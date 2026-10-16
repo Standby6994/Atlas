@@ -39,6 +39,7 @@ Tudo fica na raiz; não há pasta `src/`.
 - `manifest.webmanifest`, `icons/`: metadados da PWA.
 
 ### Módulos de apoio (importados estaticamente por `app.js`)
+- `ambient-occlusion.js`: oclusão ambiente em tela ("Sombreamento de profundidade" nos Ajustes). Roda só no quadro parado, em meia resolução, a partir de uma passada de profundidade que ignora objetos translúcidos e os marcados com `userData.noOcclusion`; o raio acompanha a distância da câmera (`drawOcclusion` em `app.js`).
 - `render-batches.js`: lotes de desenho dos sistemas do corpo. As peças de cada sistema são unidas por material em poucas malhas (≈60 chamadas de desenho em vez de ≈1.400). As peças originais ficam na cena, na camada `BATCHED_LAYER` (fora da câmera), e continuam valendo para toque, enquadramento e raio-X. `renderBatches.sync()` roda no fim de `applyVisibility()`: peça oculta sai do lote; peça com material diferente da maioria (selecionada, translúcida) desenha-se sozinha. Qualquer código novo que mude visibilidade ou material de peças do corpo precisa terminar em `applyVisibility()`. Peças espelhadas (escala negativa) têm os triângulos invertidos na união.
 - `anatomy-info.js`: sistemas do corpo (`MODEL_SYSTEMS`), normalização e tradução de nomes de malhas.
 - `core-mapping.js`: liga nomes de malhas dos GLBs às entradas canônicas de estudo.

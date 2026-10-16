@@ -31,7 +31,7 @@ Os cortes esofágico e colônico usam malhas pré-calculadas nos dois perfis. O 
 
 ## Tecido, célula e fotografia
 
-A histologia humana reúne 48 vistas/237 componentes; a citologia, 46/312; a botânica, 13/84. Os 821 atalhos humanos/vegetais declaram se a relação é de componente, composição, mecanismo ou contexto. Uma comparação funcional não é uma equivalência anatômica automática.
+A histologia humana reúne 48 vistas/237 componentes; a citologia, 46/316; a botânica, 13/84. Os 821 atalhos humanos/vegetais declaram se a relação é de componente, composição, mecanismo ou contexto. Uma comparação funcional não é uma equivalência anatômica automática.
 
 A microscopia reúne 23 registros/52 marcações, vinculados a 26 vistas (23 delas com destinos de marcações). São 22 microfotografias e um composto com imagem real e segmentação científica. Espécies, estágios e diferenças em relação aos modelos são explicitados. Um folículo primário sem antro não equivale à fase antral; uma ilhota de rato não determina a organização humana; mitose vegetal não contém os centrossomos do exemplo animal 3D.
 

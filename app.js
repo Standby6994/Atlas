@@ -18,6 +18,7 @@ import {createStudySessionStore} from './study-session.js';
 import * as tissueFinish from './tissue-materials.js';
 import {setupTabletUI} from './tablet-ui.js';
 import {createRenderBatches,BATCHED_LAYER} from './render-batches.js';
+import {createAmbientOcclusion} from './ambient-occlusion.js';
 const {applyTissueFinish,copyTissueFinish,getTissueFinishStats}=tissueFinish;
 const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
 
@@ -252,7 +253,7 @@ function init3D(){
   bodyGroup=new THREE.Group();femaleGroup=new THREE.Group();femaleGroup.visible=false;scene.add(bodyGroup,femaleGroup);
   bodyBounds=new THREE.Box3(new THREE.Vector3(-.335,.003,-.166),new THREE.Vector3(.335,1.708,.155));
   xrayGroup=new THREE.Group();xrayGroup.matrixAutoUpdate=false;scene.add(xrayGroup);renderBatches=createRenderBatches(bodyGroup,requestRender);
-  groundShadow=createGroundShadow();groundShadow.position.set(0,0,-.005);groundShadow.scale.set(.9,.55,1);scene.add(groundShadow);
+  groundShadow=createGroundShadow();groundShadow.userData.noOcclusion=true;groundShadow.position.set(0,0,-.005);groundShadow.scale.set(.9,.55,1);scene.add(groundShadow);
   draco=new DRACOLoader();draco.setDecoderPath('./models/draco/');draco.setWorkerLimit(touchDevice?1:2);
   loader=new GLTFLoader();loader.setDRACOLoader(draco);
   resizeObserver=new ResizeObserver(resize);resizeObserver.observe($('viewport'));
@@ -316,9 +317,13 @@ gl_FragColor=vec4(gl_FragColor.rgb*s.a,s.a);}`});
   const quad=new THREE.Mesh(new THREE.PlaneGeometry(2,2),material);quad.frustumCulled=false;const quadScene=new THREE.Scene();quadScene.add(quad);
   return{scene:quadScene,camera:new THREE.OrthographicCamera(-1,1,1,-1,0,1),material};
 }
+let ambientOcclusion=null;
+// Occlusion samples a sphere sized to the viewing distance, so creases read the same on the whole body and up close.
+function drawOcclusion(){if(!$('ambient-occlusion')?.checked)return;ambientOcclusion||=createAmbientOcclusion(renderer);ambientOcclusion.render(scene,camera,{radius:camera.position.distanceTo(controls.target)*.045})}
 function drawScene(){
   const q=renderQuality;
-  if(!q.moving||q.motion>=q.rest-.01){renderer.render(scene,camera);return}
+  if(!q.moving){renderer.render(scene,camera);drawOcclusion();return}
+  if(q.motion>=q.rest-.01){renderer.render(scene,camera);return}
   const w=Math.max(1,Math.round(renderer.domElement.clientWidth*q.motion)),h=Math.max(1,Math.round(renderer.domElement.clientHeight*q.motion));
   if(!motionTarget)motionTarget=new THREE.WebGLRenderTarget(w,h,{type:THREE.HalfFloatType,samples:4});else if(motionTarget.width!==w||motionTarget.height!==h)motionTarget.setSize(w,h);
   composite||=createComposite();composite.material.uniforms.tScene.value=motionTarget.texture;
@@ -665,7 +670,7 @@ function initPicking(){
     for(let i=0;i<direct.length;i+=4){if(direct[i+3]>8){covA++;for(let k=0;k<3;k++)sumA[k]+=direct[i+k]}if(motion[i+3]>8){covB++;for(let k=0;k<3;k++)sumB[k]+=motion[i+k]}let d=0;for(let k=0;k<4;k++)d+=Math.abs(direct[i+k]-motion[i+k]);if(d>40)changed++}
     return{coverageDirect:covA,coverageMotion:covB,avgDirect:sumA.map(v=>Math.round(v/(covA||1))),avgMotion:sumB.map(v=>Math.round(v/(covB||1))),changedPixels:changed}};
   // Synchronous frame measurement (draw calls, CPU submit time) that works even when the page is not painting.
-  renderer.domElement.atlasRenderStats=(frames=20)=>{if(tween){camera.position.copy(tween.toPosition);controls.target.copy(tween.toTarget);controls.update();tween=null}const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();renderer.render(scene,camera)}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
+  renderer.domElement.atlasRenderStats=(frames=20)=>{if(tween){camera.position.copy(tween.toPosition);controls.target.copy(tween.toTarget);controls.update();tween=null}const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();drawScene()}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
   renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){touchPointers.add(e.pointerId);if(touchPointers.size>1||e.isPrimary===false){down=null;$('hover-label').hidden=true;return}}down={id:e.pointerId,x:e.clientX,y:e.clientY,time:performance.now(),moved:false};$('hover-label').hidden=true});
   renderer.domElement.addEventListener('pointercancel',e=>{touchPointers.delete(e.pointerId);down=null});
   renderer.domElement.addEventListener('pointerup',e=>{if(down&&!down.moved&&down.id===e.pointerId&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&performance.now()-down.time<800&&e.button===0){const hit=pick(e);if(hit)selectItem(hit.name,false,false)}touchPointers.delete(e.pointerId);down=null});
@@ -777,7 +782,7 @@ async function export4K(){
   const button=$('export-4k');button.disabled=true;const W=3840,H=2160,scale=touchDevice?2/3:1,width=Math.round(W*scale),height=Math.round(H*scale);const previousSize=renderer.getSize(new THREE.Vector2()),ratio=renderer.getPixelRatio(),aspect=camera.aspect;const rotating=controls.autoRotate;controls.autoRotate=false;
   try{
     toast(`Preparando imagem de ${width} × ${height} pixels…`);
-    renderer.setPixelRatio(1);renderer.setSize(width,height,false);camera.aspect=width/height;camera.clearViewOffset();renderer.render(scene,camera);
+    renderer.setPixelRatio(1);renderer.setSize(width,height,false);camera.aspect=width/height;camera.clearViewOffset();renderer.render(scene,camera);drawOcclusion();
     const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;const ctx=canvas.getContext('2d');ctx.scale(scale,scale);
     const gradient=ctx.createRadialGradient(W*.5,H*.45,0,W*.5,H*.45,W*.65);gradient.addColorStop(0,'#233747');gradient.addColorStop(1,'#0c1420');ctx.fillStyle=gradient;ctx.fillRect(0,0,W,H);ctx.drawImage(renderer.domElement,0,0,W,H);
     const marker=selectedMarkerPosition(W,H);
@@ -835,6 +840,7 @@ function setupEvents(){
   $('export-4k').addEventListener('click',export4K);
   $('context-bones').addEventListener('change',applyVisibility);
   $('show-fps').addEventListener('change',e=>{$('fps-meter').hidden=!e.target.checked;requestRender()});
+  $('ambient-occlusion').addEventListener('change',requestRender);
   $('tissue-colors').addEventListener('change',()=>{updateSurfaceQuality();toast($('tissue-colors').checked?'Paleta aproximada de tecido aplicada.':'Cores do acervo restauradas.')});
   $('quality').addEventListener('change',()=>{const q=renderQuality;q.rest=Number($('quality').value);q.motion=storedMotionRatio(q.rest);q.tooSlow.clear();renderer.setPixelRatio(q.rest);updateSurfaceQuality();resize();toast('Qualidade de visualização atualizada. A exportação continua em 4K.')});
   $('clip-mode').addEventListener('change',updateClipping);$('clip-position').addEventListener('input',updateClipping);

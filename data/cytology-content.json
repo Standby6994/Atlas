@@ -545,6 +545,38 @@
           "mechanism": "Meio aquoso inclui enzimas e envolve organelas.",
           "uerj": "Relacionar parede, vacúolo, fotossíntese e pressão de turgor.",
           "commonMistake": "Faixa periférica no desenho não contém apenas água."
+        },
+        {
+          "id": "rough-er",
+          "label": "Retículo rugoso",
+          "function": "Produzir proteínas da via secretora.",
+          "mechanism": "Ribossomos aderidos traduzem proteínas que entram no retículo e seguem para o complexo golgiense.",
+          "uerj": "Mostrar que células vegetais também têm sistema de endomembranas.",
+          "commonMistake": "O RE rugoso não é exclusivo da célula animal."
+        },
+        {
+          "id": "golgi",
+          "label": "Complexo golgiense (dictiossomo)",
+          "function": "Modificar e empacotar produtos, inclusive polissacarídeos da parede.",
+          "mechanism": "Cisternas processam proteínas e enviam vesículas com componentes da parede celular para a membrana.",
+          "uerj": "Relacionar o Golgi à formação da lamela média e da parede na divisão celular vegetal.",
+          "commonMistake": "Na célula vegetal, o Golgi também fabrica polissacarídeos da parede, não só processa proteínas."
+        },
+        {
+          "id": "free-ribosomes",
+          "label": "Ribossomos livres",
+          "function": "Sintetizar proteínas que ficam no citosol.",
+          "mechanism": "Traduzem o RNA mensageiro sem se prender ao retículo.",
+          "uerj": "Comparar ribossomos citoplasmáticos com os ribossomos menores de cloroplastos e mitocôndrias.",
+          "commonMistake": "Ribossomos não têm membrana."
+        },
+        {
+          "id": "plasmodesmata",
+          "label": "Plasmodesmos",
+          "function": "Ligar o citoplasma de células vizinhas.",
+          "mechanism": "Canais atravessam a parede celular e são revestidos pela membrana plasmática, permitindo a passagem de água, íons e pequenas moléculas.",
+          "uerj": "Comparar plasmodesmos, em plantas, com as junções comunicantes das células animais.",
+          "commonMistake": "Plasmodesmos não são poros abertos só na parede: a membrana plasmática continua de uma célula à outra."
         }
       ],
       "steps": [

@@ -93,7 +93,18 @@ function plantCell(c){
  nuclearBody(c,'nucleus',[-.30,.13,.020],[.105,.115,.07]);
  for(const p of[[-.29,-.24,.025],[.30,.28,.018],[.34,-.24,.020]])smallChloroplast(c,'chloroplast',p,[.100,.055,.04]);
  for(const p of[[-.32,-.03,.030],[.04,.335,.018]])c.mitochondrion('mitochondria',p,[.075,.039,.029],{simple:true});
+ plantCellDetail(c);
  c.group.userData.cellArchitecture='plant-wall-membrane-central-vacuole';
+}
+// Rough ER beside the nucleus, a Golgi stack, free ribosomes in the thin peripheral cytoplasm and plasmodesmata
+// crossing the wall: the parts a plant cell shares with animal cells plus its own wall channels.
+function plantCellDetail(c){
+ for(let j=0;j<2;j++){c.cisterna('rough-er',[-.25,.285+j*.026,.026],[.085,.009,.018],{bend:.02,ripple:.004,phase:j,nu:c.quality.smallU,nv:c.quality.smallV});for(let i=0;i<4;i++)c.ribosome('rough-er',[-.31+i*.04,.285+j*.026,.046],.0075)}
+ smallGolgi(c,'golgi',[.405,.02,.022],.34);
+ const busy=[[.06,-.02,.33],[-.30,.13,.13],[-.29,-.24,.11],[.30,.28,.11],[.34,-.24,.11],[-.32,-.03,.08],[.04,.335,.08],[-.25,.3,.1],[.405,.04,.06]];
+ let placed=0;for(let i=0;placed<(c.mobile?16:26)&&i<500;i++){const a=i*2.39996,r=Math.sqrt((i+.5)/500),x=.44*r*Math.cos(a),y=.37*r*Math.sin(a);if(busy.some(([bx,by,br])=>Math.hypot(x-bx,y-by)<br))continue;c.ribosome('free-ribosomes',[x,y,.03],.0075);placed++}
+ // Channels sit inside the wall band at the cut face, without sticking out of it.
+ for(const x of[-.12,.16])for(const y of[.398,-.398])c.channel('plasmodesmata',[x,y,0],{radius:.0065,length:.02,axis:'y',lobes:5});
 }
 function bacteria(c){
  c.shell('capsule',[0,0,0],[.51,.255,.19],{thickness:.017,tissue:'matrix',color:0xbcb6a4,lobes:.025});
