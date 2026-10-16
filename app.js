@@ -17,6 +17,7 @@ import {resolveStudyEntry} from './study-entry-routes.js';
 import {createStudySessionStore} from './study-session.js';
 import * as tissueFinish from './tissue-materials.js';
 import {setupTabletUI} from './tablet-ui.js';
+import {createRenderBatches,BATCHED_LAYER} from './render-batches.js';
 const {applyTissueFinish,copyTissueFinish,getTissueFinishStats}=tissueFinish;
 const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
 
@@ -54,9 +55,11 @@ const histologicalCorrespondences={
 const interiorSpec=mode=>mode.startsWith('internal-')?detailedInteriors[mode.slice(9)]:null;
 const studyRepresentationFor=mode=>organRepresentations.get(mode)||(interiorSpec(mode)?'detailed':'reference');
 function hasSelectableGeometry(object){let found=false;object?.traverse(mesh=>{if(mesh.isMesh&&mesh.geometry?.attributes.position?.count)found=true});return found}
-let scene,camera,renderer,controls,loader,bodyGroup,femaleGroup,groundShadow,bodyBounds,frameRequested=false,tween=null,draco;
+let scene,camera,renderer,controls,loader,bodyGroup,femaleGroup,groundShadow,xrayGroup,renderBatches,bodyBounds,frameRequested=false,tween=null,draco;
 let resizeObserver,environmentHandle,tabletUI={active:false,showDetail(){},hideDetail(){},closeAll(){}};
-const viewInset={x:0,y:0,target:{x:0,y:0}},frameStats={last:0,sum:0,count:0,adapted:false,manual:false};
+const viewInset={x:0,y:0,target:{x:0,y:0}};
+// Full resolution whenever the view is still; while it moves, the resolution adapts to hold 60 fps.
+const renderQuality={rest:1.5,motion:1.5,moving:false,dragging:false,idle:0,last:0,sum:0,count:0,good:0,fps:0,tooSlow:new Set()};
 const markerWorld=new THREE.Vector3(),markerProjected=new THREE.Vector3();
 let markerSelectionKey=null;
 const microModels=new Map();
@@ -231,10 +234,10 @@ function renderList(){
 function init3D(){
   scene=new THREE.Scene();scene.background=null;
   renderer=new THREE.WebGLRenderer({canvas:$('anatomy-canvas'),antialias:true,alpha:true,preserveDrawingBuffer:false,powerPreference:'high-performance'});
-  renderer.setPixelRatio(touchDevice?Math.min(devicePixelRatio,1.5):1.5);$('quality').value=String(renderer.getPixelRatio());if(touchDevice){$('export-4k').textContent='Salvar imagem';document.querySelector('.viewer-help').firstChild.textContent='Um dedo gira · dois dedos movem e ampliam · toque para selecionar'}renderer.setClearColor(0x0e1927,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.9;renderer.localClippingEnabled=true;
+  renderQuality.rest=touchDevice?Math.min(devicePixelRatio,1.5):1.5;renderQuality.motion=storedMotionRatio(renderQuality.rest);renderer.setPixelRatio(renderQuality.rest);$('quality').value=String(renderQuality.rest);if(touchDevice){$('export-4k').textContent='Salvar imagem';document.querySelector('.viewer-help').firstChild.textContent='Um dedo gira · dois dedos movem e ampliam · toque para selecionar'}renderer.setClearColor(0x0e1927,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.9;renderer.localClippingEnabled=true;
   camera=new THREE.PerspectiveCamera(35,1,.005,30);camera.position.set(0,.85,3.2);
   controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=touchDevice?.1:.14;controls.minDistance=.025;controls.maxDistance=6;controls.panSpeed=.6;controls.rotateSpeed=.65;controls.autoRotateSpeed=.6;
-  controls.addEventListener('change',requestRender);controls.addEventListener('start',()=>{tween=null;$('hover-label').hidden=true});
+  controls.addEventListener('change',requestRender);controls.addEventListener('start',()=>{tween=null;renderQuality.dragging=true;$('hover-label').hidden=true});controls.addEventListener('end',()=>{renderQuality.dragging=false});
   scene.add(new THREE.HemisphereLight(0xd9eaf6,0x3e342d,1.3));
   const key=new THREE.DirectionalLight(0xffeee0,2.2);key.position.set(-2,3,3);scene.add(key);
   const fill=new THREE.DirectionalLight(0xbedbea,1.1);fill.position.set(2,1,2);scene.add(fill);
@@ -242,12 +245,13 @@ function init3D(){
   if(tissueFinish.createTissueEnvironment){environmentHandle=tissueFinish.createTissueEnvironment(renderer,{size:128});scene.environment=environmentHandle.texture;scene.environmentIntensity=.55}
   bodyGroup=new THREE.Group();femaleGroup=new THREE.Group();femaleGroup.visible=false;scene.add(bodyGroup,femaleGroup);
   bodyBounds=new THREE.Box3(new THREE.Vector3(-.335,.003,-.166),new THREE.Vector3(.335,1.708,.155));
+  xrayGroup=new THREE.Group();xrayGroup.matrixAutoUpdate=false;scene.add(xrayGroup);renderBatches=createRenderBatches(bodyGroup,requestRender);
   groundShadow=createGroundShadow();groundShadow.position.set(0,0,-.005);groundShadow.scale.set(.9,.55,1);scene.add(groundShadow);
   draco=new DRACOLoader();draco.setDecoderPath('./models/draco/');draco.setWorkerLimit(touchDevice?1:2);
   loader=new GLTFLoader();loader.setDRACOLoader(draco);
   resizeObserver=new ResizeObserver(resize);resizeObserver.observe($('viewport'));
   renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();showError('A renderização 3D foi interrompida. Aguardando o navegador recuperar a imagem…')});
-  renderer.domElement.addEventListener('webglcontextrestored',()=>{if(tissueFinish.createTissueEnvironment){environmentHandle?.dispose();environmentHandle=tissueFinish.createTissueEnvironment(renderer,{size:128});scene.environment=environmentHandle.texture}$('notice').hidden=true;applyVisibility();requestRender()});
+  renderer.domElement.addEventListener('webglcontextrestored',()=>{if(tissueFinish.createTissueEnvironment){environmentHandle?.dispose();environmentHandle=tissueFinish.createTissueEnvironment(renderer,{size:128});scene.environment=environmentHandle.texture}renderBatches.rebuildAll(state.groups);$('notice').hidden=true;applyVisibility();requestRender()});
   initPicking();resize();
 }
 // Soft contact shadow under the standing body: grounds the model without a real-time shadow pass.
@@ -267,15 +271,31 @@ function visibleFraction(){const w=renderer.domElement.clientWidth,h=renderer.do
 function requestRender(){if(!frameRequested){frameRequested=true;requestAnimationFrame(renderFrame)}}
 function renderFrame(now){
   frameRequested=false;if(!renderer||state.view!=='atlas'||document.hidden)return;
+  let moving=!!tween||controls.autoRotate||renderQuality.dragging;
   if(tween){const f=Math.min(1,(now-tween.start)/600),smooth=f<.5?4*f*f*f:1-(-2*f+2)**3/2;camera.position.lerpVectors(tween.fromPosition,tween.toPosition,smooth);controls.target.lerpVectors(tween.fromTarget,tween.toTarget,smooth);controls.update();if(f===1)tween=null}
-  else if(controls.enableDamping||controls.autoRotate)controls.update();renderer.render(scene,camera);updateSelectedMarker();adaptQuality(now);
+  else if((controls.enableDamping||controls.autoRotate)&&controls.update())moving=true;
+  if(moving)noteMotion();
+  renderer.render(scene,camera);updateSelectedMarker();if(moving)measureMotion(now);updateFpsMeter();
   if(tween||controls.autoRotate)requestRender();
 }
-// On touch devices, drop to the light quality once if continuous interaction stays below ~28 fps.
-function adaptQuality(now){
-  if(!touchDevice||frameStats.adapted||frameStats.manual)return;const delta=now-frameStats.last;frameStats.last=now;if(delta<=0||delta>200){frameStats.sum=frameStats.count=0;return}
-  frameStats.sum+=delta;if(++frameStats.count<60)return;const slow=frameStats.sum/frameStats.count>36;frameStats.sum=frameStats.count=0;
-  if(slow&&renderer.getPixelRatio()>1){frameStats.adapted=true;renderer.setPixelRatio(1);$('quality').value='1';updateSurfaceQuality();resize();toast('Qualidade ajustada para Leve para manter o giro fluido.')}
+function setRenderRatio(ratio){if(Math.abs(renderer.getPixelRatio()-ratio)>.01)renderer.setPixelRatio(ratio)}
+function storedMotionRatio(rest){try{const saved=Number(localStorage.getItem('atlas-motion-ratio-'+rest));return saved>=.75&&saved<=rest?saved:rest}catch{return rest}}
+function storeMotionRatio(){try{localStorage.setItem('atlas-motion-ratio-'+renderQuality.rest,String(renderQuality.motion))}catch{}}
+// Each moving frame pushes back the return to full resolution; 160 ms without motion renders one sharp frame.
+function noteMotion(){
+  const q=renderQuality;clearTimeout(q.idle);if(!q.moving){q.moving=true;q.last=0;q.sum=q.count=0;setRenderRatio(q.motion)}
+  q.idle=setTimeout(()=>{q.moving=false;setRenderRatio(q.rest);requestRender()},160);
+}
+// Lower the moving resolution in 0.25 steps while frames take longer than ~18 ms; climb back only to levels that kept up.
+function measureMotion(now){
+  const q=renderQuality,delta=now-q.last;q.last=now;if(delta<=0||delta>100){q.sum=q.count=0;return}
+  q.sum+=delta;if(++q.count<20)return;const average=q.sum/q.count;q.sum=q.count=0;q.fps=Math.round(1000/average);
+  if(average>18&&q.motion>.75){q.tooSlow.add(q.motion);q.motion=Math.max(.75,q.motion-.25);q.good=0;setRenderRatio(q.motion);storeMotionRatio()}
+  else if(average<17.5&&q.motion<q.rest&&!q.tooSlow.has(q.motion+.25)&&++q.good>=6){q.good=0;q.motion=Math.min(q.rest,q.motion+.25);setRenderRatio(q.motion);storeMotionRatio()}
+}
+function updateFpsMeter(){
+  const meter=$('fps-meter');if(!meter||meter.hidden)return;const q=renderQuality,info=renderer.info.render;
+  meter.textContent=(q.moving&&q.fps?q.fps+' fps':'parado')+' · resolução '+renderer.getPixelRatio().toFixed(2)+'× · '+info.calls+' chamadas · '+Math.round(info.triangles/1000)+' mil triângulos';
 }
 function selectedMarkerPosition(width,height){
   const raw=state.selected?.raw,object=raw?.object;
@@ -307,11 +327,14 @@ function moveCamera(target,position,instant=false){
 function fitBounds(bounds,direction='front',instant=false){
   if(renderer)applyViewOffset();
   const center=bounds.getCenter(new THREE.Vector3()),size=bounds.getSize(new THREE.Vector3());
-  const visible=visibleFraction(),distance=Math.max(size.y/visible.y,size.x/(camera.aspect*visible.x),size.z)*.62/Math.tan(THREE.MathUtils.degToRad(camera.fov/2))+.07;
+  const visible=visibleFraction(),reach=box=>{const s=box.getSize(new THREE.Vector3());return Math.max(s.y/visible.y,s.x/(camera.aspect*visible.x),s.z)*.62/Math.tan(THREE.MathUtils.degToRad(camera.fov/2))+.07};
   const vector=direction==='back'?new THREE.Vector3(0,0,-1):direction==='left'?new THREE.Vector3(1,0,.02).normalize():new THREE.Vector3(0,0,1);
+  const outer=isDetailMode(state.mode)?activeBounds():null;
+  // In sectioned models keep some of the organ around a small part: it should fill at most about half of the view.
+  let distance=reach(bounds);if(outer&&!outer.isEmpty())distance=Math.max(distance,reach(outer)*.5);
   const position=center.clone().addScaledVector(vector,distance);
   // Inner parts of a sectioned model would put the camera inside its walls; back out of the whole model instead.
-  if(isDetailMode(state.mode)){const outer=activeBounds();if(!outer.isEmpty()&&outer.containsPoint(position)){const exit=new THREE.Ray(center,vector).intersectBox(outer,new THREE.Vector3());if(exit)position.copy(exit).addScaledVector(vector,outer.getSize(new THREE.Vector3()).length()*.08)}}
+  if(outer){if(!outer.isEmpty()&&outer.containsPoint(position)){const exit=new THREE.Ray(center,vector).intersectBox(outer,new THREE.Vector3());if(exit)position.copy(exit).addScaledVector(vector,outer.getSize(new THREE.Vector3()).length()*.08)}}
   moveCamera(center,position,instant);
 }
 function fitBody(direction='front',instant=false){
@@ -333,7 +356,7 @@ async function loadSystem(id){
       for(const object of named)container.attach(object);
       applyTissueFinish(container,{system:id},surfaceOptions());
       for(const object of named){const raw=object.userData.za_name,r=state.registry.get(raw);r.object=object;object.traverse(m=>{if(m.isMesh){m.userData.atlasName=raw;m.userData.originalMaterial=m.material;m.frustumCulled=true;registerMesh(m)}})}
-      freezeModel(container);state.groups[id]=container;state.loaded.add(id);applyVisibility();
+      freezeModel(container);state.groups[id]=container;state.loaded.add(id);renderBatches.build(id,container);applyVisibility();
       const count=Object.keys(MODEL_SYSTEMS).filter(id=>state.loaded.has(id)).length;$('load-progress').value=count;$('asset-status').textContent=count+' de 7 camadas carregadas';
       $('render-status').textContent=isStudyMode(state.mode)?(studyModels.get(state.mode)?.parts.length||0)+' partes neste esquema · carregamento sob demanda':state.registry.size.toLocaleString('pt-BR')+' peças catalogadas · carregamento por camada';
     }catch(error){console.error(error);showError('Não foi possível carregar '+meta.name+'. Verifique se todos os arquivos do programa estão na mesma pasta.');throw error}
@@ -361,14 +384,20 @@ function applyVisibility(){
     r.object.visible=!!state.layers[r.system]&&!state.hidden.has(raw)&&isolated;
     const ghost=r.system==='skeletal'&&$('context-bones').checked&&!selected&&state.isolated===null;
     const covering=/^(Pleura|Greater omentum|Lesser omentum)$/i.test(raw)&&!selected;
-    // With a structure selected, fade the other soft tissues so organs in front of it (lungs over the heart) stop hiding it.
-    const faded=!selected&&state.selectedNames.size&&state.isolated===null&&r.system!=='skeletal';
-    const opacity=selected?state.opacity:ghost?.16:covering?.08:faded?.32:1;
+    const opacity=selected?state.opacity:ghost?.16:covering?.08:1;
     r.object.traverse(m=>{if(m.isMesh){const original=m.userData.originalMaterial;m.material=Array.isArray(original)?original.map(x=>styledMaterial(x,opacity,selected)):styledMaterial(original,opacity,selected)}});
   }
   if(femaleGroup.visible){femaleGroup.traverse(m=>{if(m.isMesh&&m.userData.originalMaterial){const selected=state.selectedNames.has(m.userData.atlasName);m.visible=!state.hidden.has(m.userData.atlasName)&&(state.isolated===null||state.isolated.has(m.userData.atlasName));const original=m.userData.originalMaterial;m.material=Array.isArray(original)?original.map(x=>styledMaterial(x,selected?state.opacity:1,selected)):styledMaterial(original,selected?state.opacity:1,selected)}})}
   for(const [mode,model] of [...microModels,...studyModels]){model.group.visible=state.mode===mode;if(!model.group.visible)continue;for(const context of model.group.children)if(context.userData.contextOnly)context.visible=state.isolated===null;for(const part of model.parts){const raw=part.registryName,selected=state.selectedNames.has(raw);let needed=false;if(state.isolated!==null)part.object.traverse(m=>{if(m.isMesh&&state.isolated.has(m.userData.atlasName))needed=true});part.object.visible=!state.hidden.has(raw)&&(state.isolated===null||state.isolated.has(raw)||needed);part.object.traverse(m=>{if(m.isMesh){const original=m.userData.originalMaterial;m.material=Array.isArray(original)?original.map(x=>styledMaterial(x,selected?state.opacity:1,selected)):styledMaterial(original,selected?state.opacity:1,selected)}})}}
-  pickCandidates=refreshPickCandidates(allMeshObjects);refreshLayerUi();updateClipping();updateSelectedMarker();requestRender();
+  pickCandidates=refreshPickCandidates(allMeshObjects);refreshLayerUi();updateClipping();updateXray();renderBatches.sync();updateSelectedMarker();requestRender();
+}
+// X-ray of the selection: only the hidden parts of the selected meshes are drawn, in gold, over whatever covers them
+// (lungs over the heart). One extra draw per selected mesh instead of making every other organ transparent.
+const xrayMaterial=new THREE.MeshBasicMaterial({color:SELECTION_COLOR,transparent:true,opacity:.38,depthWrite:false,depthFunc:THREE.GreaterDepth,toneMapped:false});
+function updateXray(){
+  xrayGroup.clear();if(!['body','female'].includes(state.mode)||!state.selectedNames.size||state.isolated!==null)return;
+  const meshes=[];for(const name of state.selectedNames){const object=state.registry.get(name)?.object;if(object?.visible!==false)object?.traverse(m=>{if(m.isMesh&&m.visible&&meshes.length<240)meshes.push(m)})}
+  for(const mesh of meshes){mesh.updateWorldMatrix(true,false);const ghost=new THREE.Mesh(mesh.geometry,xrayMaterial);ghost.matrixAutoUpdate=false;ghost.matrix.copy(mesh.matrixWorld);ghost.renderOrder=20;ghost.raycast=()=>{};xrayGroup.add(ghost)}
 }
 function updateClipping(){
   if(!renderer)return;const mode=$('clip-mode').value,isolated=state.isolated!==null;$('clip-mode').disabled=isolated;$('clip-position').disabled=mode==='none'||isolated;state.clip=mode;
@@ -582,8 +611,13 @@ function initPicking(){
     const hit=raycastVisible(raycaster,pickCandidates,renderer.clippingPlanes);
     return hit?state.registry.get(hit.object.userData.atlasName):null;
   }
+  raycaster.layers.enable(BATCHED_LAYER);
   // Also available for reproducible local selection measurements.
   renderer.domElement.atlasPick=pick;
+  // Verification: pixel difference between the batched frame and the same frame drawn mesh by mesh.
+  renderer.domElement.atlasCompareBatches=()=>{const gl=renderer.getContext(),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,read=()=>{renderer.render(scene,camera);const p=new Uint8Array(w*h*4);gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,p);return{p,calls:renderer.info.render.calls}};const a=read();renderBatches.bypass(true);const b=read();renderBatches.bypass(false);let diff=0,changed=0,covered=0;for(let i=0;i<a.p.length;i+=4){const d=Math.abs(a.p[i]-b.p[i])+Math.abs(a.p[i+1]-b.p[i+1])+Math.abs(a.p[i+2]-b.p[i+2])+Math.abs(a.p[i+3]-b.p[i+3]);diff+=d;if(d>12)changed++;if(b.p[i+3]>0)covered++}return{pixels:w*h,coveredByModel:covered,changedPixels:changed,meanDiff:+(diff/(w*h)).toFixed(3),callsBatched:a.calls,callsIndividual:b.calls}};
+  // Synchronous frame measurement (draw calls, CPU submit time) that works even when the page is not painting.
+  renderer.domElement.atlasRenderStats=(frames=20)=>{const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();renderer.render(scene,camera)}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
   renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){touchPointers.add(e.pointerId);if(touchPointers.size>1||e.isPrimary===false){down=null;$('hover-label').hidden=true;return}}down={id:e.pointerId,x:e.clientX,y:e.clientY,time:performance.now(),moved:false};$('hover-label').hidden=true});
   renderer.domElement.addEventListener('pointercancel',e=>{touchPointers.delete(e.pointerId);down=null});
   renderer.domElement.addEventListener('pointerup',e=>{if(down&&!down.moved&&down.id===e.pointerId&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&performance.now()-down.time<800&&e.button===0){const hit=pick(e);if(hit)selectItem(hit.name,false,false)}touchPointers.delete(e.pointerId);down=null});
@@ -725,7 +759,16 @@ function setView(view){
   history.replaceState(null,'','#'+view);
   rememberStudy();
 }
+// Caveats, scope notes and sources stay available but move into one collapsible block at the end of the details.
+const MODEL_NOTE_SELECTOR='.learning-scope-note:not([data-description-scope]),.study-representation,.study-sources,.detail-footnote,.model-coverage';
+function organizeModelNotes(){
+  const panel=$('detail-panel'),notes=[...panel.querySelectorAll(MODEL_NOTE_SELECTOR)].filter(n=>!n.closest('.model-notes'));if(!notes.length)return;
+  let box=panel.querySelector(':scope>.model-notes');
+  if(!box){box=document.createElement('details');box.className='model-notes';const summary=document.createElement('summary');summary.textContent='Sobre este modelo e fontes';box.append(summary)}
+  box.append(...notes);panel.append(box);
+}
 function setupEvents(){
+  new MutationObserver(organizeModelNotes).observe($('detail-panel'),{childList:true,subtree:true});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestRender()});
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.view==='atlas'&&['cytology','botany'].includes(state.tab)){setCatalogTab('core');switchModel('body')}setView(b.dataset.view)}));
   $('go-cytology').addEventListener('click',()=>{setView('atlas');setCatalogTab('cytology');if(!state.mode.startsWith('cyto-'))openStudy('cyto-animal-cell',null)});
@@ -743,8 +786,9 @@ function setupEvents(){
   $('auto-rotate').addEventListener('click',()=>{controls.autoRotate=!controls.autoRotate;$('auto-rotate').setAttribute('aria-pressed',String(controls.autoRotate));requestRender()});
   $('export-4k').addEventListener('click',export4K);
   $('context-bones').addEventListener('change',applyVisibility);
+  $('show-fps').addEventListener('change',e=>{$('fps-meter').hidden=!e.target.checked;requestRender()});
   $('tissue-colors').addEventListener('change',()=>{updateSurfaceQuality();toast($('tissue-colors').checked?'Paleta aproximada de tecido aplicada.':'Cores do acervo restauradas.')});
-  $('quality').addEventListener('change',()=>{frameStats.manual=true;renderer.setPixelRatio(Number($('quality').value));updateSurfaceQuality();resize();toast('Qualidade de visualização atualizada. A exportação continua em 4K.')});
+  $('quality').addEventListener('change',()=>{const q=renderQuality;q.rest=Number($('quality').value);q.motion=storedMotionRatio(q.rest);q.tooSlow.clear();renderer.setPixelRatio(q.rest);updateSurfaceQuality();resize();toast('Qualidade de visualização atualizada. A exportação continua em 4K.')});
   $('clip-mode').addEventListener('change',updateClipping);$('clip-position').addEventListener('input',updateClipping);
   $('model-mode').addEventListener('change',e=>switchModel(e.target.value));
   $('model-representation').addEventListener('change',e=>changeStudyRepresentation(e.target.value));

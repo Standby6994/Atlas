@@ -17,7 +17,7 @@ export function setupTabletUI({touchDevice,onInsetChange=()=>{}}={}){
   const active=isTabletLayout(touchDevice),root=document.documentElement;
   root.classList.toggle('tablet-ui',active);
   // Skip the drawer transitions while the layout first switches to tablet mode.
-  if(active){root.classList.add('ui-preload');requestAnimationFrame(()=>requestAnimationFrame(()=>root.classList.remove('ui-preload')))}
+  if(active){root.classList.add('ui-preload');const ready=()=>root.classList.remove('ui-preload');requestAnimationFrame(()=>requestAnimationFrame(ready));setTimeout(ready,300)}
   const noop={active:false,showDetail(){},hideDetail(){},closeAll(){}};
   if(!active)return noop;
 

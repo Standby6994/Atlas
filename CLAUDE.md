@@ -39,6 +39,7 @@ Tudo fica na raiz; não há pasta `src/`.
 - `manifest.webmanifest`, `icons/`: metadados da PWA.
 
 ### Módulos de apoio (importados estaticamente por `app.js`)
+- `render-batches.js`: lotes de desenho dos sistemas do corpo. As peças de cada sistema são unidas por material em poucas malhas (≈60 chamadas de desenho em vez de ≈1.400). As peças originais ficam na cena, na camada `BATCHED_LAYER` (fora da câmera), e continuam valendo para toque, enquadramento e raio-X. `renderBatches.sync()` roda no fim de `applyVisibility()`: peça oculta sai do lote; peça com material diferente da maioria (selecionada, translúcida) desenha-se sozinha. Qualquer código novo que mude visibilidade ou material de peças do corpo precisa terminar em `applyVisibility()`. Peças espelhadas (escala negativa) têm os triângulos invertidos na união.
 - `anatomy-info.js`: sistemas do corpo (`MODEL_SYSTEMS`), normalização e tradução de nomes de malhas.
 - `core-mapping.js`: liga nomes de malhas dos GLBs às entradas canônicas de estudo.
 - `simulation-engine.js`: simulações fisiológicas.
@@ -64,6 +65,14 @@ Tudo fica na raiz; não há pasta `src/`.
 
 ### Documentação
 - `MODELOS-ANATOMICOS.md` e `COBERTURA-MODELOS.md`: inventário dos modelos, contagens, proveniência e limites. Atualize as contagens se adicionar peças ou vistas.
+
+## Desempenho
+
+- Meta: 60 fps no iPad 9. A cena só é redesenhada quando algo muda (`requestRender`).
+- Resolução: `renderQuality.rest` (seletor Qualidade) quando a vista está parada; durante giro e animações usa `renderQuality.motion`, que cai em passos de 0,25 (mínimo 0,75×) se os quadros passarem de ~18 ms e fica salva em `localStorage`. 160 ms após parar, um quadro na resolução cheia.
+- Seleção no corpo: raio-X (`updateXray`) desenha em dourado só as partes encobertas da peça; não deixe os outros órgãos transparentes (transparência em massa desfaz os lotes e multiplica o custo).
+- Nada de `backdrop-filter` sobre o canvas: o navegador refaz o desfoque a cada quadro.
+- Medição: Ajustes → "Mostrar FPS". No console: `document.getElementById('anatomy-canvas').atlasRenderStats()` (chamadas, triângulos e peças por sistema) e `.atlasCompareBatches()` (diferença de pixels entre lotes e desenho peça a peça; deve ficar perto de zero).
 
 ## Convenções
 
