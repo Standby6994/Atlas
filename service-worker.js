@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-16-drawing-board-v27';
+const APP_VERSION = '2026-10-16-motion-lod-v27';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
@@ -56,6 +56,7 @@ const APP_ASSETS = [
   "selection-highlight.js",
   "tablet-ui.js",
   "render-batches.js",
+  "lod-worker.js",
   "ambient-occlusion.js",
   "draw-board.js",
   "index.html",

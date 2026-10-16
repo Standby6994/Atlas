@@ -5,12 +5,17 @@ import * as THREE from 'three';
 // into proxy meshes; geometry groups then draw only the meshes that currently look like the rest of their
 // batch. The original meshes stay in the scene for picking, bounds and x-ray, moved to BATCHED_LAYER so the
 // camera skips them. A mesh that differs (selected, faded cover, custom opacity) leaves the batch and draws
-// itself; a hidden mesh drops out of both. Geometry is never simplified.
+// itself; a hidden mesh drops out of both.
+// Each batch also gets a lighter copy for frames drawn while the camera moves (vertex clustering on a 2.5 mm
+// grid, built in lod-worker.js). It is used only in motion and only while 2.5 mm is about a pixel or less;
+// still frames always draw the full geometry.
 
 export const BATCHED_LAYER=1;
 // Bounds the temporary memory of one merge on tablets and keeps batches regional, so frustum culling still skips
 // the parts of the body that are off screen when the camera is close to an organ.
 const MAX_TRIANGLES=250000;
+export const LOD_CELL=.0025; // metres
+const LOD_PIXEL_RATIO=.35; // lighter copy while a cell spans at most ~3 pixels (in motion only)
 const ATTRIBUTES=['position','normal','uv','color'];
 const matrix=new THREE.Matrix4(),normalMatrix=new THREE.Matrix3(),vector=new THREE.Vector3();
 
@@ -58,13 +63,36 @@ function merge(meshes,inverse){
   return{geometry,ranges};
 }
 
+function releaseAfterUpload(){this.array=null}
+
 export function createRenderBatches(parent,onChange=()=>{}){
   const root=new THREE.Group();root.name='render-batches';parent.add(root);
   const systems=new Map();let queue=Promise.resolve();
+  let worker=null,nextJob=0;const jobs=new Map();
+  const sphere=new THREE.Sphere();
+
+  // Send copies of the merged arrays: the originals are released once the GPU has them.
+  function requestLod(batch,geometry,names){
+    if(names.includes('color')||(names.includes('uv')&&batch.proxy.material[0]?.map))return;
+    try{worker||=new Worker(new URL('./lod-worker.js',import.meta.url));worker.onmessage=receiveLod}catch(error){console.warn('Versão leve indisponível; o giro usa a malha completa.',error);return}
+    const id=++nextJob,positions=geometry.attributes.position.array.slice(),normals=geometry.attributes.normal?.array.slice()||null,index=geometry.index.array.slice();
+    jobs.set(id,batch);
+    worker.postMessage({id,positions,normals,index,ranges:batch.ranges.map(({start,count})=>({start,count})),cell:LOD_CELL},[positions.buffer,index.buffer,...(normals?[normals.buffer]:[])]);
+  }
+  function receiveLod({data}){
+    const batch=jobs.get(data.id);jobs.delete(data.id);if(!batch?.proxy.parent)return;
+    const geometry=new THREE.BufferGeometry();
+    geometry.setAttribute('position',new THREE.BufferAttribute(data.positions,3).onUpload(releaseAfterUpload));
+    if(data.normals)geometry.setAttribute('normal',new THREE.BufferAttribute(data.normals,3).onUpload(releaseAfterUpload));
+    geometry.setIndex(new THREE.BufferAttribute(data.index,1).onUpload(releaseAfterUpload));
+    geometry.computeBoundingBox();geometry.computeBoundingSphere();
+    const proxy=new THREE.Mesh(geometry,batch.proxy.material);proxy.name=batch.proxy.name+'-lod';proxy.matrixAutoUpdate=false;proxy.raycast=()=>{};proxy.userData.renderBatch=true;proxy.visible=false;
+    root.add(proxy);batch.lod={proxy,ranges:data.ranges,triangles:data.triangles,sourceTriangles:data.sourceTriangles};sync();
+  }
 
   function release(id){
     const batches=systems.get(id);if(!batches)return;systems.delete(id);
-    for(const batch of batches){root.remove(batch.proxy);batch.proxy.geometry.dispose();for(const {mesh} of batch.ranges)mesh.layers.set(0)}
+    for(const batch of batches){root.remove(batch.proxy);batch.proxy.geometry.dispose();if(batch.lod){root.remove(batch.lod.proxy);batch.lod.proxy.geometry.dispose()}for(const {mesh} of batch.ranges)mesh.layers.set(0)}
   }
   // Merges run one chunk per task so loading stays responsive; meshes keep drawing themselves until their chunk is ready.
   function build(id,container){
@@ -87,7 +115,7 @@ export function createRenderBatches(parent,onChange=()=>{}){
           if(systems.get(id)!==batches)return;
           const {geometry,ranges}=merge(chunk,inverse),proxy=new THREE.Mesh(geometry,[chunk[0].material]);
           proxy.name=id+'-batch';proxy.matrixAutoUpdate=false;proxy.raycast=()=>{};proxy.userData.renderBatch=true;
-          root.add(proxy);batches.push({proxy,ranges});sync();onChange();
+          const batch={proxy,ranges,lod:null,useLod:false};root.add(proxy);batches.push(batch);requestLod(batch,geometry,Object.keys(geometry.attributes));sync();onChange();
           await new Promise(resolve=>setTimeout(resolve,0));
         }
       }
@@ -100,19 +128,34 @@ export function createRenderBatches(parent,onChange=()=>{}){
       const counts=new Map();
       for(const {mesh} of batch.ranges)if(visibleUpTo(mesh,parent.parent)&&!Array.isArray(mesh.material))counts.set(mesh.material,(counts.get(mesh.material)||0)+1);
       let material=null,best=0;for(const [m,c] of counts)if(c>best){best=c;material=m}
-      const groups=[];
-      for(const {mesh,start,count} of batch.ranges){
+      const groups=[],lodGroups=[],add=(list,start,count)=>{if(!count)return;const last=list.at(-1);if(last&&last.start+last.count===start)last.count+=count;else list.push({start,count,materialIndex:0})};
+      batch.ranges.forEach(({mesh,start,count},i)=>{
         const batched=material!==null&&mesh.material===material&&visibleUpTo(mesh,parent.parent);
         mesh.layers.set(batched?BATCHED_LAYER:0);
-        if(!batched)continue;
-        const last=groups.at(-1);if(last&&last.start+last.count===start)last.count+=count;else groups.push({start,count,materialIndex:0});
-      }
-      batch.proxy.geometry.groups=groups;batch.proxy.visible=groups.length>0;if(material)batch.proxy.material=[material];
+        if(!batched)return;
+        add(groups,start,count);if(batch.lod){const r=batch.lod.ranges[i];add(lodGroups,r.start,r.count)}
+      });
+      batch.proxy.geometry.groups=groups;batch.hasGroups=groups.length>0;if(material)batch.proxy.material=[material];
+      if(batch.lod){batch.lod.proxy.geometry.groups=lodGroups;batch.lod.hasGroups=lodGroups.length>0;batch.lod.proxy.material=batch.proxy.material}
+      applyDetail(batch);
+    }
+  }
+  function applyDetail(batch){const lod=batch.useLod&&batch.lod;batch.proxy.visible=batch.hasGroups&&!lod;if(batch.lod)batch.lod.proxy.visible=lod?batch.lod.hasGroups:false}
+  // Per frame, before rendering: lighter copies only while moving and only where a pixel spans most of a cell.
+  function updateDetail(moving,camera,bufferHeight){
+    const pixelPerDistance=2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))/Math.max(1,bufferHeight*(camera.view?.enabled?camera.view.height/camera.view.fullHeight:1));
+    for(const batches of systems.values())for(const batch of batches){
+      if(!batch.lod)continue;let use=false;
+      if(moving){sphere.copy(batch.proxy.geometry.boundingSphere).applyMatrix4(batch.proxy.matrixWorld);const distance=Math.max(0,camera.position.distanceTo(sphere.center)-sphere.radius);use=distance*pixelPerDistance>=LOD_CELL*LOD_PIXEL_RATIO}
+      if(use!==batch.useLod){batch.useLod=use;applyDetail(batch)}
     }
   }
   // After a lost WebGL context the released CPU copies are gone: rebuild every batch from the originals.
   function rebuildAll(containers){for(const [id,container] of Object.entries(containers))if(systems.has(id))build(id,container)}
   // Debug/verification: draw every original individually again (true) or return to batching (false).
   function bypass(flag){root.visible=!flag;if(flag){for(const batches of systems.values())for(const b of batches)for(const {mesh} of b.ranges)mesh.layers.set(0)}else sync()}
-  return{build,sync,release,rebuildAll,bypass,stats:()=>[...systems.values()].reduce((s,b)=>s+b.length,0)};
+  // Debug/verification: force the lighter copies on or off regardless of motion (null returns to automatic).
+  function forceDetail(flag){for(const batches of systems.values())for(const batch of batches){batch.useLod=!!flag&&!!batch.lod;applyDetail(batch)}}
+  const lodStats=()=>{let ready=0,full=0,light=0;for(const batches of systems.values())for(const b of batches)if(b.lod){ready++;full+=b.lod.sourceTriangles;light+=b.lod.triangles}return{batchesWithLod:ready,fullTriangles:full,lodTriangles:light}};
+  return{build,sync,release,rebuildAll,bypass,updateDetail,forceDetail,lodStats,stats:()=>[...systems.values()].reduce((s,b)=>s+b.length,0)};
 }

@@ -322,10 +322,12 @@ let ambientOcclusion=null;
 // Occlusion samples a sphere sized to the viewing distance, so creases read the same on the whole body and up close.
 function drawOcclusion(){if(!$('ambient-occlusion')?.checked)return;ambientOcclusion||=createAmbientOcclusion(renderer);ambientOcclusion.render(scene,camera,{radius:camera.position.distanceTo(controls.target)*.045})}
 function drawScene(){
-  const q=renderQuality;
-  if(!q.moving){renderer.render(scene,camera);drawOcclusion();return}
-  if(q.motion>=q.rest-.01){renderer.render(scene,camera);return}
+  const q=renderQuality,gl=renderer.getContext();
+  // Still frames always use the full geometry; in motion, lighter copies where a pixel spans a 2.5 mm cell.
+  if(!q.moving){renderBatches.updateDetail(false,camera,gl.drawingBufferHeight);renderer.render(scene,camera);drawOcclusion();return}
+  if(q.motion>=q.rest-.01){renderBatches.updateDetail(true,camera,gl.drawingBufferHeight);renderer.render(scene,camera);return}
   const w=Math.max(1,Math.round(renderer.domElement.clientWidth*q.motion)),h=Math.max(1,Math.round(renderer.domElement.clientHeight*q.motion));
+  renderBatches.updateDetail(true,camera,h);
   if(!motionTarget)motionTarget=new THREE.WebGLRenderTarget(w,h,{type:THREE.HalfFloatType,samples:4});else if(motionTarget.width!==w||motionTarget.height!==h)motionTarget.setSize(w,h);
   composite||=createComposite();composite.material.uniforms.tScene.value=motionTarget.texture;
   renderer.setRenderTarget(motionTarget);renderer.render(scene,camera);renderer.setRenderTarget(null);renderer.render(composite.scene,composite.camera);
@@ -663,6 +665,10 @@ function initPicking(){
   // Diagnostics: triangles and size of every mesh of one body system.
   renderer.domElement.atlasMeshReport=system=>{const out=[];const box=new THREE.Box3(),size=new THREE.Vector3();state.groups[system]?.traverse(m=>{if(!m.isMesh)return;const g=m.geometry;box.copy(g.boundingBox||(g.computeBoundingBox(),g.boundingBox)).applyMatrix4(m.matrixWorld);out.push([Math.round((g.index?g.index.count:g.attributes.position.count)/3),+box.getSize(size).length().toFixed(4),g.attributes.position.count])});return out};
   // Verification: pixel difference between the batched frame and the same frame drawn mesh by mesh.
+  // Verification: JPEG of the current view at a fixed size, full geometry next to the lighter motion copies.
+  renderer.domElement.atlasCaptureLod=(width=1080,height=740,crop=[.3,.04,.4,.92])=>{const size=renderer.getSize(new THREE.Vector2()),ratio=renderer.getPixelRatio(),aspect=camera.aspect;renderer.setPixelRatio(1);renderer.setSize(width,height,false);camera.aspect=width/height;camera.clearViewOffset();const [cx,cy,cw,ch]=crop.map((v,i)=>Math.round(v*(i%2?height:width))),out=document.createElement('canvas');out.width=cw*2+6;out.height=ch;const ctx=out.getContext('2d');ctx.fillStyle='#16222f';ctx.fillRect(0,0,out.width,out.height);for(const [i,flag] of [[0,false],[1,true]]){renderBatches.forceDetail(flag);renderer.render(scene,camera);ctx.drawImage(renderer.domElement,cx,cy,cw,ch,i*(cw+6),0,cw,ch)}renderBatches.forceDetail(false);renderer.setPixelRatio(ratio);renderer.setSize(size.x,size.y,false);camera.aspect=aspect;applyViewOffset();renderer.render(scene,camera);return out.toDataURL('image/jpeg',.85)};
+  // Verification: the same frame with full geometry and with the lighter motion copies forced on.
+  renderer.domElement.atlasCompareLod=()=>{const gl=renderer.getContext(),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,read=()=>{renderer.render(scene,camera);const p=new Uint8Array(w*h*4);gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,p);return{p,triangles:renderer.info.render.triangles,calls:renderer.info.render.calls}};renderBatches.forceDetail(false);const a=read();renderBatches.forceDetail(true);const b=read();renderBatches.forceDetail(false);renderer.render(scene,camera);let changed=0,covered=0,diff=0;for(let i=0;i<a.p.length;i+=4){const d=Math.abs(a.p[i]-b.p[i])+Math.abs(a.p[i+1]-b.p[i+1])+Math.abs(a.p[i+2]-b.p[i+2])+Math.abs(a.p[i+3]-b.p[i+3]);diff+=d;if(d>40)changed++;if(a.p[i+3]>0)covered++}return{trianglesFull:a.triangles,trianglesLod:b.triangles,callsFull:a.calls,callsLod:b.calls,coveredByModel:covered,changedPixels:changed,meanDiff:+(diff/(w*h)).toFixed(3),...renderBatches.lodStats()}};
   renderer.domElement.atlasCompareBatches=()=>{const gl=renderer.getContext(),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,read=()=>{renderer.render(scene,camera);const p=new Uint8Array(w*h*4);gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,p);return{p,calls:renderer.info.render.calls}};const a=read();renderBatches.bypass(true);const b=read();renderBatches.bypass(false);let diff=0,changed=0,covered=0;for(let i=0;i<a.p.length;i+=4){const d=Math.abs(a.p[i]-b.p[i])+Math.abs(a.p[i+1]-b.p[i+1])+Math.abs(a.p[i+2]-b.p[i+2])+Math.abs(a.p[i+3]-b.p[i+3]);diff+=d;if(d>12)changed++;if(b.p[i+3]>0)covered++}return{pixels:w*h,coveredByModel:covered,changedPixels:changed,meanDiff:+(diff/(w*h)).toFixed(3),callsBatched:a.calls,callsIndividual:b.calls}};
   // Verification: a frame drawn through the reduced-resolution motion path against the direct full-resolution frame.
   renderer.domElement.atlasCompareMotion=(ratio=.75)=>{

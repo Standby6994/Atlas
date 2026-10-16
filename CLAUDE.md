@@ -75,6 +75,7 @@ Tudo fica na raiz; não há pasta `src/`.
 - Troca de modelo: `warmUpScene()` envia texturas e compila shaders (`compileAsync`) antes do primeiro quadro; enquanto isso a imagem anterior fica na tela (`compileGate`). `clearMaterialCache(root)` descarta só os materiais do modelo removido; limpar tudo recompila o corpo inteiro.
 - Lotes de desenho são fatias por altura (≤ 250 mil triângulos), para o recorte de câmera descartar o que está fora da tela.
 - `moveCamera` zera a inércia do OrbitControls antes de animar.
+- Versão leve em movimento: cada lote ganha uma cópia simplificada por agrupamento de vértices numa grade de 2,5 mm (`lod-worker.js`, Web Worker). `renderBatches.updateDetail()` (chamado em `drawScene`) só a usa durante o movimento e enquanto a célula ocupa até ~3 px; o quadro parado usa sempre a malha completa. Com todas as camadas: ~10,4 → ~4,0 milhões de triângulos no giro. Verificação: `.atlasCompareLod()` e `.atlasCaptureLod()`.
 - O índice de toque (BVH, `picking-index.js`) é montado em blocos que não podem ser interrompidos (~90 ms para 190 mil triângulos no PC). `deferPickingIndex()` adia a montagem enquanto a câmera se move (chamado em `noteMotion` e no início do gesto); sem índice, o toque usa o raycast comum.
 - Seleção no corpo: raio-X (`updateXray`) desenha em dourado só as partes encobertas da peça; não deixe os outros órgãos transparentes (transparência em massa desfaz os lotes e multiplica o custo).
 - Nada de `backdrop-filter` sobre o canvas: o navegador refaz o desfoque a cada quadro.
