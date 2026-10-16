@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "language": "pt-BR",
+  "createdAt": "2026-10-11",
+  "scope": "Dez explorações de fisiologia humana para ensino médio, com relações causais e questões autorais inspiradas no estilo UERJ.",
+  "modelPolicy": {
+    "parameterRanges": "Limites dos controles foram escolhidos para exploração didática; não são intervalos de referência clínica.",
+    "relativeUnits": "Índices de 0 a 100 e curvas de referência são escalas visuais autorais, sem calibração experimental ou interpretação como concentração, probabilidade ou dose.",
+    "time": "Tempo normalizado e velocidade de reprodução não representam a duração real dos processos.",
+    "quantitativeException": "Débito cardíaco = frequência cardíaca × volume sistólico é uma identidade fisiológica documentada. O modelo mantém essas duas entradas independentes para isolar a relação.",
+    "questionPolicy": "Material autoral, não oficial UERJ. Dez itens com rubricas de 2,00 pontos; total 20,00. Dados textuais das questões bastam para resolvê-las sem uma imagem ausente."
+  },
+  "modules": [
+    {
+      "id": "ventilacao",
+      "title": "Ventilação: diafragma, volume e pressão",
+      "system": "respiratorio",
+      "context": "Observe a caixa torácica em um ciclo de respiração tranquila e compare sua expansão com a direção do fluxo de ar.",
+      "anatomyTargets": ["pulmoes", "diafragma", "costelas", "traqueia"],
+      "parameters": [
+        {"id":"frequencia","label":"Frequência respiratória","min":6,"max":30,"default":12,"step":1,"unit":"ciclos/min","rangeBasis":"Faixa de exploração do ritmo; não é referência individual de saúde."},
+        {"id":"amplitude","label":"Expansão torácica","min":10,"max":100,"default":50,"step":1,"unit":"índice didático","rangeBasis":"Deslocamento visual relativo do diafragma e da caixa torácica."},
+        {"id":"resistencia","label":"Resistência das vias aéreas","min":0,"max":100,"default":20,"step":1,"unit":"índice didático","rangeBasis":"Comparação qualitativa sob a mesma diferença de pressão."}
+      ],
+      "causalExplanation": "Na inspiração tranquila, o diafragma contrai e desce, ampliando o tórax. A pressão alveolar cai em relação à atmosférica e o ar entra. Ao relaxar a musculatura inspiratória, o recuo elástico favorece a expiração. Maior resistência dificulta o fluxo para a mesma diferença de pressão.",
+      "relationships": [
+        {"from":"amplitude","to":"excursao_diafragma","direction":"positive","condition":"Na mesma fase inspiratória."},
+        {"from":"frequencia","to":"ciclos_por_tempo","direction":"positive","condition":"Altera o ritmo, não a pressão de cada ciclo por si só."},
+        {"from":"resistencia","to":"fluxo_ar","direction":"negative","condition":"Mantida a diferença de pressão."}
+      ],
+      "graphSpec": {
+        "type":"line","xLabel":"Fase de um ciclo","xUnit":"fração de ciclo","yLabel":"Variação relativa","yUnit":"índice didático",
+        "series":[
+          {"id":"volume","label":"Volume torácico relativo","color":"#36b9e9","points":[[0,0],[0.25,50],[0.5,100],[0.75,50],[1,0]]},
+          {"id":"pressao","label":"Pressão alveolar em relação ao exterior","color":"#ffb85c","points":[[0,0],[0.25,-50],[0.5,0],[0.75,50],[1,0]]}
+        ],
+        "updateRule":"A frequência muda a velocidade do ciclo; amplitude muda a excursão; resistência reduz o indicador de fluxo mantendo o esforço igual. Preservar volume máximo no final da inspiração e fluxo zero nas transições.",
+        "dataNature":"Traçados autorais de fase; não são curvas espirométricas ou medidas de pressão."
+      },
+      "animationHints": ["Diafragma desce durante a inspiração e sobe durante a expiração.","Ar entra pela traqueia e sai pelo mesmo trajeto, com setas de sentidos opostos.","A parede pleural transmite a expansão; os pulmões não contraem ativamente para inspirar."],
+      "caveat": "O módulo mostra respiração tranquila. A expiração forçada pode recrutar músculos; ventilação não equivale à oxigenação e o espaço morto não foi quantificado.",
+      "sourceIds": ["os-breathing","os-biology-breathing"],
+      "uerj": {
+        "label":"Questão autoral inspirada no estilo UERJ",
+        "question":"Durante uma inspiração tranquila, o volume da caixa torácica aumenta e a pressão alveolar fica menor que a atmosférica. Indique o movimento do diafragma nessa etapa e explique a entrada de ar nos pulmões.",
+        "answer":"O diafragma contrai e desce. A expansão torácica aumenta o volume pulmonar e reduz a pressão alveolar em relação à atmosférica, fazendo o ar entrar a favor desse gradiente de pressão.",
+        "skills":["identificação","explicação causal"],"points":2,
+        "rubric":[{"criterion":"Indica contração e descida do diafragma.","points":0.5},{"criterion":"Relaciona expansão torácica a aumento do volume pulmonar e diminuição da pressão alveolar.","points":0.75},{"criterion":"Explica entrada de ar do exterior de maior pressão para os alvéolos de menor pressão.","points":0.75}],
+        "acceptedEquivalents":["Achatamento do diafragma durante a contração.","Ar desloca-se a favor do gradiente de pressão."],
+        "commonErrors":["Afirmar que o diafragma relaxa para iniciar a inspiração tranquila.","Tratar a inspiração como transporte ativo de moléculas de ar."]
+      }
+    },
+    {
+      "id":"trocas-gasosas",
+      "title":"Trocas alveolares: difusão e perfusão",
+      "system":"respiratorio",
+      "context":"Aproxime um alvéolo e seu capilar para acompanhar O₂ entrando no sangue e CO₂ seguindo o sentido inverso.",
+      "anatomyTargets":["pulmoes","alveolo","capilar_pulmonar"],
+      "parameters":[
+        {"id":"gradiente","label":"Gradiente de pressão parcial de O₂","min":0,"max":80,"default":60,"step":1,"unit":"mmHg","rangeBasis":"Diferença escolhida entre alvéolo e sangue que chega ao capilar; sem estimar saturação."},
+        {"id":"espessura","label":"Espessura relativa da barreira","min":1,"max":4,"default":1,"step":0.1,"unit":"vezes a referência visual","rangeBasis":"Comparação de distância de difusão; não é medida histológica."},
+        {"id":"perfusao","label":"Perfusão capilar","min":0,"max":100,"default":70,"step":1,"unit":"índice didático","rangeBasis":"Quantidade relativa de fluxo sanguíneo na região desenhada."}
+      ],
+      "causalExplanation":"O₂ e CO₂ atravessam a barreira alveolocapilar por difusão simples, a favor de seus próprios gradientes de pressão parcial. Uma barreira delgada favorece a troca. Ventilação fornece ar aos alvéolos; perfusão leva sangue aos capilares. Aumentar uma delas isoladamente não garante maior troca útil quando a outra é insuficiente.",
+      "relationships":[
+        {"from":"gradiente","to":"fluxo_difusivo_O2","direction":"positive","condition":"Mesma área, permeabilidade e espessura; em zero não há fluxo líquido impulsionado por esse gradiente."},
+        {"from":"espessura","to":"fluxo_difusivo_O2","direction":"negative","condition":"Mesma área e gradiente."},
+        {"from":"perfusao","to":"transporte_sanguineo_util","direction":"positive_with_limit","condition":"Depende de ventilação e difusão suficientes; sem perfusão não há transporte pela região."}
+      ],
+      "graphSpec":{"type":"line","xLabel":"Gradiente de O₂","xUnit":"mmHg","yLabel":"Difusão relativa","yUnit":"índice didático","series":[{"id":"difusao","label":"Tendência de difusão de O₂","color":"#36b9e9","points":[[0,0],[20,25],[40,50],[60,75],[80,100]]}],"updateRule":"Marcar o gradiente selecionado e reduzir a curva quando a barreira engrossa; mostrar a limitação de perfusão separadamente, sem converter o índice em saturação arterial.","dataNature":"Escala qualitativa autoral para a direção da relação, sem constante de difusão calibrada."},
+      "animationHints":["Mostrar O₂ e CO₂ com legenda e setas distintas.","O sangue percorre o capilar enquanto as partículas cruzam a barreira; não atravessam uma parede comum inexistente.","Com gradiente zero, suspender setas de fluxo líquido de O₂, preservando movimento aleatório das moléculas."],
+      "caveat":"Não calcula saturação de hemoglobina, gasometria ou relação ventilação/perfusão regional. Área de troca e solubilidades estão fixas no desenho.",
+      "sourceIds":["os-gas-exchange","os-biology-gas-exchange"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Em um modelo alveolar, PO₂ é 100 mmHg no alvéolo e 40 mmHg no sangue que chega ao capilar. PCO₂ é 40 mmHg no alvéolo e 46 mmHg nesse sangue. Nomeie o mecanismo de passagem dos gases pela barreira e justifique por que O₂ e CO₂ têm sentidos de fluxo líquido opostos.","answer":"O mecanismo é difusão simples. O O₂ vai do alvéolo ao sangue porque sua pressão parcial é maior no alvéolo; o CO₂ vai do sangue ao alvéolo porque sua pressão parcial é maior no sangue.","skills":["interpretação dados","explicação causal"],"points":2,"rubric":[{"criterion":"Nomeia difusão simples.","points":0.5},{"criterion":"Relaciona fluxo de O₂ alvéolo→sangue ao gradiente 100→40 mmHg.","points":0.75},{"criterion":"Relaciona fluxo de CO₂ sangue→alvéolo ao gradiente 46→40 mmHg.","points":0.75}],"acceptedEquivalents":["Difusão passiva sem gasto direto de ATP.","Cada gás segue seu próprio gradiente de pressão parcial."],"commonErrors":["Chamar a passagem de osmose.","Usar a pressão total para definir o sentido de ambos os gases."]}
+    },
+    {
+      "id":"debito-cardiaco",
+      "title":"Coração: frequência e volume sistólico",
+      "system":"cardiovascular",
+      "context":"Compare o volume bombeado por um ventrículo em um minuto ao variar os batimentos e o volume ejetado em cada batimento.",
+      "anatomyTargets":["coracao","aorta","arteria_pulmonar"],
+      "parameters":[
+        {"id":"frequencia","label":"Frequência cardíaca","min":40,"max":160,"default":70,"step":1,"unit":"batimentos/min","rangeBasis":"Faixa de controle para comparar a identidade de débito, não recomendação de frequência."},
+        {"id":"volume_sistolico","label":"Volume sistólico","min":30,"max":110,"default":70,"step":1,"unit":"mL/batimento","rangeBasis":"Entradas independentes para o exercício; não prevê o enchimento de um coração real."}
+      ],
+      "causalExplanation":"O débito cardíaco é o volume que cada ventrículo bombeia em um minuto. Multiplicar a frequência pelo volume sistólico fornece esse débito. Mantido o volume por batimento, aumentar a frequência eleva o débito. Num organismo, enchimento, contratilidade e resistência à ejeção também alteram o volume sistólico.",
+      "relationships":[{"from":"frequencia","to":"debito","direction":"positive","condition":"Volume sistólico mantido constante."},{"from":"volume_sistolico","to":"debito","direction":"positive","condition":"Frequência mantida constante."}],
+      "documentedIdentity":{"expression":"debito_L_min = frequencia * volume_sistolico / 1000","outputUnit":"L/min","sourceId":"os-cardiac-physiology","note":"É o débito de um ventrículo; não somar os débitos direito e esquerdo como se fossem circuitos paralelos."},
+      "graphSpec":{"type":"line","xLabel":"Frequência cardíaca","xUnit":"batimentos/min","yLabel":"Débito de um ventrículo","yUnit":"L/min","series":[{"id":"debito","label":"Volume sistólico fixo no controle","color":"#fc7188","points":[[40,2.8],[70,4.9],[100,7],[130,9.1],[160,11.2]]}],"updateRule":"Recalcular todos os pontos pela identidade documentada com o volume sistólico escolhido; destacar a frequência atual.","dataNature":"Cálculo exato da identidade para entradas hipotéticas, sem modelo hemodinâmico clínico."},
+      "animationHints":["Frequência controla o ritmo da ejeção.","Volume sistólico muda a quantidade relativa de partículas por ejeção.","Válvulas permitem o fluxo em um sentido; os circuitos pulmonar e sistêmico estão em série."],
+      "caveat":"A simulação mantém frequência e volume sistólico independentes. Não prevê pressão arterial, eletrocardiograma ou redução do enchimento em frequências elevadas.",
+      "sourceIds":["os-cardiac-physiology","os-blood-flow"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Em duas condições hipotéticas, um ventrículo ejeta 70 mL por batimento. A frequência é 70 batimentos/min na condição A e 100 batimentos/min na B. Calcule o débito de cada condição em L/min e explique a diferença, considerando que o volume sistólico permaneceu constante.","answer":"A: 70 × 70 = 4.900 mL/min = 4,9 L/min. B: 100 × 70 = 7.000 mL/min = 7,0 L/min. B tem maior débito porque realiza mais ejeções por minuto com o mesmo volume em cada ejeção.","skills":["cálculo","comparação","explicação causal"],"points":2,"rubric":[{"criterion":"Calcula A = 4,9 L/min com conversão correta.","points":0.5},{"criterion":"Calcula B = 7,0 L/min com conversão correta.","points":0.5},{"criterion":"Relaciona maior débito à maior frequência com volume sistólico fixo.","points":1}],"acceptedEquivalents":["Expressões equivalentes com mL/min convertidos a L/min.","Débito proporcional ao número de batimentos nas condições descritas."],"commonErrors":["Somar frequência e volume sistólico.","Dobrar o resultado por haver dois ventrículos."]}
+    },
+    {
+      "id":"glicemia",
+      "title":"Glicemia: insulina e glucagon",
+      "system":"endocrino",
+      "context":"Acompanhe, em escala relativa, a entrada de glicose após uma refeição e a resposta que favorece sua utilização e armazenamento.",
+      "anatomyTargets":["pancreas","figado","musculo","tecido_adiposo"],
+      "parameters":[
+        {"id":"refeicao","label":"Entrada de glicose da refeição","min":0,"max":100,"default":60,"step":1,"unit":"índice didático","rangeBasis":"Tamanho relativo do estímulo, sem equivalência a gramas de alimento."},
+        {"id":"resposta_insulina","label":"Resposta dos tecidos à insulina","min":0,"max":100,"default":70,"step":1,"unit":"índice didático","rangeBasis":"Comparação da ação sobre tecidos-alvo; não mede resistência à insulina."},
+        {"id":"glucagon","label":"Sinal de glucagon","min":0,"max":100,"default":30,"step":1,"unit":"índice didático","rangeBasis":"Sinal hepático relativo, sem dose ou concentração hormonal."}
+      ],
+      "causalExplanation":"A elevação de glicose estimula células beta pancreáticas a liberar insulina, que favorece captação em tecidos-alvo e armazenamento. Quando a glicose diminui, células alfa liberam glucagon, favorecendo a liberação hepática de glicose. Essas respostas participam de retroalimentação negativa. Nem toda célula depende de insulina para captar glicose.",
+      "relationships":[{"from":"refeicao","to":"elevacao_glicose","direction":"positive","condition":"Mesma absorção e respostas hormonais."},{"from":"resposta_insulina","to":"retorno_glicose","direction":"positive","condition":"Existe sinal de insulina; curva retorna mais rapidamente à referência."},{"from":"glucagon","to":"liberacao_hepatica","direction":"positive","condition":"Disponibilidade de substratos hepáticos mantida."}],
+      "graphSpec":{"type":"line","xLabel":"Tempo após o estímulo","xUnit":"tempo normalizado","yLabel":"Sinal relativo","yUnit":"índice didático","series":[{"id":"glicose","label":"Glicose relativa","color":"#ffb85c","points":[[0,30],[0.15,45],[0.3,80],[0.5,65],[0.75,40],[1,30]]},{"id":"insulina","label":"Resposta insulínica ilustrativa","color":"#a994ff","points":[[0,10],[0.15,20],[0.3,55],[0.5,65],[0.75,30],[1,10]]}],"updateRule":"Entrada maior eleva o pico de glicose; resposta insulínica maior favorece o retorno; glucagon aumenta o indicador de liberação hepática. Conservar rótulos relativos e o atraso ilustrativo do feedback.","dataNature":"Curvas autorais, sem mg/dL, doses, diagnóstico ou previsão de tempo pós-prandial."},
+      "animationHints":["Mostrar sinal insulínico do pâncreas para fígado, músculo e tecido adiposo.","Mostrar glucagon atuando sobre o fígado.","Não representar glucagon liberando diretamente glicose do músculo para o sangue."],
+      "caveat":"O módulo omite incretinas, estoques variáveis e diferenças individuais. Índices não representam diabetes ou necessidade de insulina.",
+      "sourceIds":["os-pancreas","os-biology-homeostasis"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Após um intervalo sem alimentação, uma preparação experimental apresenta diminuição da glicose e aumento de um hormônio pancreático que estimula a quebra de glicogênio no fígado. Identifique esse hormônio e o tipo celular que o secreta. Explique como sua ação ajuda a recuperar a glicose sanguínea.","answer":"É o glucagon, secretado pelas células alfa das ilhotas pancreáticas. Ele estimula a glicogenólise hepática, permitindo que o fígado disponibilize glicose para o sangue e se oponha à queda da glicemia.","skills":["identificação","explicação causal"],"points":2,"rubric":[{"criterion":"Identifica glucagon.","points":0.5},{"criterion":"Identifica células alfa pancreáticas.","points":0.5},{"criterion":"Relaciona glicogenólise hepática à disponibilização de glicose para o sangue.","points":1}],"acceptedEquivalents":["Células α das ilhotas de Langerhans.","Quebra do glicogênio hepático e liberação de glicose."],"commonErrors":["Indicar insulina ou células beta.","Afirmar que o hormônio converte glicose sanguínea em glicogênio nesse contexto."]}
+    },
+    {
+      "id":"rim-adh",
+      "title":"Néfron: filtração e ação do ADH",
+      "system":"urinario",
+      "context":"Distinga o filtrado produzido no glomérulo da água reabsorvida no ducto coletor ao variar o sinal de ADH.",
+      "anatomyTargets":["rins","nefron","glomerulo","ducto_coletor","hipotalamo","hipofise"],
+      "parameters":[
+        {"id":"adh","label":"Sinal de ADH","min":0,"max":100,"default":50,"step":1,"unit":"índice didático","rangeBasis":"Controle de ação hormonal relativa, sem concentração plasmática."},
+        {"id":"gradiente_medular","label":"Gradiente osmótico medular","min":0,"max":100,"default":80,"step":1,"unit":"índice didático","rangeBasis":"Condição relativa necessária ao movimento osmótico de água."},
+        {"id":"filtracao","label":"Formação de filtrado","min":50,"max":150,"default":100,"step":1,"unit":"índice didático","rangeBasis":"Entrada de filtrado relativa, não taxa clínica de filtração glomerular."}
+      ],
+      "causalExplanation":"A filtração glomerular forma um filtrado; sua composição é modificada por reabsorção e secreção. ADH é produzido no hipotálamo e liberado pela neuro-hipófise. Ele favorece inserção de aquaporinas nas células do ducto coletor, permitindo reabsorção de água por osmose quando há gradiente medular. Com os demais fatores mantidos, a urina fica menos volumosa e mais concentrada.",
+      "relationships":[{"from":"adh","to":"aquaporinas_apicais","direction":"positive","condition":"Células do ducto coletor respondem ao hormônio."},{"from":"gradiente_medular","to":"reabsorcao_agua","direction":"positive","condition":"Membrana permeável; ADH sozinho não cria o gradiente."},{"from":"reabsorcao_agua","to":"volume_urinario","direction":"negative","condition":"Mesma filtração e carga de solutos."},{"from":"filtracao","to":"entrada_filtrado","direction":"positive","condition":"Varia entrada do modelo, sem prever autorregulação renal."}],
+      "graphSpec":{"type":"line","xLabel":"Sinal de ADH","xUnit":"índice didático","yLabel":"Resposta relativa","yUnit":"índice didático","series":[{"id":"agua","label":"Reabsorção no coletor","color":"#36b9e9","points":[[0,10],[25,30],[50,55],[75,75],[100,90]]},{"id":"urina","label":"Volume urinário relativo","color":"#ffb85c","points":[[0,90],[25,70],[50,45],[75,25],[100,10]]}],"updateRule":"Reduzir a diferença entre curvas quando o gradiente medular é baixo; filtração varia a entrada relativa. Não interpretar as séries como percentagens do filtrado ou mL de urina.","dataNature":"Traçados comparativos autorais de direção, sem taxa renal calibrada."},
+      "animationHints":["Separar visualmente filtrado no túbulo e sangue nos capilares.","Aquaporinas permitem água retornar do coletor ao interstício e à circulação.","Não mostrar hemácias cruzando uma barreira glomerular íntegra."],
+      "caveat":"Urina não é simplesmente sangue filtrado. O desenho omite vários segmentos e transportadores; aquaporinas sem gradiente osmótico não garantem concentração urinária.",
+      "sourceIds":["os-urine-formation","os-renal-hormones","os-pituitary"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Dois ductos coletores experimentais recebem a mesma entrada de filtrado e a mesma carga de solutos, com gradiente osmótico medular preservado. Apenas B recebe um sinal maior de ADH. Indique qual tende a produzir menor volume final de urina e explique o mecanismo celular responsável.","answer":"B tende a produzir menor volume de urina. O ADH promove inserção de aquaporinas na membrana apical das células do coletor; isso aumenta sua permeabilidade e permite maior reabsorção osmótica de água em direção ao interstício medular.","skills":["previsão","explicação causal"],"points":2,"rubric":[{"criterion":"Indica B.","points":0.5},{"criterion":"Relaciona ADH à inserção de aquaporinas e aumento da permeabilidade à água.","points":0.75},{"criterion":"Explica reabsorção por osmose a favor do gradiente medular, reduzindo água eliminada.","points":0.75}],"acceptedEquivalents":["Canais de água na membrana luminal/apical.","Água sai do coletor e retorna ao interstício e à circulação."],"commonErrors":["Afirmar que ADH aumenta a diurese.","Dizer que aquaporina bombeia água usando ATP."]}
+    },
+    {
+      "id":"reflexo-sinapse",
+      "title":"Reflexo: sinal elétrico e sinapse química",
+      "system":"nervoso",
+      "context":"Siga um sinal da pele até a medula e o músculo, separando condução no axônio de transmissão entre células.",
+      "anatomyTargets":["pele","nervo","medula_espinhal","musculo"],
+      "parameters":[
+        {"id":"estimulo","label":"Intensidade do estímulo","min":0,"max":100,"default":70,"step":1,"unit":"índice didático","rangeBasis":"Controle de estímulo; limiar gráfico é arbitrário e não define limiar sensorial humano."},
+        {"id":"mielina","label":"Integridade relativa da mielina","min":0,"max":100,"default":80,"step":1,"unit":"índice didático","rangeBasis":"Comparação do atraso de condução, sem velocidade clínica."},
+        {"id":"liberacao","label":"Liberação sináptica dependente de Ca²⁺","min":0,"max":100,"default":80,"step":1,"unit":"índice didático","rangeBasis":"Eficácia de uma sinapse excitadora desenhada; não representa todas as sinapses."}
+      ],
+      "causalExplanation":"No axônio, o potencial de ação depende de canais iônicos e apresenta comportamento de tudo ou nada após o limiar. No terminal de uma sinapse química, entrada de Ca²⁺ favorece liberação de neurotransmissor. Reflexos de retirada podem ser integrados na medula, com excitação de músculos flexores e inibição de antagonistas. A informação também pode seguir ao encéfalo.",
+      "relationships":[{"from":"estimulo","to":"disparo","direction":"threshold","condition":"Superar o limiar didático dispara pulsos; maior intensidade não aumenta a amplitude de um potencial de ação individual."},{"from":"mielina","to":"atraso_conducao","direction":"negative","condition":"Mesma extensão e tipo de axônio; não calcular m/s."},{"from":"liberacao","to":"sinal_possinaptico","direction":"positive","condition":"Sinapse excitadora específica com receptores preservados."}],
+      "graphSpec":{"type":"line","xLabel":"Sequência temporal do pulso","xUnit":"tempo normalizado","yLabel":"Potencial relativo","yUnit":"índice didático","series":[{"id":"potencial","label":"Pulso de amplitude fixa após o limiar","color":"#a994ff","points":[[0,0],[0.25,0],[0.35,100],[0.45,40],[0.6,-15],[0.75,0],[1,0]]}],"updateRule":"Abaixo do limiar, não desenhar o pulso; acima, conservar amplitude. Mielina muda atraso, e eficácia sináptica muda o indicador pós-sináptico, não o pulso pré-sináptico.","dataNature":"Esquema autoral; não é registro em mV ou ms e não usa equações de excitabilidade."},
+      "animationHints":["Percurso pele→neurônio sensorial→medula→neurônio motor→músculo.","Inserir um espaço sináptico e vesículas no detalhe ampliado.","Distinguir via excitadora para flexor e via inibidora para antagonista."],
+      "caveat":"O reflexo desenhado é polissináptico de retirada. Nem todo reflexo possui a mesma organização, e sinapses podem ser excitadoras ou inibidoras conforme receptor e contexto.",
+      "sourceIds":["os-action-potential","os-neuron-communication","os-motor-responses"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Em uma preparação que reproduz um reflexo de retirada, o impulso chega ao terminal pré-sináptico, mas um bloqueio impede a entrada de Ca²⁺ nesse terminal. A resposta motora diminui. Explique essa diminuição e nomeie a região do sistema nervoso central capaz de integrar esse reflexo sem uma decisão consciente inicial.","answer":"Sem a entrada de Ca²⁺, diminui a exocitose de vesículas e a liberação de neurotransmissor, reduzindo a ativação pós-sináptica e a resposta motora. A medula espinhal pode integrar o reflexo de retirada antes da decisão consciente.","skills":["explicação causal","identificação"],"points":2,"rubric":[{"criterion":"Relaciona bloqueio de entrada de Ca²⁺ à redução de exocitose/liberação de neurotransmissor.","points":0.75},{"criterion":"Relaciona menor transmissão sináptica à menor ativação da via motora.","points":0.75},{"criterion":"Nomeia medula espinhal como centro integrador no reflexo descrito.","points":0.5}],"acceptedEquivalents":["Menor fusão de vesículas com a membrana pré-sináptica.","Medula ou circuito medular."],"commonErrors":["Afirmar que o neurotransmissor atravessa a sinapse como corrente elétrica.","Afirmar que reflexos nunca envolvem informação ascendente ao encéfalo."]}
+    },
+    {
+      "id":"digestao-ph",
+      "title":"Digestão: enzimas e pH",
+      "system":"digestorio",
+      "context":"Compare a atividade de enzimas em ambientes distintos e acompanhe a transformação de moléculas alimentares ao longo do tubo digestório.",
+      "anatomyTargets":["boca","estomago","pancreas","intestino_delgado"],
+      "parameters":[
+        {"id":"ph","label":"pH do ensaio","min":1,"max":9,"default":2,"step":0.1,"unit":"pH","rangeBasis":"Faixa experimental para comparar enzimas em tubos, não pH de todo o tubo digestório."},
+        {"id":"enzima","label":"Quantidade relativa de enzima","min":0,"max":100,"default":70,"step":1,"unit":"índice didático","rangeBasis":"Disponibilidade de enzima em condição de substrato suficiente."},
+        {"id":"substrato","label":"Disponibilidade de substrato","min":0,"max":100,"default":80,"step":1,"unit":"índice didático","rangeBasis":"Substrato específico para cada ensaio, não massa total da refeição."}
+      ],
+      "causalExplanation":"Enzimas têm condições de atividade dependentes de sua estrutura e do meio. A pepsina atua sobre proteínas em ambiente gástrico ácido; a acidez também permite sua ativação a partir do pepsinogênio. Outras enzimas atuam melhor em meios distintos. Digestão química gera moléculas menores, e o intestino delgado é um importante local de digestão e absorção.",
+      "relationships":[{"from":"ph","to":"atividade_pepsina","direction":"optimum_acidic","condition":"Mesma temperatura, quantidade de enzima e substrato específico."},{"from":"enzima","to":"atividade","direction":"positive_with_limit","condition":"Não aumentar indefinidamente se o substrato for limitante."},{"from":"substrato","to":"atividade","direction":"positive_with_limit","condition":"Enzima disponível; curva deve saturar qualitativamente."}],
+      "graphSpec":{"type":"line","xLabel":"pH do ensaio","xUnit":"pH","yLabel":"Atividade relativa","yUnit":"índice didático","series":[{"id":"pepsina","label":"Pepsina + proteína","color":"#ffb85c","points":[[1,60],[2,100],[3,65],[4,20],[5,5],[6,0],[7,0],[8,0],[9,0]]},{"id":"amilase","label":"Amilase salivar + amido","color":"#36b9e9","points":[[1,0],[2,0],[3,0],[4,5],[5,30],[6,80],[7,100],[8,50],[9,10]]}],"updateRule":"Marcar o pH atual nas duas curvas; quantidade de enzima e substrato modulam o indicador de conversão sob limites qualitativos. A forma numérica das curvas é autoral, não caracteriza parâmetros cinéticos reais.","dataNature":"Perfis qualitativos ilustrativos, sem taxas enzimáticas ou constantes experimentais."},
+      "animationHints":["No estômago, representar proteínas formando fragmentos menores.","No ensaio de amilase, representar amido como substrato; não proteína.","Mostrar absorção em direção aos vasos no detalhe do intestino, separada da quebra enzimática."],
+      "caveat":"As enzimas comparadas usam substratos diferentes. Curvas não servem para comparar velocidades absolutas entre elas ou calcular tratamento de acidez.",
+      "sourceIds":["os-stomach","os-chemical-digestion","os-mouth","os-biology-enzymes"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Uma enzima gástrica que degrada proteínas apresentou atividade relativa 100 em pH 2 e 5 em pH 7. Os ensaios mantiveram temperatura, substrato e quantidade de enzima iguais. Identifique essa enzima e explique por que mudar o pH pode reduzir sua atividade.","answer":"A enzima é a pepsina. A mudança de pH altera a ionização de grupos da proteína e pode afetar sua conformação e o sítio ativo; afastar o meio de sua condição ácida favorável reduz a catálise.","skills":["interpretação dados","explicação causal"],"points":2,"rubric":[{"criterion":"Identifica pepsina.","points":0.5},{"criterion":"Relaciona pH à ionização e/ou conformação da enzima e ao funcionamento do sítio ativo.","points":1},{"criterion":"Relaciona afastamento do meio ácido favorável à menor catálise registrada.","points":0.5}],"acceptedEquivalents":["Alteração de cargas dos aminoácidos do sítio ativo.","Mudança estrutural que dificulta a interação enzima-substrato."],"commonErrors":["Afirmar que toda enzima atua melhor em pH 7.","Atribuir a diferença à quantidade de substrato, mantida constante no ensaio."]}
+    },
+    {
+      "id":"ciclo-ovariano",
+      "title":"Ciclo ovariano e endométrio",
+      "system":"reprodutor",
+      "context":"Percorra um ciclo esquemático e relacione os sinais hormonais à ovulação, ao corpo lúteo e ao endométrio.",
+      "anatomyTargets":["ovarios","utero","hipofise","hipotalamo"],
+      "parameters":[
+        {"id":"dia","label":"Dia do ciclo esquemático","min":1,"max":28,"default":14,"step":1,"unit":"dia ilustrativo","rangeBasis":"Um ciclo autoral de 28 dias para ordenar eventos; não prevê ciclos individuais."},
+        {"id":"sinal_lh","label":"Intensidade do pico de LH no modelo","min":0,"max":100,"default":100,"step":1,"unit":"índice didático","rangeBasis":"Modulação do evento hormonal ilustrativo, sem concentração ou limiar clínico."},
+        {"id":"funcao_lutea","label":"Produção lútea relativa de progesterona","min":0,"max":100,"default":80,"step":1,"unit":"índice didático","rangeBasis":"Variação comparativa após o evento ovulatório representado."}
+      ],
+      "causalExplanation":"FSH participa do crescimento folicular. Antes da ovulação, estradiol elevado de modo sustentado favorece retroalimentação positiva e o pico de LH. Após a ovulação, o corpo lúteo produz progesterona, associada ao endométrio secretor. Sem manutenção do corpo lúteo, a queda dos esteroides favorece a menstruação. O ciclo ovariano e o uterino são relacionados, mas descrevem eventos distintos.",
+      "relationships":[{"from":"sinal_lh","to":"evento_ovulatorio","direction":"trigger_in_model","condition":"Folículo maduro e cenário sem gestação; não aplicar um limiar numérico clínico."},{"from":"funcao_lutea","to":"sinal_progesterona","direction":"positive","condition":"Corpo lúteo já formado após ovulação."},{"from":"queda_esteroides","to":"descamacao_endometrio","direction":"positive","condition":"Modelo sem gestação; não representa a dinâmica de todos os ciclos."}],
+      "graphSpec":{"type":"line","xLabel":"Dia do ciclo esquemático","xUnit":"dia","yLabel":"Sinal hormonal relativo","yUnit":"índice didático","series":[{"id":"estradiol","label":"Estradiol","color":"#fc7188","points":[[1,15],[5,20],[9,50],[12,90],[14,50],[17,35],[21,55],[24,40],[28,10]]},{"id":"lh","label":"LH","color":"#a994ff","points":[[1,10],[5,10],[9,12],[12,25],[14,100],[16,12],[21,10],[28,10]]},{"id":"progesterona","label":"Progesterona","color":"#ffb85c","points":[[1,5],[5,5],[9,5],[14,10],[17,50],[21,85],[24,65],[28,5]]}],"updateRule":"Dia move um cursor e a fase anatômica; sinal_lh muda o pico ilustrativo; funcao_lutea muda a curva pós-ovulatória de progesterona. Se o evento ovulatório for desativado, não formar corpo lúteo nem mostrar pico lúteo normal.","dataNature":"Sequência hormonal autoral. Dia 14 e escala das amplitudes são escolhas do exemplo, não previsão de ovulação."},
+      "animationHints":["Representar folículo→liberação de ovócito secundário→corpo lúteo.","Separar fase ovariana de mudança no endométrio.","Só aplicar sinal de progesterona lútea após mostrar a formação do corpo lúteo."],
+      "caveat":"A duração e o momento da ovulação variam. O módulo não calcula janela fértil, risco de gravidez ou efeito de contraceptivos, e não inclui gestação.",
+      "sourceIds":["os-ovarian-system","os-pituitary"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Em um ciclo sem fecundação, um pico de LH é seguido por aumento de progesterona. Dias depois, essa progesterona diminui e começa a descamação endometrial. Nomeie a estrutura ovariana responsável pela principal produção de progesterona após a ovulação e explique a relação entre sua regressão e a menstruação.","answer":"É o corpo lúteo. Sua regressão reduz progesterona e estrógenos; a retirada do suporte hormonal ao endométrio favorece a degeneração e a descamação de sua camada funcional, caracterizando a menstruação.","skills":["identificação","explicação causal"],"points":2,"rubric":[{"criterion":"Nomeia corpo lúteo.","points":0.5},{"criterion":"Relaciona regressão do corpo lúteo à queda de progesterona/esteroides ovarianos.","points":0.75},{"criterion":"Relaciona retirada do suporte hormonal à descamação da camada funcional do endométrio.","points":0.75}],"acceptedEquivalents":["Corpo amarelo.","Queda hormonal desencadeia perda da camada funcional uterina."],"commonErrors":["Indicar o próprio ovócito como produtor principal de progesterona.","Afirmar que toda a parede do útero é eliminada."]}
+    },
+    {
+      "id":"sarcomero",
+      "title":"Sarcômero: cálcio, ATP e deslizamento",
+      "system":"muscular",
+      "context":"Amplie uma fibra muscular para comparar os filamentos durante contração e relaxamento, distinguindo suas extensões da distância entre linhas Z.",
+      "anatomyTargets":["musculo","fibra_muscular","sarcomero"],
+      "parameters":[
+        {"id":"calcio","label":"Ativação por Ca²⁺ no sarcoplasma","min":0,"max":100,"default":70,"step":1,"unit":"índice didático","rangeBasis":"Disponibilidade relativa para ativar troponina; não concentração molar."},
+        {"id":"atp","label":"Disponibilidade de ATP","min":0,"max":100,"default":80,"step":1,"unit":"índice didático","rangeBasis":"Disponibilidade para ciclo de pontes e bombas; ausência não equivale a relaxamento."},
+        {"id":"estimulos","label":"Repetição de estímulos","min":1,"max":30,"default":10,"step":1,"unit":"pulsos ilustrativos/s","rangeBasis":"Controle visual de repetição e somação, sem prever força humana."}
+      ],
+      "causalExplanation":"Ca²⁺ liga-se à troponina e favorece o deslocamento da tropomiosina, expondo sítios da actina. As cabeças de miosina realizam ciclos de ligação e movimento dependentes de ATP, aproximando as linhas Z. Os filamentos não encurtam. ATP também permite o desligamento das pontes e a recuperação de Ca²⁺ pelo retículo sarcoplasmático; ausência intensa de ATP pode manter pontes presas.",
+      "relationships":[{"from":"calcio","to":"sitios_actina_expostos","direction":"positive","condition":"Troponina/tropomiosina presentes."},{"from":"atp","to":"ciclagem_pontes","direction":"enabling","condition":"ATP é necessário à ciclagem; em zero, indicar bloqueio, sem animar relaxamento automático."},{"from":"estimulos","to":"somacao","direction":"positive_with_limit","condition":"Músculo esquelético e recuperação incompleta entre estímulos; qualitativo."}],
+      "graphSpec":{"type":"line","xLabel":"Etapas de uma contração ilustrativa","xUnit":"tempo normalizado","yLabel":"Extensão relativa","yUnit":"índice didático","series":[{"id":"sarcomero","label":"Distância entre linhas Z","color":"#fc7188","points":[[0,100],[0.2,100],[0.4,80],[0.6,65],[0.8,80],[1,100]]},{"id":"banda_a","label":"Extensão da banda A","color":"#a994ff","points":[[0,60],[0.2,60],[0.4,60],[0.6,60],[0.8,60],[1,60]]}],"updateRule":"Ca²⁺ controla exposição e início; ATP permite ciclos e retorno por remoção de Ca²⁺. Em atp=0, interromper ciclagem e exibir estado de pontes presas em vez de retorno automático. Manter banda A constante em toda animação.","dataNature":"Comprimentos normalizados autorais; não calcula tensão, fadiga ou comprimento real."},
+      "animationHints":["Actina desliza em direção ao centro, sem mudar seu comprimento.","Miosina preserva seu comprimento; a sobreposição aumenta.","Bandas I e zona H tendem a diminuir durante o encurtamento; banda A permanece constante."],
+      "caveat":"Contração e encurtamento não são sinônimos em todas as situações: músculo pode desenvolver tensão sem encurtar. A animação mostra um caso de deslizamento com encurtamento.",
+      "sourceIds":["os-skeletal-muscle","os-muscle-contraction"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Ao comparar um sarcômero relaxado e outro encurtado, observou-se menor distância entre linhas Z e banda A de mesma extensão. Indique se os filamentos de actina e miosina encurtaram e explique como o Ca²⁺ permite o início de sua interação.","answer":"Os filamentos não encurtaram: deslizaram uns em relação aos outros, aumentando a sobreposição. Ca²⁺ liga-se à troponina, deslocando a tropomiosina e expondo na actina os sítios de ligação para a miosina.","skills":["interpretação dados","explicação causal"],"points":2,"rubric":[{"criterion":"Afirma que os filamentos mantêm suas extensões e ocorre deslizamento/aumento da sobreposição.","points":0.75},{"criterion":"Relaciona Ca²⁺ à ligação com troponina.","points":0.5},{"criterion":"Relaciona deslocamento de tropomiosina à exposição de sítios da actina para miosina.","points":0.75}],"acceptedEquivalents":["Miofilamentos não ficam menores; a unidade sarcomérica se encurta.","Cálcio libera os sítios de interação ao modificar o complexo regulador."],"commonErrors":["Afirmar que a banda A diminui.","Afirmar que Ca²⁺ fornece a energia química do ciclo de pontes."]}
+    },
+    {
+      "id":"termorregulacao",
+      "title":"Termorregulação: suor, umidade e pele",
+      "system":"tegumentar",
+      "context":"Compare a dissipação de calor em ar mais seco ou mais úmido, com a mesma produção de suor, e acompanhe respostas controladas pelo hipotálamo.",
+      "anatomyTargets":["pele","glandula_sudoripara","vasos_cutaneos","hipotalamo"],
+      "parameters":[
+        {"id":"umidade","label":"Umidade relativa do ar","min":10,"max":95,"default":40,"step":1,"unit":"%","rangeBasis":"Condição ambiental para comparar evaporação, não avaliar segurança de exposição."},
+        {"id":"suor","label":"Produção relativa de suor","min":0,"max":100,"default":60,"step":1,"unit":"índice didático","rangeBasis":"Disponibilidade de água na superfície, não mL de suor por minuto."},
+        {"id":"vasodilatacao","label":"Fluxo cutâneo relativo","min":0,"max":100,"default":60,"step":1,"unit":"índice didático","rangeBasis":"Representação de vasodilatação, com ambiente mais frio que a pele."}
+      ],
+      "causalExplanation":"O hipotálamo coordena respostas de retroalimentação negativa à variação térmica. No calor, sudorese e aumento do fluxo cutâneo podem favorecer perda de calor. A evaporação do suor retira energia da pele; maior umidade dificulta essa evaporação. Suor que escorre sem evaporar não produz a mesma dissipação. Trocas secas dependem do gradiente de temperatura com o ambiente.",
+      "relationships":[{"from":"umidade","to":"evaporacao","direction":"negative","condition":"Mesma temperatura, ventilação e quantidade de suor disponível."},{"from":"suor","to":"potencial_evaporativo","direction":"positive_with_limit","condition":"Até a capacidade de evaporação do meio; não supor que todo suor evapora."},{"from":"vasodilatacao","to":"transferencia_calor_pele","direction":"positive","condition":"Ambiente mais frio que a pele; não extrapolar a ar mais quente que a superfície."}],
+      "graphSpec":{"type":"line","xLabel":"Umidade relativa","xUnit":"%","yLabel":"Capacidade evaporativa relativa","yUnit":"índice didático","series":[{"id":"evaporacao","label":"Dissipação por evaporação com suor igual","color":"#36b9e9","points":[[10,95],[30,75],[50,55],[70,35],[95,10]]}],"updateRule":"Umidade move o marcador; suor aumenta disponibilidade até um limite ilustrativo. Fluxo cutâneo atualiza um indicador separado sob a condição de ambiente mais frio que a pele.","dataNature":"Relação qualitativa autoral, sem balanço térmico quantitativo ou previsão da temperatura corporal."},
+      "animationHints":["Distinguir gotas que evaporam de gotas que escorrem.","Mostrar vasos cutâneos mais largos para maior fluxo relativo.","Mostrar feedback hipotálamo→efetores; não atribuir ao suor frio a produção direta de calor."],
+      "caveat":"Não prevê temperatura central, desidratação ou risco térmico. Ventilação, radiação, roupas e produção metabólica de calor não estão modeladas.",
+      "sourceIds":["os-heat-balance","os-biology-homeostasis"],
+      "uerj":{"label":"Questão autoral inspirada no estilo UERJ","question":"Duas situações têm a mesma temperatura do ar, ventilação e quantidade de suor na pele, mas a umidade relativa é 30% em A e 90% em B. A evaporação é menor em B. Identifique o mecanismo de perda de calor relacionado ao suor e explique por que a mesma sudorese produz menor resfriamento em B.","answer":"O mecanismo é a evaporação. Ao passar de líquido a vapor, a água absorve energia da pele. O ar mais úmido dificulta essa passagem; assim, menos água evapora e menos calor é retirado, mesmo com a mesma produção de suor.","skills":["comparação","explicação causal"],"points":2,"rubric":[{"criterion":"Identifica evaporação.","points":0.5},{"criterion":"Relaciona vaporização da água à retirada de energia térmica da pele.","points":0.75},{"criterion":"Relaciona maior umidade à menor evaporação e menor resfriamento, com produção de suor igual.","points":0.75}],"acceptedEquivalents":["Calor utilizado na mudança de fase da água.","Menor diferença entre vapor junto à pele e no ar limita a evaporação."],"commonErrors":["Afirmar que qualquer gota escorrendo retira o mesmo calor que uma gota evaporada.","Atribuir o efeito à temperatura do ar, mantida igual."]}
+    }
+  ]
+}

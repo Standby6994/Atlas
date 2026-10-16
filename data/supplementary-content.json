@@ -1,0 +1,2872 @@
+{
+  "schemaVersion": "1.0.0",
+  "language": "pt-BR",
+  "scope": "Complemento autoral de órgãos e tecidos. Modelos didáticos estáticos; não são reconstruções individuais nem lâminas reais.",
+  "organs": [
+    {
+      "id": "nasal-cavity",
+      "label": "Cavidade nasal",
+      "system": "respiratory",
+      "primaryCoreId": "nasal-cavity",
+      "coreIds": [
+        "nasal-cavity"
+      ],
+      "histologyId": "respiratory-epithelium",
+      "histologyIds": [
+        "respiratory-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "nose",
+      "description": "Vista aberta da cavidade nasal, com conchas, septo e áreas funcionais da mucosa.",
+      "internalParts": [
+        {
+          "id": "septum",
+          "name": "septum",
+          "label": "Septo nasal",
+          "function": "Separa as duas cavidades nasais.",
+          "mechanism": "Suporte osteocartilaginoso mantém uma divisão medial.",
+          "tissue": "cartilage",
+          "uerj": "Relacione septo nasal à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "conchae",
+          "name": "conchae",
+          "label": "Conchas nasais",
+          "function": "Ampliam o contato do ar com a mucosa.",
+          "mechanism": "Projeções da parede lateral aumentam área e modificam o trajeto do ar.",
+          "tissue": "bone",
+          "uerj": "Relacione conchas nasais à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "respiratory-mucosa",
+          "name": "respiratory-mucosa",
+          "label": "Mucosa respiratória",
+          "function": "Filtra, aquece e umidifica o ar.",
+          "mechanism": "Muco retém partículas; cílios transportam o material para a faringe.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa respiratória à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "olfactory-area",
+          "name": "olfactory-area",
+          "label": "Região olfatória",
+          "function": "Detecta substâncias odoríferas.",
+          "mechanism": "Neurônios receptores convertem interação química em sinais nervosos.",
+          "tissue": "neural",
+          "uerj": "Relacione região olfatória à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "palate",
+          "name": "palate",
+          "label": "Palato",
+          "function": "Separa cavidade nasal e cavidade oral.",
+          "mechanism": "A porção anterior óssea forma o assoalho nasal.",
+          "tissue": "bone",
+          "uerj": "Relacione palato à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-respiratory"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "larynx",
+      "label": "Laringe",
+      "system": "respiratory",
+      "primaryCoreId": "larynx",
+      "coreIds": [
+        "larynx"
+      ],
+      "histologyId": "respiratory-epithelium",
+      "histologyIds": [
+        "respiratory-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "larynx",
+      "description": "Arcabouço laríngeo aberto; pregas e abertura glótica aparecem em destaque.",
+      "internalParts": [
+        {
+          "id": "thyroid-cartilage",
+          "name": "thyroid-cartilage",
+          "label": "Cartilagem tireóidea",
+          "function": "Sustenta e protege a laringe.",
+          "mechanism": "Forma a maior peça do arcabouço laríngeo.",
+          "tissue": "cartilage",
+          "uerj": "Relacione cartilagem tireóidea à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "cricoid",
+          "name": "cricoid",
+          "label": "Cartilagem cricóidea",
+          "function": "Mantém a luz na base da laringe.",
+          "mechanism": "Um anel cartilaginoso dá suporte ao segmento inferior.",
+          "tissue": "cartilage",
+          "uerj": "Relacione cartilagem cricóidea à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "epiglottis",
+          "name": "epiglottis",
+          "label": "Epiglote",
+          "function": "Participa da proteção da via aérea na deglutição.",
+          "mechanism": "Seu deslocamento se integra à elevação laríngea e ao fechamento das pregas.",
+          "tissue": "cartilage",
+          "uerj": "Relacione epiglote à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "vocal-folds",
+          "name": "vocal-folds",
+          "label": "Pregas vocais",
+          "function": "Participam da produção de som.",
+          "mechanism": "O fluxo expiratório pode fazê-las vibrar; músculos ajustam sua tensão.",
+          "tissue": "connective",
+          "uerj": "Relacione pregas vocais à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "glottis",
+          "name": "glottis",
+          "label": "Rima da glote",
+          "function": "Permite passagem de ar entre as pregas vocais.",
+          "mechanism": "A abertura muda conforme a posição das pregas.",
+          "tissue": "organ",
+          "uerj": "Relacione rima da glote à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        },
+        {
+          "id": "laryngeal-mucosa",
+          "name": "laryngeal-mucosa",
+          "label": "Mucosa laríngea",
+          "function": "Protege o revestimento interno.",
+          "mechanism": "O epitélio varia conforme a região e a exposição ao atrito.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa laríngea à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-respiratory"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-respiratory"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "ureter",
+      "label": "Ureter",
+      "system": "urinary",
+      "primaryCoreId": "ureters",
+      "coreIds": [
+        "ureters"
+      ],
+      "histologyId": "urothelium",
+      "histologyIds": [
+        "urothelium"
+      ],
+      "supplementary": true,
+      "shape": "tube",
+      "description": "Segmento aberto de ureter com mucosa, músculo liso e adventícia.",
+      "internalParts": [
+        {
+          "id": "urothelium",
+          "name": "urothelium",
+          "label": "Urotélio",
+          "function": "Forma uma barreira ao contato com a urina.",
+          "mechanism": "Células superficiais e junções mantêm o revestimento protegido durante a distensão.",
+          "tissue": "organ",
+          "uerj": "Relacione urotélio à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "lamina-propria",
+          "name": "lamina-propria",
+          "label": "Lâmina própria",
+          "function": "Sustenta o urotélio.",
+          "mechanism": "Tecido conjuntivo contém vasos e dá suporte flexível.",
+          "tissue": "connective",
+          "uerj": "Relacione lâmina própria à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "muscular-wall",
+          "name": "muscular-wall",
+          "label": "Parede muscular",
+          "function": "Conduz a urina até a bexiga.",
+          "mechanism": "Contrações peristálticas de músculo liso movem o conteúdo.",
+          "tissue": "muscle",
+          "uerj": "Relacione parede muscular à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "adventitia",
+          "name": "adventitia",
+          "label": "Adventícia",
+          "function": "Relaciona o ureter aos tecidos vizinhos.",
+          "mechanism": "Conjuntivo externo contém vasos e nervos.",
+          "tissue": "connective",
+          "uerj": "Relacione adventícia à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "lumen",
+          "name": "lumen",
+          "label": "Luz ureteral",
+          "function": "É o espaço por onde a urina passa.",
+          "mechanism": "Pregas da mucosa se ajustam ao conteúdo.",
+          "tissue": "organ",
+          "uerj": "Relacione luz ureteral à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-urinary"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "urethra",
+      "label": "Uretra",
+      "system": "urinary",
+      "primaryCoreId": "urethra",
+      "coreIds": [
+        "urethra"
+      ],
+      "histologyId": "stratified-epithelium",
+      "histologyIds": [
+        "stratified-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "tube",
+      "description": "Segmento uretral com revestimento e controle muscular. O esfíncter é destacado ao lado do segmento.",
+      "internalParts": [
+        {
+          "id": "mucosa",
+          "name": "mucosa",
+          "label": "Mucosa uretral",
+          "function": "Reveste o trajeto final da urina.",
+          "mechanism": "O tipo epitelial muda ao longo do trajeto e difere entre regiões.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa uretral à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "connective-support",
+          "name": "connective-support",
+          "label": "Conjuntivo periuretral",
+          "function": "Sustenta o revestimento.",
+          "mechanism": "Matriz e vasos dão suporte à parede.",
+          "tissue": "connective",
+          "uerj": "Relacione conjuntivo periuretral à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "smooth-muscle",
+          "name": "smooth-muscle",
+          "label": "Músculo liso",
+          "function": "Participa do controle do trajeto urinário.",
+          "mechanism": "Contração involuntária altera o tônus local.",
+          "tissue": "muscle",
+          "uerj": "Relacione músculo liso à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "external-sphincter",
+          "name": "external-sphincter",
+          "label": "Esfíncter uretral externo",
+          "function": "Contribui para o controle voluntário da micção.",
+          "mechanism": "Músculo estriado circunda o segmento correspondente.",
+          "tissue": "muscle",
+          "uerj": "Relacione esfíncter uretral externo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        },
+        {
+          "id": "lumen",
+          "name": "lumen",
+          "label": "Luz uretral",
+          "function": "Conduz urina ao exterior.",
+          "mechanism": "É uma continuidade funcional da saída da bexiga.",
+          "tissue": "organ",
+          "uerj": "Relacione luz uretral à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-urinary"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-urinary"
+      ],
+      "representation": "Segmento didático: não reproduz todo o trajeto masculino ou feminino. O epitélio e a organização muscular variam ao longo da uretra; o esfíncter externo é destacado separadamente."
+    },
+    {
+      "id": "mouth",
+      "label": "Boca e dente em corte",
+      "system": "digestive",
+      "primaryCoreId": "mouth",
+      "coreIds": [
+        "mouth"
+      ],
+      "histologyId": "stratified-epithelium",
+      "histologyIds": [
+        "stratified-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "mouth",
+      "description": "Cavidade oral aberta com um dente ampliado em corte; o dente e a língua têm escalas diferentes.",
+      "internalParts": [
+        {
+          "id": "tongue",
+          "name": "tongue",
+          "label": "Língua",
+          "function": "Move o alimento e participa da deglutição.",
+          "mechanism": "Músculos esqueléticos mudam sua forma e posição.",
+          "tissue": "muscle",
+          "uerj": "Relacione língua à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-mouth"
+          ]
+        },
+        {
+          "id": "enamel",
+          "name": "enamel",
+          "label": "Esmalte dentário",
+          "function": "Protege a coroa contra desgaste.",
+          "mechanism": "Tecido altamente mineralizado recobre a dentina.",
+          "tissue": "bone",
+          "uerj": "Relacione esmalte dentário à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-mouth"
+          ]
+        },
+        {
+          "id": "dentin",
+          "name": "dentin",
+          "label": "Dentina",
+          "function": "Constitui a maior parte do dente.",
+          "mechanism": "Matriz mineralizada contém túbulos relacionados aos odontoblastos.",
+          "tissue": "bone",
+          "uerj": "Relacione dentina à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-mouth"
+          ]
+        },
+        {
+          "id": "pulp",
+          "name": "pulp",
+          "label": "Polpa dentária",
+          "function": "Nutre e inerva o dente.",
+          "mechanism": "Conjuntivo vascularizado ocupa a cavidade central.",
+          "tissue": "connective",
+          "uerj": "Relacione polpa dentária à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-mouth"
+          ]
+        },
+        {
+          "id": "oral-mucosa",
+          "name": "oral-mucosa",
+          "label": "Mucosa oral",
+          "function": "Protege contra atrito.",
+          "mechanism": "Epitélio estratificado varia com a região e a queratinização.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa oral à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-mouth"
+          ]
+        },
+        {
+          "id": "hard-palate",
+          "name": "hard-palate",
+          "label": "Palato duro",
+          "function": "Separa boca e cavidade nasal.",
+          "mechanism": "Suporte ósseo permite pressão durante mastigação e deglutição.",
+          "tissue": "bone",
+          "uerj": "Relacione palato duro à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-mouth"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-mouth"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "salivary-gland",
+      "label": "Glândula salivar",
+      "system": "digestive",
+      "primaryCoreId": "salivary-glands",
+      "coreIds": [
+        "salivary-glands"
+      ],
+      "histologyId": "salivary-acini",
+      "histologyIds": [
+        "salivary-acini"
+      ],
+      "supplementary": true,
+      "shape": "gland",
+      "description": "Lóbulo salivar ampliado com ácinos e sucessivas regiões ductais.",
+      "internalParts": [
+        {
+          "id": "acini",
+          "name": "acini",
+          "label": "Ácinos secretores",
+          "function": "Produzem componentes da saliva.",
+          "mechanism": "Células serosas ou mucosas liberam produto para uma pequena luz.",
+          "tissue": "organ",
+          "uerj": "Relacione ácinos secretores à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-acini"
+          ]
+        },
+        {
+          "id": "intercalated-duct",
+          "name": "intercalated-duct",
+          "label": "Ducto intercalar",
+          "function": "Recebe a secreção dos ácinos.",
+          "mechanism": "Pequenos ductos conectam unidades secretoras ao sistema seguinte.",
+          "tissue": "organ",
+          "uerj": "Relacione ducto intercalar à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-acini"
+          ]
+        },
+        {
+          "id": "striated-duct",
+          "name": "striated-duct",
+          "label": "Ducto estriado",
+          "function": "Modifica a composição eletrolítica da saliva.",
+          "mechanism": "Transporte de íons ocorre no epitélio ductal.",
+          "tissue": "organ",
+          "uerj": "Relacione ducto estriado à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-acini"
+          ]
+        },
+        {
+          "id": "excretory-duct",
+          "name": "excretory-duct",
+          "label": "Ducto excretor",
+          "function": "Conduz saliva em direção à cavidade oral.",
+          "mechanism": "Ductos maiores recebem os ramos menores.",
+          "tissue": "organ",
+          "uerj": "Relacione ducto excretor à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-acini"
+          ]
+        },
+        {
+          "id": "capsule-septa",
+          "name": "capsule-septa",
+          "label": "Cápsula e septos",
+          "function": "Organizam lóbulos da glândula.",
+          "mechanism": "Conjuntivo delimita o parênquima e acompanha vasos.",
+          "tissue": "connective",
+          "uerj": "Relacione cápsula e septos à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-acini"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-acini"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "parathyroid",
+      "label": "Paratireoide",
+      "system": "endocrine",
+      "primaryCoreId": "parathyroid",
+      "coreIds": [
+        "parathyroid"
+      ],
+      "histologyId": "parathyroid-tissue",
+      "histologyIds": [
+        "parathyroid-tissue"
+      ],
+      "supplementary": true,
+      "shape": "endocrine-gland",
+      "description": "Paratireoide ampliada; populações celulares e rede vascular são distinguidas por cores.",
+      "internalParts": [
+        {
+          "id": "chief-cells",
+          "name": "chief-cells",
+          "label": "Células principais",
+          "function": "Secretam paratormônio (PTH).",
+          "mechanism": "A queda do cálcio extracelular favorece sua liberação.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de células principais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "oxyphil-cells",
+          "name": "oxyphil-cells",
+          "label": "Células oxífilas",
+          "function": "Constituem uma população distinta da glândula.",
+          "mechanism": "Possuem citoplasma abundante em mitocôndrias; não substituem o papel principal das células principais.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de células oxífilas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "capillaries",
+          "name": "capillaries",
+          "label": "Capilares",
+          "function": "Recebem hormônio e nutrem o tecido.",
+          "mechanism": "PTH atravessa o interstício para alcançar a circulação.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de capilares contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "capsule",
+          "name": "capsule",
+          "label": "Cápsula",
+          "function": "Dá suporte externo à glândula.",
+          "mechanism": "Conjuntivo envolve o parênquima.",
+          "tissue": "connective",
+          "uerj": "Explique como a organização de cápsula contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "fat",
+          "name": "fat",
+          "label": "Tecido adiposo",
+          "function": "Compõe parte variável do estroma.",
+          "mechanism": "A proporção de adipócitos varia com idade e indivíduo.",
+          "tissue": "fat",
+          "uerj": "Explique como a organização de tecido adiposo contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-parathyroid"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "pineal",
+      "label": "Glândula pineal",
+      "system": "endocrine",
+      "primaryCoreId": "pineal-gland",
+      "coreIds": [
+        "pineal-gland"
+      ],
+      "histologyId": "pineal-tissue",
+      "histologyIds": [
+        "pineal-tissue"
+      ],
+      "supplementary": true,
+      "shape": "endocrine-gland",
+      "description": "Pineal ampliada com tecido secretor, glia, vasos e suporte conjuntivo.",
+      "internalParts": [
+        {
+          "id": "pinealocytes",
+          "name": "pinealocytes",
+          "label": "Pinealócitos",
+          "function": "Produzem melatonina.",
+          "mechanism": "A secreção integra sinais relacionados ao ciclo claro–escuro.",
+          "tissue": "organ",
+          "uerj": "Relacione pinealócitos à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-pineal"
+          ]
+        },
+        {
+          "id": "glia",
+          "name": "glia",
+          "label": "Células gliais",
+          "function": "Dão suporte ao parênquima.",
+          "mechanism": "A rede glial contribui para o ambiente das células secretoras.",
+          "tissue": "neural",
+          "uerj": "Relacione células gliais à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-pineal"
+          ]
+        },
+        {
+          "id": "vessels",
+          "name": "vessels",
+          "label": "Vasos",
+          "function": "Nutrem o tecido e recebem secreções.",
+          "mechanism": "Melatonina pode alcançar a circulação.",
+          "tissue": "vascular",
+          "uerj": "Relacione vasos à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-pineal"
+          ]
+        },
+        {
+          "id": "septa",
+          "name": "septa",
+          "label": "Septos conjuntivos",
+          "function": "Organizam grupos celulares.",
+          "mechanism": "Conjuntivo acompanha a vascularização.",
+          "tissue": "connective",
+          "uerj": "Relacione septos conjuntivos à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-pineal"
+          ]
+        },
+        {
+          "id": "capsule",
+          "name": "capsule",
+          "label": "Revestimento conjuntivo",
+          "function": "Delimita a superfície da glândula.",
+          "mechanism": "Continuidade meníngea acompanha o órgão.",
+          "tissue": "connective",
+          "uerj": "Relacione revestimento conjuntivo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-pineal"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-pineal"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "epididymis",
+      "label": "Epidídimo",
+      "system": "reproductive",
+      "primaryCoreId": "epididymis",
+      "coreIds": [
+        "epididymis"
+      ],
+      "histologyId": "epididymal-epithelium",
+      "histologyIds": [
+        "epididymal-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "coiled-tube",
+      "description": "Ducto epididimário enrolado com regiões de cabeça, corpo e cauda. Um segmento da parede está ampliado.",
+      "internalParts": [
+        {
+          "id": "head",
+          "name": "head",
+          "label": "Cabeça",
+          "function": "Recebe espermatozoides vindos dos ductos eferentes.",
+          "mechanism": "O trajeto ductal inicia a passagem pelo epidídimo.",
+          "tissue": "organ",
+          "uerj": "Relacione cabeça à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "body",
+          "name": "body",
+          "label": "Corpo",
+          "function": "Participa da maturação dos espermatozoides.",
+          "mechanism": "O ambiente luminal muda pela atividade epitelial.",
+          "tissue": "organ",
+          "uerj": "Relacione corpo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "tail",
+          "name": "tail",
+          "label": "Cauda",
+          "function": "Armazena e encaminha espermatozoides.",
+          "mechanism": "Contrações musculares ajudam na passagem ao ducto deferente.",
+          "tissue": "muscle",
+          "uerj": "Relacione cauda à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "epithelium",
+          "name": "epithelium",
+          "label": "Epitélio com estereocílios",
+          "function": "Participa de absorção e secreção.",
+          "mechanism": "Estereocílios são longas microvilosidades; não são cílios móveis.",
+          "tissue": "organ",
+          "uerj": "Relacione epitélio com estereocílios à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "muscle",
+          "name": "muscle",
+          "label": "Músculo liso",
+          "function": "Move o conteúdo ductal.",
+          "mechanism": "Contrações promovem transporte e esvaziamento.",
+          "tissue": "muscle",
+          "uerj": "Relacione músculo liso à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-male"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "vas-deferens",
+      "label": "Ducto deferente",
+      "system": "reproductive",
+      "primaryCoreId": "vas-deferens",
+      "coreIds": [
+        "vas-deferens"
+      ],
+      "histologyId": "epididymal-epithelium",
+      "histologyIds": [
+        "epididymal-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "tube",
+      "description": "Parede muscular espessa do ducto deferente, aberta para revelar as camadas.",
+      "internalParts": [
+        {
+          "id": "mucosa",
+          "name": "mucosa",
+          "label": "Mucosa pregueada",
+          "function": "Reveste a pequena luz do ducto.",
+          "mechanism": "Pregas incluem epitélio pseudoestratificado e lâmina própria.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa pregueada à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "inner-longitudinal",
+          "name": "inner-longitudinal",
+          "label": "Músculo longitudinal interno",
+          "function": "Contribui para o transporte do conteúdo.",
+          "mechanism": "Contrações encurtam segmentos da parede.",
+          "tissue": "muscle",
+          "uerj": "Relacione músculo longitudinal interno à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "circular",
+          "name": "circular",
+          "label": "Músculo circular",
+          "function": "Contribui para a propulsão dos espermatozoides.",
+          "mechanism": "Contração reduz a luz de forma coordenada.",
+          "tissue": "muscle",
+          "uerj": "Relacione músculo circular à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "outer-longitudinal",
+          "name": "outer-longitudinal",
+          "label": "Músculo longitudinal externo",
+          "function": "Integra a parede muscular espessa.",
+          "mechanism": "Atua com as demais camadas durante a emissão.",
+          "tissue": "muscle",
+          "uerj": "Relacione músculo longitudinal externo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "adventitia",
+          "name": "adventitia",
+          "label": "Adventícia",
+          "function": "Sustenta o ducto externamente.",
+          "mechanism": "Conjuntivo acompanha nervos e vasos.",
+          "tissue": "connective",
+          "uerj": "Relacione adventícia à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-male"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "seminal-vesicle",
+      "label": "Vesícula seminal",
+      "system": "reproductive",
+      "primaryCoreId": "seminal-vesicles",
+      "coreIds": [
+        "seminal-vesicles"
+      ],
+      "histologyId": "seminal-vesicle-tissue",
+      "histologyIds": [
+        "seminal-vesicle-tissue"
+      ],
+      "supplementary": true,
+      "shape": "folded-sac",
+      "description": "Cavidade aberta com mucosa pregueada e saída ductal; não é um reservatório de espermatozoides.",
+      "internalParts": [
+        {
+          "id": "folded-mucosa",
+          "name": "folded-mucosa",
+          "label": "Mucosa muito pregueada",
+          "function": "Amplia a superfície secretora.",
+          "mechanism": "Pregas ramificadas formam um aspecto labiríntico.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa muito pregueada à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "secretory-epithelium",
+          "name": "secretory-epithelium",
+          "label": "Epitélio secretor",
+          "function": "Produz parte importante do líquido seminal.",
+          "mechanism": "Secreção contém, entre outros componentes, frutose.",
+          "tissue": "organ",
+          "uerj": "Relacione epitélio secretor à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "muscle",
+          "name": "muscle",
+          "label": "Parede muscular",
+          "function": "Ajuda a expelir secreção durante a emissão.",
+          "mechanism": "Músculo liso contrai sob controle autonômico.",
+          "tissue": "muscle",
+          "uerj": "Relacione parede muscular à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "excretory-duct",
+          "name": "excretory-duct",
+          "label": "Ducto da vesícula",
+          "function": "Encaminha o produto secretado.",
+          "mechanism": "Une-se ao ducto deferente na formação do ducto ejaculatório.",
+          "tissue": "organ",
+          "uerj": "Relacione ducto da vesícula à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        },
+        {
+          "id": "adventitia",
+          "name": "adventitia",
+          "label": "Revestimento conjuntivo",
+          "function": "Dá suporte à parede.",
+          "mechanism": "Conjuntivo contém vasos e nervos.",
+          "tissue": "connective",
+          "uerj": "Relacione revestimento conjuntivo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-male"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-male"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "vagina",
+      "label": "Vagina",
+      "system": "reproductive",
+      "primaryCoreId": "vagina",
+      "coreIds": [
+        "vagina"
+      ],
+      "histologyId": "stratified-epithelium",
+      "histologyIds": [
+        "stratified-epithelium"
+      ],
+      "supplementary": true,
+      "shape": "tube",
+      "description": "Parede vaginal aberta. A mucosa não possui glândulas próprias; lubrificação não é secreção de glândulas vaginais.",
+      "internalParts": [
+        {
+          "id": "epithelium",
+          "name": "epithelium",
+          "label": "Epitélio estratificado pavimentoso",
+          "function": "Protege contra atrito.",
+          "mechanism": "As várias camadas celulares protegem sem uma camada córnea típica da pele.",
+          "tissue": "organ",
+          "uerj": "Relacione epitélio estratificado pavimentoso à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "lamina-propria",
+          "name": "lamina-propria",
+          "label": "Lâmina própria",
+          "function": "Sustenta a mucosa distensível.",
+          "mechanism": "Fibras e vasos apoiam o epitélio.",
+          "tissue": "connective",
+          "uerj": "Relacione lâmina própria à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "muscle",
+          "name": "muscle",
+          "label": "Camada muscular",
+          "function": "Permite distensão e participa da parede.",
+          "mechanism": "Feixes de músculo liso acompanham o tubo.",
+          "tissue": "muscle",
+          "uerj": "Relacione camada muscular à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "adventitia",
+          "name": "adventitia",
+          "label": "Adventícia",
+          "function": "Relaciona o órgão aos tecidos próximos.",
+          "mechanism": "Conjuntivo externo contém vasos e fibras elásticas.",
+          "tissue": "connective",
+          "uerj": "Relacione adventícia à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "rugae",
+          "name": "rugae",
+          "label": "Pregas vaginais",
+          "function": "Permitem ajuste da superfície à distensão.",
+          "mechanism": "A mucosa forma rugas transversais variáveis.",
+          "tissue": "organ",
+          "uerj": "Relacione pregas vaginais à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-female"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "uterine-tube",
+      "label": "Tuba uterina",
+      "system": "reproductive",
+      "primaryCoreId": "uterine-tubes",
+      "coreIds": [
+        "uterine-tubes"
+      ],
+      "histologyId": "uterine-tube-tissue",
+      "histologyIds": [
+        "uterine-tube-tissue"
+      ],
+      "supplementary": true,
+      "shape": "tube-fimbriae",
+      "description": "Segmentos da tuba com extremidade fimbriada e mucosa ampliada; não representa movimento em tempo real.",
+      "internalParts": [
+        {
+          "id": "fimbriae",
+          "name": "fimbriae",
+          "label": "Fímbrias e infundíbulo",
+          "function": "Participam da captação do ovócito.",
+          "mechanism": "Extremidade aberta e projeções se relacionam à superfície ovariana.",
+          "tissue": "organ",
+          "uerj": "Relacione fímbrias e infundíbulo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "ampulla",
+          "name": "ampulla",
+          "label": "Ampola",
+          "function": "É a região mais comum de fecundação.",
+          "mechanism": "Luz ampla e mucosa pregueada compõem este segmento.",
+          "tissue": "organ",
+          "uerj": "Relacione ampola à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "isthmus",
+          "name": "isthmus",
+          "label": "Istmo",
+          "function": "Conecta a ampola ao segmento uterino.",
+          "mechanism": "É uma região mais estreita da tuba.",
+          "tissue": "organ",
+          "uerj": "Relacione istmo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "ciliated-mucosa",
+          "name": "ciliated-mucosa",
+          "label": "Mucosa ciliada e secretora",
+          "function": "Apoia o transporte e o ambiente luminal.",
+          "mechanism": "Cílios, secreções e contração muscular atuam em conjunto.",
+          "tissue": "organ",
+          "uerj": "Relacione mucosa ciliada e secretora à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        },
+        {
+          "id": "muscle",
+          "name": "muscle",
+          "label": "Músculo liso",
+          "function": "Participa da movimentação do conteúdo.",
+          "mechanism": "Contrações contribuem para o transporte em direção ao útero.",
+          "tissue": "muscle",
+          "uerj": "Relacione músculo liso à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-female"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-female"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "mammary-gland",
+      "label": "Glândula mamária",
+      "system": "reproductive",
+      "primaryCoreId": "mammary-glands",
+      "coreIds": [
+        "mammary-glands"
+      ],
+      "histologyId": "mammary-alveoli",
+      "histologyIds": [
+        "mammary-alveoli"
+      ],
+      "supplementary": true,
+      "shape": "gland",
+      "description": "Lóbulo mamário na lactação, com alvéolos, ductos e células mioepiteliais destacados.",
+      "internalParts": [
+        {
+          "id": "alveoli",
+          "name": "alveoli",
+          "label": "Alvéolos secretores",
+          "function": "Produzem leite na lactação.",
+          "mechanism": "Células epiteliais sintetizam e liberam componentes para a luz.",
+          "tissue": "organ",
+          "uerj": "Relacione alvéolos secretores à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-breast"
+          ]
+        },
+        {
+          "id": "myoepithelial",
+          "name": "myoepithelial",
+          "label": "Células mioepiteliais",
+          "function": "Ajudam na ejeção do leite.",
+          "mechanism": "Resposta à ocitocina comprime unidades secretoras.",
+          "tissue": "muscle",
+          "uerj": "Relacione células mioepiteliais à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-breast"
+          ]
+        },
+        {
+          "id": "ducts",
+          "name": "ducts",
+          "label": "Ductos lactíferos",
+          "function": "Conduzem leite em direção ao mamilo.",
+          "mechanism": "O sistema de ductos conecta unidades secretoras.",
+          "tissue": "organ",
+          "uerj": "Relacione ductos lactíferos à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-breast"
+          ]
+        },
+        {
+          "id": "stroma",
+          "name": "stroma",
+          "label": "Estroma conjuntivo",
+          "function": "Sustenta os lóbulos.",
+          "mechanism": "Conjuntivo separa unidades e acompanha vasos.",
+          "tissue": "connective",
+          "uerj": "Relacione estroma conjuntivo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-breast"
+          ]
+        },
+        {
+          "id": "fat",
+          "name": "fat",
+          "label": "Tecido adiposo",
+          "function": "Compõe parte do volume da mama.",
+          "mechanism": "Sua proporção varia conforme indivíduo e estado funcional.",
+          "tissue": "fat",
+          "uerj": "Relacione tecido adiposo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-breast"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-breast"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "placenta",
+      "label": "Placenta",
+      "system": "reproductive",
+      "primaryCoreId": "placenta",
+      "coreIds": [
+        "placenta"
+      ],
+      "histologyId": "placental-villus",
+      "histologyIds": [
+        "placental-villus"
+      ],
+      "supplementary": true,
+      "shape": "placenta",
+      "description": "Corte de um setor placentário com dois compartimentos de sangue separados.",
+      "internalParts": [
+        {
+          "id": "chorionic-plate",
+          "name": "chorionic-plate",
+          "label": "Placa coriônica",
+          "function": "Integra a face fetal da placenta.",
+          "mechanism": "Recebe vasos fetais que se ramificam para as vilosidades.",
+          "tissue": "organ",
+          "uerj": "Relacione placa coriônica à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-placenta"
+          ]
+        },
+        {
+          "id": "villi",
+          "name": "villi",
+          "label": "Vilosidades coriônicas",
+          "function": "Ampliam a interface de trocas.",
+          "mechanism": "Projeções fetais contêm estroma e vasos fetais.",
+          "tissue": "organ",
+          "uerj": "Relacione vilosidades coriônicas à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-placenta"
+          ]
+        },
+        {
+          "id": "intervillous-space",
+          "name": "intervillous-space",
+          "label": "Espaço interviloso materno",
+          "function": "Recebe sangue materno ao redor das vilosidades.",
+          "mechanism": "A circulação materna banha a superfície trofoblástica.",
+          "tissue": "vascular",
+          "uerj": "Relacione espaço interviloso materno à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-placenta"
+          ]
+        },
+        {
+          "id": "fetal-vessels",
+          "name": "fetal-vessels",
+          "label": "Vasos fetais",
+          "function": "Transportam sangue fetal dentro das vilosidades.",
+          "mechanism": "Capilares permanecem separados do compartimento materno.",
+          "tissue": "vascular",
+          "uerj": "Relacione vasos fetais à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-placenta"
+          ]
+        },
+        {
+          "id": "basal-plate",
+          "name": "basal-plate",
+          "label": "Placa basal e decídua",
+          "function": "Formam a relação com o componente materno.",
+          "mechanism": "Tecido endometrial modificado acompanha o local de implantação.",
+          "tissue": "connective",
+          "uerj": "Relacione placa basal e decídua à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-placenta"
+          ]
+        },
+        {
+          "id": "umbilical-cord",
+          "name": "umbilical-cord",
+          "label": "Cordão: duas artérias e uma veia",
+          "function": "Conecta a circulação fetal à placenta.",
+          "mechanism": "Artérias levam sangue fetal à placenta; a veia o devolve ao feto.",
+          "tissue": "vascular",
+          "uerj": "Relacione cordão: duas artérias e uma veia à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-placenta"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-placenta"
+      ],
+      "representation": "Modelo de interface materno-fetal. Os dois sangues normalmente circulam em compartimentos distintos; as cores não representam contato ou mistura. Contagens de vilosidades e dimensões são didáticas."
+    },
+    {
+      "id": "tonsil",
+      "label": "Tonsila palatina",
+      "system": "lymphatic-immune",
+      "primaryCoreId": "tonsils",
+      "coreIds": [
+        "tonsils"
+      ],
+      "histologyId": "tonsillar-tissue",
+      "histologyIds": [
+        "tonsillar-tissue"
+      ],
+      "supplementary": true,
+      "shape": "tonsil",
+      "description": "Tonsila palatina em corte com criptas e tecido linfoide. Outros tipos de tonsila têm revestimentos distintos.",
+      "internalParts": [
+        {
+          "id": "epithelium",
+          "name": "epithelium",
+          "label": "Epitélio superficial",
+          "function": "Protege a região sujeita a atrito.",
+          "mechanism": "Na tonsila palatina é predominantemente estratificado pavimentoso.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de epitélio superficial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "crypts",
+          "name": "crypts",
+          "label": "Criptas tonsilares",
+          "function": "Ampliam contato com material da cavidade oral.",
+          "mechanism": "Invaginações do revestimento se aproximam do tecido linfoide.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de criptas tonsilares contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "lymphoid-follicles",
+          "name": "lymphoid-follicles",
+          "label": "Folículos linfoides",
+          "function": "Organizam populações de linfócitos.",
+          "mechanism": "Centros germinativos podem aparecer em respostas imunes.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de folículos linfoides contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "interfollicular",
+          "name": "interfollicular",
+          "label": "Regiões interfoliculares",
+          "function": "Participam da resposta imune local.",
+          "mechanism": "Células imunes interagem entre os folículos.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de regiões interfoliculares contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "partial-capsule",
+          "name": "partial-capsule",
+          "label": "Cápsula parcial",
+          "function": "Sustenta a superfície profunda.",
+          "mechanism": "Conjuntivo delimita parte do tecido tonsilar.",
+          "tissue": "connective",
+          "uerj": "Explique como a organização de cápsula parcial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-lymph"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "synovial-joint",
+      "label": "Articulação sinovial",
+      "system": "musculoskeletal",
+      "primaryCoreId": "synovial-joints",
+      "coreIds": [
+        "synovial-joints"
+      ],
+      "histologyId": "cartilage",
+      "histologyIds": [
+        "cartilage"
+      ],
+      "supplementary": true,
+      "shape": "joint",
+      "description": "Articulação sinovial genérica aberta; não são mostrados meniscos, presentes apenas em algumas articulações.",
+      "internalParts": [
+        {
+          "id": "bone-ends",
+          "name": "bone-ends",
+          "label": "Extremidades ósseas",
+          "function": "Transmitem forças através da articulação.",
+          "mechanism": "Osso subcondral sustenta a superfície articular.",
+          "tissue": "bone",
+          "uerj": "Relacione extremidades ósseas à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-joint"
+          ]
+        },
+        {
+          "id": "articular-cartilage",
+          "name": "articular-cartilage",
+          "label": "Cartilagem articular",
+          "function": "Reduz atrito e distribui cargas.",
+          "mechanism": "Matriz hidratada protege superfícies ósseas.",
+          "tissue": "cartilage",
+          "uerj": "Relacione cartilagem articular à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-joint"
+          ]
+        },
+        {
+          "id": "synovial-cavity",
+          "name": "synovial-cavity",
+          "label": "Cavidade sinovial",
+          "function": "Permite movimento entre superfícies.",
+          "mechanism": "Espaço contém uma fina película de líquido sinovial.",
+          "tissue": "organ",
+          "uerj": "Relacione cavidade sinovial à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-joint"
+          ]
+        },
+        {
+          "id": "synovial-membrane",
+          "name": "synovial-membrane",
+          "label": "Membrana sinovial",
+          "function": "Participa da formação do líquido sinovial.",
+          "mechanism": "Células sinoviais e vasos contribuem para o fluido e a manutenção local.",
+          "tissue": "organ",
+          "uerj": "Relacione membrana sinovial à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-joint"
+          ]
+        },
+        {
+          "id": "fibrous-capsule",
+          "name": "fibrous-capsule",
+          "label": "Cápsula fibrosa",
+          "function": "Contém e estabiliza a articulação.",
+          "mechanism": "Conjuntivo resistente envolve o espaço articular.",
+          "tissue": "connective",
+          "uerj": "Relacione cápsula fibrosa à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-joint"
+          ]
+        },
+        {
+          "id": "ligament",
+          "name": "ligament",
+          "label": "Ligamento",
+          "function": "Limita movimentos excessivos.",
+          "mechanism": "Colágeno une ossos e resiste à tração.",
+          "tissue": "connective",
+          "uerj": "Relacione ligamento à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-joint"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-joint"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "peripheral-nerve",
+      "label": "Nervo periférico",
+      "system": "nervous",
+      "primaryCoreId": "peripheral-nerves",
+      "coreIds": [
+        "peripheral-nerves"
+      ],
+      "histologyId": "nervous-tissue",
+      "histologyIds": [
+        "nervous-tissue"
+      ],
+      "supplementary": true,
+      "shape": "nerve",
+      "description": "Nervo em corte com fascículos e fibras ampliados. Nem todas as fibras periféricas são mielinizadas.",
+      "internalParts": [
+        {
+          "id": "axons",
+          "name": "axons",
+          "label": "Axônios",
+          "function": "Conduzem potenciais de ação.",
+          "mechanism": "Membrana axonal transmite sinais elétricos ao longo da fibra.",
+          "tissue": "neural",
+          "uerj": "Relacione axônios à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-nerve"
+          ]
+        },
+        {
+          "id": "myelin",
+          "name": "myelin",
+          "label": "Bainhas de mielina",
+          "function": "Favorecem condução saltatória nas fibras mielinizadas.",
+          "mechanism": "Células de Schwann envolvem segmentos do axônio.",
+          "tissue": "neural",
+          "uerj": "Relacione bainhas de mielina à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-nerve"
+          ]
+        },
+        {
+          "id": "endoneurium",
+          "name": "endoneurium",
+          "label": "Endoneuro",
+          "function": "Sustenta fibras individualmente.",
+          "mechanism": "Conjuntivo delicado acompanha cada fibra.",
+          "tissue": "connective",
+          "uerj": "Relacione endoneuro à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-nerve"
+          ]
+        },
+        {
+          "id": "perineurium",
+          "name": "perineurium",
+          "label": "Perineuro",
+          "function": "Envolve fascículos e participa da barreira do nervo.",
+          "mechanism": "Camadas celulares organizadas delimitam grupos de fibras.",
+          "tissue": "connective",
+          "uerj": "Relacione perineuro à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-nerve"
+          ]
+        },
+        {
+          "id": "epineurium",
+          "name": "epineurium",
+          "label": "Epineuro",
+          "function": "Envolve o nervo e seus vasos.",
+          "mechanism": "Conjuntivo externo une fascículos.",
+          "tissue": "connective",
+          "uerj": "Relacione epineuro à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-nerve"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-nerve"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "blood-vessel",
+      "label": "Artéria, veia e capilar",
+      "system": "cardiovascular",
+      "primaryCoreId": "aorta",
+      "coreIds": [
+        "aorta",
+        "vena-cava",
+        "pulmonary-arteries",
+        "pulmonary-veins",
+        "arterioles",
+        "veins",
+        "capillaries"
+      ],
+      "histologyId": "vascular-wall",
+      "histologyIds": [
+        "vascular-wall"
+      ],
+      "supplementary": true,
+      "shape": "vessels",
+      "description": "Três segmentos comparados em escalas didáticas diferentes. Capilar não tem as três túnicas de um vaso grande.",
+      "internalParts": [
+        {
+          "id": "intima",
+          "name": "intima",
+          "label": "Túnica íntima e endotélio",
+          "function": "Reveste a luz de artérias e veias.",
+          "mechanism": "Endotélio regula a interface com o sangue.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de túnica íntima e endotélio contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "arterial-media",
+          "name": "arterial-media",
+          "label": "Túnica média arterial",
+          "function": "Regula calibre e suporta pressão.",
+          "mechanism": "Músculo liso e elementos elásticos compõem a parede.",
+          "tissue": "muscle",
+          "uerj": "Explique como a organização de túnica média arterial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "adventitia",
+          "name": "adventitia",
+          "label": "Túnica externa",
+          "function": "Sustenta e conecta o vaso ao entorno.",
+          "mechanism": "Colágeno e outros componentes conjuntivos formam o revestimento externo.",
+          "tissue": "connective",
+          "uerj": "Explique como a organização de túnica externa contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "venous-wall",
+          "name": "venous-wall",
+          "label": "Parede venosa",
+          "function": "Conduz sangue de retorno ao coração.",
+          "mechanism": "Em geral tem média mais fina que a artéria comparável.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de parede venosa contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "venous-valves",
+          "name": "venous-valves",
+          "label": "Valvas venosas",
+          "function": "Reduzem refluxo em muitas veias, especialmente dos membros.",
+          "mechanism": "Pregas da íntima favorecem fluxo em uma direção.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de valvas venosas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "capillary-endothelium",
+          "name": "capillary-endothelium",
+          "label": "Endotélio capilar",
+          "function": "Favorece trocas com os tecidos.",
+          "mechanism": "Parede delgada com lâmina basal mantém curto o percurso difusivo.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de endotélio capilar contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-vessels"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "lymphatic-vessel",
+      "label": "Vaso linfático",
+      "system": "lymphatic-immune",
+      "primaryCoreId": "lymphatic-vessels",
+      "coreIds": [
+        "lymphatic-vessels"
+      ],
+      "histologyId": "lymphatic-wall",
+      "histologyIds": [
+        "lymphatic-wall"
+      ],
+      "supplementary": true,
+      "shape": "lymphatic",
+      "description": "Capilar inicial e vaso coletor são mostrados separadamente. O capilar inicial não possui uma camada muscular contínua.",
+      "internalParts": [
+        {
+          "id": "blind-capillary",
+          "name": "blind-capillary",
+          "label": "Capilar linfático inicial",
+          "function": "Recebe líquido intersticial.",
+          "mechanism": "Extremidade em fundo cego e junções sobrepostas favorecem entrada de líquido.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de capilar linfático inicial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "endothelial-flaps",
+          "name": "endothelial-flaps",
+          "label": "Abas endoteliais",
+          "function": "Favorecem entrada e dificultam saída retrógrada.",
+          "mechanism": "Diferenças de pressão deslocam sobreposições celulares.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de abas endoteliais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "collecting-wall",
+          "name": "collecting-wall",
+          "label": "Parede do coletor",
+          "function": "Conduz linfa aos trajetos seguintes.",
+          "mechanism": "Vasos coletores maiores têm parede e músculo liso.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de parede do coletor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "valves",
+          "name": "valves",
+          "label": "Valvas do coletor",
+          "function": "Ajudam a manter fluxo unidirecional.",
+          "mechanism": "Pregas fecham quando surge tendência de refluxo.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de valvas do coletor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "smooth-muscle",
+          "name": "smooth-muscle",
+          "label": "Músculo liso do coletor",
+          "function": "Ajuda a impulsionar a linfa.",
+          "mechanism": "Contrações se somam à ação muscular externa e respiratória.",
+          "tissue": "muscle",
+          "uerj": "Explique como a organização de músculo liso do coletor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-lymph"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    },
+    {
+      "id": "diaphragm",
+      "label": "Diafragma",
+      "system": "respiratory",
+      "primaryCoreId": "diaphragm",
+      "coreIds": [
+        "diaphragm"
+      ],
+      "histologyId": "skeletal-muscle",
+      "histologyIds": [
+        "skeletal-muscle"
+      ],
+      "supplementary": true,
+      "shape": "diaphragm",
+      "description": "Cúpula diafragmática com aberturas aproximadas; não inclui todos os ligamentos e pilares.",
+      "internalParts": [
+        {
+          "id": "muscle",
+          "name": "muscle",
+          "label": "Porção muscular",
+          "function": "É o principal motor da inspiração em repouso.",
+          "mechanism": "Contração reduz a convexidade e aumenta o volume torácico.",
+          "tissue": "muscle",
+          "uerj": "Relacione porção muscular à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-ventilation"
+          ]
+        },
+        {
+          "id": "central-tendon",
+          "name": "central-tendon",
+          "label": "Centro tendíneo",
+          "function": "Recebe a força da musculatura.",
+          "mechanism": "Tecido conjuntivo resistente ocupa a região central.",
+          "tissue": "connective",
+          "uerj": "Relacione centro tendíneo à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-ventilation"
+          ]
+        },
+        {
+          "id": "caval-opening",
+          "name": "caval-opening",
+          "label": "Forame da veia cava",
+          "function": "Permite passagem da veia cava inferior.",
+          "mechanism": "Atravessa a região do centro tendíneo.",
+          "tissue": "organ",
+          "uerj": "Relacione forame da veia cava à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-ventilation"
+          ]
+        },
+        {
+          "id": "esophageal-hiatus",
+          "name": "esophageal-hiatus",
+          "label": "Hiato esofágico",
+          "function": "Permite passagem do esôfago.",
+          "mechanism": "Abertura se relaciona a fibras musculares do diafragma.",
+          "tissue": "organ",
+          "uerj": "Relacione hiato esofágico à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-ventilation"
+          ]
+        },
+        {
+          "id": "aortic-hiatus",
+          "name": "aortic-hiatus",
+          "label": "Hiato aórtico",
+          "function": "Permite passagem da aorta junto à região posterior.",
+          "mechanism": "É uma passagem posterior relacionada aos pilares, não uma perfuração do centro tendíneo.",
+          "tissue": "organ",
+          "uerj": "Relacione hiato aórtico à função do órgão, indicando o mecanismo e sua consequência.",
+          "commonMistake": "Uma parte do modelo representa uma classe de estrutura; a quantidade e as proporções foram simplificadas.",
+          "sourceIds": [
+            "extra-ventilation"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "extra-ventilation"
+      ],
+      "representation": "Corte e ampliação didáticos. Quantidades, posição de detalhes e cores não reproduzem um indivíduo; as camadas e relações mostradas são uma seleção anatômica."
+    }
+  ],
+  "histology": [
+    {
+      "id": "salivary-acini",
+      "title": "Ácinos e ductos salivares",
+      "label": "Ácinos e ductos salivares",
+      "system": "digestive",
+      "organIds": [
+        "salivary-gland"
+      ],
+      "shape": "acini",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-acini"
+      ],
+      "parts": [
+        {
+          "id": "serous-cells",
+          "name": "serous-cells",
+          "label": "Células serosas",
+          "function": "Secretam produto aquoso com proteínas.",
+          "mechanism": "Polarização celular organiza síntese e secreção apical.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-acini"
+          ],
+          "uerj": "Explique como a organização de células serosas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "mucous-cells",
+          "name": "mucous-cells",
+          "label": "Células mucosas",
+          "function": "Secretam mucinas.",
+          "mechanism": "Mucinas ajudam na lubrificação do conteúdo oral.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-acini"
+          ],
+          "uerj": "Explique como a organização de células mucosas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "myoepithelial",
+          "name": "myoepithelial",
+          "label": "Células mioepiteliais",
+          "function": "Auxiliam expulsão do produto secretado.",
+          "mechanism": "Células contráteis ficam entre o epitélio e a lâmina basal.",
+          "tissue": "muscle",
+          "sourceIds": [
+            "extra-acini"
+          ],
+          "uerj": "Explique como a organização de células mioepiteliais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "lumen",
+          "name": "lumen",
+          "label": "Luz do ácino",
+          "function": "Recebe a secreção.",
+          "mechanism": "É contínua com o pequeno ducto de saída.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-acini"
+          ],
+          "uerj": "Explique como a organização de luz do ácino contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "duct",
+          "name": "duct",
+          "label": "Epitélio ductal",
+          "function": "Conduz e modifica a saliva.",
+          "mechanism": "Transporte epitelial altera a composição iônica.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-acini"
+          ],
+          "uerj": "Explique como a organização de epitélio ductal contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Unidades secretoras serosa e mucosa e um ducto são mostrados em ampliação didática.",
+      "recognition": "Procure unidades secretoras em torno de pequenas luzes e ductos entre os lóbulos. Células serosas costumam ser mais escuras; mucosas, mais claras.",
+      "contrast": "Ácinos salivares podem ter células mioepiteliais; o pâncreas exócrino tem células centroacinares e não apresenta essa camada mioepitelial."
+    },
+    {
+      "id": "mammary-alveoli",
+      "title": "Alvéolo mamário em lactação",
+      "label": "Alvéolo mamário em lactação",
+      "system": "reproductive",
+      "organIds": [
+        "mammary-gland"
+      ],
+      "shape": "acini",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-breast"
+      ],
+      "parts": [
+        {
+          "id": "secretory-cells",
+          "name": "secretory-cells",
+          "label": "Células secretoras",
+          "function": "Produzem componentes do leite.",
+          "mechanism": "Síntese e secreção apical abastecem a luz alveolar.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-breast"
+          ],
+          "uerj": "Explique como a organização de células secretoras contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "myoepithelial",
+          "name": "myoepithelial",
+          "label": "Células mioepiteliais",
+          "function": "Participam da ejeção do leite.",
+          "mechanism": "Ocitocina estimula contração ao redor do alvéolo.",
+          "tissue": "muscle",
+          "sourceIds": [
+            "extra-breast"
+          ],
+          "uerj": "Explique como a organização de células mioepiteliais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "milk-lumen",
+          "name": "milk-lumen",
+          "label": "Luz com leite",
+          "function": "Recebe o produto secretado.",
+          "mechanism": "Se comunica com os ductos da glândula.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-breast"
+          ],
+          "uerj": "Explique como a organização de luz com leite contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "basal-lamina",
+          "name": "basal-lamina",
+          "label": "Lâmina basal",
+          "function": "Sustenta o epitélio.",
+          "mechanism": "Matriz extracelular separa epitélio e estroma.",
+          "tissue": "connective",
+          "sourceIds": [
+            "extra-breast"
+          ],
+          "uerj": "Explique como a organização de lâmina basal contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "capillaries",
+          "name": "capillaries",
+          "label": "Capilares do estroma",
+          "function": "Nutrem a unidade secretora.",
+          "mechanism": "Trocas ocorrem com o interstício; sangue e leite são compartimentos distintos.",
+          "tissue": "vascular",
+          "sourceIds": [
+            "extra-breast"
+          ],
+          "uerj": "Explique como a organização de capilares do estroma contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Unidade mamária secretora na lactação; a forma muda nos demais estados funcionais.",
+      "recognition": "Na lactação, unidades secretoras desenvolvidas têm epitélio ao redor de luzes com produto secretado, cercadas por estroma.",
+      "contrast": "O aspecto da mama em repouso difere do lactante; a quantidade de alvéolos não é constante."
+    },
+    {
+      "id": "placental-villus",
+      "title": "Vilosidade placentária",
+      "label": "Vilosidade placentária",
+      "system": "reproductive",
+      "organIds": [
+        "placenta"
+      ],
+      "shape": "villus",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-placenta"
+      ],
+      "parts": [
+        {
+          "id": "syncytiotrophoblast",
+          "name": "syncytiotrophoblast",
+          "label": "Sinciciotrofoblasto",
+          "function": "Forma a superfície da interface de trocas.",
+          "mechanism": "Camada multinucleada envolve a vilosidade.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-placenta"
+          ],
+          "uerj": "Explique como a organização de sinciciotrofoblasto contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "stroma",
+          "name": "stroma",
+          "label": "Estroma da vilosidade",
+          "function": "Sustenta os vasos fetais.",
+          "mechanism": "Conjuntivo mesenquimal forma o interior da projeção.",
+          "tissue": "connective",
+          "sourceIds": [
+            "extra-placenta"
+          ],
+          "uerj": "Explique como a organização de estroma da vilosidade contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "fetal-capillary",
+          "name": "fetal-capillary",
+          "label": "Capilar fetal",
+          "function": "Transporta sangue fetal.",
+          "mechanism": "Endotélio separa sua luz do estroma e do compartimento materno.",
+          "tissue": "vascular",
+          "sourceIds": [
+            "extra-placenta"
+          ],
+          "uerj": "Explique como a organização de capilar fetal contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "maternal-space",
+          "name": "maternal-space",
+          "label": "Espaço materno interviloso",
+          "function": "Banha externamente a vilosidade.",
+          "mechanism": "Trocas atravessam tecidos; os dois sangues não formam uma única luz.",
+          "tissue": "vascular",
+          "sourceIds": [
+            "extra-placenta"
+          ],
+          "uerj": "Explique como a organização de espaço materno interviloso contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Vilosidade em gestação avançada. O citotrofoblasto torna-se descontínuo e não é representado como uma camada espessa universal.",
+      "recognition": "Procure projeções com estroma e vasos fetais, cercadas por espaços maternos. A cobertura trofoblástica fica na superfície da projeção.",
+      "contrast": "Vilosidades coriônicas têm interface materno-fetal; vilosidades intestinais pertencem à mucosa digestiva e têm outra organização."
+    },
+    {
+      "id": "pineal-tissue",
+      "title": "Parênquima pineal",
+      "label": "Parênquima pineal",
+      "system": "endocrine",
+      "organIds": [
+        "pineal"
+      ],
+      "shape": "endocrine",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-pineal"
+      ],
+      "parts": [
+        {
+          "id": "pinealocytes",
+          "name": "pinealocytes",
+          "label": "Pinealócitos",
+          "function": "Secretam melatonina.",
+          "mechanism": "Integram informação relacionada ao ciclo claro–escuro.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-pineal"
+          ],
+          "uerj": "Explique como a organização de pinealócitos contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "glia",
+          "name": "glia",
+          "label": "Glia intersticial",
+          "function": "Sustenta o tecido.",
+          "mechanism": "Células gliais acompanham o parênquima.",
+          "tissue": "neural",
+          "sourceIds": [
+            "extra-pineal"
+          ],
+          "uerj": "Explique como a organização de glia intersticial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "capillary",
+          "name": "capillary",
+          "label": "Capilar",
+          "function": "Nutre células e recebe secreções.",
+          "mechanism": "Hormônio alcança a circulação a partir do interstício.",
+          "tissue": "vascular",
+          "sourceIds": [
+            "extra-pineal"
+          ],
+          "uerj": "Explique como a organização de capilar contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "stroma",
+          "name": "stroma",
+          "label": "Estroma conjuntivo",
+          "function": "Organiza a estrutura da glândula.",
+          "mechanism": "Septos acompanham vasos.",
+          "tissue": "connective",
+          "sourceIds": [
+            "extra-pineal"
+          ],
+          "uerj": "Explique como a organização de estroma conjuntivo contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Grupos celulares da pineal, ampliados. Calcificações variáveis com idade não foram acrescentadas.",
+      "recognition": "Pinealócitos e glia formam um parênquima vascularizado. Corpúsculos calcificados podem aparecer em lâminas, variando com idade.",
+      "contrast": "A presença de calcificações não define uma contagem obrigatória nem é representada como doença neste atlas."
+    },
+    {
+      "id": "parathyroid-tissue",
+      "title": "Parênquima da paratireoide",
+      "label": "Parênquima da paratireoide",
+      "system": "endocrine",
+      "organIds": [
+        "parathyroid"
+      ],
+      "shape": "endocrine",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-parathyroid"
+      ],
+      "parts": [
+        {
+          "id": "chief-cells",
+          "name": "chief-cells",
+          "label": "Células principais",
+          "function": "Secretam paratormônio (PTH).",
+          "mechanism": "A queda do cálcio extracelular favorece sua liberação.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de células principais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "oxyphil-cells",
+          "name": "oxyphil-cells",
+          "label": "Células oxífilas",
+          "function": "Constituem uma população distinta da glândula.",
+          "mechanism": "Possuem citoplasma abundante em mitocôndrias; não substituem o papel principal das células principais.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de células oxífilas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "capillaries",
+          "name": "capillaries",
+          "label": "Capilares",
+          "function": "Recebem hormônio e nutrem o tecido.",
+          "mechanism": "PTH atravessa o interstício para alcançar a circulação.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de capilares contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "capsule",
+          "name": "capsule",
+          "label": "Cápsula",
+          "function": "Dá suporte externo à glândula.",
+          "mechanism": "Conjuntivo envolve o parênquima.",
+          "tissue": "connective",
+          "uerj": "Explique como a organização de cápsula contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        },
+        {
+          "id": "fat",
+          "name": "fat",
+          "label": "Tecido adiposo",
+          "function": "Compõe parte variável do estroma.",
+          "mechanism": "A proporção de adipócitos varia com idade e indivíduo.",
+          "tissue": "fat",
+          "uerj": "Explique como a organização de tecido adiposo contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-parathyroid"
+          ]
+        }
+      ],
+      "description": "Células principais e oxífilas, capilares e estroma em arranjo didático.",
+      "recognition": "Procure cordões ou grupos de células principais junto a capilares, células oxífilas e adipócitos de proporção variável.",
+      "contrast": "A paratireoide não tem os folículos cheios de coloide típicos da tireoide."
+    },
+    {
+      "id": "epididymal-epithelium",
+      "title": "Epitélio do epidídimo",
+      "label": "Epitélio do epidídimo",
+      "system": "reproductive",
+      "organIds": [
+        "epididymis",
+        "vas-deferens"
+      ],
+      "shape": "epithelium",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-male"
+      ],
+      "parts": [
+        {
+          "id": "principal-cells",
+          "name": "principal-cells",
+          "label": "Células principais",
+          "function": "Participam de absorção e secreção.",
+          "mechanism": "Microvilosidades longas aumentam a superfície apical.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de células principais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "stereocilia",
+          "name": "stereocilia",
+          "label": "Estereocílios",
+          "function": "Ampliam área de contato.",
+          "mechanism": "São projeções de actina, não estruturas de batimento ciliar.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de estereocílios contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "basal-cells",
+          "name": "basal-cells",
+          "label": "Células basais",
+          "function": "Compõem a base do epitélio.",
+          "mechanism": "Não chegam à superfície luminal; o aspecto é pseudoestratificado.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de células basais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "basal-lamina",
+          "name": "basal-lamina",
+          "label": "Lâmina basal",
+          "function": "Sustenta todas as células epiteliais.",
+          "mechanism": "Contato basal diferencia pseudoestratificação de estratificação verdadeira.",
+          "tissue": "connective",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de lâmina basal contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Epitélio pseudoestratificado com estereocílios e células basais.",
+      "recognition": "Núcleos em alturas diferentes, células basais e longas projeções apicais dão aspecto pseudoestratificado.",
+      "contrast": "Estereocílios são microvilosidades longas. Na tuba uterina, os cílios móveis têm organização e função distintas."
+    },
+    {
+      "id": "seminal-vesicle-tissue",
+      "title": "Mucosa da vesícula seminal",
+      "label": "Mucosa da vesícula seminal",
+      "system": "reproductive",
+      "organIds": [
+        "seminal-vesicle"
+      ],
+      "shape": "epithelium",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-male"
+      ],
+      "parts": [
+        {
+          "id": "secretory-epithelium",
+          "name": "secretory-epithelium",
+          "label": "Epitélio secretor",
+          "function": "Produz componentes do líquido seminal.",
+          "mechanism": "Atividade das células secretoras é influenciada por andrógenos.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de epitélio secretor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "folds",
+          "name": "folds",
+          "label": "Pregas da mucosa",
+          "function": "Ampliam a área funcional.",
+          "mechanism": "Pregas ramificadas aumentam a superfície revestida.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de pregas da mucosa contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "lamina-propria",
+          "name": "lamina-propria",
+          "label": "Lâmina própria",
+          "function": "Sustenta o revestimento.",
+          "mechanism": "Conjuntivo acompanha a base das pregas.",
+          "tissue": "connective",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de lâmina própria contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "smooth-muscle",
+          "name": "smooth-muscle",
+          "label": "Músculo liso",
+          "function": "Participa da emissão da secreção.",
+          "mechanism": "Contração ajuda a esvaziar a luz.",
+          "tissue": "muscle",
+          "sourceIds": [
+            "extra-male"
+          ],
+          "uerj": "Explique como a organização de músculo liso contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Mucosa pregueada com epitélio secretor, suporte e musculatura.",
+      "recognition": "Pregas mucosas ramificadas criam luzes irregulares; o epitélio secretor se apoia em conjuntivo e músculo liso.",
+      "contrast": "Vesícula seminal produz secreção: não é o local de formação dos espermatozoides nem seu principal reservatório."
+    },
+    {
+      "id": "uterine-tube-tissue",
+      "title": "Mucosa da tuba uterina",
+      "label": "Mucosa da tuba uterina",
+      "system": "reproductive",
+      "organIds": [
+        "uterine-tube"
+      ],
+      "shape": "epithelium",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-female"
+      ],
+      "parts": [
+        {
+          "id": "ciliated-cells",
+          "name": "ciliated-cells",
+          "label": "Células ciliadas",
+          "function": "Participam do transporte luminal.",
+          "mechanism": "Batimento ciliar atua em conjunto com a contração da parede.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-female"
+          ],
+          "uerj": "Explique como a organização de células ciliadas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "secretory-cells",
+          "name": "secretory-cells",
+          "label": "Células secretoras",
+          "function": "Ajudam a compor o ambiente luminal.",
+          "mechanism": "Secreção apoia gametas e o desenvolvimento inicial.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-female"
+          ],
+          "uerj": "Explique como a organização de células secretoras contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "cilia",
+          "name": "cilia",
+          "label": "Cílios móveis",
+          "function": "Deslocam líquido junto à superfície.",
+          "mechanism": "Microtúbulos e proteínas motoras produzem movimento.",
+          "tissue": "organ",
+          "sourceIds": [
+            "extra-female"
+          ],
+          "uerj": "Explique como a organização de cílios móveis contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        },
+        {
+          "id": "lamina-propria",
+          "name": "lamina-propria",
+          "label": "Lâmina própria",
+          "function": "Sustenta as pregas mucosas.",
+          "mechanism": "Conjuntivo vascularizado fica sob o epitélio.",
+          "tissue": "connective",
+          "sourceIds": [
+            "extra-female"
+          ],
+          "uerj": "Explique como a organização de lâmina própria contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células."
+        }
+      ],
+      "description": "Epitélio simples colunar ciliado e secretor da tuba. Não é o epitélio com estereocílios do epidídimo.",
+      "recognition": "Pregas mucosas revestidas por epitélio simples colunar contêm células ciliadas e secretoras.",
+      "contrast": "Pseudoestratificação e estereocílios são característicos do epidídimo, não da mucosa tubária típica."
+    },
+    {
+      "id": "tonsillar-tissue",
+      "title": "Tecido da tonsila palatina",
+      "label": "Tecido da tonsila palatina",
+      "system": "lymphatic-immune",
+      "organIds": [
+        "tonsil"
+      ],
+      "shape": "lymphoid",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-lymph"
+      ],
+      "parts": [
+        {
+          "id": "epithelium",
+          "name": "epithelium",
+          "label": "Epitélio superficial",
+          "function": "Protege a região sujeita a atrito.",
+          "mechanism": "Na tonsila palatina é predominantemente estratificado pavimentoso.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de epitélio superficial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "crypts",
+          "name": "crypts",
+          "label": "Criptas tonsilares",
+          "function": "Ampliam contato com material da cavidade oral.",
+          "mechanism": "Invaginações do revestimento se aproximam do tecido linfoide.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de criptas tonsilares contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "lymphoid-follicles",
+          "name": "lymphoid-follicles",
+          "label": "Folículos linfoides",
+          "function": "Organizam populações de linfócitos.",
+          "mechanism": "Centros germinativos podem aparecer em respostas imunes.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de folículos linfoides contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "interfollicular",
+          "name": "interfollicular",
+          "label": "Regiões interfoliculares",
+          "function": "Participam da resposta imune local.",
+          "mechanism": "Células imunes interagem entre os folículos.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de regiões interfoliculares contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "partial-capsule",
+          "name": "partial-capsule",
+          "label": "Cápsula parcial",
+          "function": "Sustenta a superfície profunda.",
+          "mechanism": "Conjuntivo delimita parte do tecido tonsilar.",
+          "tissue": "connective",
+          "uerj": "Explique como a organização de cápsula parcial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        }
+      ],
+      "description": "Cripta e folículos da tonsila palatina; tipo epitelial varia entre tonsilas.",
+      "recognition": "Na tonsila palatina, criptas revestidas por epitélio se aproximam de folículos linfoides e regiões entre folículos.",
+      "contrast": "Um linfonodo possui seios e fluxo de linfa; a tonsila faz contato com a superfície mucosa."
+    },
+    {
+      "id": "vascular-wall",
+      "title": "Parede vascular",
+      "label": "Parede vascular",
+      "system": "cardiovascular",
+      "organIds": [
+        "blood-vessel"
+      ],
+      "shape": "vascular",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-vessels"
+      ],
+      "parts": [
+        {
+          "id": "intima",
+          "name": "intima",
+          "label": "Túnica íntima e endotélio",
+          "function": "Reveste a luz de artérias e veias.",
+          "mechanism": "Endotélio regula a interface com o sangue.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de túnica íntima e endotélio contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "arterial-media",
+          "name": "arterial-media",
+          "label": "Túnica média arterial",
+          "function": "Regula calibre e suporta pressão.",
+          "mechanism": "Músculo liso e elementos elásticos compõem a parede.",
+          "tissue": "muscle",
+          "uerj": "Explique como a organização de túnica média arterial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "adventitia",
+          "name": "adventitia",
+          "label": "Túnica externa",
+          "function": "Sustenta e conecta o vaso ao entorno.",
+          "mechanism": "Colágeno e outros componentes conjuntivos formam o revestimento externo.",
+          "tissue": "connective",
+          "uerj": "Explique como a organização de túnica externa contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "venous-wall",
+          "name": "venous-wall",
+          "label": "Parede venosa",
+          "function": "Conduz sangue de retorno ao coração.",
+          "mechanism": "Em geral tem média mais fina que a artéria comparável.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de parede venosa contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "venous-valves",
+          "name": "venous-valves",
+          "label": "Valvas venosas",
+          "function": "Reduzem refluxo em muitas veias, especialmente dos membros.",
+          "mechanism": "Pregas da íntima favorecem fluxo em uma direção.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de valvas venosas contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        },
+        {
+          "id": "capillary-endothelium",
+          "name": "capillary-endothelium",
+          "label": "Endotélio capilar",
+          "function": "Favorece trocas com os tecidos.",
+          "mechanism": "Parede delgada com lâmina basal mantém curto o percurso difusivo.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de endotélio capilar contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-vessels"
+          ]
+        }
+      ],
+      "description": "Endotélio, músculo liso e conjuntivo de vasos; o capilar é um exemplo separado de parede delgada.",
+      "recognition": "Compare uma média arterial espessa, uma parede venosa relativamente mais fina e um capilar com revestimento delgado.",
+      "contrast": "Artéria e veia são definidas pelo sentido do fluxo em relação ao coração, e não apenas pela cor ou oxigenação."
+    },
+    {
+      "id": "lymphatic-wall",
+      "title": "Capilar e coletor linfáticos",
+      "label": "Capilar e coletor linfáticos",
+      "system": "lymphatic-immune",
+      "organIds": [
+        "lymphatic-vessel"
+      ],
+      "shape": "vascular",
+      "supplementary": true,
+      "sourceIds": [
+        "extra-lymph"
+      ],
+      "parts": [
+        {
+          "id": "blind-capillary",
+          "name": "blind-capillary",
+          "label": "Capilar linfático inicial",
+          "function": "Recebe líquido intersticial.",
+          "mechanism": "Extremidade em fundo cego e junções sobrepostas favorecem entrada de líquido.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de capilar linfático inicial contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "endothelial-flaps",
+          "name": "endothelial-flaps",
+          "label": "Abas endoteliais",
+          "function": "Favorecem entrada e dificultam saída retrógrada.",
+          "mechanism": "Diferenças de pressão deslocam sobreposições celulares.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de abas endoteliais contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "collecting-wall",
+          "name": "collecting-wall",
+          "label": "Parede do coletor",
+          "function": "Conduz linfa aos trajetos seguintes.",
+          "mechanism": "Vasos coletores maiores têm parede e músculo liso.",
+          "tissue": "vascular",
+          "uerj": "Explique como a organização de parede do coletor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "valves",
+          "name": "valves",
+          "label": "Valvas do coletor",
+          "function": "Ajudam a manter fluxo unidirecional.",
+          "mechanism": "Pregas fecham quando surge tendência de refluxo.",
+          "tissue": "organ",
+          "uerj": "Explique como a organização de valvas do coletor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        },
+        {
+          "id": "smooth-muscle",
+          "name": "smooth-muscle",
+          "label": "Músculo liso do coletor",
+          "function": "Ajuda a impulsionar a linfa.",
+          "mechanism": "Contrações se somam à ação muscular externa e respiratória.",
+          "tissue": "muscle",
+          "uerj": "Explique como a organização de músculo liso do coletor contribui para a função do tecido.",
+          "commonMistake": "Este é um modelo didático ampliado, não uma lâmina histológica nem uma contagem real de células.",
+          "sourceIds": [
+            "extra-lymph"
+          ]
+        }
+      ],
+      "description": "Endotélio inicial sobreposto e parede de coletor com valvas, em dois segmentos distintos.",
+      "recognition": "Capilares iniciais têm endotélio delgado e sobreposto; coletores maiores podem mostrar músculo e valvas.",
+      "contrast": "Uma camada muscular não deve ser atribuída ao capilar linfático inicial por observar um coletor maior."
+    }
+  ],
+  "sources": [
+    {
+      "id": "extra-respiratory",
+      "title": "Vias respiratórias",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-urinary",
+      "title": "Transporte da urina",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-2-gross-anatomy-of-urine-transport",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-mouth",
+      "title": "Boca e glândulas salivares",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-male",
+      "title": "Sistema reprodutivo masculino",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-1-anatomy-and-physiology-of-the-testicular-reproductive-system",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-female",
+      "title": "Sistema reprodutivo feminino",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-2-anatomy-and-physiology-of-the-ovarian-reproductive-system",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-parathyroid",
+      "title": "Paratireoides",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-5-the-parathyroid-glands",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-pineal",
+      "title": "Glândula pineal",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-7-the-pineal-gland",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-vessels",
+      "title": "Camadas dos vasos sanguíneos",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-1-structure-and-function-of-blood-vessels",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-lymph",
+      "title": "Sistema linfático",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-1-anatomy-of-the-lymphatic-and-immune-systems",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-joint",
+      "title": "Articulações sinoviais",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-4-synovial-joints",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-nerve",
+      "title": "Nervos periféricos",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-4-the-peripheral-nervous-system",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-ventilation",
+      "title": "Mecânica da ventilação",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing",
+      "publisher": "OpenStax · Rice University"
+    },
+    {
+      "id": "extra-acini",
+      "title": "Histologia: glândula parótida",
+      "url": "https://histologyguide.com/slideview/MH-094-parotid/12-slide-1.html",
+      "publisher": "University of Minnesota · Histology Guide"
+    },
+    {
+      "id": "extra-placenta",
+      "title": "Histologia: placenta",
+      "url": "https://histologyguide.com/slideview/MH-175-placenta/18-slide-1.html",
+      "publisher": "University of Minnesota · Histology Guide"
+    },
+    {
+      "id": "extra-breast",
+      "title": "Histologia: glândula mamária em lactação",
+      "url": "https://histologyguide.com/slideview/MH-174a-mammary-gland/18-slide-1.html",
+      "publisher": "University of Minnesota · Histology Guide"
+    }
+  ]
+}

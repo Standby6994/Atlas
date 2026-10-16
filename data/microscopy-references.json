@@ -1,0 +1,1309 @@
+{
+  "version": "2026-10-16-digestive-wall-v18",
+  "language": "pt-BR",
+  "references": [
+    {
+      "id": "cardiac-muscle",
+      "viewIds": [
+        "cardiac-muscle"
+      ],
+      "label": "Miocárdio · microscopia óptica, 400×",
+      "caption": "Observe fibras estriadas com núcleos centrais e trajetos que se ramificam. A espécie não é informada na descrição original.",
+      "image": "images/histology/cardiac-muscle.jpg",
+      "preview": "images/histology/cardiac-muscle-preview.jpg",
+      "width": 3072,
+      "height": 4096,
+      "author": "Alexander G. Cheroske",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cardiac_muscle_histology_400x.jpg",
+      "changes": "Arquivo original sem retoque. A prévia, quando disponível, é a miniatura publicada pelo Wikimedia Commons.",
+      "sha256": "4fbf98487adc57355ea00b98368ad034c3636989cff0be1c3c70a4b5848a4b41",
+      "originalMagnification": "400×, conforme o nome e a descrição do arquivo da fonte; não corresponde ao zoom da tela.",
+      "annotations": [
+        {
+          "x": 0.635,
+          "y": 0.524,
+          "label": "Núcleo central",
+          "viewId": "cardiac-muscle",
+          "partId": "nuclei",
+          "description": "Núcleo escuro no interior de uma fibra muscular. A posição central ajuda a comparar miocárdio e músculo esquelético, mas não significa que toda seção de fibra conterá um núcleo."
+        },
+        {
+          "x": 0.65,
+          "y": 0.766,
+          "label": "Cardiomiócitos em trajetos longitudinais",
+          "viewId": "cardiac-muscle",
+          "partId": "cells",
+          "description": "Trajetos celulares estriados na área indicada. A fotografia é um corte; contornos e ramificações podem não estar inteiros no mesmo plano."
+        },
+        {
+          "x": 0.837,
+          "y": 0.822,
+          "label": "Estriações transversais",
+          "viewId": "cardiac-muscle",
+          "partId": "striations",
+          "description": "Alternância de faixas nas fibras. Compare sua relação com a organização dos sarcômeros; a foto não permite seguir todos os filamentos de actina e miosina."
+        }
+      ],
+      "species": "Não informada na descrição catalogada.",
+      "organRegion": "Miocárdio",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "comparison": "Compare núcleos centrais, trajetos ramificados e estriações com o tecido cardíaco 3D. A fotografia mostra um corte, enquanto o modelo separa componentes para ensino; ela não identifica todas as junções ou o trajeto completo de cada célula."
+    },
+    {
+      "id": "renal-medulla",
+      "viewIds": [
+        "renal-tubules"
+      ],
+      "label": "Medula renal humana",
+      "caption": "Compare perfis tubulares e trajetos paralelos da medula. Corpúsculos renais pertencem ao córtex e não devem ser procurados nesta imagem.",
+      "image": "images/histology/renal-medulla.jpg",
+      "preview": "images/histology/renal-medulla-preview.jpg",
+      "width": 2816,
+      "height": 2112,
+      "author": "Jpogi at English Wikipedia",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kidney-medulla.JPG",
+      "changes": "Arquivo original sem retoque. A prévia, quando disponível, é a miniatura publicada pelo Wikimedia Commons.",
+      "sha256": "b0ed41d5f80a9768bf59759539885f57b15d70e778bb50d1a07670c5b974f116",
+      "annotations": [],
+      "species": "Humano, conforme a descrição catalogada.",
+      "organRegion": "Medula renal humana",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare os trajetos tubulares paralelos com os segmentos medulares do modelo. A vista 3D de túbulos reúne exemplos diferentes para comparação; nem todo tipo tubular mostrado nela pertence a este campo medular. Corpúsculos renais não estão sendo identificados nesta fotografia."
+    },
+    {
+      "id": "intestinal-mucosa",
+      "viewIds": [
+        "intestinal-villus",
+        "simple-columnar"
+      ],
+      "label": "Mucosa do intestino delgado humano",
+      "caption": "Observe projeções da mucosa, revestimento epitelial e tecido de sustentação. A ampliação nominal da fonte depende do tamanho de impressão.",
+      "image": "images/histology/intestinal-mucosa.jpg",
+      "preview": "images/histology/intestinal-mucosa-preview.jpg",
+      "width": 3752,
+      "height": 2401,
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Small_intestine_%28265_23%29_Human.jpg",
+      "changes": "Arquivo original sem retoque. A prévia, quando disponível, é a miniatura publicada pelo Wikimedia Commons.",
+      "sha256": "4bb765688d17fba439c46c9f893006e89981b061a2b2ab8401ca1ed7c02c27ab",
+      "originalMagnification": "500× para fotografia impressa com 26 cm de largura, conforme a fonte; não é o zoom da tela.",
+      "technique": "Microscopia óptica em campo claro.",
+      "annotations": [
+        {
+          "x": 0.463,
+          "y": 0.471,
+          "label": "Epitélio da vilosidade",
+          "viewId": "intestinal-villus",
+          "partId": "enterocytes",
+          "description": "Revestimento da projeção mucosa no ponto indicado. Compare a posição dos enterócitos; microvilosidades individuais não são resolvidas nesta ampliação."
+        },
+        {
+          "x": 0.36,
+          "y": 0.527,
+          "label": "Lâmina própria da vilosidade",
+          "viewId": "intestinal-villus",
+          "partId": "lamina_propria",
+          "description": "Tecido no eixo interno da vilosidade, sob o revestimento. Capilares e vaso quilífero do modelo não são individualizados com segurança neste campo."
+        }
+      ],
+      "species": "Humano, conforme a descrição catalogada.",
+      "organRegion": "Mucosa do intestino delgado humano",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "comparison": "Compare projeções da mucosa e seu revestimento com a parede intestinal 3D. O corte intercepta partes das projeções; não fornece uma reconstrução completa do órgão, de todos os vasos ou da borda em escova de cada célula."
+    },
+    {
+      "id": "thick-skin",
+      "viewIds": [
+        "skin",
+        "stratified-epithelium"
+      ],
+      "label": "Pele espessa · corte histológico",
+      "caption": "Compare a espessura da queratina e as camadas epidérmicas. Pele espessa não possui folículos pilosos; a espécie não é informada na descrição original.",
+      "image": "images/histology/thick-skin.jpg",
+      "preview": "images/histology/thick-skin-preview.jpg",
+      "width": 4000,
+      "height": 3000,
+      "author": "SGnanadeep",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thick_skin.jpg",
+      "changes": "Arquivo original sem retoque. A prévia, quando disponível, é a miniatura publicada pelo Wikimedia Commons.",
+      "sha256": "aecef01be18f78b14e7a7493576c143658874fa9fe19adc982cd3fbf65965f74",
+      "annotations": [
+        {
+          "x": 0.517,
+          "y": 0.16,
+          "label": "Estrato córneo",
+          "viewId": "skin",
+          "partId": "corneum",
+          "description": "Camada superficial espessa de material queratinizado. Compare sua posição com as camadas celulares vivas; a espessura varia entre regiões da pele."
+        },
+        {
+          "x": 0.393,
+          "y": 0.407,
+          "label": "Camadas epidérmicas vivas",
+          "viewId": "skin",
+          "partId": "living_layers",
+          "description": "Faixa celular sob a queratina e acima da derme. O modelo separa componentes que aparecem como um conjunto de camadas no corte."
+        },
+        {
+          "x": 0.279,
+          "y": 0.522,
+          "label": "Derme",
+          "viewId": "skin",
+          "partId": "dermis",
+          "description": "Tecido de sustentação abaixo da epiderme, com matriz fibrosa. Vasos particulares, melanócitos e terminações nervosas não foram marcados sem identificação suficiente."
+        }
+      ],
+      "species": "Não informada na descrição catalogada.",
+      "organRegion": "Pele espessa",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare a camada queratinizada e as camadas epidérmicas com a pele 3D. O campo mostra pele espessa e não deve receber folículos pilosos por associação com um esquema genérico de pele."
+    },
+    {
+      "id": "renal-cortex",
+      "image": "images/histology/renal-cortex.jpg",
+      "preview": "images/histology/renal-cortex-preview.jpg",
+      "width": 2816,
+      "height": 2112,
+      "sourceWidth": 2816,
+      "sourceHeight": 2112,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Kidney-Cortex.JPG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kidney-Cortex.JPG",
+      "sha256": "9f4edc564d51b8d043d2270700d6340137e02cca30fe6e4d6395db42e149598d",
+      "viewIds": [
+        "renal-corpuscle",
+        "renal-tubules"
+      ],
+      "label": "Córtex renal humano · corpúsculos e túbulos",
+      "caption": "Corpúsculos arredondados aparecem entre perfis tubulares. O ponteiro preto pertence à fotografia original e não é uma estrutura renal. O campo permite reconhecer corpúsculos, mas não resolver pedicelos ou a barreira de filtração inteira.",
+      "annotations": [
+        {
+          "x": 0.793,
+          "y": 0.798,
+          "label": "Glomérulo",
+          "viewId": "renal-corpuscle",
+          "partId": "glomerulus",
+          "description": "Tufo capilar arredondado dentro do corpúsculo. Compare com os capilares do modelo; as células individuais do tufo não são identificadas neste campo."
+        },
+        {
+          "x": 0.793,
+          "y": 0.757,
+          "label": "Cápsula do corpúsculo renal",
+          "viewId": "renal-corpuscle",
+          "partId": "capsule",
+          "description": "Contorno externo do corpúsculo indicado. Corresponde à folha parietal da cápsula glomerular, e não à cápsula fibrosa que envolve o rim inteiro."
+        }
+      ],
+      "author": "Jpogi at English Wikipedia",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Humano, conforme a descrição catalogada.",
+      "organRegion": "Córtex renal humano",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare corpúsculos entre túbulos com o córtex e o corpúsculo renal 3D. A foto permite reconhecer a unidade regional; a separação de pedicelos e de todas as camadas da barreira no modelo é uma ampliação didática, não detalhe resolvido por esta imagem."
+    },
+    {
+      "id": "liver-section",
+      "image": "images/histology/liver-section.jpg",
+      "preview": "images/histology/liver-section-preview.jpg",
+      "width": 2776,
+      "height": 1777,
+      "sourceWidth": 2776,
+      "sourceHeight": 1777,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/69/Liver_%2826_2_07%29_Cross-section.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Liver_(26_2_07)_Cross-section.jpg",
+      "sha256": "35144ad3d7ab0c4dbe5a0278844cf6b31102c708a622880bc42babf377eebef2",
+      "viewIds": [
+        "liver-lobule"
+      ],
+      "label": "Fígado · cordões celulares e veia central",
+      "caption": "Corte de fígado com veia central e organização do parênquima. A espécie não é informada pela descrição original. A imagem contém uma barra original de 0,1 mm, mantida sem recalibração digital.",
+      "technique": "Microscopia óptica em campo claro.",
+      "stain": "Hematoxilina e eosina (H&E), conforme a fonte.",
+      "originalMagnification": "360× quando a fotografia é impressa com 26 cm de largura; não corresponde ao zoom da tela.",
+      "annotations": [
+        {
+          "x": 0.389,
+          "y": 0.267,
+          "label": "Veia central",
+          "viewId": "liver-lobule",
+          "partId": "central_vein",
+          "description": "Lúmen venoso claro no parênquima. No lóbulo, recebe sangue que percorreu os sinusoides; não deve ser confundido com o ramo da veia porta."
+        },
+        {
+          "x": 0.668,
+          "y": 0.616,
+          "label": "Cordões de hepatócitos",
+          "viewId": "liver-lobule",
+          "partId": "hepatocytes",
+          "description": "Células do parênquima dispostas em cordões, entre espaços vasculares. Compare a organização dos cordões com a representação 3D; canalículos biliares e células de Kupffer não são individualizados nesta fotografia."
+        }
+      ],
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Não informada na descrição catalogada.",
+      "organRegion": "Fígado",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "scaleCalibration": "A barra de 0,1 mm pertence ao arquivo original e foi mantida. O Atlas não recalibra a fotografia nem transforma o zoom digital em aumento óptico.",
+      "comparison": "Compare a veia central e a disposição do parênquima com a unidade hepática 3D. A fotografia não mostra todas as conexões biliares e vasculares separadas do esquema nem permite atribuir identidade a cada pequeno espaço claro."
+    },
+    {
+      "id": "pancreas-islet-confocal",
+      "image": "images/histology/pancreas-islet-confocal.jpg",
+      "preview": "images/histology/pancreas-islet-confocal-preview.jpg",
+      "width": 960,
+      "height": 960,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Pancreaticislet.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pancreaticislet.jpg",
+      "sha256": "527ba78ca5ac009e6aaac7289eb72df3689af4e93caff58b14e6375892308fe7",
+      "viewIds": [
+        "pancreatic-tissue"
+      ],
+      "label": "Ilhota pancreática de rato · microscopia confocal",
+      "caption": "Ilhota isolada de rato, com marcações diferentes para insulina, glucagon e núcleos. A distribuição celular em rato não deve ser tomada como um mapa obrigatório da ilhota humana. A imagem não mostra ácinos ou ductos exócrinos.",
+      "technique": "Microscopia confocal de varredura a laser.",
+      "stain": "DAPI nos núcleos (azul); anticorpos contra insulina (verde) e glucagon (vermelho), conforme a fonte.",
+      "originalMagnification": "Objetiva de 63× com imersão em óleo; isso não é a ampliação total de exibição.",
+      "annotations": [
+        {
+          "x": 0.606,
+          "y": 0.387,
+          "label": "Células beta · marcação para insulina",
+          "viewId": "pancreatic-tissue",
+          "partId": "beta_cells",
+          "description": "Sinal verde associado à insulina identifica células beta nesta preparação. O modelo relaciona essas células à redução da glicemia; a cor decorre da marcação experimental, não de uma coloração natural."
+        },
+        {
+          "x": 0.716,
+          "y": 0.811,
+          "label": "Células alfa · marcação para glucagon",
+          "viewId": "pancreatic-tissue",
+          "partId": "alpha_cells",
+          "description": "Sinal vermelho associado ao glucagon identifica células alfa nesta preparação. Compare sua contribuição hormonal com a das células beta; posição e quantidade no modelo são didáticas."
+        }
+      ],
+      "author": "Masur",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Rato; espécie específica não informada no catálogo.",
+      "organRegion": "Ilhota pancreática de rato",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "comparison": "Compare células marcadas para insulina e glucagon com a ilhota 3D. A fotografia é de rato; sua distribuição celular não é um mapa obrigatório da ilhota humana. Ácinos e ductos do pâncreas não estão representados nesta ilhota isolada."
+    },
+    {
+      "id": "ovarian-follicle-real",
+      "image": "images/histology/ovarian-follicle-real.jpg",
+      "preview": "images/histology/ovarian-follicle-real-preview.jpg",
+      "width": 960,
+      "height": 545,
+      "sourceWidth": 2517,
+      "sourceHeight": 1430,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Human_ovarian_follicle.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Human_ovarian_follicle.jpg",
+      "sha256": "52c72dc398b999f865dfb50346f11c9951434bf1088b97173ed4889790fe73a4",
+      "viewIds": [
+        "ovarian-follicle"
+      ],
+      "label": "Folículo ovariano humano · ovócito e granulosa",
+      "caption": "Fotografia de um folículo humano, denominado primário na descrição original. Compare ovócito, envoltório e células da granulosa. O corte não possui um antro visível; o antro da vista 3D pertence a uma etapa folicular mais avançada.",
+      "annotations": [
+        {
+          "x": 0.455,
+          "y": 0.58,
+          "label": "Ovócito",
+          "viewId": "ovarian-follicle",
+          "partId": "oocyte",
+          "description": "Grande célula central, com região nuclear visível. O ovócito é a célula germinativa em desenvolvimento, distinto das células somáticas que o circundam."
+        },
+        {
+          "x": 0.712,
+          "y": 0.36,
+          "label": "Células da granulosa",
+          "viewId": "ovarian-follicle",
+          "partId": "granulosa",
+          "description": "Células com núcleos escuros ao redor do ovócito. Sua organização em camadas participa do suporte e das trocas com a célula germinativa."
+        },
+        {
+          "x": 0.615,
+          "y": 0.624,
+          "label": "Zona pelúcida",
+          "viewId": "ovarian-follicle",
+          "partId": "zona",
+          "description": "Faixa em torno do ovócito que o separa das células circundantes. Compare o envoltório glicoproteico do modelo; não equivale ao antro nem a uma camada de células."
+        }
+      ],
+      "author": "Jpogi at English Wikipedia",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Humano, conforme a descrição catalogada.",
+      "organRegion": "Folículo ovariano humano",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Folículo denominado primário pela fonte; sem antro visível. Não equivale ao folículo antral do modelo.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare o ovócito e a granulosa com os componentes foliculares 3D. A fonte descreve um folículo primário sem antro visível; o antro e a organização antral do modelo correspondem a uma etapa posterior, não a estruturas ocultas nesta foto."
+    },
+    {
+      "id": "testis-boar",
+      "image": "images/histology/testis-boar.jpg",
+      "preview": "images/histology/testis-boar-preview.jpg",
+      "width": 960,
+      "height": 720,
+      "sourceWidth": 1600,
+      "sourceHeight": 1200,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Testicle-histology-boar.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Testicle-histology-boar.jpg",
+      "sha256": "e5d32d4661567f46f9b8d76e157c6ff00a0ad89d8e168766c7a70e6d8bd24b0b",
+      "viewIds": [
+        "testis"
+      ],
+      "label": "Testículo de javali · epitélio seminífero e interstício",
+      "caption": "Corte de testículo de javali. A numeração preta já pertence ao arquivo da fonte; as marcações interativas do Atlas ficam em uma camada separada. O exemplo permite comparar organização de mamíferos, sem afirmar identidade com uma lâmina humana.",
+      "annotations": [
+        {
+          "x": 0.115,
+          "y": 0.593,
+          "label": "Espermatogônias",
+          "viewId": "testis",
+          "partId": "spermatogonia",
+          "description": "Células basais indicadas pelo número 4 na fotografia original. Estão próximas à periferia do túbulo; compare sua posição com as etapas que avançam em direção ao lúmen."
+        },
+        {
+          "x": 0.249,
+          "y": 0.544,
+          "label": "Espermatócitos",
+          "viewId": "testis",
+          "partId": "spermatocytes",
+          "description": "Células indicadas pelo número 3 da fonte, em posição mais interna que a das espermatogônias. Participam da etapa meiótica; a foto isolada não determina a subfase da meiose de cada célula."
+        },
+        {
+          "x": 0.341,
+          "y": 0.466,
+          "label": "Células de Leydig",
+          "viewId": "testis",
+          "partId": "leydig",
+          "description": "Grupo no tecido entre os túbulos, identificado pelo número 7 na fonte. Essas células endócrinas pertencem ao interstício, não ao epitélio de onde surgem as células germinativas."
+        }
+      ],
+      "author": "User:Uwe Gille",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Javali, conforme a descrição catalogada.",
+      "organRegion": "Testículo de javali",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare perfis de túbulos seminíferos e interstício com os modelos testicular e histológico. A fotografia é de javali; ela apoia a comparação da organização de mamíferos, sem representar uma lâmina humana ou resolver todos os tipos celulares individualmente."
+    },
+    {
+      "id": "hyaline-cartilage",
+      "image": "images/histology/hyaline-cartilage.jpg",
+      "preview": "images/histology/hyaline-cartilage.jpg",
+      "width": 960,
+      "height": 614,
+      "sourceWidth": 3750,
+      "sourceHeight": 2400,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/57/Hyaline_cartilage_%28254_01%29_Mammal%3B_section.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hyaline_cartilage_(254_01)_Mammal;_section.jpg",
+      "sha256": "115768f99bdea50a8e2ada5b8935bf2d8111b47691902a4a0af7ed895d432be1",
+      "viewIds": [
+        "cartilage"
+      ],
+      "label": "Cartilagem hialina de mamífero · células e matriz",
+      "caption": "Condrócitos e lacunas em corte de cartilagem hialina de mamífero; a espécie não é identificada. A barra de 50 µm pertence ao original. Espaços claros e retrações podem decorrer do preparo, não de cavidades vazias no tecido vivo.",
+      "technique": "Microscopia óptica em campo claro.",
+      "originalMagnification": "1200× quando a fotografia é impressa com 26 cm de largura; não corresponde ao zoom da tela.",
+      "annotations": [
+        {
+          "x": 0.399,
+          "y": 0.491,
+          "label": "Condrócito em lacuna",
+          "viewId": "cartilage",
+          "partId": "chondrocytes",
+          "description": "Perfil celular com núcleo escuro, envolvido por sua lacuna. Compare a célula individualizada no modelo e considere que o plano de corte pode atravessá-la parcialmente."
+        },
+        {
+          "x": 0.554,
+          "y": 0.477,
+          "label": "Matriz cartilaginosa",
+          "viewId": "cartilage",
+          "partId": "matrix",
+          "description": "Material entre as lacunas, produzido e mantido pelos condrócitos. A rede colágena molecular não é resolvida fibra por fibra nesta imagem."
+        }
+      ],
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "changes": "Imagem: miniatura oficial do Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Mamífero; espécie não informada na descrição original.",
+      "organRegion": "Cartilagem hialina de mamífero",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "scaleCalibration": "A barra de 50 µm pertence ao arquivo original e foi mantida. O Atlas não recalibra a fotografia nem transforma o zoom digital em aumento óptico.",
+      "comparison": "Compare condrócitos em lacunas e a matriz com a cartilagem 3D. Retrações decorrentes do preparo não significam cavidades vazias no tecido vivo, e a reconstrução educativa não corresponde célula por célula a este campo."
+    },
+    {
+      "id": "thyroid-section",
+      "image": "images/histology/thyroid-section.jpg",
+      "preview": "images/histology/thyroid-section-preview.jpg",
+      "width": 960,
+      "height": 861,
+      "sourceWidth": 1334,
+      "sourceHeight": 1197,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Histology_thyroid_gland.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Histology_thyroid_gland.jpg",
+      "sha256": "2502c2561a024d3e57dbe1531ea4f101329a04b48185ce1db5ff707dd33c9b86",
+      "viewIds": [
+        "thyroid-follicle"
+      ],
+      "label": "Tireoide · coloide e epitélio folicular",
+      "caption": "Folículos tireoidianos com coloide e revestimento celular. Os números 1 e 2 e a seta são marcas da fonte original. A seta da fonte indica uma célula C, mas o Atlas não a usa como identificação inequívoca de tipo celular sem técnica específica.",
+      "annotations": [
+        {
+          "x": 0.303,
+          "y": 0.583,
+          "label": "Coloide",
+          "viewId": "thyroid-follicle",
+          "partId": "colloid",
+          "description": "Material no interior do folículo. Compare a reserva extracelular de tireoglobulina com o espaço preenchido do modelo; não é tecido conjuntivo nem uma célula."
+        },
+        {
+          "x": 0.418,
+          "y": 0.48,
+          "label": "Epitélio folicular",
+          "viewId": "thyroid-follicle",
+          "partId": "follicular_cells",
+          "description": "Revestimento que delimita o folículo no ponto indicado pela linha do número 2 da fonte. As células foliculares conectam síntese, armazenamento no coloide e liberação de hormônios."
+        }
+      ],
+      "author": "M-J-G",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Não informada na descrição catalogada.",
+      "organRegion": "Tireoide",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare coloide e revestimento dos folículos com o tecido tireoidiano 3D. A seta original não será usada para identificar uma célula C de forma inequívoca sem marcação específica; o modelo separa tipos celulares para ensinar funções."
+    },
+    {
+      "id": "lung-section",
+      "image": "images/histology/lung-section.jpg",
+      "preview": "images/histology/lung-section-preview.jpg",
+      "width": 960,
+      "height": 614,
+      "sourceWidth": 3750,
+      "sourceHeight": 2400,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Lung_%28265_24%29_Mammal.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lung_(265_24)_Mammal.jpg",
+      "sha256": "71731bd1aa89a5ff8f9a801acee8f897c65e5f8b26bc9d882bb8645d926edcf2",
+      "viewIds": [
+        "alveolar-tissue"
+      ],
+      "label": "Pulmão de mamífero · espaços alveolares",
+      "caption": "Corte pulmonar de mamífero com perfis de espaços aéreos e suas paredes. A espécie não é informada. A barra de 0,1 mm é original. O campo não permite classificar com segurança cada pneumócito ou identificar a barreira de difusão inteira.",
+      "technique": "Microscopia óptica em campo claro.",
+      "originalMagnification": "300× quando a fotografia é impressa com 26 cm de largura; não corresponde ao zoom da tela.",
+      "annotations": [
+        {
+          "x": 0.526,
+          "y": 0.7,
+          "label": "Espaço aéreo alveolar · perfil amplo",
+          "viewId": "alveolar-tissue",
+          "partId": "airspace",
+          "description": "Área clara delimitada pelo tecido pulmonar. É um espaço onde o ar circula; não corresponde ao citoplasma de uma célula."
+        },
+        {
+          "x": 0.826,
+          "y": 0.238,
+          "label": "Espaço aéreo alveolar · outro perfil",
+          "viewId": "alveolar-tissue",
+          "partId": "airspace",
+          "description": "Outro perfil de espaço aéreo no mesmo corte. Compare a variação de forma entre cortes reais com a cavidade didática do modelo; o formato depende do plano de corte e do preparo."
+        }
+      ],
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Mamífero; espécie não informada na descrição original.",
+      "organRegion": "Pulmão de mamífero",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "scaleCalibration": "A barra de 0,1 mm pertence ao arquivo original e foi mantida. O Atlas não recalibra a fotografia nem transforma o zoom digital em aumento óptico.",
+      "comparison": "Compare espaços alveolares e septos com a unidade de troca gasosa 3D. O corte não permite classificar com segurança cada pneumócito nem resolver toda a barreira ar-sangue representada em ampliação no modelo."
+    },
+    {
+      "id": "dense-connective",
+      "image": "images/histology/dense-connective.jpg",
+      "preview": "images/histology/dense-connective-preview.jpg",
+      "width": 960,
+      "height": 479,
+      "sourceWidth": 2048,
+      "sourceHeight": 1021,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/50/Dense_regular1.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dense_regular1.jpg",
+      "sha256": "c7134b5b3b725247bee5333ea889add3e82278040d72fb4e789407badee6d7fc",
+      "viewIds": [
+        "connective-tissue"
+      ],
+      "label": "Conjuntivo denso regular · fibras e núcleos",
+      "caption": "Feixes predominantemente paralelos e núcleos alongados, em tecido conjuntivo denso regular. Compare com a vista 3D de conjuntivo, que representa um exemplo mais frouxo; a densidade e a orientação das fibras variam conforme a função. A espécie não é informada pela descrição.",
+      "annotations": [
+        {
+          "x": 0.685,
+          "y": 0.642,
+          "label": "Feixes colágenos",
+          "viewId": "connective-tissue",
+          "partId": "collagen",
+          "description": "Feixes ondulados, predominantemente alinhados, ocupam a maior parte do campo. Compare seu papel na resistência à tração com as fibras mais dispersas do exemplo de conjuntivo frouxo."
+        },
+        {
+          "x": 0.86,
+          "y": 0.266,
+          "label": "Núcleo de célula conjuntiva",
+          "viewId": "connective-tissue",
+          "partId": "fibroblasts",
+          "description": "Núcleo alongado entre os feixes, compatível com uma célula da população fibroblástica. O núcleo é visível; o contorno de todo o citoplasma não está individualizado nesta fotografia."
+        }
+      ],
+      "author": "Echinaceapallida",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Não informada na descrição catalogada.",
+      "organRegion": "Conjuntivo denso regular",
+      "orientation": "Orientação específica não informada na descrição catalogada.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare a direção predominante dos feixes com a organização do conjuntivo 3D. Esta fotografia é de conjuntivo denso regular; a vista 3D apresenta um exemplo mais frouxo, e não uma cópia da densidade ou orientação deste tecido."
+    },
+    {
+      "id": "peripheral-nerve",
+      "image": "images/histology/peripheral-nerve.jpg",
+      "preview": "images/histology/peripheral-nerve-preview.jpg",
+      "width": 709,
+      "height": 532,
+      "sourceWidth": 709,
+      "sourceHeight": 532,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Peripheral_nerve%2C_cross_section.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peripheral_nerve,_cross_section.jpg",
+      "sha256": "6fb71ab792abbbfd7452066946b5da84545d60bc99d01c22604a11802c1a81ec",
+      "viewIds": [
+        "nervous-tissue"
+      ],
+      "label": "Nervo periférico · fibras em corte",
+      "caption": "Corte de nervo periférico, disponibilizado pelo Departamento de Histologia do Jagiellonian University Medical College. Perfis transversais aparecem na região superior; a região inferior apresenta trajetos mais longitudinais. A lâmina mostra prolongamentos em um nervo, e não corpos neuronais ou sinapses.",
+      "annotations": [
+        {
+          "x": 0.551,
+          "y": 0.31,
+          "label": "Perfil de fibra mielinizada",
+          "viewId": "nervous-tissue",
+          "partId": "myelin",
+          "description": "Perfil arredondado com envoltório ao redor do axônio. O aspecto da mielina depende do preparo; compare a bainha do modelo sem interpretar seu tamanho como uma medida da fibra fotografada."
+        },
+        {
+          "x": 0.551,
+          "y": 0.282,
+          "label": "Centro de um perfil axonal",
+          "viewId": "nervous-tissue",
+          "partId": "axon",
+          "description": "Região central de outro perfil de fibra no corte transversal. Axônio e bainha devem ser distinguidos; o corpo celular desse neurônio fica fora do campo."
+        }
+      ],
+      "author": "Departamento de Histologia, Jagiellonian University Medical College (fotógrafo não informado)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "changes": "Imagem: arquivo original publicado pelo Wikimedia Commons, conservado sem retoque pelo Atlas. Prévia: miniatura oficial. Marcações interativas e traduções são camadas separadas e não alteram os pixels da fotografia.",
+      "species": "Não informada na descrição catalogada.",
+      "organRegion": "Nervo periférico",
+      "orientation": "Perfis transversais na região superior e trajetos mais longitudinais na região inferior da fotografia.",
+      "stage": "Estágio específico não informado na descrição catalogada.",
+      "technique": "Não informada na descrição catalogada.",
+      "stain": "Não informada na descrição catalogada.",
+      "originalMagnification": "Não informada na descrição catalogada; o zoom da tela não equivale ao aumento óptico.",
+      "comparison": "Compare a orientação dos perfis e trajetos de fibras com o nervo 3D. A foto reúne cortes mais transversais e mais longitudinais; não apresenta corpos neuronais ou sinapses que apareçam em outras vistas do Atlas."
+    },
+    {
+      "id": "leaf-semithin-reischig",
+      "modelViewIds": [
+        "botany-leaf-cross-section",
+        "cyto-plant-cell"
+      ],
+      "viewIds": [],
+      "label": "Folha · mesofilo e feixe vascular em corte semifino",
+      "caption": "Campo real de uma folha, com células do mesofilo e um feixe vascular. A espécie e a identificação das faces superior e inferior não são informadas. Não se trata de uma fotografia da folha inteira nem de todas as suas camadas.",
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leaf_(255_14)_Leaf_semi-thick_section.jpg",
+      "species": "Não informada pela fonte.",
+      "organRegion": "Folha; campo de mesofilo e feixe vascular.",
+      "orientation": "Seção semifina foliar; faces adaxial e abaxial não identificadas pela fonte.",
+      "stage": "Não informado pela fonte.",
+      "technique": "Microscopia óptica em campo claro, corte semifino, conforme a fonte.",
+      "stain": "Não informada pela fonte; as cores não identificam sozinhas um corante.",
+      "originalMagnification": "1600× para reprodução com 26 cm de largura, conforme a fonte; não equivale ao zoom digital atual.",
+      "comparison": "A vista 3D representa uma folha dorsiventral de eudicotiledônea mesófita. A espécie desta fotografia é desconhecida: compare as paredes celulares, os plastídios periféricos e o feixe, sem presumir que toda a arquitetura 3D esteja neste campo. A microscopia óptica não resolve grana ou membranas individuais dos cloroplastos.",
+      "scaleCalibration": {
+        "type": "embedded-bar",
+        "value": 50,
+        "unit": "µm",
+        "source": "Barra de 50 µm visível no canto inferior esquerdo do arquivo original.",
+        "scope": "Somente a barra já impressa na imagem original; não calibra o tamanho físico da tela nem habilita medição interativa."
+      },
+      "annotations": [
+        {
+          "x": 0.548,
+          "y": 0.323,
+          "label": "Vaso do xilema no feixe",
+          "viewId": "botany-leaf-cross-section",
+          "partId": "xylem",
+          "description": "Grande perfil com lúmen e parede relativamente espessa dentro do feixe. Compare a condução de água e a posição do tecido no modelo; o floema não foi individualizado nesta marcação.",
+          "identificationBasis": "Identificação morfológica no campo foliar: grande lúmen e parede espessada na região do feixe. A fonte identifica o preparo como seção semifina de folha; não fornece legenda celular.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.469,
+          "y": 0.456,
+          "label": "Parede de célula do mesofilo",
+          "viewId": "cyto-plant-cell",
+          "partId": "cell-wall",
+          "description": "Limite espesso entre perfis celulares. Compare a parede do modelo; a membrana plasmática justaposta não é distinguida separadamente com segurança nesta fotografia.",
+          "identificationBasis": "Contorno celular observado após inspeção da imagem. Não se atribui composição química específica ao contraste de cor.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.405,
+          "y": 0.536,
+          "label": "Plastídios periféricos no mesofilo",
+          "viewId": "cyto-plant-cell",
+          "partId": "chloroplast",
+          "description": "Perfis escuros periféricos compatíveis com cloroplastos do mesofilo. O destino 3D amplia um cloroplasto; suas membranas internas e os grana não estão resolvidos aqui.",
+          "identificationBasis": "Identificação morfológica como plastídios em células foliares; a fonte descreve folha em campo claro. A marcação não identifica grana, DNA ou ribossomos na foto.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/leaf-semithin-reischig.jpg",
+      "preview": "images/microscopy/leaf-semithin-reischig-preview.jpg",
+      "width": 3751,
+      "height": 2401,
+      "sourceWidth": 3751,
+      "sourceHeight": 2401,
+      "previewWidth": 960,
+      "previewHeight": 614,
+      "bytes": 1859302,
+      "sha256": "54ae4c47ae0d259560ac15112ca6ec07482fa011dd07bce9cab564625e3accaf",
+      "previewSha256": "d24b95acd1824903a1c83f9ee0c0e28e9dab798551610f16fe683334b4723ae5",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 31554933,
+      "visualReview": "Arquivo nativo inspecionado em 15/10/2026; coordenadas normalizadas no enquadramento completo, sem recorte.",
+      "changes": "Arquivo original da fonte sem retoque, recorte, recoloração ou ampliação pelo Atlas. A prévia é a miniatura oficial da Wikimedia, quando diferente do original. As anotações são sobreposições separadas e não alteram os pixels."
+    },
+    {
+      "id": "root-ranunculus-houseman",
+      "modelViewIds": [
+        "botany-root-primary"
+      ],
+      "viewIds": [],
+      "label": "Raiz de Ranunculus · seção transversal",
+      "caption": "Raiz real de Ranunculus, com córtex amplo e cilindro vascular central. O gênero é informado, mas a espécie, o corante e o estágio de desenvolvimento não são especificados. A fonte já ajustou cor, brilho, contraste e fundo.",
+      "author": "Jon Houseman; fonte creditada a Jon Houseman e Matthew Ford",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ranunculus_root.jpg",
+      "species": "Ranunculus sp.; espécie não informada pela fonte.",
+      "organRegion": "Raiz; córtex e cilindro vascular.",
+      "orientation": "Seção transversal da raiz, reconhecível pela organização concêntrica; não é uma vista longitudinal do ápice.",
+      "stage": "Não informado pela fonte.",
+      "technique": "Fotomicrografia óptica; modalidade específica não informada pela fonte.",
+      "stain": "Não informada pela fonte.",
+      "originalMagnification": "Não informada; a descrição da fonte associa a barra a 0,31 mm.",
+      "comparison": "Compare a distribuição periférica da rizoderme, o córtex e o xilema central com a raiz primária 3D. O corte não mostra pelos absorventes inteiros, coifa ou todo o trajeto longitudinal. Faixas de Caspary e membranas não foram identificadas individualmente nesta foto.",
+      "scaleCalibration": {
+        "type": "embedded-bar",
+        "value": 0.31,
+        "unit": "mm",
+        "source": "A descrição da fonte informa Scale=0.31mm para a barra preta da fotografia.",
+        "scope": "Somente a barra já impressa na imagem original; não calibra o tamanho físico da tela nem habilita medição interativa."
+      },
+      "scientificReferenceUrls": [
+        "https://commons.wikimedia.org/wiki/File:Ranunculus_root_L.jpg"
+      ],
+      "annotations": [
+        {
+          "x": 0.501,
+          "y": 0.046,
+          "label": "Revestimento periférico da raiz",
+          "viewId": "botany-root-primary",
+          "partId": "rhizodermis",
+          "description": "Camada externa de pequenos perfis celulares. Compare sua posição com a rizoderme; esta seção não permite concluir que todos os pelos absorventes estejam presentes.",
+          "identificationBasis": "Contorno externo observado; a versão legendada da mesma fotografia identifica A como epidermis.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.296,
+          "y": 0.271,
+          "label": "Córtex parenquimático",
+          "viewId": "botany-root-primary",
+          "partId": "cortex",
+          "description": "Região de células parenquimáticas entre o revestimento e o cilindro central. Compare a participação do córtex na passagem de água e no armazenamento.",
+          "identificationBasis": "A versão legendada da mesma fotografia identifica B como parenchyma; a posição radial corresponde ao córtex.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.502,
+          "y": 0.489,
+          "label": "Xilema no cilindro central",
+          "viewId": "botany-root-primary",
+          "partId": "root-xylem",
+          "description": "Perfis centrais com grandes lúmens e paredes contrastadas. Compare o xilema primário; a imagem não mostra o fluxo de seiva nem permite atribuir uma taxa de condução.",
+          "identificationBasis": "Identificação morfológica do xilema no cilindro central, cuja localização é indicada como stele na versão legendada. Não foi marcada uma faixa de Caspary por inferência.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/root-ranunculus-houseman.jpg",
+      "preview": "images/microscopy/root-ranunculus-houseman-preview.jpg",
+      "width": 1319,
+      "height": 1178,
+      "sourceWidth": 1319,
+      "sourceHeight": 1178,
+      "previewWidth": 960,
+      "previewHeight": 857,
+      "bytes": 229230,
+      "sha256": "dbdffca300e44a3cffc122ef323ce9e18d84b5791253c17830a1bcb95396f985",
+      "previewSha256": "5836b81bd0af310a84777fa664e1626f533e411c8a66bea266d3d7572aeb5286",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 35811235,
+      "visualReview": "Arquivo nativo inspecionado em 15/10/2026; coordenadas normalizadas no enquadramento completo, sem recorte.",
+      "changes": "Arquivo original da fonte sem retoque, recorte, recoloração ou ampliação pelo Atlas. A prévia é a miniatura oficial da Wikimedia, quando diferente do original. As anotações são sobreposições separadas e não alteram os pixels. A fonte declara ajustes prévios de cor, brilho, contraste e fundo."
+    },
+    {
+      "id": "stoma-aloe-vera",
+      "modelViewIds": [
+        "botany-stomatal-complex",
+        "cyto-plant-cell"
+      ],
+      "viewIds": [],
+      "label": "Aloe vera · células-guarda e epiderme inferior",
+      "caption": "Preparação real da epiderme inferior de Aloe vera. A fonte informa campo claro e tinta de caneta Lamy: os núcleos aparecem azuis e as células-guarda são reconhecíveis. Um campo isolado não mede a abertura estomática de toda a folha.",
+      "author": "ConformationXII",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aloe_vera_Cells_with_Stoma,_600X.jpg",
+      "species": "Aloe vera.",
+      "organRegion": "Epiderme inferior da folha.",
+      "orientation": "Vista superficial da epiderme inferior; não é corte transversal da folha.",
+      "stage": "Não informado pela fonte; estado hídrico, horário e condições de abertura não informados.",
+      "technique": "Microscopia óptica em campo claro, microscópio monocular Olympus OIC, conforme a fonte.",
+      "stain": "Tinta de caneta-tinteiro Lamy, conforme a fonte; núcleos azuis.",
+      "originalMagnification": "600×, conforme a descrição da fonte; sem escala física calibrada para a tela.",
+      "comparison": "Compare o par de células-guarda, o poro e as células epidérmicas com o complexo estomático 3D. O modelo é um exemplo didático, não uma reconstrução desta espécie ou deste estado hídrico. A foto estática não demonstra o bombeamento de prótons, a entrada de K⁺ ou a variação temporal do turgor.",
+      "annotations": [
+        {
+          "x": 0.363,
+          "y": 0.165,
+          "label": "Célula-guarda",
+          "viewId": "botany-stomatal-complex",
+          "partId": "guard-cells",
+          "description": "Uma das duas células que delimitam a abertura estomática. Compare sua organização no modelo; o destino destaca o par, não uma célula epidérmica comum.",
+          "identificationBasis": "A descrição da fonte identifica explicitamente as células-guarda; o par foi localizado visualmente no campo.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.371,
+          "y": 0.249,
+          "label": "Poro estomático",
+          "viewId": "botany-stomatal-complex",
+          "partId": "pore",
+          "description": "Região entre as células-guarda. Compare o poro como via de difusão; a abertura aparente desta preparação não é uma medida calibrada nem uma taxa de transpiração.",
+          "identificationBasis": "Localização visual do intervalo entre o par de células-guarda descrito na fonte.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.681,
+          "y": 0.474,
+          "label": "Célula epidérmica adjacente",
+          "viewId": "botany-stomatal-complex",
+          "partId": "epidermal-cells",
+          "description": "Perfil de uma célula do revestimento ao lado do complexo estomático. Compare a continuidade da epiderme e evite confundi-la com célula-guarda.",
+          "identificationBasis": "A fonte identifica a preparação como epiderme inferior; o perfil está fora do par de células-guarda.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.527,
+          "y": 0.244,
+          "label": "Núcleo corado em azul",
+          "viewId": "cyto-plant-cell",
+          "partId": "nucleus",
+          "description": "Região azul de uma célula epidérmica. Compare o núcleo no modelo vegetal; cromatina detalhada, poros e nucléolo não foram identificados separadamente neste campo.",
+          "identificationBasis": "A descrição original afirma que os núcleos são corados em azul pela tinta usada; a posição foi conferida na imagem.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/stoma-aloe-vera.jpg",
+      "preview": "images/microscopy/stoma-aloe-vera-preview.jpg",
+      "width": 4267,
+      "height": 3200,
+      "sourceWidth": 4267,
+      "sourceHeight": 3200,
+      "previewWidth": 960,
+      "previewHeight": 720,
+      "bytes": 5631363,
+      "sha256": "72bcfb1b536fc0c5d41e00eaa359a44c8ac8ef3882742fc3956d25f8c636d666",
+      "previewSha256": "a9472af8523bdb10afa84fdbce6f930ff6b4f7a0bac346c98861f0950b0ef3ea",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 179995214,
+      "visualReview": "Arquivo nativo inspecionado em 15/10/2026; coordenadas normalizadas no enquadramento completo, sem recorte.",
+      "changes": "Arquivo original da fonte sem retoque, recorte, recoloração ou ampliação pelo Atlas. A prévia é a miniatura oficial da Wikimedia, quando diferente do original. As anotações são sobreposições separadas e não alteram os pixels."
+    },
+    {
+      "id": "mitochondria-lung-tem",
+      "modelViewIds": [
+        "cyto-mitochondrion"
+      ],
+      "viewIds": [],
+      "label": "Mitocôndrias em tecido pulmonar · microscopia eletrônica",
+      "caption": "Duas mitocôndrias em seção ultrafina de tecido pulmonar de mamífero, fotografadas com JEOL 100CX TEM. A imagem nativa tem 640 × 480 pixels: o zoom não adiciona resolução. A espécie não é informada.",
+      "author": "Louisa Howard, Dartmouth Electron Microscope Facility",
+      "license": "Domínio público por liberação da autora",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mitochondria,_mammalian_lung_-_TEM.jpg",
+      "species": "Mamífero; espécie não informada pela fonte.",
+      "organRegion": "Tecido pulmonar; tipo celular não informado.",
+      "orientation": "Seção ultrafina; orientação anatômica e plano exato das mitocôndrias não informados.",
+      "stage": "Não informado pela fonte.",
+      "technique": "Microscopia eletrônica de transmissão (TEM), JEOL 100CX, conforme a fonte.",
+      "stain": "Preparação e contrastação eletrônica não informadas pela fonte.",
+      "originalMagnification": "Não informada; a imagem possui barra de 50 nm.",
+      "comparison": "Compare cristas e matriz com a mitocôndria 3D. As cristas são dobras de uma rede membranosa, não discos soltos. O corte 2D intercepta apenas parte dessa rede; DNA, ribossomos e complexos respiratórios não foram individualizados nesta fotografia.",
+      "scaleCalibration": {
+        "type": "embedded-bar",
+        "value": 50,
+        "unit": "nm",
+        "source": "Barra rotulada 50 nm no rodapé do arquivo original.",
+        "scope": "Somente a barra já impressa na imagem original; não calibra o tamanho físico da tela nem habilita medição interativa."
+      },
+      "scientificReferenceUrls": [
+        "http://remf.dartmouth.edu/images/mammalianLungTEM/source/8.html"
+      ],
+      "annotations": [
+        {
+          "x": 0.225,
+          "y": 0.559,
+          "label": "Crista mitocondrial",
+          "viewId": "cyto-mitochondrion",
+          "partId": "cristae",
+          "description": "Perfil escuro de dobra da membrana interna na mitocôndria à esquerda. Compare a continuidade das cristas e sua relação com a área disponível para a fosforilação oxidativa.",
+          "identificationBasis": "A fonte identifica as duas organelas como mitocôndrias em TEM; o perfil interno de membrana foi localizado após inspeção. Não foi inferido um complexo proteico individual.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.739,
+          "y": 0.349,
+          "label": "Matriz mitocondrial",
+          "viewId": "cyto-mitochondrion",
+          "partId": "matrix",
+          "description": "Região interna delimitada pela membrana interna, entre perfis de cristas da mitocôndria à direita. Compare o compartimento da matriz; os pontos da micrografia não foram classificados como DNA ou ribossomos.",
+          "identificationBasis": "Localização morfológica do compartimento entre cristas no interior de uma das mitocôndrias identificadas pela fonte.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/mitochondria-lung-tem.jpg",
+      "preview": "images/microscopy/mitochondria-lung-tem.jpg",
+      "width": 640,
+      "height": 480,
+      "sourceWidth": 640,
+      "sourceHeight": 480,
+      "previewWidth": 640,
+      "previewHeight": 480,
+      "bytes": 98422,
+      "sha256": "e8656f87df4075e7093b57afda0bad18fef1bc71c825de918345d6db6a01ced7",
+      "previewSha256": "e8656f87df4075e7093b57afda0bad18fef1bc71c825de918345d6db6a01ced7",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 1248089,
+      "visualReview": "Arquivo nativo inspecionado em 15/10/2026; coordenadas normalizadas no enquadramento completo, sem recorte.",
+      "changes": "Arquivo original da fonte sem retoque, recorte, recoloração ou ampliação pelo Atlas. A prévia é a miniatura oficial da Wikimedia, quando diferente do original. As anotações são sobreposições separadas e não alteram os pixels."
+    },
+    {
+      "id": "chloroplast-lettuce-stem",
+      "modelViewIds": [
+        "cyto-chloroplast"
+      ],
+      "viewIds": [],
+      "label": "Cloroplasto de alface · fatia STEM e segmentação científica",
+      "caption": "A PARTE SUPERIOR é uma fatia tomográfica STEM de 10 nm de espessura; a PARTE INFERIOR é uma reconstrução 3D obtida por segmentação dos dados, não uma fotografia colorida. Rótulos originais: grana = pilhas de tilacoides; stroma lamellae = lamelas do estroma; plastoglobules = plastoglóbulos.",
+      "author": "Yuv345; imagem relacionada ao estudo citado na fonte sobre geometria da membrana fotossintética",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lettuce_Chloroplast_STEM.jpg",
+      "species": "Lactuca sativa (alface), conforme o registro e o estudo referenciado.",
+      "organRegion": "Cloroplasto de folha de alface.",
+      "orientation": "No painel superior, fatia tomográfica de 10 nm; no inferior, volume segmentado em perspectiva. Orientação anatômica da folha não informada.",
+      "stage": "Não informado no registro do arquivo; condição luminosa e estado de desenvolvimento não informados nesse registro.",
+      "technique": "Microscopia eletrônica de transmissão por varredura (STEM) com tomografia; segmentação 3D dos dados no painel inferior.",
+      "stain": "Contraste do preparo não especificado no registro do arquivo. Cores do painel inferior são códigos da segmentação: amarelo, grana; verde, lamelas; roxo, plastoglóbulos; azul, envelope.",
+      "originalMagnification": "Não informada; o painel superior possui barra de 200 nm. A espessura de 10 nm é da fatia tomográfica, não a resolução da imagem nem sua ampliação.",
+      "comparison": "Compare as pilhas de tilacoides vistas no painel superior com o granum do modelo do Atlas. A reconstrução inferior deriva de segmentação científica; o modelo interativo do Atlas é uma reconstrução educativa independente, sem correspondência voxel a voxel. Plastoglóbulos não são grãos de amido e não devem ser identificados como tal no modelo.",
+      "scaleCalibration": {
+        "type": "embedded-bar",
+        "value": 200,
+        "unit": "nm",
+        "source": "Barra de 200 nm no painel superior; não se aplica como régua da perspectiva 3D inferior.",
+        "scope": "Somente a barra já impressa na imagem original; não calibra o tamanho físico da tela nem habilita medição interativa."
+      },
+      "scientificReferenceUrls": [
+        "https://doi.org/10.1073/pnas.1905994116"
+      ],
+      "imageKind": "microscopy-and-segmentation-composite",
+      "annotations": [
+        {
+          "x": 0.489,
+          "y": 0.229,
+          "label": "Granum na fatia tomográfica real",
+          "viewId": "cyto-chloroplast",
+          "partId": "granum",
+          "description": "Pilha de perfis de tilacoides no painel superior em tons de cinza. Compare o granum no Atlas; as conexões com lamelas mostram por que as membranas não devem parecer discos independentes.",
+          "identificationBasis": "O registro identifica explicitamente as pilhas grana e as lamelas do estroma; a marcação coincide com uma pilha no painel superior, e não com a reconstrução inferior.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/chloroplast-lettuce-stem.jpg",
+      "preview": "images/microscopy/chloroplast-lettuce-stem-preview.jpg",
+      "width": 2320,
+      "height": 2000,
+      "sourceWidth": 2320,
+      "sourceHeight": 2000,
+      "previewWidth": 960,
+      "previewHeight": 828,
+      "bytes": 3012769,
+      "sha256": "f18b305f3d300bbefff7aa150317ef1fd9e35ecd521cdd730c236b0891cf97e3",
+      "previewSha256": "5ab99b10b9805531edd6df74ca183dea81f365ec89b85cdf556fe46f4cac7c90",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 93345039,
+      "visualReview": "Arquivo nativo inspecionado em 15/10/2026; coordenadas normalizadas no enquadramento completo, sem recorte.",
+      "changes": "Arquivo original da fonte sem retoque, recorte, recoloração ou ampliação pelo Atlas. A prévia é a miniatura oficial da Wikimedia, quando diferente do original. As anotações são sobreposições separadas e não alteram os pixels. A composição com reconstrução 3D e os rótulos em inglês já pertencem ao original.",
+      "sourceLabels": [
+        {
+          "original": "Grana",
+          "pt": "grana, pilhas de tilacoides"
+        },
+        {
+          "original": "Stroma lamellae",
+          "pt": "lamelas do estroma, que conectam regiões da membrana tilacoidal"
+        },
+        {
+          "original": "Plastoglobules",
+          "pt": "plastoglóbulos, estruturas lipoproteicas associadas aos tilacoides"
+        }
+      ]
+    },
+    {
+      "id": "mitosis-vicia-faba",
+      "modelViewIds": [
+        "cyto-mitosis",
+        "botany-meristems-growth"
+      ],
+      "viewIds": [],
+      "label": "Meristema de Vicia faba · cromossomos em mitose",
+      "caption": "Preparação por esmagamento de meristema radicular de Vicia faba. Há células com diferentes padrões de condensação e separação cromossômica. O título do arquivo menciona anáfase e prófase; a descrição em inglês menciona metáfase e prófase. As marcações deixam explícitos os critérios visuais usados.",
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mitosis_(261_10)_Pressed;_root_meristem_of_Vicia_faba_(cells_in_anaphase,_prophase).jpg",
+      "species": "Vicia faba.",
+      "organRegion": "Meristema radicular; células isoladas por esmagamento.",
+      "orientation": "Preparação por esmagamento (squash); não preserva a arquitetura longitudinal de toda a raiz.",
+      "stage": "Células em fases distintas da mitose; título e descrição da fonte divergem entre anáfase/metáfase. Estágio ontogenético da planta não informado.",
+      "technique": "Microscopia óptica em campo claro, preparação por esmagamento, conforme a fonte.",
+      "stain": "Não informada pela fonte; não é possível nomear o corante apenas pela cor roxa.",
+      "originalMagnification": "3000× para reprodução com 26 cm de largura, conforme a fonte; a fotografia contém barra de 10 µm.",
+      "comparison": "Compare condensação e separação dos cromossomos com as fases do modelo 3D. O modelo citológico usa um exemplo animal com centrossomos; estes não devem ser transferidos para as células vegetais da foto. O número de cromossomos do modelo é ilustrativo e não representa o cariótipo de Vicia faba. Esta preparação não mostra a posição das células ao longo do meristema completo.",
+      "scaleCalibration": {
+        "type": "embedded-bar",
+        "value": 10,
+        "unit": "µm",
+        "source": "Barra de 10 µm visível no canto inferior esquerdo da imagem original.",
+        "scope": "Somente a barra já impressa na imagem original; não calibra o tamanho físico da tela nem habilita medição interativa."
+      },
+      "annotations": [
+        {
+          "x": 0.213,
+          "y": 0.269,
+          "label": "Cromossomos em dois grupos: anáfase",
+          "viewId": "cyto-mitosis",
+          "partId": "anaphase",
+          "description": "A célula à esquerda mostra dois grupos cromossômicos separados em direção a polos opostos. Este critério visual fundamenta a comparação com anáfase; não se nomeou a fase apenas pela cor.",
+          "identificationBasis": "Separação em dois conjuntos observada na imagem e anáfase mencionada no título do arquivo. A divergência com a descrição em inglês é explicitada nos metadados.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.525,
+          "y": 0.461,
+          "label": "Condensação cromossômica: comparação com prófase",
+          "viewId": "cyto-mitosis",
+          "partId": "prophase",
+          "description": "Na célula central, filamentos cromossômicos condensados ocupam uma região nuclear, sem dois grupos separados nem uma placa equatorial clara. Compare o processo de condensação; a foto estática não demonstra a transição temporal.",
+          "identificationBasis": "Prófase é mencionada no título e na descrição da fonte; a marcação usa a aparência de condensação sem separação em dois conjuntos.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/mitosis-vicia-faba.jpg",
+      "preview": "images/microscopy/mitosis-vicia-faba-preview.jpg",
+      "width": 3751,
+      "height": 2401,
+      "sourceWidth": 3751,
+      "sourceHeight": 2401,
+      "previewWidth": 960,
+      "previewHeight": 614,
+      "bytes": 1380236,
+      "sha256": "1ae8593fb2bda1806c16efc3852de6a5038cb5a05921fec9c2801e45832072d1",
+      "previewSha256": "18f1854b1e0678b09933933020091ae274433d56496355343dc1f3a11a1a8b7c",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 31556307,
+      "visualReview": "Arquivo nativo inspecionado em 15/10/2026; coordenadas normalizadas no enquadramento completo, sem recorte.",
+      "changes": "Arquivo original da fonte sem retoque, recorte, recoloração ou ampliação pelo Atlas. A prévia é a miniatura oficial da Wikimedia, quando diferente do original. As anotações são sobreposições separadas e não alteram os pixels."
+    },
+    {
+      "id": "gastric-wall-human",
+      "viewIds": [],
+      "modelViewIds": [
+        "histo-gastric-wall"
+      ],
+      "label": "Estômago humano · campo parcial de mucosa, fossetas e glândulas",
+      "caption": "Fotografia real de um campo parcial da parede gástrica humana: a superfície está acima e as fossetas e os perfis glandulares ocupam a mucosa. O campo não mostra toda a espessura da parede. A região basal não recebeu um rótulo de camada sem confirmação suficiente da fonte. A ponta preta no rodapé pertence à fotografia original e não é uma estrutura do órgão.",
+      "author": "Jpogi at English Wikipedia",
+      "license": "Domínio público por liberação do autor",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "species": "Humano, conforme a descrição original do autor.",
+      "organRegion": "Campo parcial da mucosa do estômago, com fossetas e perfis glandulares; região gástrica específica não informada. Não representa todas as camadas da parede.",
+      "orientation": "Corte atravessando a mucosa em direção ao lúmen, visível na parte superior; plano anatômico e espessura do corte não informados.",
+      "stage": "Etapa de desenvolvimento e estado funcional não informados pela fonte.",
+      "technique": "Fotografia através de microscópio óptico, conforme o autor; modalidade específica não informada.",
+      "stain": "Não informada pela fonte; a aparência rosa e roxa não basta para nomear o corante.",
+      "originalMagnification": "Não informada pela fonte. Os valores fotográficos de EXIF não representam aumento óptico nem permitem calibrar uma régua.",
+      "comparison": "Compare somente o epitélio superficial e o lúmen dos perfis glandulares com as peças correspondentes do modelo. Fossetas gástricas são invaginações, não vilosidades. A fotografia não permite comparar toda a parede: muscular externa e serosa não estão individualizadas neste campo. A região basal ficou sem marcação de submucosa ou camada muscular porque a fonte não oferece confirmação suficiente. Células parietais e principais não foram marcadas sem identificação suficiente nesta ampliação.",
+      "scientificReferenceUrls": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach"
+      ],
+      "annotations": [
+        {
+          "x": 0.52,
+          "y": 0.32,
+          "label": "Epitélio superficial junto às fossetas",
+          "viewId": "histo-gastric-wall",
+          "partId": "surface",
+          "description": "Revestimento que acompanha a superfície e a entrada das invaginações da mucosa. Compare a continuidade epitelial no modelo; a fotografia não mede a produção de muco ou a secreção de ácido.",
+          "identificationBasis": "A fonte identifica parede gástrica humana. A posição luminal e a continuidade com as invaginações foram conferidas visualmente; não se classificou uma célula secretora específica.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.446,
+          "y": 0.563,
+          "label": "Lúmen de um perfil glandular",
+          "viewId": "histo-gastric-wall",
+          "partId": "gland_lumen",
+          "description": "Espaço claro delimitado pelo epitélio glandular dentro da mucosa. Compare o lúmen da glândula, distinguindo-o do lúmen amplo do estômago na parte superior da imagem.",
+          "identificationBasis": "Perfil tubular claro com parede epitelial observável após inspeção da microfotografia. A imagem estática não demonstra a direção ou a velocidade de secreção.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/gastric-wall-human.jpg",
+      "preview": "images/microscopy/gastric-wall-human-preview.jpg",
+      "width": 2816,
+      "height": 2112,
+      "sourceWidth": 2816,
+      "sourceHeight": 2112,
+      "previewWidth": 960,
+      "previewHeight": 720,
+      "bytes": 3016177,
+      "sha256": "92e035e1d875899d374e5dadd8f6f5d8fcd62e1f09bb443d368c9b165c3f56d5",
+      "previewSha256": "5e4e1a9da8c87572660844115eac38162da98b17347f1f8931eb23f01a08efe5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stomach.JPG",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 50116342,
+      "visualReview": "Arquivo nativo integral inspecionado em 15/10/2026; coordenadas no enquadramento completo, sem recorte.",
+      "changes": "Original e prévia oficial mantidos sem retoque, recorte, recoloração ou ampliação artificial pelo Atlas. As marcações são uma sobreposição separada; o zoom digital não acrescenta resolução."
+    },
+    {
+      "id": "esophageal-epithelium-human",
+      "viewIds": [],
+      "modelViewIds": [
+        "histo-stratified-epithelium"
+      ],
+      "label": "Esôfago · epitélio pavimentoso estratificado não queratinizado",
+      "caption": "A fonte descreve epitélio e lâmina própria da parede esofágica e classifica o arquivo como histologia humana. Observe células superficiais achatadas com núcleos e camadas mais profundas. O original tem somente 800 × 704 pixels: o zoom não cria detalhe adicional.",
+      "author": "Димитър Митев (Dimitar Mitev)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "species": "Humano, conforme a categorização do registro da fonte; outros dados da amostra não informados.",
+      "organRegion": "Mucosa esofágica: epitélio e lâmina própria, conforme a descrição original.",
+      "orientation": "Corte da mucosa com superfície luminal voltada para o espaço claro à direita e abaixo; nível do esôfago e plano anatômico exato não informados.",
+      "stage": "Etapa de desenvolvimento e estado funcional não informados pela fonte.",
+      "technique": "Microfotografia óptica de preparo histológico; modalidade específica não informada pela fonte.",
+      "stain": "Não informada pela fonte; não inferida apenas pela aparência das cores.",
+      "originalMagnification": "Não informada pela fonte; não há barra calibrada publicada neste arquivo.",
+      "comparison": "O destino é o modelo genérico de epitélio pavimentoso estratificado NÃO queratinizado já existente no Atlas, compatível com esta comparação esofágica. Não é uma reconstrução de toda a parede do esôfago. Compare as camadas basal, intermediárias e superficial; não transfira estrato córneo da pele para este tecido. A lâmina basal molecular não foi individualizada na foto, e a musculatura externa está fora desta comparação.",
+      "scientificReferenceUrls": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus"
+      ],
+      "annotations": [
+        {
+          "x": 0.487,
+          "y": 0.267,
+          "label": "Camada basal: região de núcleos próximos",
+          "viewId": "histo-stratified-epithelium",
+          "partId": "basal_cells",
+          "description": "Células profundas do epitélio junto à interface com o tecido conjuntivo. Compare sua posição basal; a marcação não afirma que a lâmina basal molecular esteja resolvida nesta imagem.",
+          "identificationBasis": "A descrição original identifica epitélio e lâmina própria. A camada profunda foi localizada pela interface tecidual e pela posição das células; não por uma marcação molecular.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.624,
+          "y": 0.31,
+          "label": "Camadas intermediárias do epitélio",
+          "viewId": "histo-stratified-epithelium",
+          "partId": "intermediate_cells",
+          "description": "Região de várias camadas celulares entre a base e a superfície. Compare a organização estratificada, sem interpretar a espessura exibida na tela como uma medida histológica.",
+          "identificationBasis": "Posição no interior da espessura epitelial, entre a interface basal e o limite luminal, conferida visualmente no preparo.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.757,
+          "y": 0.32,
+          "label": "Células superficiais achatadas",
+          "viewId": "histo-stratified-epithelium",
+          "partId": "surface_cells",
+          "description": "Região superficial próxima ao lúmen, com células achatadas e núcleos conservados. Compare o exemplo não queratinizado do Atlas; não há indicação de uma camada córnea espessa neste campo.",
+          "identificationBasis": "Morfologia e posição luminal observadas no arquivo. O padrão não queratinizado da mucosa esofágica humana é sustentado pela referência OpenStax indicada, sem inferir um corante específico.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/esophageal-epithelium-human.jpg",
+      "preview": "images/microscopy/esophageal-epithelium-human.jpg",
+      "width": 800,
+      "height": 704,
+      "sourceWidth": 800,
+      "sourceHeight": 704,
+      "previewWidth": 800,
+      "previewHeight": 704,
+      "bytes": 128576,
+      "sha256": "1fff314c80f74f8ba83b3fe2e5d34a2326248dfb38291be2861663e900a9860a",
+      "previewSha256": "1fff314c80f74f8ba83b3fe2e5d34a2326248dfb38291be2861663e900a9860a",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oesophagus.jpg",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 6806336,
+      "visualReview": "Arquivo nativo integral inspecionado em 15/10/2026; coordenadas no enquadramento completo, sem recorte.",
+      "changes": "Original e prévia oficial mantidos sem retoque, recorte, recoloração ou ampliação artificial pelo Atlas. As marcações são uma sobreposição separada; o zoom digital não acrescenta resolução."
+    },
+    {
+      "id": "colon-crypts-human",
+      "viewIds": [],
+      "modelViewIds": [
+        "histo-colon-mucosa"
+      ],
+      "label": "Intestino grosso humano · criptas e células caliciformes",
+      "caption": "Corte real de intestino grosso humano, do acervo de Josef Reischig. Perfis glandulares e células com regiões apicais claras permitem comparar a mucosa com o cólon 3D. Uma prega ou um plano oblíquo não deve ser interpretado como vilosidade intestinal.",
+      "author": "Doc. RNDr. Josef Reischig, CSc.",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "species": "Humano, conforme a descrição original.",
+      "organRegion": "Mucosa do intestino grosso; segmento colônico específico não informado pela fonte.",
+      "orientation": "Seção mostrando perfis de criptas em orientações variadas e tecido de sustentação; plano anatômico exato e espessura do corte não informados.",
+      "stage": "Etapa de desenvolvimento e estado funcional não informados pela fonte.",
+      "technique": "Microscopia óptica em campo claro, conforme a fonte.",
+      "stain": "Não informada pela fonte; o aspecto amarelado não identifica um corante por si só.",
+      "originalMagnification": "400× quando reproduzida com 26 cm de largura, conforme a fonte. A fotografia possui barra original de 0,1 mm; o zoom da tela não é esse aumento óptico.",
+      "scaleCalibration": "A barra de 0,1 mm está impressa no canto inferior esquerdo do arquivo original. Ela foi preservada sem recalibração pelo Atlas e não calibra o tamanho físico da tela ou habilita uma régua interativa.",
+      "comparison": "Compare as criptas tubulares e os perfis de células caliciformes com a mucosa do cólon. A fotografia contém cortes oblíquos e regiões conjuntivas, enquanto o modelo didático organiza componentes para exploração. Não há vilosidades típicas do intestino delgado; a presença de perfis alongados não transforma criptas em vilosidades. O campo não mede absorção de água, secreção de muco ou atividade da microbiota.",
+      "scientificReferenceUrls": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+      ],
+      "annotations": [
+        {
+          "x": 0.293,
+          "y": 0.321,
+          "label": "Cripta: perfil glandular tubular",
+          "viewId": "histo-colon-mucosa",
+          "partId": "crypts",
+          "description": "Perfil de uma glândula tubular da mucosa, com espaço claro entre as células do revestimento. Compare a cripta 3D; ela se invagina na mucosa e não é uma projeção vilosa para o lúmen.",
+          "identificationBasis": "A fonte identifica intestino grosso humano. O perfil tubular e sua parede epitelial foram localizados visualmente; o plano oblíquo limita a visualização do tubo inteiro.",
+          "reviewedOn": "2026-10-15"
+        },
+        {
+          "x": 0.168,
+          "y": 0.618,
+          "label": "Perfis compatíveis com células caliciformes",
+          "viewId": "histo-colon-mucosa",
+          "partId": "goblet",
+          "description": "Regiões claras e arredondadas no epitélio são compatíveis com o polo mucoso de células caliciformes. Compare sua contribuição ao muco; a imagem não é uma marcação molecular específica de mucina nem resolve a secreção em movimento.",
+          "identificationBasis": "Identificação morfológica conservadora em epitélio de intestino grosso humano. A fonte não fornece legenda célula a célula nem técnica específica para mucina, por isso a compatibilidade é explicitada.",
+          "reviewedOn": "2026-10-15"
+        }
+      ],
+      "image": "images/microscopy/colon-crypts-human.jpg",
+      "preview": "images/microscopy/colon-crypts-human-preview.jpg",
+      "width": 3751,
+      "height": 2401,
+      "sourceWidth": 3751,
+      "sourceHeight": 2401,
+      "previewWidth": 960,
+      "previewHeight": 614,
+      "bytes": 2361549,
+      "sha256": "2d7f66dc9317ce60f5f138f4af8f50d7ce331facf16f97a07e433b7779432c5a",
+      "previewSha256": "38e796ebde331e02ce68c915b076e2bfa07c97f2c38d5176efe488538341cf09",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Large_intestine_(254_15)_Human_large_intestine.jpg",
+      "retrievedOn": "2026-10-15",
+      "verifiedSourcePageId": 31557330,
+      "visualReview": "Arquivo nativo integral inspecionado em 15/10/2026; coordenadas no enquadramento completo, sem recorte.",
+      "changes": "Original e prévia oficial mantidos sem retoque, recorte, recoloração ou ampliação artificial pelo Atlas. As marcações são uma sobreposição separada; o zoom digital não acrescenta resolução."
+    }
+  ],
+  "annotationScope": "Marcações didáticas feitas após inspeção das fotografias; não constituem segmentação clínica. Uma ligação ao 3D compara a estrutura ou o tipo de tecido, sem afirmar reconstrução do mesmo espécime. A ausência de uma marcação indica que não houve identificação suficiente.",
+  "vegetalCellularScope": "Seis arquivos nativos distintos, cinco microfotografias e um composto com fatia microscópica real e segmentação científica. Não são texturas nem imagens geradas por IA. Não se atribui resolução 4K a originais menores."
+}

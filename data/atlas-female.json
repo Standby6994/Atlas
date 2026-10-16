@@ -1,0 +1,233 @@
+{
+  "title": "Female reproductive anatomy, Human Reference Atlas",
+  "authors": [
+    "Kristen Browne",
+    "Heidi Schlehlein"
+  ],
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source_library": "https://humanatlas.io/3d-reference-library",
+  "source_repository": "https://github.com/hubmapconsortium/ccf-releases/tree/main/v1.3/models",
+  "uterus_doi": "https://doi.org/10.48539/HBM228.JBNJ.299",
+  "adaptation": "Five HRA reference GLBs assembled into one file. Original vertices, normals, materials, node names and transforms preserved. Added identity/system/source-file extras; buffer and index offsets rewritten for assembly.",
+  "warning": "Separate reference assembly, not registered to the Z-Anatomy adult male body. No vagina or endometrium mesh is present in these five reference organs.",
+  "output_bytes": 1593428,
+  "output_sha256": "67b5c7d1a07aface8a0c4611736ebb4d9bc14eb5b68fb5cfdbc504ce93ed7982",
+  "sources": [
+    {
+      "filename": "VH_F_Uterus.glb",
+      "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/main/v1.3/models/VH_F_Uterus.glb",
+      "bytes": 909772,
+      "sha256": "a484956788ecc2ab05ca7720d9b33d265677e238f144cc28481aad2f7a0c9a95"
+    },
+    {
+      "filename": "VH_F_Fallopian_Tube_L.glb",
+      "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/main/v1.3/models/VH_F_Fallopian_Tube_L.glb",
+      "bytes": 336676,
+      "sha256": "5025453048a83c26393b866bc69859a255b4c38816f34ed3a196bfe7d4f33dd1"
+    },
+    {
+      "filename": "VH_F_Fallopian_Tube_R.glb",
+      "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/main/v1.3/models/VH_F_Fallopian_Tube_R.glb",
+      "bytes": 327448,
+      "sha256": "17aef41a430e068705dc21ac8ccf746a74f14f47ffc1a31908198b0b026849df"
+    },
+    {
+      "filename": "VH_F_Ovary_L.glb",
+      "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/main/v1.3/models/VH_F_Ovary_L.glb",
+      "bytes": 8984,
+      "sha256": "ed91414a667dec5e4e14aeaa2f8641731f06725dbc914bc0da3dd8b5d77f5062"
+    },
+    {
+      "filename": "VH_F_Ovary_R.glb",
+      "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/main/v1.3/models/VH_F_Ovary_R.glb",
+      "bytes": 8744,
+      "sha256": "99cc2b91602feacaee08ec1771b993fc0f8b0e32a08bdd7fd6b990a6736aa53b"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "VH_F_uterus",
+      "label": "VH_F_uterus",
+      "ontologyid": null,
+      "mesh": null,
+      "children": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "name": "VH_F_abdominal_ostium_of_uterine_tube",
+      "label": "Abdominal ostium of uterine tube",
+      "ontologyid": "FMA:77049",
+      "mesh": 0,
+      "children": []
+    },
+    {
+      "name": "VH_F_body_of_uterus",
+      "label": "body of uterus",
+      "ontologyid": "UBERON:0009853",
+      "mesh": 1,
+      "children": []
+    },
+    {
+      "name": "VH_F_fundus_of_uterus",
+      "label": "Fundus of uterus",
+      "ontologyid": "FMA:17561",
+      "mesh": 2,
+      "children": []
+    },
+    {
+      "name": "VH_F_cornua",
+      "label": "-",
+      "ontologyid": "-",
+      "mesh": 3,
+      "children": []
+    },
+    {
+      "name": "VH_F_lower_uterine_segment",
+      "label": "Lower uterine segment",
+      "ontologyid": "FMA:17752",
+      "mesh": 4,
+      "children": []
+    },
+    {
+      "name": "VH_F_posterior_wall_of_uterus",
+      "label": "Posterior wall of uterus",
+      "ontologyid": "FMA:224878",
+      "mesh": 5,
+      "children": []
+    },
+    {
+      "name": "VH_F_anterior_wall_of_uterus",
+      "label": "Anterior wall of uterus",
+      "ontologyid": "FMA:224876",
+      "mesh": 6,
+      "children": []
+    },
+    {
+      "name": "VH_F_cervix",
+      "label": "uterine cervix",
+      "ontologyid": "UBERON:0000002",
+      "mesh": 7,
+      "children": [
+        9,
+        10
+      ]
+    },
+    {
+      "name": "VH_F_internal_cervical_os",
+      "label": "internal cervical os",
+      "ontologyid": "UBERON:0013759",
+      "mesh": 8,
+      "children": []
+    },
+    {
+      "name": "VH_F_external_cervical_os",
+      "label": "external cervical os",
+      "ontologyid": "UBERON:0013760",
+      "mesh": 9,
+      "children": []
+    },
+    {
+      "name": "VH_F_fallopian_tube_L",
+      "label": "VH_F_fallopian_tube_L",
+      "ontologyid": null,
+      "mesh": null,
+      "children": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "VH_F_ampulla_of_uterine_tube_L",
+      "label": "Ampulla of left uterine tube",
+      "ontologyid": "FMA:18492",
+      "mesh": 10,
+      "children": []
+    },
+    {
+      "name": "VH_F_isthmus_of_fallopian_tube_L",
+      "label": "Isthmus of left uterine tube",
+      "ontologyid": "FMA:18494",
+      "mesh": 11,
+      "children": []
+    },
+    {
+      "name": "VH_F_fibria_of_uterine_tube_L",
+      "label": "Fimbria of left uterine tube",
+      "ontologyid": "FMA:18498",
+      "mesh": 12,
+      "children": []
+    },
+    {
+      "name": "VH_F_uterine_tube_infundibulum_L",
+      "label": "Infundibulum of left uterine tube",
+      "ontologyid": "FMA:18490",
+      "mesh": 13,
+      "children": []
+    },
+    {
+      "name": "VH_F_fallopian_tube_R",
+      "label": "VH_F_fallopian_tube_R",
+      "ontologyid": null,
+      "mesh": null,
+      "children": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "name": "VH_F_ampulla_of_uterine_tube_R",
+      "label": "Ampulla of right uterine tube",
+      "ontologyid": "FMA:18491",
+      "mesh": 14,
+      "children": []
+    },
+    {
+      "name": "VH_F_isthmus_of_fallopian_tube_R",
+      "label": "Isthmus of right uterine tube",
+      "ontologyid": "FMA:18493",
+      "mesh": 15,
+      "children": []
+    },
+    {
+      "name": "VH_F_fibria_of_uterine_tube_R",
+      "label": "Fimbria of right uterine tube",
+      "ontologyid": "FMA:18497",
+      "mesh": 16,
+      "children": []
+    },
+    {
+      "name": "VH_F_uterine_tube_infundibulum_R",
+      "label": "Infundibulum of right uterine tube",
+      "ontologyid": "FMA:18489",
+      "mesh": 17,
+      "children": []
+    },
+    {
+      "name": "VH_F_left_ovary",
+      "label": "Left ovary",
+      "ontologyid": "FMA:7214",
+      "mesh": 18,
+      "children": []
+    },
+    {
+      "name": "VH_F_right_ovary",
+      "label": "Right ovary",
+      "ontologyid": "FMA:7213",
+      "mesh": 19,
+      "children": []
+    }
+  ]
+}

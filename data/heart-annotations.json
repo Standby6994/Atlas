@@ -1,0 +1,1077 @@
+{
+  "createdAt": "2026-10-12T16:01:33.595939+00:00",
+  "originalURL": "https://sketchfab.com/3d-models/interior-heart-high-detail-7a592ce3b0514258ad4c4ef9e18b8f8e",
+  "originalAuthor": "University of Dundee, CAHID",
+  "license": "CC BY-SA 4.0",
+  "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "originalSourceNote": "Interior heart - high detail \nBased in part upon BodyParts3D, © The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+  "glbSHA256": "69bd08b81c4577a38ddbe175ccc0c4e933de5bea41ae532e7cf93fecfa35da67",
+  "method": "Public viewer metadata only. positions use author localPosition (Y-up); cameras map public viewer positions from Z-up to Y-up. No protected original mesh payload accessed.",
+  "coordinateProvenance": {
+    "publicViewerSpace": "Z-up, as evidenced by comparison with author localPosition in the same public metadata",
+    "glbAssetSpace": "Y-up; asset nodes have no transform, all coordinates retained in mesh positions",
+    "viewerToGLB": "[x, z, -y]",
+    "viewerToGLBMatrixColumnMajor": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "originalOrientationMatrix": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "maxMappingDifference": 6.191542735968433e-08,
+    "positionRule": "Use author sourceGeometryBinding.localPosition / positionGLB directly. Geometry bindings refer to original uncompressed geometry, not optimized mesh indices.",
+    "cameraRule": "eyeGLB / targetGLB apply [x,z,-y]. Apply the same centering, scaling, and model group matrix used by the app to marker, eye, and target. Root visual QA must confirm orientation and positions.",
+    "normalizedCoordinatesProvided": false
+  },
+  "bounds": {
+    "downloadedGLB": {
+      "min": [
+        -0.23682400584220886,
+        0.8122469782829285,
+        -0.10326699912548065
+      ],
+      "max": [
+        0.2409907579421997,
+        1.5657399892807007,
+        0.3726620674133301
+      ]
+    },
+    "extent": [
+      0.47781476378440857,
+      0.7534930109977722,
+      0.47592906653881073
+    ],
+    "center": [
+      0.0020833760499954224,
+      1.1889934837818146,
+      0.1346975341439247
+    ],
+    "originalScenegraphBounds": null,
+    "originalScenegraphBoundsNote": "Public metadata provides identity orientation and local hotspot bindings, not complete original scenegraph bounds. DownloadedGLB bounds above are decoded mesh bounds, not a claim about original2.3M-triangle scenegraph."
+  },
+  "originalDefaultCamera": {
+    "up": 1.555089,
+    "fov": 45,
+    "down": -1.555089,
+    "left": -3.141593,
+    "right": 3.141593,
+    "target": [
+      0.020864590118589356,
+      -0.13990532662013,
+      1.1822875762577258
+    ],
+    "zoomIn": 0,
+    "zoomOut": 68.25958081330462,
+    "position": [
+      -0.15400972580385336,
+      -1.3038930787820553,
+      1.24661927519833
+    ],
+    "nearFarRatio": 0.005,
+    "usePanConstraints": true,
+    "useYawConstraints": false,
+    "useZoomConstraints": false,
+    "usePitchConstraints": false,
+    "useCameraConstraints": false
+  },
+  "originalVR": {
+    "floorHeight": 0.812230996950351,
+    "worldFactor": 0.2528132622714986,
+    "displayFloor": true,
+    "initialCamera": {
+      "position": [
+        0.002083100378513336,
+        -0.7414502790043286,
+        0.812230996950351
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "limits": [
+    "These are author educational markers, not individually segmented anatomical meshes.",
+    "The optimized asset merges surfaces into3generic-named meshes; original geometryUid / indices / barycentricWeights must not be used as optimized mesh IDs.",
+    "Duplicate chordae/papillary labels are kept as marker1/2; laterality is not assigned without visual confirmation.",
+    "No artificial anatomy needs to be added to display these source markers.",
+    "Anatomical names indicate author annotations; markers do not establish clinical validation."
+  ],
+  "annotations": [
+    {
+      "id": "5fe03b0521ff4e0dba35b2b62e624512",
+      "order": 1,
+      "sourceName": "Aorta",
+      "label": "Aorta",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        -0.04827343686023228,
+        -0.23463318880999273,
+        1.3968911029769857
+      ],
+      "sourceEye": [
+        0.12408145835882153,
+        -0.9781027827036499,
+        1.4438466959955263
+      ],
+      "sourceTarget": [
+        0.0517609009875906,
+        -0.24021164373667797,
+        1.2198500539722053
+      ],
+      "sourceGeometryBinding": {
+        "uid": "5fe03b0521ff4e0dba35b2b62e624512",
+        "indices": [
+          37620,
+          37621,
+          37968
+        ],
+        "geometryUid": 229,
+        "localPosition": [
+          -0.04827343686023228,
+          1.3968911132331283,
+          0.23463312774992653
+        ],
+        "barycentricWeights": [
+          0.05694380743763494,
+          0.21818267696572347,
+          0.7248735155966416
+        ]
+      },
+      "positionGLB": [
+        -0.04827343686023228,
+        1.3968911132331283,
+        0.23463312774992653
+      ],
+      "eyeGLB": [
+        0.12408145835882153,
+        1.4438466959955263,
+        0.9781027827036499
+      ],
+      "targetGLB": [
+        0.0517609009875906,
+        1.2198500539722053,
+        0.24021164373667797
+      ],
+      "mappedPositionDifference": 6.191542735968433e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "de682cd0ee494c06ae7e35a5d8e1b2e4",
+      "order": 2,
+      "sourceName": "Pulmonary trunk",
+      "label": "Tronco pulmonar",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.06910512123953397,
+        -0.23951178808120785,
+        1.3211464742054309
+      ],
+      "sourceEye": [
+        0.4929983785897934,
+        -0.7552980935130391,
+        1.5938601196632438
+      ],
+      "sourceTarget": [
+        0.0517609009875906,
+        -0.24021164373667797,
+        1.2198500539722053
+      ],
+      "sourceGeometryBinding": {
+        "uid": "de682cd0ee494c06ae7e35a5d8e1b2e4",
+        "indices": [
+          4546,
+          4550,
+          4551
+        ],
+        "geometryUid": 215,
+        "localPosition": [
+          0.06910512123953397,
+          1.321146484674824,
+          0.2395117303320454
+        ],
+        "barycentricWeights": [
+          0.01770597015823061,
+          0.8238444585134848,
+          0.15844957132828463
+        ]
+      },
+      "positionGLB": [
+        0.06910512123953397,
+        1.321146484674824,
+        0.2395117303320454
+      ],
+      "eyeGLB": [
+        0.4929983785897934,
+        1.5938601196632438,
+        0.7552980935130391
+      ],
+      "targetGLB": [
+        0.0517609009875906,
+        1.2198500539722053,
+        0.24021164373667797
+      ],
+      "mappedPositionDifference": 5.869049289644649e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "a12303e24bf64b7dbc8c7a160a728d87",
+      "order": 3,
+      "sourceName": "Superior vena cava",
+      "label": "Veia cava superior",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        -0.16445657190707058,
+        -0.194554140653099,
+        1.3895096346958966
+      ],
+      "sourceEye": [
+        -0.5052882440247002,
+        -0.7806104229497928,
+        1.57980362449569
+      ],
+      "sourceTarget": [
+        0.0517609009875906,
+        -0.24021164373667797,
+        1.2198500539722053
+      ],
+      "sourceGeometryBinding": {
+        "uid": "a12303e24bf64b7dbc8c7a160a728d87",
+        "indices": [
+          19765,
+          19764,
+          19769
+        ],
+        "geometryUid": 319,
+        "localPosition": [
+          -0.16445657190707058,
+          1.389509643200128,
+          0.19455407991568718
+        ],
+        "barycentricWeights": [
+          0.3626941970328445,
+          0.6306758271242242,
+          0.006629975842931282
+        ]
+      },
+      "positionGLB": [
+        -0.16445657190707058,
+        1.389509643200128,
+        0.19455407991568718
+      ],
+      "eyeGLB": [
+        -0.5052882440247002,
+        1.57980362449569,
+        0.7806104229497928
+      ],
+      "targetGLB": [
+        0.0517609009875906,
+        1.2198500539722053,
+        0.24021164373667797
+      ],
+      "mappedPositionDifference": 6.132988786221299e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "896c66853d114e5a98fa65775086831c",
+      "order": 4,
+      "sourceName": "Inferior vena cava",
+      "label": "Veia cava inferior",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        -0.16287843675435842,
+        -0.19776113963461664,
+        0.8530249035878751
+      ],
+      "sourceEye": [
+        -0.49844944369585314,
+        -0.9008304008830551,
+        1.0812651421091515
+      ],
+      "sourceTarget": [
+        0.026957219994488666,
+        -0.22600780356359765,
+        1.059736942849586
+      ],
+      "sourceGeometryBinding": {
+        "uid": "896c66853d114e5a98fa65775086831c",
+        "indices": [
+          32364,
+          32367,
+          32366
+        ],
+        "geometryUid": 301,
+        "localPosition": [
+          -0.16287843675435842,
+          0.8530249122322897,
+          0.1977611023477035
+        ],
+        "barycentricWeights": [
+          0.41019324643023697,
+          0.4826856874413478,
+          0.10712106612841515
+        ]
+      },
+      "positionGLB": [
+        -0.16287843675435842,
+        0.8530249122322897,
+        0.1977611023477035
+      ],
+      "eyeGLB": [
+        -0.49844944369585314,
+        1.0812651421091515,
+        0.9008304008830551
+      ],
+      "targetGLB": [
+        0.026957219994488666,
+        1.059736942849586,
+        0.22600780356359765
+      ],
+      "mappedPositionDifference": 3.827583827706135e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "79a2ee5b094d43a49fcdfa5877f30b75",
+      "order": 5,
+      "sourceName": "Right atrium",
+      "label": "Átrio direito",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        -0.08006279675790598,
+        -0.11034799829234652,
+        1.1525010673752296
+      ],
+      "sourceEye": [
+        -0.7274257110032785,
+        -0.5681970851489065,
+        1.274123111127934
+      ],
+      "sourceTarget": [
+        0.029061138520569567,
+        -0.22194172749826963,
+        1.0747841102719387
+      ],
+      "sourceGeometryBinding": {
+        "uid": "79a2ee5b094d43a49fcdfa5877f30b75",
+        "indices": [
+          11288,
+          11289,
+          11290
+        ],
+        "geometryUid": 215,
+        "localPosition": [
+          -0.08006279675790598,
+          1.1525010721986928,
+          0.11034794791491116
+        ],
+        "barycentricWeights": [
+          0.23331535751596177,
+          0.11334331232841438,
+          0.6533413301556238
+        ]
+      },
+      "positionGLB": [
+        -0.08006279675790598,
+        1.1525010721986928,
+        0.11034794791491116
+      ],
+      "eyeGLB": [
+        -0.7274257110032785,
+        1.274123111127934,
+        0.5681970851489065
+      ],
+      "targetGLB": [
+        0.029061138520569567,
+        1.0747841102719387,
+        0.22194172749826963
+      ],
+      "mappedPositionDifference": 5.060782341458889e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "96c6891858864089acc2b66134141d29",
+      "order": 6,
+      "sourceName": "Right ventricle",
+      "label": "Ventrículo direito",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.04504968004201185,
+        -0.27506784957803604,
+        1.0653336797798814
+      ],
+      "sourceEye": [
+        -0.22635235783714003,
+        -0.9487013538569163,
+        1.1084254624167504
+      ],
+      "sourceTarget": [
+        0.05334811981310873,
+        -0.22718636724698416,
+        1.1036734108753947
+      ],
+      "sourceGeometryBinding": {
+        "uid": "96c6891858864089acc2b66134141d29",
+        "indices": [
+          9607,
+          9608,
+          9606
+        ],
+        "geometryUid": 301,
+        "localPosition": [
+          0.04504968004201185,
+          1.0653336918034801,
+          0.2750678030108089
+        ],
+        "barycentricWeights": [
+          0.4277418651350992,
+          0.40078754822649265,
+          0.17147058663840814
+        ]
+      },
+      "positionGLB": [
+        0.04504968004201185,
+        1.0653336918034801,
+        0.2750678030108089
+      ],
+      "eyeGLB": [
+        -0.22635235783714003,
+        1.1084254624167504,
+        0.9487013538569163
+      ],
+      "targetGLB": [
+        0.05334811981310873,
+        1.1036734108753947,
+        0.22718636724698416
+      ],
+      "mappedPositionDifference": 4.8094423484131594e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "39a40b0116a949819d55265e17f7e8a6",
+      "order": 7,
+      "sourceName": "Left ventricle",
+      "label": "Ventrículo esquerdo",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.0824048840575678,
+        -0.18663869910440273,
+        0.9369453599645396
+      ],
+      "sourceEye": [
+        0.6744039346598437,
+        -0.6088079189353561,
+        1.3698045394867366
+      ],
+      "sourceTarget": [
+        0.0883683716010334,
+        -0.18143813527953456,
+        1.1000709636333044
+      ],
+      "sourceGeometryBinding": {
+        "uid": "39a40b0116a949819d55265e17f7e8a6",
+        "indices": [
+          17489,
+          17486,
+          17490
+        ],
+        "geometryUid": 292,
+        "localPosition": [
+          0.0824048840575678,
+          0.9369453681227767,
+          0.18663865814920896
+        ],
+        "barycentricWeights": [
+          0.35674882726113655,
+          0.15755203370678053,
+          0.48569913903208295
+        ]
+      },
+      "positionGLB": [
+        0.0824048840575678,
+        0.9369453681227767,
+        0.18663865814920896
+      ],
+      "eyeGLB": [
+        0.6744039346598437,
+        1.3698045394867366,
+        0.6088079189353561
+      ],
+      "targetGLB": [
+        0.0883683716010334,
+        1.1000709636333044,
+        0.18143813527953456
+      ],
+      "mappedPositionDifference": 4.1759845888204206e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "d55e9d641a6c473cbd439424f9524ca6",
+      "order": 8,
+      "sourceName": "Left atrium",
+      "label": "Átrio esquerdo",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.009647546433487973,
+        0.034725712074471546,
+        1.1602801596541308
+      ],
+      "sourceEye": [
+        0.3038881018934442,
+        0.6518878193311394,
+        1.2912661480953282
+      ],
+      "sourceTarget": [
+        -0.10021695890951451,
+        -0.08789329544241634,
+        1.1494806885843387
+      ],
+      "sourceGeometryBinding": {
+        "uid": "d55e9d641a6c473cbd439424f9524ca6",
+        "indices": [
+          2132,
+          2134,
+          2133
+        ],
+        "geometryUid": 301,
+        "localPosition": [
+          0.009647546433487973,
+          1.160280158136219,
+          -0.03472576279194165
+        ],
+        "barycentricWeights": [
+          0.5261718716578047,
+          0.2697379288748239,
+          0.20409019946737147
+        ]
+      },
+      "positionGLB": [
+        0.009647546433487973,
+        1.160280158136219,
+        -0.03472576279194165
+      ],
+      "eyeGLB": [
+        0.3038881018934442,
+        1.2912661480953282,
+        -0.6518878193311394
+      ],
+      "targetGLB": [
+        -0.10021695890951451,
+        1.1494806885843387,
+        0.08789329544241634
+      ],
+      "mappedPositionDifference": 5.074017964230658e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "6b129592619c408ab71d596660dbbc62",
+      "order": 9,
+      "sourceName": "Tricuspid valve",
+      "label": "Valva tricúspide",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        -0.14108754987024325,
+        -0.2127851190016555,
+        1.0666799701798755
+      ],
+      "sourceEye": [
+        -0.8487610064120386,
+        -0.30970716414620314,
+        1.3688710049375148
+      ],
+      "sourceTarget": [
+        -0.11423388514938713,
+        -0.28588125107116297,
+        1.1285623833882787
+      ],
+      "sourceGeometryBinding": {
+        "uid": "6b129592619c408ab71d596660dbbc62",
+        "indices": [
+          4264,
+          4266,
+          4299
+        ],
+        "geometryUid": 247,
+        "localPosition": [
+          -0.14108754987024325,
+          1.066679979481009,
+          0.21278507237558025
+        ],
+        "barycentricWeights": [
+          0.09421082233883812,
+          0.754418151766628,
+          0.1513710258945339
+        ]
+      },
+      "positionGLB": [
+        -0.14108754987024325,
+        1.066679979481009,
+        0.21278507237558025
+      ],
+      "eyeGLB": [
+        -0.8487610064120386,
+        1.3688710049375148,
+        0.30970716414620314
+      ],
+      "targetGLB": [
+        -0.11423388514938713,
+        1.1285623833882787,
+        0.28588125107116297
+      ],
+      "mappedPositionDifference": 4.754473657689541e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "dde5cf89e4d648fcb6ac6f6263d078a2",
+      "order": 10,
+      "sourceName": "Chordae tendineae",
+      "label": "Cordas tendíneas — marcador 1",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        -0.05516025822757578,
+        -0.2812357627780133,
+        0.9912241824871998
+      ],
+      "sourceEye": [
+        0.16361034225499071,
+        -1.0339292222148446,
+        1.129274421373666
+      ],
+      "sourceTarget": [
+        0.10107798199134561,
+        -0.2637563112773913,
+        1.1015365272009079
+      ],
+      "sourceGeometryBinding": {
+        "uid": "dde5cf89e4d648fcb6ac6f6263d078a2",
+        "indices": [
+          33723,
+          33725,
+          33735
+        ],
+        "geometryUid": 355,
+        "localPosition": [
+          -0.05516025822757578,
+          0.9912241947804068,
+          0.281235719450216
+        ],
+        "barycentricWeights": [
+          0.13859719500067913,
+          0.07626268785270113,
+          0.7851401171466198
+        ]
+      },
+      "positionGLB": [
+        -0.05516025822757578,
+        0.9912241947804068,
+        0.281235719450216
+      ],
+      "eyeGLB": [
+        0.16361034225499071,
+        1.129274421373666,
+        1.0339292222148446
+      ],
+      "targetGLB": [
+        0.10107798199134561,
+        1.1015365272009079,
+        0.2637563112773913
+      ],
+      "mappedPositionDifference": 4.503799459264229e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "48b383f8d4054ebd8d6248a2dbbf6b3e",
+      "order": 11,
+      "sourceName": "Papillary muscle",
+      "label": "Músculo papilar — marcador 1",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.031056486407789498,
+        -0.3371544734155876,
+        0.9771913939909812
+      ],
+      "sourceEye": [
+        0.011491663671590172,
+        -1.0136267989881382,
+        1.2674116091918741
+      ],
+      "sourceTarget": [
+        0.10107798199134561,
+        -0.2637563112773913,
+        1.1015365272009079
+      ],
+      "sourceGeometryBinding": {
+        "uid": "48b383f8d4054ebd8d6248a2dbbf6b3e",
+        "indices": [
+          65378,
+          65379,
+          65377
+        ],
+        "geometryUid": 274,
+        "localPosition": [
+          0.031056486407789498,
+          0.9771914087284734,
+          0.337154430701183
+        ],
+        "barycentricWeights": [
+          0.07313310120395916,
+          0.5210969076662666,
+          0.40576999112977424
+        ]
+      },
+      "positionGLB": [
+        0.031056486407789498,
+        0.9771914087284734,
+        0.337154430701183
+      ],
+      "eyeGLB": [
+        0.011491663671590172,
+        1.2674116091918741,
+        1.0136267989881382
+      ],
+      "targetGLB": [
+        0.10107798199134561,
+        1.1015365272009079,
+        0.2637563112773913
+      ],
+      "mappedPositionDifference": 4.518532986276625e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "22383f512aa8441eae8ae9b14877077c",
+      "order": 12,
+      "sourceName": "Moderator band",
+      "label": "Trabécula septomarginal (banda moderadora)",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.07638342850929009,
+        -0.33977067355153967,
+        1.0021685553310857
+      ],
+      "sourceEye": [
+        0.11818758968913771,
+        -0.9484802950785125,
+        1.1978713325029013
+      ],
+      "sourceTarget": [
+        0.08836837160103342,
+        -0.18143813527953462,
+        1.1000709636333044
+      ],
+      "sourceGeometryBinding": {
+        "uid": "22383f512aa8441eae8ae9b14877077c",
+        "indices": [
+          10338,
+          10336,
+          10339
+        ],
+        "geometryUid": 265,
+        "localPosition": [
+          0.07638342850929009,
+          1.0021685701829357,
+          0.33977062974534844
+        ],
+        "barycentricWeights": [
+          0.3152172380445464,
+          0.5605646541566384,
+          0.12421810779881526
+        ]
+      },
+      "positionGLB": [
+        0.07638342850929009,
+        1.0021685701829357,
+        0.33977062974534844
+      ],
+      "eyeGLB": [
+        0.11818758968913771,
+        1.1978713325029013,
+        0.9484802950785125
+      ],
+      "targetGLB": [
+        0.08836837160103342,
+        1.1000709636333044,
+        0.18143813527953462
+      ],
+      "mappedPositionDifference": 4.625537631101227e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "502ea81375474c5ca2872e8f5e582e55",
+      "order": 13,
+      "sourceName": "Pulmonary valve",
+      "label": "Valva pulmonar",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.03909012344445409,
+        -0.3213577958626825,
+        1.1788345478944937
+      ],
+      "sourceEye": [
+        -0.019489917753219427,
+        -0.8913103994453433,
+        0.8115302718527888
+      ],
+      "sourceTarget": [
+        0.08836837160103342,
+        -0.18143813527953462,
+        1.1000709636333044
+      ],
+      "sourceGeometryBinding": {
+        "uid": "502ea81375474c5ca2872e8f5e582e55",
+        "indices": [
+          13656,
+          13642,
+          13657
+        ],
+        "geometryUid": 319,
+        "localPosition": [
+          0.03909012344445409,
+          1.1788345619414906,
+          0.3213577443341734
+        ],
+        "barycentricWeights": [
+          0.9167498578204772,
+          0.038850710057057876,
+          0.04439943212246494
+        ]
+      },
+      "positionGLB": [
+        0.03909012344445409,
+        1.1788345619414906,
+        0.3213577443341734
+      ],
+      "eyeGLB": [
+        -0.019489917753219427,
+        0.8115302718527888,
+        0.8913103994453433
+      ],
+      "targetGLB": [
+        0.08836837160103342,
+        1.1000709636333044,
+        0.18143813527953462
+      ],
+      "mappedPositionDifference": 5.3408851035526985e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "fbe4d3098e9d4310b6dc1c253ec22a84",
+      "order": 14,
+      "sourceName": "Mitral (bicuspid) valve",
+      "label": "Valva mitral (bicúspide)",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.023444349574419265,
+        -0.07179485684070724,
+        1.0525400688680902
+      ],
+      "sourceEye": [
+        0.6281507062343359,
+        -0.7279420795766036,
+        1.006389359713095
+      ],
+      "sourceTarget": [
+        0.08836837160103342,
+        -0.18143813527953462,
+        1.1000709636333044
+      ],
+      "sourceGeometryBinding": {
+        "uid": "fbe4d3098e9d4310b6dc1c253ec22a84",
+        "indices": [
+          36292,
+          36295,
+          36296
+        ],
+        "geometryUid": 238,
+        "localPosition": [
+          0.023444349574419265,
+          1.0525400720063418,
+          0.07179481083270714
+        ],
+        "barycentricWeights": [
+          0.6482265789681911,
+          0.01626853199576793,
+          0.3355048890360409
+        ]
+      },
+      "positionGLB": [
+        0.023444349574419265,
+        1.0525400720063418,
+        0.07179481083270714
+      ],
+      "eyeGLB": [
+        0.6281507062343359,
+        1.006389359713095,
+        0.7279420795766036
+      ],
+      "targetGLB": [
+        0.08836837160103342,
+        1.1000709636333044,
+        0.18143813527953462
+      ],
+      "mappedPositionDifference": 4.611490753599664e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "3cece46fe1c14bb0bf5c90a8bb11904f",
+      "order": 15,
+      "sourceName": "Chordae tendineae",
+      "label": "Cordas tendíneas — marcador 2",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.10672628659223696,
+        -0.14325095486402226,
+        0.9879476524471916
+      ],
+      "sourceEye": [
+        0.5257218907141912,
+        -0.713807943480091,
+        1.2025534365128148
+      ],
+      "sourceTarget": [
+        0.15931747727772733,
+        -0.1308193581990175,
+        1.0772760556704808
+      ],
+      "sourceGeometryBinding": {
+        "uid": "3cece46fe1c14bb0bf5c90a8bb11904f",
+        "indices": [
+          1093,
+          1128,
+          1127
+        ],
+        "geometryUid": 265,
+        "localPosition": [
+          0.10672628659223696,
+          0.9879476587088896,
+          0.14325091167944698
+        ],
+        "barycentricWeights": [
+          0.3486422075359495,
+          0.6381505856431666,
+          0.013207206820883891
+        ]
+      },
+      "positionGLB": [
+        0.10672628659223696,
+        0.9879476587088896,
+        0.14325091167944698
+      ],
+      "eyeGLB": [
+        0.5257218907141912,
+        1.2025534365128148,
+        0.713807943480091
+      ],
+      "targetGLB": [
+        0.15931747727772733,
+        1.0772760556704808,
+        0.1308193581990175
+      ],
+      "mappedPositionDifference": 4.363618226779668e-08,
+      "sourceDescription": ""
+    },
+    {
+      "id": "1372ed6cf9e14edb84747c9d8a0d9ddf",
+      "order": 16,
+      "sourceName": "Papillary muscle",
+      "label": "Músculo papilar — marcador 2",
+      "kind": "educational-landmark",
+      "notSegmented": true,
+      "sourcePosition": [
+        0.18282509166824984,
+        -0.18657638819825076,
+        0.9983732996100759
+      ],
+      "sourceEye": [
+        0.403200383496028,
+        -0.7747518180177956,
+        1.2025534365128148
+      ],
+      "sourceTarget": [
+        0.15931747727772733,
+        -0.1308193581990175,
+        1.0772760556704808
+      ],
+      "sourceGeometryBinding": {
+        "uid": "1372ed6cf9e14edb84747c9d8a0d9ddf",
+        "indices": [
+          48849,
+          48835,
+          48850
+        ],
+        "geometryUid": 337,
+        "localPosition": [
+          0.18282509166824984,
+          0.9983733077655892,
+          0.18657634455795574
+        ],
+        "barycentricWeights": [
+          0.21992824802093947,
+          0.006044023298118553,
+          0.7740277286809419
+        ]
+      },
+      "positionGLB": [
+        0.18282509166824984,
+        0.9983733077655892,
+        0.18657634455795574
+      ],
+      "eyeGLB": [
+        0.403200383496028,
+        1.2025534365128148,
+        0.7747518180177956
+      ],
+      "targetGLB": [
+        0.15931747727772733,
+        1.0772760556704808,
+        0.1308193581990175
+      ],
+      "mappedPositionDifference": 4.439580774966227e-08,
+      "sourceDescription": ""
+    }
+  ]
+}

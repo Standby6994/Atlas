@@ -1,0 +1,2140 @@
+{
+  "schemaVersion": "1.0.0",
+  "language": "pt-BR",
+  "updatedOn": "2026-10-11",
+  "title": "Atlas humano — fisiologia para a Biologia discursiva",
+  "scope": "Material educacional autoral de anatomia funcional e fisiologia escolar avançada. As conexões UERJ descrevem operações discursivas e não previsões de cobrança.",
+  "notes": [
+    "Atribuir uma estrutura a um sistema é uma organização didática; os sistemas funcionam de forma integrada.",
+    "Estruturas microscópicas, células, hormônios e processos podem aparecer somente como conteúdo explicativo. Sua presença neste banco não significa uma malha 3D distinta.",
+    "meshPatterns são sugestões de correspondência por nome, não validação anatômica de uma malha. Correspondências genéricas devem ser apresentadas como função da classe de tecido, sem atribuir precisão a uma parte não identificada.",
+    "As descrições tratam da fisiologia humana típica e não oferecem diagnóstico ou conduta clínica.",
+    "Os textos são originais e concisos; as fontes de verificação constam em content-sources.json."
+  ],
+  "systems": [
+    {
+      "id": "cardiovascular",
+      "name": "Cardiovascular"
+    },
+    {
+      "id": "respiratory",
+      "name": "Respiratório"
+    },
+    {
+      "id": "urinary",
+      "name": "Urinário e osmorregulação"
+    },
+    {
+      "id": "digestive",
+      "name": "Digestório"
+    },
+    {
+      "id": "nervous",
+      "name": "Nervoso e sentidos"
+    },
+    {
+      "id": "endocrine",
+      "name": "Endócrino"
+    },
+    {
+      "id": "reproductive",
+      "name": "Reprodutivo"
+    },
+    {
+      "id": "musculoskeletal",
+      "name": "Musculoesquelético"
+    },
+    {
+      "id": "integumentary",
+      "name": "Tegumentar"
+    },
+    {
+      "id": "lymphatic-immune",
+      "name": "Linfático e imune"
+    }
+  ],
+  "structures": [
+    {
+      "id": "heart",
+      "name": "Coração",
+      "system": "cardiovascular",
+      "aliases": [
+        "bomba cardíaca"
+      ],
+      "shortFunction": "Impulsiona o sangue nas circulações pulmonar e sistêmica.",
+      "function": "Os dois lados trabalham em série, fornecendo fluxo aos pulmões e aos tecidos.",
+      "mechanism": "A contração do miocárdio eleva a pressão nas câmaras; o sangue segue para regiões de menor pressão.",
+      "uerj": "Relacionar sístole, diástole e débito cardíaco; calcular débito = frequência × volume sistólico.",
+      "commonMistake": "Dizer que o coração oxigena o sangue: a troca de gases ocorre nos pulmões.",
+      "sourceIds": [
+        "os19-3",
+        "os19-4"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])heart($|[ _-])"
+      ]
+    },
+    {
+      "id": "right-atrium",
+      "name": "Átrio direito",
+      "system": "cardiovascular",
+      "aliases": [],
+      "shortFunction": "Recebe o retorno venoso sistêmico.",
+      "function": "Recebe sangue pelas veias cavas e pelo seio coronário e o encaminha ao ventrículo direito.",
+      "mechanism": "Durante o enchimento, a pressão atrial maior que a ventricular permite fluxo pela valva tricúspide.",
+      "uerj": "Identificar a câmara de chegada do sangue que retorna dos tecidos.",
+      "commonMistake": "Afirmar que todo o sangue venoso chega diretamente ao ventrículo.",
+      "sourceIds": [
+        "os19-1",
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "right[ _-]?atrium",
+        "atrium[ _-]?right"
+      ]
+    },
+    {
+      "id": "right-ventricle",
+      "name": "Ventrículo direito",
+      "system": "cardiovascular",
+      "aliases": [],
+      "shortFunction": "Envia sangue aos pulmões.",
+      "function": "Ejeta sangue no tronco pulmonar, iniciando a circulação pulmonar.",
+      "mechanism": "A sístole ventricular abre a valva pulmonar quando a pressão ventricular supera a arterial.",
+      "uerj": "Comparar a pressão necessária nos circuitos pulmonar e sistêmico.",
+      "commonMistake": "Trocar a artéria pulmonar pela aorta como vaso de saída.",
+      "sourceIds": [
+        "os19-1",
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "right[ _-]?ventricle",
+        "ventricle[ _-]?right"
+      ]
+    },
+    {
+      "id": "left-atrium",
+      "name": "Átrio esquerdo",
+      "system": "cardiovascular",
+      "aliases": [],
+      "shortFunction": "Recebe sangue que retorna dos pulmões.",
+      "function": "Recebe as veias pulmonares e encaminha sangue ao ventrículo esquerdo.",
+      "mechanism": "O gradiente entre átrio e ventrículo conduz o enchimento através da valva mitral.",
+      "uerj": "Ordenar o percurso do sangue após a hematose.",
+      "commonMistake": "Dizer que veias pulmonares transportam necessariamente sangue pobre em O₂.",
+      "sourceIds": [
+        "os19-1",
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "left[ _-]?atrium",
+        "atrium[ _-]?left"
+      ]
+    },
+    {
+      "id": "left-ventricle",
+      "name": "Ventrículo esquerdo",
+      "system": "cardiovascular",
+      "aliases": [],
+      "shortFunction": "Impulsiona o sangue para a circulação sistêmica.",
+      "function": "Ejeta sangue na aorta; sua parede muscular é mais espessa que a do ventrículo direito.",
+      "mechanism": "A contração gera pressão suficiente para vencer a maior resistência do circuito sistêmico.",
+      "uerj": "Justificar a diferença de espessura entre as paredes ventriculares.",
+      "commonMistake": "Concluir que uma parede mais espessa significa maior volume bombeado: os circuitos têm fluxos médios equivalentes.",
+      "sourceIds": [
+        "os19-1",
+        "os19-4"
+      ],
+      "meshPatterns": [
+        "left[ _-]?ventricle",
+        "ventricle[ _-]?left"
+      ]
+    },
+    {
+      "id": "tricuspid-valve",
+      "name": "Valva tricúspide",
+      "system": "cardiovascular",
+      "aliases": [
+        "válvula tricúspide"
+      ],
+      "shortFunction": "Evita refluxo do ventrículo direito para o átrio direito.",
+      "function": "Permite fluxo atrioventricular em um sentido.",
+      "mechanism": "A diferença de pressão abre ou fecha seus folhetos; cordas tendíneas evitam sua inversão durante a sístole.",
+      "uerj": "Relacionar pressão ventricular e fechamento de valvas atrioventriculares.",
+      "commonMistake": "Dizer que músculos papilares abrem a valva ativamente.",
+      "sourceIds": [
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "tricuspid"
+      ]
+    },
+    {
+      "id": "mitral-valve",
+      "name": "Valva mitral",
+      "system": "cardiovascular",
+      "aliases": [
+        "válvula mitral",
+        "valva bicúspide"
+      ],
+      "shortFunction": "Evita refluxo do ventrículo esquerdo para o átrio esquerdo.",
+      "function": "Regula o sentido do fluxo entre as câmaras esquerdas.",
+      "mechanism": "Quando a pressão ventricular supera a atrial, seus folhetos se fecham.",
+      "uerj": "Prever o sentido do refluxo quando uma valva atrioventricular não fecha adequadamente.",
+      "commonMistake": "Confundir a mitral com uma valva da saída para a aorta.",
+      "sourceIds": [
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "mitral",
+        "bicuspid"
+      ]
+    },
+    {
+      "id": "aortic-valve",
+      "name": "Valva aórtica",
+      "system": "cardiovascular",
+      "aliases": [
+        "válvula aórtica",
+        "valva semilunar aórtica"
+      ],
+      "shortFunction": "Evita retorno da aorta ao ventrículo esquerdo.",
+      "function": "Permite ejeção ventricular e impede refluxo durante o relaxamento.",
+      "mechanism": "Abre com pressão ventricular maior que a aórtica; fecha quando o gradiente se inverte.",
+      "uerj": "Interpretar curvas de pressão para identificar abertura e fechamento valvar.",
+      "commonMistake": "Colocar a valva aórtica entre átrio e ventrículo.",
+      "sourceIds": [
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "aortic[ _-]?(valve|cusp)"
+      ]
+    },
+    {
+      "id": "pulmonary-valve",
+      "name": "Valva pulmonar",
+      "system": "cardiovascular",
+      "aliases": [
+        "válvula pulmonar",
+        "valva semilunar pulmonar"
+      ],
+      "shortFunction": "Evita retorno do tronco pulmonar ao ventrículo direito.",
+      "function": "Mantém o fluxo da circulação pulmonar em um sentido.",
+      "mechanism": "A pressão arterial supera a ventricular no relaxamento e fecha os folhetos.",
+      "uerj": "Distinguir as duas valvas semilunares e os vasos ligados a elas.",
+      "commonMistake": "Dizer que esta valva fica entre pulmão e átrio esquerdo.",
+      "sourceIds": [
+        "os19-3"
+      ],
+      "meshPatterns": [
+        "pulmonary[ _-]?(valve|cusp)"
+      ]
+    },
+    {
+      "id": "sinoatrial-node",
+      "name": "Nó sinoatrial",
+      "system": "cardiovascular",
+      "aliases": [
+        "nódulo sinoatrial",
+        "marca-passo natural"
+      ],
+      "shortFunction": "Inicia normalmente o ritmo cardíaco.",
+      "function": "Células autorritmicas disparam impulsos que se propagam pelos átrios e pelo sistema de condução.",
+      "mechanism": "Sua despolarização espontânea gera potenciais de ação; simpático e parassimpático modulam a frequência.",
+      "uerj": "Explicar por que o coração tem automatismo, mas sofre controle nervoso.",
+      "commonMistake": "Afirmar que cada batimento precisa ser iniciado por um comando consciente.",
+      "sourceIds": [
+        "os19-2",
+        "os19-4"
+      ],
+      "meshPatterns": [
+        "sinoatrial",
+        "sinus[ _-]?node"
+      ]
+    },
+    {
+      "id": "aorta",
+      "name": "Aorta",
+      "system": "cardiovascular",
+      "aliases": [
+        "artéria aorta"
+      ],
+      "shortFunction": "Distribui sangue do ventrículo esquerdo ao corpo.",
+      "function": "Suas ramificações alimentam a circulação sistêmica.",
+      "mechanism": "A parede elástica distende na ejeção e recua no relaxamento, ajudando a sustentar o fluxo.",
+      "uerj": "Relacionar elasticidade arterial com continuidade do fluxo entre batimentos.",
+      "commonMistake": "Definir artéria pela quantidade de O₂, em vez de pela direção em relação ao coração.",
+      "sourceIds": [
+        "os20-1",
+        "os20-2"
+      ],
+      "meshPatterns": [
+        "aorta",
+        "aortic[ _-]?arch"
+      ]
+    },
+    {
+      "id": "vena-cava",
+      "name": "Veias cavas",
+      "system": "cardiovascular",
+      "aliases": [
+        "veia cava superior",
+        "veia cava inferior"
+      ],
+      "shortFunction": "Conduzem sangue sistêmico ao átrio direito.",
+      "function": "A superior recebe regiões superiores; a inferior recebe regiões inferiores ao coração.",
+      "mechanism": "O retorno venoso depende de gradientes de pressão, bomba muscular e variações de pressão torácica.",
+      "uerj": "Explicar como contração muscular e respiração contribuem para o retorno venoso.",
+      "commonMistake": "Afirmar que as veias cavas bombeiam como ventrículos.",
+      "sourceIds": [
+        "os20-1",
+        "os20-2"
+      ],
+      "meshPatterns": [
+        "vena[ _-]?cava",
+        "caval"
+      ]
+    },
+    {
+      "id": "pulmonary-arteries",
+      "name": "Artérias pulmonares",
+      "system": "cardiovascular",
+      "aliases": [
+        "tronco pulmonar"
+      ],
+      "shortFunction": "Conduzem sangue do coração aos pulmões.",
+      "function": "Levando sangue do ventrículo direito ao leito capilar pulmonar, permitem sua oxigenação.",
+      "mechanism": "O sangue segue o gradiente criado pela ejeção do ventrículo direito.",
+      "uerj": "Usar a circulação pulmonar como exceção à associação entre artéria e sangue rico em O₂.",
+      "commonMistake": "Chamar de veias esses vasos por transportarem sangue relativamente pobre em O₂.",
+      "sourceIds": [
+        "os19-1",
+        "os20-1"
+      ],
+      "meshPatterns": [
+        "pulmonary[ _-]?(artery|arteries|trunk)"
+      ]
+    },
+    {
+      "id": "pulmonary-veins",
+      "name": "Veias pulmonares",
+      "system": "cardiovascular",
+      "aliases": [],
+      "shortFunction": "Retornam sangue dos pulmões ao coração.",
+      "function": "Conduzem sangue relativamente rico em O₂ ao átrio esquerdo.",
+      "mechanism": "Após as trocas nos capilares, o sangue converge nas veias pulmonares.",
+      "uerj": "Ordenar pulmão → veias pulmonares → átrio esquerdo.",
+      "commonMistake": "Definir veia como vaso que sempre transporta sangue pobre em O₂.",
+      "sourceIds": [
+        "os19-1",
+        "os20-1"
+      ],
+      "meshPatterns": [
+        "pulmonary[ _-]?(vein|veins)"
+      ]
+    },
+    {
+      "id": "arterioles",
+      "name": "Arteríolas",
+      "system": "cardiovascular",
+      "aliases": [
+        "vasos de resistência"
+      ],
+      "shortFunction": "Ajustam o fluxo sanguíneo que chega aos tecidos.",
+      "function": "O músculo liso regula seu calibre e a resistência vascular.",
+      "mechanism": "Vasoconstrição aumenta a resistência; para o mesmo gradiente de pressão, reduz o fluxo local.",
+      "uerj": "Relacionar exercício, termorregulação e redistribuição do fluxo; interpretar a relação entre raio e resistência.",
+      "commonMistake": "Dizer que vasoconstrição aumenta sempre o fluxo no vaso estreitado.",
+      "sourceIds": [
+        "os20-1",
+        "os20-2"
+      ],
+      "meshPatterns": [
+        "arteriole"
+      ]
+    },
+    {
+      "id": "capillaries",
+      "name": "Capilares sanguíneos",
+      "system": "cardiovascular",
+      "aliases": [
+        "leito capilar"
+      ],
+      "shortFunction": "Permitem trocas entre sangue e tecidos.",
+      "function": "A parede endotelial delgada facilita transporte de gases, nutrientes e resíduos.",
+      "mechanism": "Solutos difundem conforme gradientes; pressões hidrostáticas e oncóticas influenciam o movimento de água.",
+      "uerj": "Relacionar área total, pequena espessura e eficiência das trocas.",
+      "commonMistake": "Supor que todas as substâncias cruzam livremente ou que toda água filtrada retorna diretamente ao mesmo capilar.",
+      "sourceIds": [
+        "os20-3"
+      ],
+      "meshPatterns": [
+        "capillar"
+      ]
+    },
+    {
+      "id": "veins",
+      "name": "Veias",
+      "system": "cardiovascular",
+      "aliases": [
+        "vasos venosos"
+      ],
+      "shortFunction": "Retornam sangue dos tecidos ao coração.",
+      "function": "São vasos de menor pressão; muitas veias dos membros têm valvas.",
+      "mechanism": "Contrações musculares comprimem as veias; valvas limitam o refluxo e favorecem o retorno.",
+      "uerj": "Explicar o papel da bomba muscular e comparar artérias, veias e capilares.",
+      "commonMistake": "Dizer que todas as veias possuem valvas ou paredes sem músculo.",
+      "sourceIds": [
+        "os20-1",
+        "os20-2"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])(vein|veins|venous)($|[ _-])"
+      ]
+    },
+    {
+      "id": "erythrocytes",
+      "name": "Hemácias",
+      "system": "cardiovascular",
+      "aliases": [
+        "eritrócitos",
+        "glóbulos vermelhos"
+      ],
+      "shortFunction": "Transportam O₂ e participam do transporte de CO₂.",
+      "function": "A hemoglobina se liga reversivelmente ao O₂; a anidrase carbônica participa da formação de bicarbonato.",
+      "mechanism": "PO₂ elevada favorece ligação de O₂; maior CO₂ e menor pH nos tecidos favorecem sua liberação.",
+      "uerj": "Interpretar curvas de dissociação da hemoglobina e conectar respiração ao equilíbrio ácido-base.",
+      "commonMistake": "Dizer que a maior parte do CO₂ circula ligada à hemoglobina: predomina o bicarbonato.",
+      "sourceIds": [
+        "os18-3",
+        "os22-5"
+      ],
+      "meshPatterns": [
+        "erythrocyte",
+        "red[ _-]?blood[ _-]?cell"
+      ]
+    },
+    {
+      "id": "nasal-cavity",
+      "name": "Cavidade nasal",
+      "system": "respiratory",
+      "aliases": [
+        "fossas nasais",
+        "nariz"
+      ],
+      "shortFunction": "Filtra, aquece e umidifica o ar inspirado.",
+      "function": "Mucosa, muco e cílios ajudam a reter e remover partículas.",
+      "mechanism": "A vascularização aquece o ar; secreções o umidificam e prendem partículas.",
+      "uerj": "Relacionar tecido epitelial ciliado à proteção das vias respiratórias.",
+      "commonMistake": "Dizer que a principal hematose ocorre no nariz.",
+      "sourceIds": [
+        "os22-1"
+      ],
+      "meshPatterns": [
+        "nasal[ _-]?cavity",
+        "nasal[ _-]?cavities"
+      ]
+    },
+    {
+      "id": "larynx",
+      "name": "Laringe",
+      "system": "respiratory",
+      "aliases": [
+        "caixa da voz"
+      ],
+      "shortFunction": "Conduz o ar e participa da fonação.",
+      "function": "Abriga pregas vocais e mecanismos que protegem a entrada das vias aéreas durante a deglutição.",
+      "mechanism": "O ar faz as pregas vocais vibrarem; a deglutição coordena fechamento da entrada laríngea.",
+      "uerj": "Relacionar proteção das vias respiratórias e produção da voz.",
+      "commonMistake": "Tratar a epiglote como uma tampa que explica sozinha toda a deglutição.",
+      "sourceIds": [
+        "os22-1"
+      ],
+      "meshPatterns": [
+        "larynx",
+        "laryngeal",
+        "epiglottis"
+      ]
+    },
+    {
+      "id": "trachea",
+      "name": "Traqueia",
+      "system": "respiratory",
+      "aliases": [],
+      "shortFunction": "Conduz ar entre laringe e brônquios.",
+      "function": "Cartilagem mantém a via aberta; epitélio mucociliar remove partículas.",
+      "mechanism": "Cílios deslocam muco em direção à faringe, onde ele pode ser deglutido.",
+      "uerj": "Explicar consequências funcionais da alteração dos cílios, integrando citologia e fisiologia.",
+      "commonMistake": "Afirmar que cílios produzem o muco: sua função principal é movimentá-lo.",
+      "sourceIds": [
+        "os22-1"
+      ],
+      "meshPatterns": [
+        "trachea",
+        "tracheal"
+      ]
+    },
+    {
+      "id": "bronchi",
+      "name": "Brônquios e bronquíolos",
+      "system": "respiratory",
+      "aliases": [
+        "árvore brônquica"
+      ],
+      "shortFunction": "Distribuem o ar no interior dos pulmões.",
+      "function": "Os brônquios se ramificam; o músculo liso dos bronquíolos regula a passagem do ar.",
+      "mechanism": "Redução do calibre aumenta a resistência à passagem do ar; a condução mucociliar protege vias maiores.",
+      "uerj": "Relacionar calibre, resistência e ventilação; distinguir condução de troca gasosa.",
+      "commonMistake": "Colocar anéis cartilaginosos em todos os bronquíolos.",
+      "sourceIds": [
+        "os22-1",
+        "os22-3"
+      ],
+      "meshPatterns": [
+        "bronch"
+      ]
+    },
+    {
+      "id": "lungs",
+      "name": "Pulmões",
+      "system": "respiratory",
+      "aliases": [
+        "pulmão direito",
+        "pulmão esquerdo"
+      ],
+      "shortFunction": "Abriga as superfícies de troca de O₂ e CO₂.",
+      "function": "A ventilação renova o ar alveolar, enquanto a perfusão leva sangue aos capilares.",
+      "mechanism": "Ventilação e circulação mantêm gradientes de pressão parcial que sustentam a difusão dos gases.",
+      "uerj": "Distinguir ventilação, hematose e respiração celular; relacionar ventilação e perfusão.",
+      "commonMistake": "Dizer que o pulmão produz O₂ ou que respirar é apenas uma reação celular.",
+      "sourceIds": [
+        "os22-4",
+        "os22-3"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])lung(s)?($|[ _-])"
+      ]
+    },
+    {
+      "id": "alveoli",
+      "name": "Alvéolos pulmonares",
+      "system": "respiratory",
+      "aliases": [
+        "sacos alveolares"
+      ],
+      "shortFunction": "Realizam a hematose.",
+      "function": "Pneumócitos tipo I formam grande parte da barreira fina; tipo II produzem surfactante.",
+      "mechanism": "O₂ difunde do alvéolo ao sangue e CO₂ no sentido oposto; surfactante reduz a tensão superficial.",
+      "uerj": "Relacionar superfície, espessura, gradiente e eficiência da difusão.",
+      "commonMistake": "Dizer que surfactante transporta O₂ ou que gases são bombeados ativamente pela parede alveolar.",
+      "sourceIds": [
+        "os22-4",
+        "os22-1"
+      ],
+      "meshPatterns": [
+        "alveol"
+      ]
+    },
+    {
+      "id": "diaphragm",
+      "name": "Diafragma",
+      "system": "respiratory",
+      "aliases": [
+        "músculo diafragma"
+      ],
+      "shortFunction": "É o principal músculo da inspiração em repouso.",
+      "function": "Sua contração amplia a cavidade torácica; a expiração em repouso é predominantemente passiva.",
+      "mechanism": "Ao contrair, desce e aumenta o volume torácico; a pressão alveolar cai e o ar entra.",
+      "uerj": "Explicar ventilação com relações entre volume, pressão e fluxo.",
+      "commonMistake": "Dizer que o ar entra porque o pulmão o puxa por contração de músculo pulmonar.",
+      "sourceIds": [
+        "os22-3"
+      ],
+      "meshPatterns": [
+        "diaphragm"
+      ]
+    },
+    {
+      "id": "pleura",
+      "name": "Pleura",
+      "system": "respiratory",
+      "aliases": [
+        "pleura visceral",
+        "pleura parietal"
+      ],
+      "shortFunction": "Reduz atrito e acopla pulmões à parede torácica.",
+      "function": "As duas lâminas delimitam um espaço com pequena quantidade de líquido.",
+      "mechanism": "A relação de pressões e a película líquida permitem que a expansão torácica acompanhe a expansão pulmonar.",
+      "uerj": "Relacionar pressão intrapleural e mecânica respiratória em um esquema.",
+      "commonMistake": "Confundir cavidade pleural com o espaço cheio de ar dos alvéolos.",
+      "sourceIds": [
+        "os22-3"
+      ],
+      "meshPatterns": [
+        "pleur"
+      ]
+    },
+    {
+      "id": "kidneys",
+      "name": "Rins",
+      "system": "urinary",
+      "aliases": [
+        "rim direito",
+        "rim esquerdo"
+      ],
+      "shortFunction": "Regulam água, sais, pH e excreção de resíduos.",
+      "function": "Formam urina e têm funções endócrinas, como produção de renina e eritropoetina.",
+      "mechanism": "Filtração, reabsorção e secreção ajustam a composição final da urina e preservam o meio interno.",
+      "uerj": "Integrar excreção nitrogenada, osmose, pressão arterial e homeostase.",
+      "commonMistake": "Dizer que os rins apenas retiram toxinas ou que a ureia é produzida principalmente neles.",
+      "sourceIds": [
+        "os25-3",
+        "os25-5"
+      ],
+      "meshPatterns": [
+        "kidney",
+        "renal[ _-]?(cortex|medulla|pelvis)"
+      ]
+    },
+    {
+      "id": "glomerulus",
+      "name": "Glomérulo renal",
+      "system": "urinary",
+      "aliases": [
+        "glomérulo"
+      ],
+      "shortFunction": "Filtra parte do plasma para o início do néfron.",
+      "function": "É um conjunto de capilares entre as arteríolas aferente e eferente.",
+      "mechanism": "A pressão hidrostática favorece passagem de água e pequenos solutos pela barreira de filtração; células e a maior parte das proteínas ficam no sangue.",
+      "uerj": "Distinguir plasma, filtrado glomerular e urina final.",
+      "commonMistake": "Afirmar que o glomérulo seleciona apenas resíduos: glicose e outros solutos úteis também são filtrados.",
+      "sourceIds": [
+        "os25-4",
+        "os25-5"
+      ],
+      "meshPatterns": [
+        "glomerul"
+      ]
+    },
+    {
+      "id": "bowman-capsule",
+      "name": "Cápsula de Bowman",
+      "system": "urinary",
+      "aliases": [
+        "cápsula glomerular"
+      ],
+      "shortFunction": "Recebe o filtrado glomerular.",
+      "function": "Com o glomérulo, forma o corpúsculo renal; sua camada visceral contém podócitos.",
+      "mechanism": "O filtrado chega ao espaço capsular e segue para o túbulo proximal.",
+      "uerj": "Identificar as estruturas de um esquema do néfron e ordenar o percurso do filtrado.",
+      "commonMistake": "Confundir a cápsula glomerular microscópica com a cápsula externa do rim.",
+      "sourceIds": [
+        "os25-4"
+      ],
+      "meshPatterns": [
+        "bowman",
+        "glomerular[ _-]?capsule"
+      ]
+    },
+    {
+      "id": "proximal-tubule",
+      "name": "Túbulo contorcido proximal",
+      "system": "urinary",
+      "aliases": [
+        "TCP",
+        "túbulo proximal"
+      ],
+      "shortFunction": "Reabsorve grande parte da água e dos solutos filtrados.",
+      "function": "Recupera normalmente quase toda a glicose filtrada e muitos aminoácidos; também participa da secreção.",
+      "mechanism": "A bomba de Na⁺/K⁺ sustenta cotransportes; a água acompanha a recuperação de solutos por osmose.",
+      "uerj": "Relacionar transporte ativo, ATP e recuperação de glicose; explicar saturação dos transportadores.",
+      "commonMistake": "Dizer que reabsorção leva substâncias do sangue ao túbulo: esse sentido corresponde à secreção.",
+      "sourceIds": [
+        "os25-6"
+      ],
+      "meshPatterns": [
+        "proximal[ _-]?(convoluted[ _-]?)?tubule"
+      ]
+    },
+    {
+      "id": "henle-loop",
+      "name": "Alça de Henle",
+      "system": "urinary",
+      "aliases": [
+        "alça do néfron"
+      ],
+      "shortFunction": "Ajuda a estabelecer o gradiente osmótico da medula renal.",
+      "function": "Os ramos têm propriedades diferentes, fundamentais para concentrar a urina.",
+      "mechanism": "O ramo descendente perde água; o ascendente reabsorve sais e tem baixa permeabilidade à água, contribuindo para o mecanismo de contracorrente.",
+      "uerj": "Comparar permeabilidades dos ramos e prever concentração do líquido tubular.",
+      "commonMistake": "Dizer que ambos os ramos reabsorvem água da mesma forma.",
+      "sourceIds": [
+        "os25-6"
+      ],
+      "meshPatterns": [
+        "henle",
+        "nephron[ _-]?loop"
+      ]
+    },
+    {
+      "id": "distal-tubule",
+      "name": "Túbulo contorcido distal",
+      "system": "urinary",
+      "aliases": [
+        "TCD",
+        "túbulo distal"
+      ],
+      "shortFunction": "Ajusta a composição iônica do líquido tubular.",
+      "function": "Participa da reabsorção de sais e do controle de cálcio; seus segmentos finais integram regulação hormonal.",
+      "mechanism": "Transportadores regulam fluxos de íons; PTH aumenta a recuperação de Ca²⁺ e aldosterona atua no néfron distal.",
+      "uerj": "Relacionar seletividade de membrana, hormônios e equilíbrio iônico.",
+      "commonMistake": "Tratar o túbulo distal apenas como um tubo passivo que conduz urina pronta.",
+      "sourceIds": [
+        "os25-6",
+        "os17-5"
+      ],
+      "meshPatterns": [
+        "distal[ _-]?(convoluted[ _-]?)?tubule"
+      ]
+    },
+    {
+      "id": "collecting-duct",
+      "name": "Ducto coletor",
+      "system": "urinary",
+      "aliases": [
+        "túbulo coletor"
+      ],
+      "shortFunction": "Ajusta a recuperação final de água e a concentração da urina.",
+      "function": "Recebe líquido de vários néfrons; participa também da regulação de íons e pH.",
+      "mechanism": "ADH aumenta aquaporinas na membrana apical, permitindo saída de água por osmose para a medula.",
+      "uerj": "Prever volume e concentração urinários a partir da concentração de ADH.",
+      "commonMistake": "Dizer que ADH bombeia água ou que o ducto coletor pertence exclusivamente a um único néfron.",
+      "sourceIds": [
+        "os25-6",
+        "os25-8"
+      ],
+      "meshPatterns": [
+        "collecting[ _-]?(duct|tubule)"
+      ]
+    },
+    {
+      "id": "ureters",
+      "name": "Ureteres",
+      "system": "urinary",
+      "aliases": [
+        "ureter direito",
+        "ureter esquerdo"
+      ],
+      "shortFunction": "Transportam urina dos rins à bexiga.",
+      "function": "São ductos musculares ligados à pelve renal.",
+      "mechanism": "Ondas de contração do músculo liso impulsionam a urina, sem depender apenas da gravidade.",
+      "uerj": "Distinguir formação, transporte e armazenamento da urina.",
+      "commonMistake": "Confundir ureter com uretra.",
+      "sourceIds": [
+        "os25-2"
+      ],
+      "meshPatterns": [
+        "ureter"
+      ]
+    },
+    {
+      "id": "urinary-bladder",
+      "name": "Bexiga urinária",
+      "system": "urinary",
+      "aliases": [
+        "bexiga"
+      ],
+      "shortFunction": "Armazena urina até a micção.",
+      "function": "Sua parede distensível contém músculo detrusor; esfíncteres controlam a saída.",
+      "mechanism": "O enchimento ativa receptores de estiramento; reflexos e controle voluntário coordenam esvaziamento.",
+      "uerj": "Relacionar receptores, reflexo medular e controle nervoso da micção.",
+      "commonMistake": "Afirmar que a bexiga filtra o sangue ou produz urina.",
+      "sourceIds": [
+        "os25-2"
+      ],
+      "meshPatterns": [
+        "bladder",
+        "detrusor"
+      ]
+    },
+    {
+      "id": "adh",
+      "name": "ADH e controle da água",
+      "system": "urinary",
+      "aliases": [
+        "vasopressina",
+        "hormônio antidiurético"
+      ],
+      "shortFunction": "Favorece conservação de água pelo rim.",
+      "function": "É sintetizado por neurônios do hipotálamo e liberado pela neuro-hipófise.",
+      "mechanism": "O aumento da osmolaridade plasmática favorece sua liberação; aquaporinas aumentam a reabsorção de água e reduzem o volume urinário.",
+      "uerj": "Explicar a cadeia osmolaridade → ADH → aquaporinas → urina mais concentrada.",
+      "commonMistake": "Dizer que ADH é produzido no rim ou na neuro-hipófise; ela armazena e libera o hormônio.",
+      "sourceIds": [
+        "os25-8",
+        "os17-3"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "raas",
+      "name": "Sistema renina–angiotensina–aldosterona",
+      "system": "urinary",
+      "aliases": [
+        "SRAA",
+        "RAAS"
+      ],
+      "shortFunction": "Contribui para restaurar perfusão e volume circulante.",
+      "function": "Integra renina renal, angiotensinogênio hepático, angiotensina II e aldosterona do córtex adrenal.",
+      "mechanism": "Menor perfusão renal favorece renina; angiotensina II causa vasoconstrição e estimula aldosterona, aumentando recuperação de Na⁺ e favorecendo retenção de água.",
+      "uerj": "Ordenar uma cascata hormonal e prever efeitos de sua inibição sobre pressão e excreção de Na⁺.",
+      "commonMistake": "Confundir a ação da aldosterona sobre Na⁺ com a inserção de aquaporinas promovida pelo ADH.",
+      "sourceIds": [
+        "os25-8",
+        "os17-6"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "mouth",
+      "name": "Boca",
+      "system": "digestive",
+      "aliases": [
+        "cavidade oral"
+      ],
+      "shortFunction": "Inicia o processamento mecânico e químico do alimento.",
+      "function": "Dentes e língua fragmentam e misturam alimento; saliva participa da formação do bolo.",
+      "mechanism": "A mastigação aumenta a superfície de contato e facilita a ação de enzimas e a deglutição.",
+      "uerj": "Relacionar fragmentação, área de contato e velocidade da digestão.",
+      "commonMistake": "Afirmar que mastigação rompe quimicamente todas as moléculas do alimento.",
+      "sourceIds": [
+        "os23-3"
+      ],
+      "meshPatterns": [
+        "oral[ _-]?cavity",
+        "(^|[ _-])mouth($|[ _-])",
+        "tongue",
+        "teeth"
+      ]
+    },
+    {
+      "id": "salivary-glands",
+      "name": "Glândulas salivares",
+      "system": "digestive",
+      "aliases": [
+        "parótidas",
+        "submandibulares",
+        "sublinguais"
+      ],
+      "shortFunction": "Produzem saliva que lubrifica e inicia digestão de amido.",
+      "function": "A saliva contém água, muco e amilase, além de componentes de proteção.",
+      "mechanism": "A amilase hidrolisa ligações do amido; a lubrificação facilita passagem do bolo alimentar.",
+      "uerj": "Relacionar enzima, substrato e condições de atividade enzimática.",
+      "commonMistake": "Dizer que amilase digere proteínas ou transforma todo amido diretamente em glicose.",
+      "sourceIds": [
+        "os23-3",
+        "os23-7"
+      ],
+      "meshPatterns": [
+        "salivary",
+        "parotid",
+        "submandibular",
+        "sublingual[ _-]?gland"
+      ]
+    },
+    {
+      "id": "esophagus",
+      "name": "Esôfago",
+      "system": "digestive",
+      "aliases": [],
+      "shortFunction": "Conduz o bolo alimentar até o estômago.",
+      "function": "É um tubo muscular que participa da deglutição e do peristaltismo.",
+      "mechanism": "Contração atrás do bolo e relaxamento à frente o deslocam em direção ao estômago.",
+      "uerj": "Explicar por que o transporte do alimento não depende apenas da gravidade.",
+      "commonMistake": "Atribuir ao esôfago a principal absorção de nutrientes.",
+      "sourceIds": [
+        "os23-3"
+      ],
+      "meshPatterns": [
+        "esophag",
+        "oesophag"
+      ]
+    },
+    {
+      "id": "stomach",
+      "name": "Estômago",
+      "system": "digestive",
+      "aliases": [],
+      "shortFunction": "Mistura alimento e inicia parte da digestão proteica.",
+      "function": "Secreta ácido, pepsinogênio, muco e fator intrínseco; libera o quimo gradualmente.",
+      "mechanism": "O meio ácido favorece ativação da pepsina; muco e bicarbonato ajudam a proteger o epitélio.",
+      "uerj": "Relacionar pH e atividade enzimática; distinguir secreção de enzima e ativação.",
+      "commonMistake": "Dizer que o ácido é uma enzima ou que o estômago absorve a maioria dos nutrientes.",
+      "sourceIds": [
+        "os23-4"
+      ],
+      "meshPatterns": [
+        "stomach",
+        "gastric"
+      ]
+    },
+    {
+      "id": "liver",
+      "name": "Fígado",
+      "system": "digestive",
+      "aliases": [],
+      "shortFunction": "Produz bile e participa da regulação metabólica.",
+      "function": "Transforma e armazena nutrientes, sintetiza proteínas plasmáticas e converte nitrogênio da degradação de aminoácidos em ureia.",
+      "mechanism": "O sangue portal leva substâncias absorvidas; hepatócitos ajustam seu processamento e produzem sais biliares.",
+      "uerj": "Integrar metabolismo, digestão e excreção; distinguir local de produção e de eliminação da ureia.",
+      "commonMistake": "Afirmar que o fígado armazena a bile ou que a ureia é sintetizada principalmente nos rins.",
+      "sourceIds": [
+        "os23-6"
+      ],
+      "meshPatterns": [
+        "liver",
+        "hepatic"
+      ]
+    },
+    {
+      "id": "gallbladder",
+      "name": "Vesícula biliar",
+      "system": "digestive",
+      "aliases": [
+        "vesícula"
+      ],
+      "shortFunction": "Armazena e concentra bile.",
+      "function": "Libera bile para o intestino durante a digestão, especialmente em resposta a lipídios.",
+      "mechanism": "CCK favorece sua contração; sais biliares emulsificam lipídios e ajudam a formar micelas.",
+      "uerj": "Distinguir emulsificação física, hidrólise enzimática e absorção.",
+      "commonMistake": "Dizer que bile contém lipase ou que a vesícula fabrica bile.",
+      "sourceIds": [
+        "os23-6",
+        "os23-7"
+      ],
+      "meshPatterns": [
+        "gall[ _-]?bladder",
+        "gallbladder"
+      ]
+    },
+    {
+      "id": "pancreas",
+      "name": "Pâncreas",
+      "system": "digestive",
+      "aliases": [
+        "pâncreas exócrino"
+      ],
+      "shortFunction": "Envia enzimas digestivas e bicarbonato ao duodeno.",
+      "function": "Ácinos produzem enzimas; ductos fornecem bicarbonato. A função endócrina é tratada em Ilhotas pancreáticas.",
+      "mechanism": "Secretina favorece secreção de bicarbonato; CCK favorece liberação de enzimas, permitindo digestão em meio menos ácido.",
+      "uerj": "Relacionar pH, regulação hormonal e ativação de proteases no intestino.",
+      "commonMistake": "Confundir secreção exócrina no duodeno com liberação de insulina no sangue.",
+      "sourceIds": [
+        "os23-6"
+      ],
+      "meshPatterns": [
+        "pancreas",
+        "pancreatic"
+      ]
+    },
+    {
+      "id": "small-intestine",
+      "name": "Intestino delgado",
+      "system": "digestive",
+      "aliases": [
+        "duodeno",
+        "jejuno",
+        "íleo"
+      ],
+      "shortFunction": "Realiza grande parte da digestão e da absorção.",
+      "function": "Recebe secreções biliares e pancreáticas e possui enzimas associadas à superfície do epitélio.",
+      "mechanism": "Produtos da digestão atravessam enterócitos por mecanismos específicos e chegam ao sangue ou à linfa.",
+      "uerj": "Distinguir digestão de absorção e comparar as rotas de carboidratos, proteínas e lipídios.",
+      "commonMistake": "Afirmar que toda digestão ocorre apenas no estômago.",
+      "sourceIds": [
+        "os23-5",
+        "os23-7"
+      ],
+      "meshPatterns": [
+        "small[ _-]?intestine",
+        "duodenum",
+        "jejunum",
+        "ileum"
+      ]
+    },
+    {
+      "id": "intestinal-villi",
+      "name": "Vilosidades e microvilosidades intestinais",
+      "system": "digestive",
+      "aliases": [
+        "vilosidades",
+        "microvilosidades",
+        "enterócitos"
+      ],
+      "shortFunction": "Ampliam a superfície para absorver nutrientes.",
+      "function": "Vilosidades são projeções da mucosa; microvilosidades são projeções da membrana dos enterócitos.",
+      "mechanism": "Monossacarídeos e aminoácidos seguem principalmente para capilares; lipídios de cadeia longa são empacotados em quilomícrons e seguem inicialmente pela linfa.",
+      "uerj": "Explicar a relação entre estrutura, área de contato e transporte de nutrientes.",
+      "commonMistake": "Confundir vilosidades com microvilosidades ou colocar todos os lipídios absorvidos diretamente na veia porta.",
+      "sourceIds": [
+        "os23-5",
+        "os23-7"
+      ],
+      "meshPatterns": [
+        "intestinal[ _-]?villi",
+        "villus",
+        "microvilli"
+      ]
+    },
+    {
+      "id": "large-intestine",
+      "name": "Intestino grosso",
+      "system": "digestive",
+      "aliases": [
+        "cólon",
+        "ceco",
+        "reto"
+      ],
+      "shortFunction": "Recupera água e eletrólitos e forma as fezes.",
+      "function": "Abriga microbiota que fermenta parte dos resíduos; o reto participa do armazenamento final.",
+      "mechanism": "A absorção ajusta a consistência do conteúdo; movimentos musculares o conduzem à eliminação.",
+      "uerj": "Relacionar microbiota, fermentação e reaproveitamento de água.",
+      "commonMistake": "Dizer que só o intestino grosso absorve água: o delgado recupera a maior parte.",
+      "sourceIds": [
+        "os23-5"
+      ],
+      "meshPatterns": [
+        "large[ _-]?intestine",
+        "colon",
+        "caecum",
+        "cecum",
+        "rectum"
+      ]
+    },
+    {
+      "id": "brain",
+      "name": "Encéfalo",
+      "system": "nervous",
+      "aliases": [
+        "cérebro em sentido amplo"
+      ],
+      "shortFunction": "Integra informação e coordena respostas do organismo.",
+      "function": "Compreende cérebro, cerebelo e tronco encefálico, entre outras regiões interligadas.",
+      "mechanism": "Circuitos neurais combinam sinais sensoriais, memória e comandos motores ou autonômicos.",
+      "uerj": "Relacionar integração nervosa, comportamento e manutenção da homeostase.",
+      "commonMistake": "Tratar encéfalo e cérebro como termos anatômicos rigorosamente equivalentes.",
+      "sourceIds": [
+        "os13-2"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])brain($|[ _-])",
+        "encephalon"
+      ]
+    },
+    {
+      "id": "cerebral-cortex",
+      "name": "Córtex cerebral",
+      "system": "nervous",
+      "aliases": [
+        "cérebro",
+        "córtex"
+      ],
+      "shortFunction": "Participa de percepção consciente, linguagem e planejamento de ações.",
+      "function": "Áreas corticais especializadas funcionam em redes, integrando funções sensoriais e motoras.",
+      "mechanism": "A atividade e a comunicação entre neurônios permitem representação de estímulos e seleção de respostas.",
+      "uerj": "Relacionar localização funcional a vias sensoriais e motoras sem reduzir funções complexas a um único ponto.",
+      "commonMistake": "Afirmar que cada pensamento depende de uma área isolada que não se comunica com outras.",
+      "sourceIds": [
+        "os13-2",
+        "os14-3"
+      ],
+      "meshPatterns": [
+        "cerebral[ _-]?cortex",
+        "cerebrum"
+      ]
+    },
+    {
+      "id": "cerebellum",
+      "name": "Cerebelo",
+      "system": "nervous",
+      "aliases": [],
+      "shortFunction": "Ajusta coordenação, precisão e equilíbrio do movimento.",
+      "function": "Compara sinais relacionados ao movimento e participa da aprendizagem motora.",
+      "mechanism": "Integra informações sensoriais e motoras para corrigir diferenças entre ação pretendida e executada.",
+      "uerj": "Distinguir comando motor e coordenação; relacionar propriocepção e ajuste do movimento.",
+      "commonMistake": "Dizer que o cerebelo é o único local que inicia movimentos voluntários.",
+      "sourceIds": [
+        "os13-2",
+        "os14-3"
+      ],
+      "meshPatterns": [
+        "cerebell"
+      ]
+    },
+    {
+      "id": "brainstem",
+      "name": "Tronco encefálico",
+      "system": "nervous",
+      "aliases": [
+        "mesencéfalo",
+        "ponte",
+        "bulbo",
+        "medula oblonga"
+      ],
+      "shortFunction": "Conecta regiões encefálicas e participa de funções vitais.",
+      "function": "Abriga vias e núcleos relacionados à respiração, circulação e vários reflexos.",
+      "mechanism": "Circuitos recebem informações viscerais e ajustam respostas automáticas.",
+      "uerj": "Relacionar controle da ventilação às informações sobre CO₂ e pH.",
+      "commonMistake": "Confundir bulbo encefálico com medula espinal.",
+      "sourceIds": [
+        "os13-2",
+        "os22-3"
+      ],
+      "meshPatterns": [
+        "brain[ _-]?stem",
+        "medulla[ _-]?oblongata",
+        "(^|[ _-])pons($|[ _-])",
+        "midbrain"
+      ]
+    },
+    {
+      "id": "spinal-cord",
+      "name": "Medula espinal",
+      "system": "nervous",
+      "aliases": [
+        "medula espinhal"
+      ],
+      "shortFunction": "Conduz sinais e integra muitos reflexos.",
+      "function": "Conecta encéfalo e periferia; circuitos locais podem gerar respostas rápidas.",
+      "mechanism": "Vias aferentes levam sinais ao SNC; vias eferentes os conduzem a efetores.",
+      "uerj": "Ordenar o arco reflexo: receptor → via sensitiva → integração → via motora → efetor.",
+      "commonMistake": "Dizer que todo reflexo precisa de decisão consciente ou confundir medula espinal com medula óssea.",
+      "sourceIds": [
+        "os13-2",
+        "os14-3"
+      ],
+      "meshPatterns": [
+        "spinal[ _-]?cord"
+      ]
+    },
+    {
+      "id": "peripheral-nerves",
+      "name": "Nervos periféricos",
+      "system": "nervous",
+      "aliases": [
+        "nervos cranianos",
+        "nervos espinais"
+      ],
+      "shortFunction": "Conectam o SNC aos órgãos e tecidos.",
+      "function": "São feixes de axônios; podem conduzir informação sensitiva, motora ou ambas.",
+      "mechanism": "Potenciais de ação percorrem axônios e levam informação entre receptores, SNC e efetores.",
+      "uerj": "Distinguir neurônio de nervo e diferenciar vias aferentes e eferentes.",
+      "commonMistake": "Definir nervo como um único neurônio ou como feixe de vasos sanguíneos.",
+      "sourceIds": [
+        "os13-4",
+        "os12-2"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])nerve(s)?($|[ _-])"
+      ]
+    },
+    {
+      "id": "neuron",
+      "name": "Neurônio",
+      "system": "nervous",
+      "aliases": [
+        "célula nervosa"
+      ],
+      "shortFunction": "Recebe, integra e transmite sinais.",
+      "function": "Dendritos, corpo celular e axônio contribuem para a comunicação; a mielina acelera condução em muitos axônios.",
+      "mechanism": "Canais de Na⁺ e K⁺ dependentes de voltagem participam do potencial de ação; a mielina permite condução saltatória entre nós.",
+      "uerj": "Interpretar potencial de ação, limiar e condução saltatória.",
+      "commonMistake": "Dizer que um estímulo mais forte sempre produz um potencial de ação de maior amplitude.",
+      "sourceIds": [
+        "os12-2",
+        "os12-4"
+      ],
+      "meshPatterns": [
+        "neuron",
+        "axon",
+        "dendrite"
+      ]
+    },
+    {
+      "id": "synapse",
+      "name": "Sinapse",
+      "system": "nervous",
+      "aliases": [
+        "sinapse química"
+      ],
+      "shortFunction": "Permite comunicação entre células excitáveis.",
+      "function": "Na sinapse química, neurotransmissores ligam sinais de uma célula à resposta da seguinte.",
+      "mechanism": "A chegada do potencial abre canais de Ca²⁺; vesículas liberam neurotransmissor, que se liga a receptores pós-sinápticos.",
+      "uerj": "Explicar como bloquear canais, receptores ou degradação do transmissor modifica a resposta.",
+      "commonMistake": "Dizer que o neurotransmissor atravessa o axônio ou que toda sinapse é obrigatoriamente excitatória.",
+      "sourceIds": [
+        "os12-5"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "autonomic-nervous-system",
+      "name": "Sistema nervoso autônomo",
+      "system": "nervous",
+      "aliases": [
+        "simpático",
+        "parassimpático",
+        "SNA"
+      ],
+      "shortFunction": "Regula funções viscerais de forma predominantemente involuntária.",
+      "function": "Modula músculo cardíaco, músculo liso e glândulas; simpático e parassimpático têm ações dependentes do órgão.",
+      "mechanism": "Transmissores agem em receptores específicos, alterando frequência cardíaca, secreção e calibre de vias.",
+      "uerj": "Comparar respostas no exercício e no repouso, usando o efeito concreto sobre um órgão.",
+      "commonMistake": "Dizer que simpático sempre estimula tudo e parassimpático sempre inibe tudo.",
+      "sourceIds": [
+        "os15-1"
+      ],
+      "meshPatterns": [
+        "sympathetic",
+        "parasympathetic",
+        "autonomic"
+      ]
+    },
+    {
+      "id": "eye",
+      "name": "Olho",
+      "system": "nervous",
+      "aliases": [
+        "globo ocular"
+      ],
+      "shortFunction": "Converte luz em informação para a visão.",
+      "function": "Córnea e cristalino focalizam luz na retina; cones e bastonetes realizam fototransdução.",
+      "mechanism": "A luz modifica pigmentos e a atividade dos fotorreceptores; circuitos retinianos transmitem sinais pelo nervo óptico.",
+      "uerj": "Relacionar óptica, receptores e vias nervosas; comparar visão em pouca luz e percepção de cores.",
+      "commonMistake": "Afirmar que o cristalino produz o sinal nervoso ou que a pupila é uma estrutura sólida.",
+      "sourceIds": [
+        "os14-1"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])(eye|eyeball)($|[ _-])",
+        "retina",
+        "cornea",
+        "lens",
+        "iris"
+      ]
+    },
+    {
+      "id": "ear",
+      "name": "Orelha e ouvido interno",
+      "system": "nervous",
+      "aliases": [
+        "ouvido",
+        "orelha",
+        "cóclea",
+        "vestíbulo"
+      ],
+      "shortFunction": "Participa de audição e equilíbrio.",
+      "function": "Orelhas externa e média conduzem vibrações; cóclea e aparelho vestibular transformam estímulos mecânicos em sinais.",
+      "mechanism": "Movimento de líquido desloca estruturas associadas a células ciliadas, alterando sua atividade elétrica.",
+      "uerj": "Distinguir recepção do som, amplificação mecânica e transdução; conectar equilíbrio a movimento da cabeça.",
+      "commonMistake": "Dizer que o tímpano converte diretamente som em impulsos ou que a cóclea é responsável por todo o equilíbrio.",
+      "sourceIds": [
+        "os14-1"
+      ],
+      "meshPatterns": [
+        "cochlea",
+        "vestibul",
+        "semicircular",
+        "tympan",
+        "(^|[ _-])ear($|[ _-])"
+      ]
+    },
+    {
+      "id": "hypothalamus",
+      "name": "Hipotálamo",
+      "system": "endocrine",
+      "aliases": [],
+      "shortFunction": "Integra controle nervoso e endócrino da homeostase.",
+      "function": "Participa de fome, sede, temperatura e ritmos; regula a hipófise e sintetiza ADH e ocitocina.",
+      "mechanism": "Detecta e integra sinais internos; libera fatores que controlam a adeno-hipófise ou sinais conduzidos à neuro-hipófise.",
+      "uerj": "Explicar integração entre temperatura, osmolaridade, sistema nervoso e hormônios.",
+      "commonMistake": "Afirmar que o hipotálamo é apenas uma glândula sem neurônios.",
+      "sourceIds": [
+        "os17-3",
+        "os13-2"
+      ],
+      "meshPatterns": [
+        "hypothalam"
+      ]
+    },
+    {
+      "id": "pituitary",
+      "name": "Hipófise",
+      "system": "endocrine",
+      "aliases": [
+        "glândula pituitária",
+        "adeno-hipófise",
+        "neuro-hipófise"
+      ],
+      "shortFunction": "Participa de eixos hormonais e libera sinais sistêmicos.",
+      "function": "A porção anterior secreta GH, prolactina, TSH, ACTH, FSH e LH; a posterior libera ADH e ocitocina sintetizados no hipotálamo.",
+      "mechanism": "Sinais hipotalâmicos e retroalimentação regulam sua secreção; os hormônios atuam em tecidos e outras glândulas.",
+      "uerj": "Distinguir síntese e liberação hormonal; relacionar prolactina à produção e ocitocina à ejeção do leite.",
+      "commonMistake": "Chamar a hipófise de comando independente ou dizer que a neuro-hipófise sintetiza seus hormônios.",
+      "sourceIds": [
+        "os17-3"
+      ],
+      "meshPatterns": [
+        "pituitary",
+        "hypophys"
+      ]
+    },
+    {
+      "id": "thyroid",
+      "name": "Tireoide",
+      "system": "endocrine",
+      "aliases": [
+        "glândula tireoidea"
+      ],
+      "shortFunction": "Produz T₃ e T₄, importantes para metabolismo e desenvolvimento.",
+      "function": "O iodo integra esses hormônios; células C também secretam calcitonina.",
+      "mechanism": "TRH favorece TSH, que estimula a tireoide; T₃/T₄ regulam expressão gênica e reduzem estímulos do eixo por retroalimentação.",
+      "uerj": "Interpretar curvas do eixo e relacionar disponibilidade de iodo e produção hormonal.",
+      "commonMistake": "Confundir tireoide e paratireoides ou afirmar que TSH é secretado pela tireoide.",
+      "sourceIds": [
+        "os17-4",
+        "os17-2"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])thyroid($|[ _-])"
+      ]
+    },
+    {
+      "id": "parathyroid",
+      "name": "Paratireoides",
+      "system": "endocrine",
+      "aliases": [
+        "glândulas paratireoideas"
+      ],
+      "shortFunction": "Secretam PTH para regular o cálcio no sangue.",
+      "function": "Atuam em conjunto com rins, osso e vitamina D ativa.",
+      "mechanism": "Queda de Ca²⁺ favorece PTH, que aumenta sua recuperação renal e favorece calcitriol e mobilização de cálcio ósseo.",
+      "uerj": "Construir uma explicação integrada para recuperação da concentração de cálcio.",
+      "commonMistake": "Dizer que PTH reduz a calcemia ou que sua principal ação é produzir hormônios tireoidianos.",
+      "sourceIds": [
+        "os17-5"
+      ],
+      "meshPatterns": [
+        "parathyroid"
+      ]
+    },
+    {
+      "id": "adrenal-glands",
+      "name": "Glândulas suprarrenais",
+      "system": "endocrine",
+      "aliases": [
+        "adrenais",
+        "córtex adrenal",
+        "medula adrenal"
+      ],
+      "shortFunction": "Produzem hormônios de controle metabólico, iônico e resposta ao estresse.",
+      "function": "O córtex produz cortisol e aldosterona; a medula libera catecolaminas, como adrenalina.",
+      "mechanism": "ACTH estimula cortisol; angiotensina II e K⁺ regulam aldosterona; sinais simpáticos ativam a medula.",
+      "uerj": "Comparar córtex e medula e integrar resposta ao exercício, metabolismo e osmorregulação.",
+      "commonMistake": "Tratar adrenalina, cortisol e aldosterona como hormônios iguais ou todos controlados principalmente por ACTH.",
+      "sourceIds": [
+        "os17-6",
+        "os25-8"
+      ],
+      "meshPatterns": [
+        "adrenal",
+        "suprarenal"
+      ]
+    },
+    {
+      "id": "pancreatic-islets",
+      "name": "Ilhotas pancreáticas",
+      "system": "endocrine",
+      "aliases": [
+        "ilhotas de Langerhans",
+        "pâncreas endócrino"
+      ],
+      "shortFunction": "Regulam a disponibilidade de glicose no sangue.",
+      "function": "Células beta secretam insulina; células alfa secretam glucagon.",
+      "mechanism": "Insulina favorece GLUT4 na membrana de músculo e tecido adiposo e o armazenamento de nutrientes; glucagon favorece glicogenólise e gliconeogênese hepáticas no jejum.",
+      "uerj": "Comparar jejum e estado alimentado e interpretar curvas de glicose, insulina e glucagon.",
+      "commonMistake": "Dizer que todas as células precisam de insulina para receber glicose ou que glucagon age principalmente no músculo para liberar glicose ao sangue.",
+      "sourceIds": [
+        "os17-9"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "pineal-gland",
+      "name": "Glândula pineal",
+      "system": "endocrine",
+      "aliases": [
+        "epífise"
+      ],
+      "shortFunction": "Libera melatonina e participa da organização dos ritmos diários.",
+      "function": "Sua atividade está ligada a informações de claro e escuro processadas pelo sistema nervoso.",
+      "mechanism": "A secreção de melatonina tende a ser maior no período escuro, fornecendo um sinal temporal ao organismo.",
+      "uerj": "Relacionar estímulo luminoso, controle nervoso e ritmo hormonal.",
+      "commonMistake": "Dizer que a pineal recebe luz diretamente como um olho humano.",
+      "sourceIds": [
+        "os17-7"
+      ],
+      "meshPatterns": [
+        "pineal",
+        "epiphysis[ _-]?cerebri"
+      ]
+    },
+    {
+      "id": "negative-feedback",
+      "name": "Retroalimentação hormonal negativa",
+      "system": "endocrine",
+      "aliases": [
+        "feedback negativo",
+        "homeostase endócrina"
+      ],
+      "shortFunction": "Limita desvios de variáveis e de secreções hormonais.",
+      "function": "O resultado de uma via reduz o estímulo que a iniciou, contribuindo para estabilidade dinâmica.",
+      "mechanism": "No eixo tireoidiano, aumento de T₃/T₄ reduz estímulos de TRH e TSH.",
+      "uerj": "Usar direção das setas e concentrações hormonais para explicar regulação e prever efeitos de uma intervenção.",
+      "commonMistake": "Dizer que retroalimentação negativa impede qualquer mudança ou confundi-la com feedback positivo do parto.",
+      "sourceIds": [
+        "os17-2",
+        "os17-4"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "ovaries",
+      "name": "Ovários",
+      "system": "reproductive",
+      "aliases": [
+        "ovário direito",
+        "ovário esquerdo"
+      ],
+      "shortFunction": "Produzem oócitos e hormônios reprodutivos.",
+      "function": "Folículos e corpo lúteo participam da secreção de estrógenos e progesterona.",
+      "mechanism": "FSH e LH regulam a atividade ovariana; o pico de LH desencadeia a ovulação.",
+      "uerj": "Relacionar curvas hormonais, meiose e fases do ciclo ovariano.",
+      "commonMistake": "Dizer que todo ciclo dura exatamente 28 dias ou que o oócito ovulado já completou a meiose II.",
+      "sourceIds": [
+        "os27-2",
+        "os27-review"
+      ],
+      "meshPatterns": [
+        "ovar"
+      ]
+    },
+    {
+      "id": "uterine-tubes",
+      "name": "Tubas uterinas",
+      "system": "reproductive",
+      "aliases": [
+        "trompas de Falópio",
+        "ovidutos"
+      ],
+      "shortFunction": "Conduzem o oócito e o embrião inicial ao útero.",
+      "function": "A fecundação ocorre habitualmente na região ampular da tuba.",
+      "mechanism": "Batimento de cílios e contração do músculo liso colaboram para o transporte.",
+      "uerj": "Integrar cílios, motilidade e reprodução; distinguir fecundação de implantação.",
+      "commonMistake": "Afirmar que a fecundação normalmente ocorre no útero.",
+      "sourceIds": [
+        "os27-2",
+        "os28-2"
+      ],
+      "meshPatterns": [
+        "uterine[ _-]?tube",
+        "fallopian",
+        "oviduct"
+      ]
+    },
+    {
+      "id": "uterus",
+      "name": "Útero",
+      "system": "reproductive",
+      "aliases": [
+        "miométrio"
+      ],
+      "shortFunction": "Abriga e sustenta o desenvolvimento embrionário e fetal.",
+      "function": "Sua mucosa recebe a implantação; o miométrio participa das contrações do parto.",
+      "mechanism": "Durante o parto, estiramento cervical e ocitocina podem amplificar contrações por feedback positivo.",
+      "uerj": "Relacionar tecido muscular, hormônios e retroalimentação; comparar feedback positivo e negativo.",
+      "commonMistake": "Dizer que o útero produz oócitos ou que a ocitocina é produzida no miométrio.",
+      "sourceIds": [
+        "os27-2",
+        "os17-3"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])uterus($|[ _-])",
+        "myometrium"
+      ]
+    },
+    {
+      "id": "endometrium",
+      "name": "Endométrio",
+      "system": "reproductive",
+      "aliases": [
+        "mucosa uterina"
+      ],
+      "shortFunction": "Oferece a superfície para implantação e passa por mudanças cíclicas.",
+      "function": "Sua camada funcional cresce, diferencia-se e pode ser eliminada na menstruação.",
+      "mechanism": "Estrógenos favorecem proliferação; progesterona favorece preparação secretora; queda hormonal permite descamação.",
+      "uerj": "Relacionar fases do ciclo, corpo lúteo e espessura endometrial.",
+      "commonMistake": "Definir menstruação como eliminação do óvulo ou de toda a parede uterina.",
+      "sourceIds": [
+        "os27-2",
+        "os27-review"
+      ],
+      "meshPatterns": [
+        "endometrium",
+        "endometrial"
+      ]
+    },
+    {
+      "id": "vagina",
+      "name": "Vagina",
+      "system": "reproductive",
+      "aliases": [
+        "canal vaginal"
+      ],
+      "shortFunction": "Participa da relação sexual, saída menstrual e parto.",
+      "function": "É um canal muscular revestido por epitélio, distinto da uretra e do colo uterino.",
+      "mechanism": "Sua distensibilidade permite passagem; lactobacilos contribuem para um meio geralmente ácido na idade reprodutiva.",
+      "uerj": "Distinguir os trajetos urinário e reprodutivo e relacionar microbiota a condições locais.",
+      "commonMistake": "Dizer que vagina e vulva são a mesma estrutura ou que a urina normalmente sai pela vagina.",
+      "sourceIds": [
+        "os27-2"
+      ],
+      "meshPatterns": [
+        "vagina"
+      ]
+    },
+    {
+      "id": "testes",
+      "name": "Testículos",
+      "system": "reproductive",
+      "aliases": [
+        "gônadas masculinas",
+        "túbulos seminíferos"
+      ],
+      "shortFunction": "Produzem espermatozoides e testosterona.",
+      "function": "Túbulos seminíferos abrigam espermatogênese; células de Leydig produzem testosterona.",
+      "mechanism": "FSH atua nas células de Sertoli; LH estimula Leydig. A meiose reduz a ploidia dos gametas.",
+      "uerj": "Comparar espermatogênese e ovogênese e conectar hormônios às células-alvo.",
+      "commonMistake": "Dizer que os espermatozoides são produzidos pela próstata ou que Leydig produz FSH.",
+      "sourceIds": [
+        "os27-1",
+        "os27-review"
+      ],
+      "meshPatterns": [
+        "testis",
+        "testes",
+        "testicle",
+        "seminiferous"
+      ]
+    },
+    {
+      "id": "epididymis",
+      "name": "Epidídimo",
+      "system": "reproductive",
+      "aliases": [],
+      "shortFunction": "Participa da maturação e armazenamento de espermatozoides.",
+      "function": "É um ducto muito enrolado associado a cada testículo.",
+      "mechanism": "Durante o trânsito, espermatozoides adquirem características necessárias à motilidade e à futura fecundação.",
+      "uerj": "Ordenar produção, maturação e transporte; distinguir maturação epididimária de capacitação.",
+      "commonMistake": "Dizer que maturação no epidídimo equivale à capacitação, que ocorre posteriormente.",
+      "sourceIds": [
+        "os27-1",
+        "os27-review"
+      ],
+      "meshPatterns": [
+        "epididym"
+      ]
+    },
+    {
+      "id": "vas-deferens",
+      "name": "Ductos deferentes",
+      "system": "reproductive",
+      "aliases": [
+        "canais deferentes",
+        "vas deferens"
+      ],
+      "shortFunction": "Conduzem espermatozoides do epidídimo aos ductos ejaculatórios.",
+      "function": "A parede muscular favorece transporte durante a ejaculação.",
+      "mechanism": "Contrações deslocam espermatozoides; a interrupção do ducto bloqueia sua passagem, sem retirar os testículos.",
+      "uerj": "Distinguir transporte dos gametas e produção hormonal ao analisar uma intervenção no ducto.",
+      "commonMistake": "Afirmar que interromper o deferente impede necessariamente a produção de testosterona ou de todo o sêmen.",
+      "sourceIds": [
+        "os27-1",
+        "os27-review"
+      ],
+      "meshPatterns": [
+        "vas[ _-]?deferens",
+        "ductus[ _-]?deferens"
+      ]
+    },
+    {
+      "id": "prostate",
+      "name": "Próstata",
+      "system": "reproductive",
+      "aliases": [
+        "glândula prostática"
+      ],
+      "shortFunction": "Contribui com secreções para o líquido seminal.",
+      "function": "Sua secreção contém componentes que participam das condições de transporte dos espermatozoides.",
+      "mechanism": "Enzimas prostáticas contribuem para a liquefação do sêmen após a ejaculação.",
+      "uerj": "Distinguir gônadas, glândulas acessórias e ductos e relacionar secreção à função.",
+      "commonMistake": "Dizer que a próstata fabrica espermatozoides ou produz a maior parte da testosterona.",
+      "sourceIds": [
+        "os27-1"
+      ],
+      "meshPatterns": [
+        "prostate",
+        "prostatic"
+      ]
+    },
+    {
+      "id": "placenta",
+      "name": "Placenta",
+      "system": "reproductive",
+      "aliases": [],
+      "shortFunction": "Permite trocas entre mãe e embrião/feto e secreta hormônios.",
+      "function": "Integra tecidos de origem materna e fetal; hCG ajuda a manter o corpo lúteo no início da gestação.",
+      "mechanism": "Gases e nutrientes atravessam a interface placentária por mecanismos específicos; os sangues não formam normalmente uma circulação única.",
+      "uerj": "Relacionar superfície, transporte, hormônios e circulação fetal.",
+      "commonMistake": "Dizer que a placenta bloqueia todas as substâncias ou que sangue materno e fetal se misturam livremente em condições normais.",
+      "sourceIds": [
+        "os28-2"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "uterine-cervix",
+      "name": "Colo do útero",
+      "system": "reproductive",
+      "aliases": [
+        "cérvix"
+      ],
+      "shortFunction": "Liga o útero à vagina e regula a passagem pelo muco.",
+      "function": "O muco cervical varia ao longo do ciclo; o colo dilata durante o parto.",
+      "mechanism": "Estrógenos próximos à ovulação favorecem muco mais permeável; progesterona favorece muco menos permeável.",
+      "uerj": "Relacionar composição do muco, variação hormonal e passagem de espermatozoides.",
+      "commonMistake": "Tratar o colo como parte da uretra ou como órgão produtor de gametas.",
+      "sourceIds": [
+        "os27-2"
+      ],
+      "meshPatterns": [
+        "cervix",
+        "cervical[ _-]?canal"
+      ]
+    },
+    {
+      "id": "seminal-vesicles",
+      "name": "Vesículas seminais",
+      "system": "reproductive",
+      "aliases": [
+        "glândulas seminais"
+      ],
+      "shortFunction": "Fornecem parte importante do líquido seminal.",
+      "function": "Sua secreção inclui frutose e outras substâncias do sêmen.",
+      "mechanism": "Frutose pode servir como substrato energético; a mistura das secreções glandulares com espermatozoides forma o sêmen.",
+      "uerj": "Relacionar composição, metabolismo e motilidade do gameta.",
+      "commonMistake": "Dizer que vesículas seminais armazenam ou produzem espermatozoides.",
+      "sourceIds": [
+        "os27-1",
+        "os27-review"
+      ],
+      "meshPatterns": [
+        "seminal[ _-]?(vesicle|gland)"
+      ]
+    },
+    {
+      "id": "penis",
+      "name": "Pênis",
+      "system": "reproductive",
+      "aliases": [
+        "corpos cavernosos",
+        "corpo esponjoso"
+      ],
+      "shortFunction": "Permite eliminação urinária e deposição de sêmen.",
+      "function": "Contém uretra e tecidos eréteis; a passagem de urina e de sêmen ocorre em situações distintas.",
+      "mechanism": "Relaxamento do músculo liso aumenta entrada de sangue e limita sua drenagem, produzindo ereção.",
+      "uerj": "Relacionar resposta nervosa, calibre vascular e preenchimento de tecidos eréteis.",
+      "commonMistake": "Dizer que a ereção resulta do enchimento por urina ou da contração do próprio pênis como músculo esquelético.",
+      "sourceIds": [
+        "os27-1"
+      ],
+      "meshPatterns": [
+        "penis",
+        "penile",
+        "corpus[ _-]?cavernosum",
+        "corpus[ _-]?spongiosum"
+      ]
+    },
+    {
+      "id": "mammary-glands",
+      "name": "Glândulas mamárias",
+      "system": "reproductive",
+      "aliases": [
+        "mamas"
+      ],
+      "shortFunction": "Produzem e liberam leite durante a lactação.",
+      "function": "Prolactina participa da produção; ocitocina participa da ejeção.",
+      "mechanism": "A sucção ativa sinais nervosos; prolactina estimula células secretoras e ocitocina contrai células mioepiteliais.",
+      "uerj": "Distinguir produção de secreção, transporte e ejeção e integrar controle nervoso e endócrino.",
+      "commonMistake": "Trocar as funções de prolactina e ocitocina.",
+      "sourceIds": [
+        "os17-3",
+        "os28-6"
+      ],
+      "meshPatterns": [
+        "mammary",
+        "breast"
+      ]
+    },
+    {
+      "id": "skeletal-muscle",
+      "name": "Músculo esquelético",
+      "system": "musculoskeletal",
+      "aliases": [
+        "musculatura estriada esquelética"
+      ],
+      "shortFunction": "Gera força, movimento, postura e calor.",
+      "function": "Fibras musculares respondem a neurônios motores; tendões transmitem sua força a outras estruturas.",
+      "mechanism": "O estímulo elétrico favorece liberação de Ca²⁺ intracelular e ativação do ciclo actina–miosina.",
+      "uerj": "Integrar sistema nervoso, ATP e contração; comparar tipos de tecido muscular.",
+      "commonMistake": "Afirmar que músculos só usam ATP quando se encurtam: manter tensão e relaxar também requer processos energéticos.",
+      "sourceIds": [
+        "os10-2",
+        "os10-3"
+      ],
+      "meshPatterns": [
+        "skeletal[ _-]?muscle"
+      ]
+    },
+    {
+      "id": "sarcomere",
+      "name": "Sarcômero",
+      "system": "musculoskeletal",
+      "aliases": [
+        "actina e miosina"
+      ],
+      "shortFunction": "É a unidade contrátil repetitiva do músculo estriado.",
+      "function": "Filamentos finos e grossos alteram sua sobreposição durante a contração.",
+      "mechanism": "Ca²⁺ se liga à troponina, deslocando tropomiosina; pontes de miosina usam ATP para deslocar actina.",
+      "uerj": "Explicar o modelo dos filamentos deslizantes e interpretar alterações de bandas em esquemas.",
+      "commonMistake": "Dizer que actina e miosina se tornam mais curtas ou que ATP serve apenas para o golpe de força.",
+      "sourceIds": [
+        "os10-3"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "bone",
+      "name": "Osso e tecido ósseo",
+      "system": "musculoskeletal",
+      "aliases": [
+        "ossos",
+        "esqueleto"
+      ],
+      "shortFunction": "Sustenta, protege e funciona como reserva mineral.",
+      "function": "É tecido vivo com matriz rica em colágeno e minerais; remodela-se continuamente.",
+      "mechanism": "Osteoblastos formam matriz; osteoclastos promovem reabsorção. A mineralização aumenta rigidez.",
+      "uerj": "Relacionar matriz, resistência, remodelação e homeostase de Ca²⁺.",
+      "commonMistake": "Dizer que osso é uma estrutura morta ou que osteoblastos e osteoclastos fazem a mesma função.",
+      "sourceIds": [
+        "os6-1",
+        "os6-3",
+        "os6-6"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])bone(s)?($|[ _-])",
+        "osseous"
+      ]
+    },
+    {
+      "id": "bone-marrow",
+      "name": "Medula óssea",
+      "system": "musculoskeletal",
+      "aliases": [
+        "medula vermelha",
+        "medula amarela"
+      ],
+      "shortFunction": "Produz células sanguíneas e abriga reserva lipídica.",
+      "function": "A medula vermelha realiza hematopoiese; a amarela é rica em adipócitos.",
+      "mechanism": "Células-tronco hematopoéticas geram diferentes linhagens; eritropoetina favorece a produção da linhagem eritroide.",
+      "uerj": "Integrar hipóxia, sinal renal e produção de hemácias; distinguir medulas óssea e espinal.",
+      "commonMistake": "Atribuir à medula óssea a condução de impulsos nervosos.",
+      "sourceIds": [
+        "os6-3",
+        "os18-3"
+      ],
+      "meshPatterns": [
+        "bone[ _-]?marrow"
+      ]
+    },
+    {
+      "id": "synovial-joints",
+      "name": "Articulações sinoviais",
+      "system": "musculoskeletal",
+      "aliases": [
+        "juntas",
+        "articulações móveis"
+      ],
+      "shortFunction": "Permitem movimento entre ossos com baixo atrito.",
+      "function": "Contêm cavidade articular, cartilagem, cápsula e líquido sinovial.",
+      "mechanism": "Cartilagem e lubrificação reduzem atrito; ligamentos e músculos contribuem para estabilidade.",
+      "uerj": "Relacionar forma da articulação, amplitude de movimento e distribuição de força.",
+      "commonMistake": "Dizer que toda articulação possui cavidade sinovial ou é livremente móvel.",
+      "sourceIds": [
+        "os9-4"
+      ],
+      "meshPatterns": [
+        "synovial",
+        "joint"
+      ]
+    },
+    {
+      "id": "cartilage",
+      "name": "Cartilagem",
+      "system": "musculoskeletal",
+      "aliases": [
+        "tecido cartilaginoso"
+      ],
+      "shortFunction": "Fornece suporte flexível e proteção mecânica.",
+      "function": "A cartilagem articular reveste superfícies ósseas; outros tipos sustentam vias e estruturas.",
+      "mechanism": "Sua matriz, produzida por condrócitos, resiste a cargas; em geral não há vasos no interior do tecido.",
+      "uerj": "Relacionar matriz extracelular, avascularidade e nutrição por difusão.",
+      "commonMistake": "Dizer que toda cartilagem é osso imaturo ou que todos os tipos possuem a mesma composição.",
+      "sourceIds": [
+        "os4-3",
+        "os9-4"
+      ],
+      "meshPatterns": [
+        "cartilage",
+        "cartilagin"
+      ]
+    },
+    {
+      "id": "tendons",
+      "name": "Tendões",
+      "system": "musculoskeletal",
+      "aliases": [
+        "tecido conjuntivo tendíneo"
+      ],
+      "shortFunction": "Transmitem força muscular.",
+      "function": "Em geral ligam músculos a ossos; sua organização de colágeno resiste à tração.",
+      "mechanism": "Feixes orientados na direção de carga transferem força entre músculo e ponto de inserção.",
+      "uerj": "Relacionar orientação das fibras e função mecânica.",
+      "commonMistake": "Confundir tendão com ligamento ou dizer que tendão se contrai como músculo.",
+      "sourceIds": [
+        "os4-3",
+        "os10-2"
+      ],
+      "meshPatterns": [
+        "tendon"
+      ]
+    },
+    {
+      "id": "ligaments",
+      "name": "Ligamentos",
+      "system": "musculoskeletal",
+      "aliases": [
+        "tecido conjuntivo ligamentar"
+      ],
+      "shortFunction": "Estabilizam conexões entre estruturas.",
+      "function": "Nas articulações, normalmente ligam osso a osso e limitam movimentos excessivos.",
+      "mechanism": "A matriz fibrosa resiste a tensões e contribui para preservar o alinhamento.",
+      "uerj": "Comparar tendão e ligamento e relacionar estabilidade a amplitude de movimento.",
+      "commonMistake": "Dizer que ligamentos têm como função geral transmitir contração de um músculo ao osso.",
+      "sourceIds": [
+        "os4-3",
+        "os9-4"
+      ],
+      "meshPatterns": [
+        "ligament"
+      ]
+    },
+    {
+      "id": "skin",
+      "name": "Pele",
+      "system": "integumentary",
+      "aliases": [
+        "tegumento"
+      ],
+      "shortFunction": "Protege o organismo e participa da sensibilidade e termorregulação.",
+      "function": "Sua organização em epiderme e derme limita perda de água e abriga receptores e anexos.",
+      "mechanism": "Barreira epitelial reduz passagem de substâncias; circulação cutânea e suor modulam trocas de calor.",
+      "uerj": "Integrar tecido epitelial, homeostase hídrica, receptores e temperatura.",
+      "commonMistake": "Tratar a pele como barreira absolutamente impermeável ou incluir a hipoderme como uma das duas camadas da pele propriamente dita.",
+      "sourceIds": [
+        "os5-1",
+        "os5-3"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])skin($|[ _-])",
+        "integument"
+      ]
+    },
+    {
+      "id": "epidermis",
+      "name": "Epiderme",
+      "system": "integumentary",
+      "aliases": [
+        "camada superficial da pele"
+      ],
+      "shortFunction": "Forma a principal barreira externa.",
+      "function": "É epitélio estratificado queratinizado, sem vasos; melanócitos fornecem pigmento a queratinócitos.",
+      "mechanism": "Renovação celular e lipídios entre células cornificadas ajudam a reduzir perda de água.",
+      "uerj": "Relacionar diferenciação celular, queratina, melanina e proteção.",
+      "commonMistake": "Dizer que melanina é produzida principalmente pelos queratinócitos ou que a epiderme é vascularizada.",
+      "sourceIds": [
+        "os5-1"
+      ],
+      "meshPatterns": [
+        "epiderm"
+      ]
+    },
+    {
+      "id": "dermis",
+      "name": "Derme",
+      "system": "integumentary",
+      "aliases": [
+        "camada conjuntiva da pele"
+      ],
+      "shortFunction": "Dá suporte e abriga vasos, receptores e anexos.",
+      "function": "Contém matriz conjuntiva com colágeno e fibras elásticas.",
+      "mechanism": "Sua vascularização nutre tecidos e ajusta a troca de calor; receptores convertem estímulos em sinais nervosos.",
+      "uerj": "Relacionar vascularização cutânea, nutrição da epiderme e termorregulação.",
+      "commonMistake": "Dizer que a derme é o epitélio superficial que descama.",
+      "sourceIds": [
+        "os5-1",
+        "os5-3"
+      ],
+      "meshPatterns": [
+        "(^|[ _-])dermis($|[ _-])"
+      ]
+    },
+    {
+      "id": "sweat-glands",
+      "name": "Glândulas sudoríparas",
+      "system": "integumentary",
+      "aliases": [
+        "glândulas écrinas",
+        "suor"
+      ],
+      "shortFunction": "Produzem suor e participam do controle térmico.",
+      "function": "Glândulas écrinas liberam secreção aquosa na superfície, sob controle nervoso.",
+      "mechanism": "A evaporação do suor retira calor; alta umidade reduz a eficiência desse mecanismo.",
+      "uerj": "Explicar balanço de calor e conectar sudorese, água, sais e osmorregulação.",
+      "commonMistake": "Dizer que produzir muito suor garante resfriamento mesmo quando ele não evapora.",
+      "sourceIds": [
+        "os5-2",
+        "os5-3"
+      ],
+      "meshPatterns": [
+        "sweat[ _-]?gland",
+        "sudoriferous"
+      ]
+    },
+    {
+      "id": "lymphatic-vessels",
+      "name": "Vasos linfáticos",
+      "system": "lymphatic-immune",
+      "aliases": [
+        "capilares linfáticos",
+        "linfa"
+      ],
+      "shortFunction": "Retornam líquido intersticial ao sangue e transportam lipídios.",
+      "function": "Recolhem líquido e proteínas dos tecidos; vasos quilíferos recebem quilomícrons intestinais.",
+      "mechanism": "Valvas e movimentos do corpo favorecem fluxo da linfa em direção às veias próximas ao coração.",
+      "uerj": "Integrar trocas capilares, drenagem e absorção de lipídios.",
+      "commonMistake": "Dizer que a linfa é impulsionada por um coração próprio ou que transporta apenas células de defesa.",
+      "sourceIds": [
+        "os21-1",
+        "os21-review",
+        "os23-7"
+      ],
+      "meshPatterns": [
+        "lymphatic[ _-]?(vessel|duct|capillary)",
+        "thoracic[ _-]?duct"
+      ]
+    },
+    {
+      "id": "lymph-nodes",
+      "name": "Linfonodos",
+      "system": "lymphatic-immune",
+      "aliases": [
+        "gânglios linfáticos"
+      ],
+      "shortFunction": "Filtram linfa e favorecem respostas imunes.",
+      "function": "Concentram células capazes de reconhecer antígenos e iniciar ativação de linfócitos.",
+      "mechanism": "Células apresentadoras de antígeno e linfócitos interagem; clones específicos proliferam em respostas adaptativas.",
+      "uerj": "Relacionar apresentação antigênica, seleção clonal e memória imune.",
+      "commonMistake": "Dizer que linfonodos filtram principalmente o sangue, função associada ao baço.",
+      "sourceIds": [
+        "os21-1",
+        "os21-review"
+      ],
+      "meshPatterns": [
+        "lymph[ _-]?node"
+      ]
+    },
+    {
+      "id": "spleen",
+      "name": "Baço",
+      "system": "lymphatic-immune",
+      "aliases": [],
+      "shortFunction": "Filtra sangue e participa da defesa e da remoção de hemácias envelhecidas.",
+      "function": "A polpa branca participa da resposta imune; a vermelha contribui para o processamento de células sanguíneas.",
+      "mechanism": "Macrófagos removem hemácias alteradas; estruturas imunes encontram antígenos presentes no sangue.",
+      "uerj": "Comparar baço e linfonodos e relacionar reciclagem de hemácias à circulação.",
+      "commonMistake": "Dizer que o baço é a principal estrutura de filtração da linfa.",
+      "sourceIds": [
+        "os21-1",
+        "os21-review"
+      ],
+      "meshPatterns": [
+        "spleen",
+        "splenic"
+      ]
+    },
+    {
+      "id": "thymus",
+      "name": "Timo",
+      "system": "lymphatic-immune",
+      "aliases": [],
+      "shortFunction": "Participa da maturação e seleção de linfócitos T.",
+      "function": "Recebe precursores originados na medula óssea; sua atividade é especialmente importante no início da vida.",
+      "mechanism": "A seleção favorece células funcionais e reduz a sobrevivência de muitas células fortemente reativas contra componentes próprios.",
+      "uerj": "Relacionar maturação de linfócitos T e tolerância imunológica.",
+      "commonMistake": "Afirmar que todo linfócito amadurece no timo ou que sua involução elimina toda imunidade no adulto.",
+      "sourceIds": [
+        "os21-1",
+        "os21-3"
+      ],
+      "meshPatterns": [
+        "thymus",
+        "thymic"
+      ]
+    },
+    {
+      "id": "tonsils",
+      "name": "Tonsilas",
+      "system": "lymphatic-immune",
+      "aliases": [
+        "amígdalas",
+        "tonsilas palatinas"
+      ],
+      "shortFunction": "Participam da vigilância imune na entrada do trato digestório e respiratório.",
+      "function": "São agregados de tecido linfoide expostos a antígenos das mucosas.",
+      "mechanism": "Contato com antígenos permite interação entre células de apresentação e linfócitos.",
+      "uerj": "Relacionar localização anatômica e defesa das mucosas.",
+      "commonMistake": "Dizer que tonsilas são glândulas salivares ou que funcionam como filtro mecânico absoluto.",
+      "sourceIds": [
+        "os21-1",
+        "os21-review"
+      ],
+      "meshPatterns": [
+        "tonsil",
+        "adenoid"
+      ]
+    },
+    {
+      "id": "b-lymphocytes",
+      "name": "Linfócitos B",
+      "system": "lymphatic-immune",
+      "aliases": [
+        "células B",
+        "plasmócitos"
+      ],
+      "shortFunction": "Participam da resposta humoral e da memória imune.",
+      "function": "Linfócitos B ativados podem originar plasmócitos secretores de anticorpos e células de memória.",
+      "mechanism": "O reconhecimento de antígeno e outros sinais favorecem expansão de clones específicos.",
+      "uerj": "Comparar vacina e imunização passiva; relacionar anticorpos, especificidade e resposta secundária.",
+      "commonMistake": "Dizer que anticorpos são células ou que todo linfócito B já secreta grandes quantidades de anticorpos.",
+      "sourceIds": [
+        "os21-4"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "t-lymphocytes",
+      "name": "Linfócitos T",
+      "system": "lymphatic-immune",
+      "aliases": [
+        "células T",
+        "T auxiliares",
+        "T citotóxicos"
+      ],
+      "shortFunction": "Coordenam respostas imunes e combatem células alteradas.",
+      "function": "T auxiliares regulam outras células; T citotóxicos podem induzir morte de células infectadas.",
+      "mechanism": "Receptores T reconhecem antígenos apresentados por moléculas de MHC; ativação promove expansão clonal.",
+      "uerj": "Distinguir resposta humoral e celular e relacionar imunidade a células infectadas.",
+      "commonMistake": "Dizer que linfócitos T produzem anticorpos ou reconhecem antígenos da mesma forma que anticorpos livres.",
+      "sourceIds": [
+        "os21-3"
+      ],
+      "meshPatterns": []
+    },
+    {
+      "id": "nephron",
+      "name": "Néfron",
+      "system": "urinary",
+      "aliases": [
+        "unidade funcional renal"
+      ],
+      "shortFunction": "Modifica o filtrado por reabsorção e secreção.",
+      "function": "Inclui corpúsculo renal e túbulo; o ducto coletor recebe líquido de vários néfrons.",
+      "mechanism": "A filtração inicia o processo; transporte seletivo ao longo dos segmentos determina o que é conservado ou excretado.",
+      "uerj": "Ler esquemas e diferenciar excreção = filtração − reabsorção + secreção.",
+      "commonMistake": "Chamar o filtrado inicial de urina definitiva ou tratar o ducto coletor como parte exclusiva de um néfron.",
+      "sourceIds": [
+        "os25-4",
+        "os25-5"
+      ],
+      "meshPatterns": [
+        "nephron"
+      ]
+    },
+    {
+      "id": "urethra",
+      "name": "Uretra",
+      "system": "urinary",
+      "aliases": [],
+      "shortFunction": "Conduz urina da bexiga ao exterior.",
+      "function": "No sistema reprodutivo masculino típico, também integra a saída do sêmen, em situação distinta da micção.",
+      "mechanism": "Coordenação de esfíncteres e músculos regula o esvaziamento e o trajeto de saída.",
+      "uerj": "Distinguir rim → ureter → bexiga → uretra e separar transporte de produção de urina.",
+      "commonMistake": "Confundir uretra e ureter ou afirmar que o trajeto urinário atravessa a vagina.",
+      "sourceIds": [
+        "os25-2",
+        "os27-1"
+      ],
+      "meshPatterns": [
+        "urethra",
+        "urethral"
+      ]
+    }
+  ],
+  "uerjSourceIds": [
+    "uerj-commands",
+    "uerj-biology"
+  ],
+  "coverage": {
+    "cardiovascular": 18,
+    "respiratory": 8,
+    "urinary": 13,
+    "digestive": 10,
+    "nervous": 11,
+    "endocrine": 8,
+    "reproductive": 14,
+    "musculoskeletal": 8,
+    "integumentary": 4,
+    "lymphatic-immune": 7
+  }
+}

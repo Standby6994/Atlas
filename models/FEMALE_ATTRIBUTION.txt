@@ -1,0 +1,4 @@
+HRA female reproductive reference: Kristen Browne and Heidi Schlehlein, 2022. Human Reference Atlas / HuBMAP. Derived from the Visible Human Female, U.S. National Library of Medicine. CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+Source: https://humanatlas.io/3d-reference-library
+Uterus DOI: https://doi.org/10.48539/HBM228.JBNJ.299
+Local adaptation: five reference GLBs assembled, with original geometry and names preserved. See ../data/atlas-female.json for sources and hashes.

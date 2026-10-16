@@ -1,0 +1,715 @@
+{
+  "schemaVersion": "1.0.0",
+  "language": "pt-BR",
+  "accessedOn": "2026-10-11",
+  "editorialMethod": "Textos autorais em português para explicar fatos e relações fisiológicas. As seções abaixo foram consultadas para verificação; não foram importadas imagens, atividades, avaliações ou longos trechos do livro.",
+  "uerjMethod": "Os campos uerj são conexões pedagógicas autorais com operações de identificação, explicação causal, comparação, previsão e interpretação. Não são questões oficiais, rubricas oficiais, contagens de incidência nem garantias de cobrança. O perfil local da habilidade uerj-biologia-discursiva orientou a forma de resposta, sem reutilizar suas contagens históricas.",
+  "sources": [
+    {
+      "id": "os19-1",
+      "title": "19.1 Heart Anatomy",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Câmaras, vasos ligados ao coração e circulação dupla"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os19-2",
+      "title": "19.2 Cardiac Muscle and Electrical Activity",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-2-cardiac-muscle-and-electrical-activity",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Automatismo, nó sinoatrial e sistema de condução"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os19-3",
+      "title": "19.3 Cardiac Cycle",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-3-cardiac-cycle",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Pressão, sístole, diástole e valvas"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os19-4",
+      "title": "19.4 Cardiac Physiology",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Débito e regulação da atividade cardíaca"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os20-1",
+      "title": "20.1 Structure and Function of Blood Vessels",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-1-structure-and-function-of-blood-vessels",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Artérias, veias, arteríolas e organização dos vasos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os20-2",
+      "title": "20.2 Blood Flow, Blood Pressure, and Resistance",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Resistência, calibre e retorno venoso"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os20-3",
+      "title": "20.3 Capillary Exchange",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-3-capillary-exchange",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Trocas e movimento de água entre sangue e tecidos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os18-3",
+      "title": "18.3 Erythrocytes",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-3-erythrocytes",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Hemácias, hemoglobina e eritropoiese"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os22-1",
+      "title": "22.1 Organs and Structures of the Respiratory System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Vias aéreas, epitélio mucociliar e alvéolos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os22-3",
+      "title": "22.3 The Process of Breathing",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Ventilação, diafragma, pleura e pressão"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os22-4",
+      "title": "22.4 Gas Exchange",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Difusão e pressões parciais"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os22-5",
+      "title": "22.5 Transport of Gases",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-5-transport-of-gases",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Transporte de O₂, CO₂ e efeito do pH"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os25-3",
+      "title": "25.3 Gross Anatomy of the Kidney",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-3-gross-anatomy-of-the-kidney",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Rins e organização do sistema renal"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os25-4",
+      "title": "25.4 Microscopic Anatomy of the Kidney",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-4-microscopic-anatomy-of-the-kidney",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Néfron, corpúsculo renal, túbulos e ductos coletores"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os25-5",
+      "title": "25.5 Physiology of Urine Formation",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Filtração, reabsorção, secreção e excreção"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os25-6",
+      "title": "25.6 Tubular Reabsorption",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Transportes tubulares e mecanismo de concentração"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os25-8",
+      "title": "25.8 Endocrine Regulation of Kidney Function",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-8-endocrine-regulation-of-kidney-function",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "ADH e sistema renina–angiotensina–aldosterona"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os25-2",
+      "title": "25.2 Gross Anatomy of Urine Transport",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-2-gross-anatomy-of-urine-transport",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Ureteres, bexiga, uretra e micção"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os23-3",
+      "title": "23.3 The Mouth, Pharynx, and Esophagus",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Boca, saliva, deglutição e esôfago"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os23-4",
+      "title": "23.4 The Stomach",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Secreções, ácido, pepsina e proteção da mucosa"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os23-5",
+      "title": "23.5 The Small and Large Intestines",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Intestinos, vilosidades, motilidade e absorção de água"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os23-6",
+      "title": "23.6 Accessory Organs in Digestion: The Liver, Pancreas, and Gallbladder",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Fígado, vesícula, pâncreas, bile e bicarbonato"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os23-7",
+      "title": "23.7 Chemical Digestion and Absorption: A Closer Look",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Enzimas, nutrientes, micelas e quilomícrons"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os12-2",
+      "title": "12.2 Nervous Tissue",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Neurônio, glia e mielina"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os12-4",
+      "title": "12.4 The Action Potential",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Limiar, canais iônicos e potencial de ação"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os12-5",
+      "title": "12.5 Communication Between Neurons",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-5-communication-between-neurons",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Sinapse e neurotransmissores"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os13-2",
+      "title": "13.2 The Central Nervous System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-2-the-central-nervous-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Encéfalo, cerebelo, tronco encefálico e medula"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os13-4",
+      "title": "13.4 The Peripheral Nervous System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-4-the-peripheral-nervous-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Nervos e vias periféricas"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os14-1",
+      "title": "14.1 Sensory Perception",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-1-sensory-perception",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Visão, audição, equilíbrio e transdução"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os14-3",
+      "title": "14.3 Motor Responses",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-3-motor-responses",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Controle motor e circuitos reflexos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os15-1",
+      "title": "15.1 Divisions of the Autonomic Nervous System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-1-divisions-of-the-autonomic-nervous-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Simpático, parassimpático e regulação visceral"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-3",
+      "title": "17.3 The Pituitary Gland and Hypothalamus",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-3-the-pituitary-gland-and-hypothalamus",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Hipotálamo, hipófise, ADH, ocitocina e eixos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-4",
+      "title": "17.4 The Thyroid Gland",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-4-the-thyroid-gland",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "T₃, T₄, iodo e eixo tireoidiano"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-5",
+      "title": "17.5 The Parathyroid Glands",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-5-the-parathyroid-glands",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "PTH e cálcio"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-6",
+      "title": "17.6 The Adrenal Glands",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-6-the-adrenal-glands",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Córtex, medula e hormônios adrenais"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-7",
+      "title": "17.7 The Pineal Gland",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-7-the-pineal-gland",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Melatonina e informação temporal"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-9",
+      "title": "17.9 The Endocrine Pancreas",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Ilhotas, insulina e glucagon"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os17-2",
+      "title": "17.2 Hormones",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-2-hormones",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Receptores e retroalimentação hormonal"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os27-1",
+      "title": "27.1 Anatomy and Physiology of the Testicular Reproductive System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-1-anatomy-and-physiology-of-the-testicular-reproductive-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Testículos, espermatogênese, ductos, pênis e glândulas acessórias"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os27-2",
+      "title": "27.2 Anatomy and Physiology of the Ovarian Reproductive System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-2-anatomy-and-physiology-of-the-ovarian-reproductive-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Ovários, tubas, útero, vagina e ciclos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os27-review",
+      "title": "Chapter 27 Review: The Reproductive System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-chapter-review",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Integração dos mecanismos reprodutivos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os28-2",
+      "title": "28.2 Embryonic Development",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/28-2-embryonic-development",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Implantação, placenta e trocas materno-fetais"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os28-6",
+      "title": "28.6 Lactation",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/28-6-lactation",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Produção e ejeção do leite"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os10-2",
+      "title": "10.2 Skeletal Muscle",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-2-skeletal-muscle",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Fibras, organização e função muscular"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os10-3",
+      "title": "10.3 Muscle Fiber Contraction and Relaxation",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-3-muscle-fiber-contraction-and-relaxation",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Sarcômero, cálcio, actina, miosina e ATP"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os6-1",
+      "title": "6.1 The Functions of the Skeletal System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/6-1-the-functions-of-the-skeletal-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Sustentação, proteção e reservas"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os6-3",
+      "title": "6.3 Bone Structure",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/6-3-bone-structure",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Matriz, células ósseas e medula"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os6-6",
+      "title": "6.6 Exercise, Nutrition, Hormones, and Bone Tissue",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/6-6-exercise-nutrition-hormones-and-bone-tissue",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Remodelação e regulação mineral"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os9-4",
+      "title": "9.4 Synovial Joints",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-4-synovial-joints",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Articulações, cápsula, cartilagem e estabilidade"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os4-3",
+      "title": "4.3 Connective Tissue Supports and Protects",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/4-3-connective-tissue-supports-and-protects",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Colágeno, cartilagem, tendões e ligamentos"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os5-1",
+      "title": "5.1 Layers of the Skin",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/5-1-layers-of-the-skin",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Epiderme, derme e barreira"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os5-2",
+      "title": "5.2 Accessory Structures of the Skin",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/5-2-accessory-structures-of-the-skin",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Glândulas sudoríparas"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os5-3",
+      "title": "5.3 Functions of the Integumentary System",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/5-3-functions-of-the-integumentary-system",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Proteção, sensibilidade e temperatura"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os21-1",
+      "title": "21.1 Anatomy of the Lymphatic and Immune Systems",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-1-anatomy-of-the-lymphatic-and-immune-systems",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Vasos, linfonodos, baço, timo e tonsilas"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os21-3",
+      "title": "21.3 The Adaptive Immune Response: T lymphocytes and Their Functional Types",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-3-the-adaptive-immune-response-t-lymphocytes-and-their-functional-types",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Linfócitos T e imunidade celular"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os21-4",
+      "title": "21.4 The Adaptive Immune Response: B-lymphocytes and Antibodies",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Linfócitos B, anticorpos e memória"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "os21-review",
+      "title": "Chapter 21 Review: The Lymphatic and Immune Systems",
+      "book": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax — Rice University",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-chapter-review",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Órgãos linfoides e resposta adaptativa"
+      ],
+      "role": "Verificação educacional de anatomia e fisiologia"
+    },
+    {
+      "id": "uerj-commands",
+      "title": "Competências e habilidades cognitivas: como executar essas operações na construção das respostas do exame discursivo",
+      "publisher": "Revista Eletrônica do Vestibular — UERJ",
+      "url": "https://www.revista.vestibular.uerj.br/artigo/artigo.php?seq_artigo=68",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Comandos discursivos e operações cognitivas"
+      ],
+      "role": "Calibração da linguagem pedagógica"
+    },
+    {
+      "id": "uerj-biology",
+      "title": "O enfoque programático do exame discursivo de Biologia do vestibular da UERJ: pensando sobre temas sempre atuais",
+      "publisher": "Revista Eletrônica do Vestibular — UERJ",
+      "url": "https://www.revista.vestibular.uerj.br/especial25a/view/assets/9.pdf",
+      "accessedOn": "2026-10-11",
+      "topics": [
+        "Integração de conceitos biológicos e aplicação contextual"
+      ],
+      "role": "Calibração das conexões disciplinares"
+    }
+  ]
+}

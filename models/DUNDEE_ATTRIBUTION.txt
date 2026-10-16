@@ -1,0 +1,68 @@
+CORAÇÃO INTERNO — CRÉDITO E LICENÇA
+=================================
+
+Obra: Interior heart — high detail.
+Autor: University of Dundee, CAHID.
+Fonte original:
+https://sketchfab.com/3d-models/interior-heart-high-detail-7a592ce3b0514258ad4c4ef9e18b8f8e
+Metadados públicos do autor:
+https://api.sketchfab.com/v3/models/7a592ce3b0514258ad4c4ef9e18b8f8e
+
+Licença do modelo publicado e embutida no arquivo: Creative Commons
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Crédito: “Interior heart — high detail, University of Dundee, CAHID,
+CC BY-SA 4.0. Inclui contribuições de BodyParts3D, © The Database Center
+for Life Science, sob a licença citada pelo autor: Creative Commons
+Attribution-ShareAlike 2.1 Japan.”
+https://lifesciencedb.jp/bp3d/
+https://creativecommons.org/licenses/by-sa/2.1/jp/
+
+A descrição do autor informa a contribuição de BodyParts3D. Ela não
+confirma aquisição a partir de um paciente, espécime individual,
+tomografia, ressonância ou fotogrametria. O Atlas apresenta esta obra
+como reconstrução anatômica universitária, sem afirmar essas origens.
+
+VERSÃO DISTRIBUÍDA
+-----------------
+Arquivo local: heart-dundee.glb.
+Versão otimizada redistribuída pelo repositório karansuraj/pvc-heart-tool.
+Commit da fonte verificada: fd26bd5e13aae314270390d1bdf358e4afaed5b0.
+Referências desse distribuidor:
+https://github.com/karansuraj/pvc-heart-tool/blob/fd26bd5e13aae314270390d1bdf358e4afaed5b0/REFERENCES.md
+Arquivo público utilizado:
+https://raw.githubusercontent.com/karansuraj/pvc-heart-tool/fd26bd5e13aae314270390d1bdf358e4afaed5b0/public/models/university-of-dundee-interior-heart-high-detail.glb
+
+O GLB foi copiado sem alteração adicional de bytes pelo Atlas:
+10.955.408 bytes; SHA-256:
+69bd08b81c4577a38ddbe175ccc0c4e933de5bea41ae532e7cf93fecfa35da67
+
+Auditoria após decodificação: 695.470 triângulos, 402.060 vértices,
+3 malhas/primitivas e 3 imagens incorporadas de 2048 × 2048 pixels.
+O material principal contém mapas de cor, normal e metallic/roughness;
+os outros dois materiais usam fatores uniformes. Não são texturas 4K.
+O original publicado possui maior densidade geométrica; esta versão
+otimizada não deve ser confundida com aquele arquivo original.
+
+ADAPTAÇÕES DO ATLAS
+------------------
+O visualizador centraliza, redimensiona e posiciona o conjunto, preserva
+seus materiais e traduz para português brasileiro os 16 marcadores
+educativos do autor. As coordenadas e câmeras desses marcadores são
+convertidas para a orientação do GLB e para a escala do visualizador.
+Os pontos coloridos são pinos de identificação; não são peças anatômicas
+segmentadas nem superfícies novas acrescentadas ao órgão. Nomes de
+estruturas sem marcador conferido podem permanecer apenas como conteúdo
+explicativo, com a ausência de geometria identificada indicada na tela.
+
+A exportação em 3840 × 2160 pixels refere-se à imagem gerada, não à
+resolução nativa das texturas. Não houve ampliação artificial dos mapas.
+
+Ao redistribuir este ativo ou uma adaptação dele, mantenha a atribuição,
+os links da obra e da licença e a indicação das alterações, observando
+CC BY-SA 4.0 e as contribuições indicadas pelo autor. Este aviso trata
+do ativo anatômico e não atribui sua licença ao código de terceiros.
+Outros componentes do Atlas têm créditos e licenças próprios.
+
+Verificação de origem e geometria: 12/10/2026.

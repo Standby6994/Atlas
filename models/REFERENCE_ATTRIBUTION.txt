@@ -1,0 +1,605 @@
+REFERÊNCIAS ANATÔMICAS HRA — CRÉDITOS E LICENÇAS
+=======================================================
+
+Conjunto: 27 objetos da biblioteca 3D do Human Reference Atlas (HRA).
+Biblioteca oficial: https://humanatlas.io/3d-reference-library
+Inventário completo e metadados por objeto: data/reference-organs.json.
+As licenças foram verificadas nos metadados individuais dos 27 objetos.
+
+Cada objeto deste conjunto é disponibilizado sob Creative Commons
+Attribution 4.0 International (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+As 27 referências não contêm imagens nem mapas de textura fotográfica.
+A cor e a iluminação mostradas no aplicativo são tratamentos ilustrativos.
+A origem varia entre dados anatômicos, atlas e reconstruções; os objetos
+não devem ser apresentados coletivamente como fotogrametrias individuais.
+
+ALTERAÇÕES E REDISTRIBUIÇÃO
+-------------------------
+O Atlas identifica as peças da fonte, traduz os rótulos para português
+brasileiro e centraliza/redimensiona a geometria no visualizador. A escolha
+de malhas, os cortes de visualização e os materiais ilustrativos não criam
+estruturas microscópicas que estejam ausentes do arquivo original.
+
+Os 27 arquivos foram compactados com Draco sequencial, sem simplificação,
+soldagem de vértices, remoção de faces ou redução de texturas. A quantidade
+de triângulos, a ordem dos índices e vértices, os nós e as transformações
+foram preservados. Posições usam quantização de 20 bits; normais usam
+16 bits. Nas primitivas com normais nulas ou não unitárias, a codificação
+cartesiana (atributo GENERIC de 16 bits, remapeado para NORMAL) evita
+normalização indevida. Os 1.874 vetores nulos originais permanecem
+exatamente nulos. A maior diferença auditada por componente foi de
+aproximadamente 1,014e-6 para posições nas coordenadas originais e de
+5,633e-5 para normais. Não se afirma preservação de coordenadas bit a bit.
+
+Total: 169.807.264 bytes originais para 77.930.908 bytes, redução de
+54,11%; mesmos 5.654.737 triângulos. Todos os arquivos ficam abaixo
+de 25 MiB. O inventário registra os originais, as adaptações e os
+SHA-256 atuais. A auditoria final foi concluída em 13/10/2026.
+
+Mantenha autoria, citação, licença, fonte e indicação das alterações ao
+redistribuir cada objeto. Este aviso trata dos ativos HRA, sem alterar
+a licença de software, modelos Dundee ou dos modelos corporais Z-Anatomy.
+Não atribua apoio ou validação dos autores ao aplicativo.
+
+01. Coração (heart)
+------------------------------------------------------------
+Arquivo: models/reference/heart.glb
+Autoria declarada: Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Heart, Male v1.3." https://doi.org/10.48539/HBM564.WKNG.249. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/heart-male/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/heart-male/v1.3/assets/3d-vh-m-heart.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/heart-male/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Heart-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+02. Pulmões (lungs)
+------------------------------------------------------------
+Arquivo: models/reference/lungs.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Lung, Male v1.4." https://doi.org/10.48539/HBM532.KLZD.394. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/lung-male/v1.4
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/lung-male/v1.4/assets/3d-vh-m-lung.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/lung-male/v1.4/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Lung-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). In version 1.3, the
+larynx, trachea, and main bronchi were removed; however, lung lobes and intrapulmonary bronchi remain part of the lung
+model.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+03. Rim (kidney)
+------------------------------------------------------------
+Arquivo: models/reference/kidney.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Kidney, Male, Left v1.3." https://doi.org/10.48539/HBM759.JKKF.434. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/kidney-male-left/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/kidney-male-left/v1.3/assets/3d-vh-m-kidney-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/kidney-male-left/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-kidney-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). In version
+v1.3, changes include removing the renal calyces and renal papillae and adding them to the ureter model per subject
+matter expert input.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+04. Fígado (liver)
+------------------------------------------------------------
+Arquivo: models/reference/liver.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Liver, Male v1.2." https://doi.org/10.48539/HBM896.WMSL.867. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/liver-male/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/liver-male/v1.2/assets/3d-vh-m-liver.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/liver-male/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Liver-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+05. Intestino delgado (small-intestine)
+------------------------------------------------------------
+Arquivo: models/reference/small-intestine.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Small Intestine, Male v1.2*. https://doi.org/10.48539/HBM789.XTDK.794. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/small-intestine-male/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/small-intestine-male/v1.2/assets/3d-vh-m-small-intestine.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/small-intestine-male/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Small-intestine-male (https://humanatlas.io/3d-reference-library) was created using data from
+the Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). The small
+intestines have been updated to include a measurement system. A centerline was made in the center of the intestines,
+and markers were placed along the centerline. The teal discs measure 5 cm along the intestines, the green dashes
+measure 1 cm, and the yellow disc marks the jejunoileal junction. The Visible Human Male small intestine total length
+is 285 cm.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+06. Intestino grosso (large-intestine)
+------------------------------------------------------------
+Arquivo: models/reference/large-intestine.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Large Intestine, Male v1.3." https://doi.org/10.48539/HBM487.ZKSN.693. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/large-intestine-male/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/large-intestine-male/v1.3/assets/3d-sbu-m-large-intestine.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/large-intestine-male/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Large-intestine-male (https://humanatlas.io/3d-reference-library) was primarily based on
+colonoscopy-derived data provided by Arie Kaufman (Stony Brook University). The model was generally aligned to the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998) and other
+reference organs.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+07. Pâncreas (pancreas)
+------------------------------------------------------------
+Arquivo: models/reference/pancreas.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Pancreas, Male v1.3." https://doi.org/10.48539/HBM396.QWWJ.639. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/pancreas-male/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/pancreas-male/v1.3/assets/3d-vh-m-pancreas.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/pancreas-male/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Pancreas-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). In version
+v1.3, adjustments were made from the previous version to make the neck region smaller, and the body and tail regions
+more equal in length.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+08. Bexiga urinária (bladder)
+------------------------------------------------------------
+Arquivo: models/reference/bladder.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Urinary Bladder, Male v1.2*. https://doi.org/10.48539/HBM722.RMHQ.397. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/urinary-bladder-male/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/urinary-bladder-male/v1.2/assets/3d-vh-m-urinary-bladder.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/urinary-bladder-male/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Urinary-bladder-male (https://humanatlas.io/3d-reference-library) was created using data from
+the Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+09. Encéfalo (brain)
+------------------------------------------------------------
+Arquivo: models/reference/brain.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen,	and Heidi Schlehlein.	 2024.	"3D Reference Organ for Brain, Male v1.4."	 https://doi.org/10.48539/HBM538.NKCT.649.	Accessed June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/brain-male/v1.4
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/brain-male/v1.4/assets/3d-allen-m-brain.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/brain-male/v1.4/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Brain-male (https://humanatlas.io/3d-reference-library) was created using data from the Allen
+brain reference atlas (Ding et al. 2016). The 141 anatomical structures were mirrored to arrive at a whole human brain
+(as intended) and resized to fit the Visible Human Male and Female bodies (Spitzer et al. 1996; Ackerman 1998). In
+version v1.3, an update in licensing occurred; this brain model is now licensed under Creative Commons Attribution 4.0
+International (CC BY 4.0). Ding et al. 2016 was used to inform the creation of this model.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Ding, Song-Lin, Joshua J. Royall, Susan M. Sunkin, Lydia Ng, Benjamin A.C. Facer, Phil Lesnar, Angie Guillozet-Bongaarts, et al. 2016. “Comprehensive Cellular-Resolution Atlas of the Adult Human Brain.” *Journal of Comparative Neurology* 524 (16): 3127–3481.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+10. Medula espinal (spinal-cord)
+------------------------------------------------------------
+Arquivo: models/reference/spinal-cord.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Spinal Cord, Male, v1.1*. https://doi.org/10.48539/HBM575.VDJW.494. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/spinal-cord-male/v1.1
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/spinal-cord-male/v1.1/assets/3d-vh-m-spinal-cord.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/spinal-cord-male/v1.1/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Spinal-cord-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). Frostell et al.
+2016 was referenced during model preparation.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Frostell, Arvid, Ramil Hakim, Eric Peter Thelin, Per Mattsson, and Mikael Svensson. 2016. “A Review of the Segmental Diameter of the Healthy Human Spinal Cord.” *Frontiers in Neurology* 7 (December). https://doi.org/10.3389/fneur.2016.00238.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+11. Olho (eye)
+------------------------------------------------------------
+Arquivo: models/reference/eye.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen,	and Heidi Schlehlein.	 2024.	"3D Reference Organ for Eye, Male, Left v1.3."	 https://doi.org/10.48539/HBM769.RWTZ.963.	Accessed June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/eye-male-left/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/eye-male-left/v1.3/assets/3d-vh-m-eye-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/eye-male-left/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-eye-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). In version
+v1.3, the long posterior ciliary artery was added, as well as a more detailed iris. The position of the optic nerve
+also moved, and was made twice as thick. The muscle thickness was decreased and the position of the muscles was
+shifted. The levator palpebrae superioris muscle was removed as it was not deemed necessary to the eye model. The
+inferior oblique muscle was rotated more parallel to the plane of the cornea.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+12. Ovário (ovary)
+------------------------------------------------------------
+Arquivo: models/reference/ovary.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Ovary, Female, Left v1.3." https://doi.org/10.48539/HBM695.KCXS.294. Accessed on December 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/ovary-female-left/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/ovary-female-left/v1.3/assets/3d-vh-f-ovary-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/ovary-female-left/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-ovary-female (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Dataset, provided by the National Library of Medicine (Spitzer and Whitlock 2002).
+
+**Bibliography:**
+
+* Spitzer, Victor M., and David G. Whitlock. 2002. “The Visible Human Dataset: The Anatomical Platform for Human Simulation.” *The Anatomical Record* 253 (2): 49–57. https://doi.org/10.1002/(SICI)1097-0185(199804)253:2<49::AID-AR8>3.0.CO;2-9.
+
+13. Útero (uterus)
+------------------------------------------------------------
+Arquivo: models/reference/uterus.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Uterus v1.1*. https://doi.org/10.48539/HBM627.VTKD.892. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/uterus-female/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/uterus-female/v1.2/assets/3d-vh-f-uterus.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/uterus-female/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Uterus-female (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Dataset, provided by the National Library of Medicine (Spitzer and Whitlock 2002).
+
+**Bibliography:**
+
+* Spitzer, Victor M., and David G. Whitlock. 2002. “The Visible Human Dataset: The Anatomical Platform for Human Simulation.” *The Anatomical Record* 253 (2): 49–57. https://doi.org/10.1002/(SICI)1097-0185(199804)253:2<49::AID-AR8>3.0.CO;2-9.
+
+14. Próstata (prostate)
+------------------------------------------------------------
+Arquivo: models/reference/prostate.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Prostate, Male v1.2." https://doi.org/10.48539/HBM545.CTNV.442. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/prostate-male/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/prostate-male/v1.2/assets/3d-vh-m-prostate.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/prostate-male/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Prostate-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+15. Pele (skin)
+------------------------------------------------------------
+Arquivo: models/reference/skin.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen. 2024. *3D Reference Organ for Skin, Male v1.4*. https://doi.org/10.48539/HBM953.DCMN.563. Accessed on June 15, 2025.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/skin-male/v1.4
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/skin-male/v1.4/assets/3d-vh-m-skin.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/skin-male/v1.4/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Skin-male was created using data from the Visible Human Male, provided by the National Library
+of Medicine (Spitzer et al. 1996; Ackerman 1998). It was adjusted to add space for the triceps surae and the ankle
+bones for the eventual addition of the triceps surae muscles. In v2.3, the head was adjusted to be more like the
+original skin of the Visible Human Male, to make space for the mouth 3D object and landmarks.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+16. Linfonodo (lymph-node)
+------------------------------------------------------------
+Arquivo: models/reference/lymph-node.glb
+Autoria declarada: Li Yao, Kristen Browne
+Citação: Yao, Li, Kristen Browne, and Heidi Schlehlein. 2024. "3D Reference Organ for Lymph Node, Male v1.4." https://doi.org/10.48539/HBM532.TNXR.875. Accessed on December 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/lymph-node-male/v1.4
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/lymph-node-male/v1.4/assets/3d-nih-m-lymph-node.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/lymph-node-male/v1.4/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Lymph-node-male (https://humanatlas.io/3d-reference-library) was created using the
+Clearing-enhanced 3D (Ce3D) method developed by Dr. Weizhe Li, Laboratory of Immune System Biology, National Institute
+of Allergy and Infectious Diseases, NIH using data documented in (Li, Germain, and Gerner 2017). While the size and
+cellular composition of mouse and human lymph nodes varies between species, the overall anatomy is well-conserved.
+
+**Bibliography:**
+
+* Li, Weizhe, Ronald N. Germain, and Michael Y. Gerner. 2017. “Multiplex, Quantitative Cellular Analysis in Large Tissue Volumes with Clearing-Enhanced 3D Microscopy (Ce3D).” *Proceedings of the National Academy of Sciences* 114 (35): E7321–30. https://doi.org/10.1073/pnas.1708981114.
+
+17. Baço (spleen)
+------------------------------------------------------------
+Arquivo: models/reference/spleen.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Spleen, Male v1.3*. https://doi.org/10.48539/HBM437.LMTZ.752. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/spleen-male/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/spleen-male/v1.3/assets/3d-vh-m-spleen.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/spleen-male/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Spleen-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+18. Timo (thymus)
+------------------------------------------------------------
+Arquivo: models/reference/thymus.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Thymus, Male v1.2*. https://doi.org/10.48539/HBM923.RZCC.934. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/thymus-male/v1.3
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/thymus-male/v1.3/assets/3d-vh-m-thymus.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/thymus-male/v1.3/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Thymus-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+19. Traqueia (trachea)
+------------------------------------------------------------
+Arquivo: models/reference/trachea.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Trachea, Male v1.1*. https://doi.org/10.48539/HBM357.VGJC.676. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/trachea-male/v1.1
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/trachea-male/v1.1/assets/3d-vh-m-trachea.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/trachea-male/v1.1/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Trachea-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). In version 1.0,
+the trachea was separated from the previous v1.2 lung model.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+20. Laringe (larynx)
+------------------------------------------------------------
+Arquivo: models/reference/larynx.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Larynx, Male v1.1." https://doi.org/10.48539/HBM362.HNZB.247. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/larynx-male/v1.1
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/larynx-male/v1.1/assets/3d-vh-m-larynx.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/larynx-male/v1.1/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Larynx-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). In version v1.0, the
+larynx was separated from the previous v1.2 lung model.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+21. Ureter (ureter)
+------------------------------------------------------------
+Arquivo: models/reference/ureter.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. *3D Reference Organ for Ureter, Male, Left v1.2*. https://doi.org/10.48539/HBM434.VLQJ.299. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/ureter-male-left/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/ureter-male-left/v1.2/assets/3d-vh-m-ureter-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/ureter-male-left/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-ureter-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998). Changes include
+adding the renal calyces and renal papillae from the kidney model per subject matter expert input.
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+22. Boca e dente em corte (mouth)
+------------------------------------------------------------
+Arquivo: models/reference/mouth.glb
+Autoria declarada: Heidi Schlehlein
+Citação: Schlehlein, Heidi. 2024. "3D Reference Organ for mouth, Female v1.0." https://doi.org/10.48539/HBM568.RFGM.978. Accessed on June 15, 2025.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/mouth-male/v1.0
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/mouth-male/v1.0/assets/3d-vh-m-mouth.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/mouth-male/v1.0/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Mouth-male (https://humanatlas.io/3d-reference-library) was created using data from the Visible
+Human Male dataset, provided by the National Library of Medicine (Spitzer et al., 1996; Ackerman, 1998). The 3D model
+features anatomically segmented oral structures including the gingiva, lingual mucosa, palate, vestibular tissues,
+teeth, and salivary structures. The segmentation and anatomical validation were informed by standard dental and
+medical references, including *Ten Cate’s Oral Histology*, *Netter’s Head and Neck Anatomy for Dentistry*, *Carranza’s
+Clinical Periodontology*, and *A Colour Atlas and Textbook of Oral Anatomy, Histology and Embryology* by Berkovitz et
+al., enabling consistency across sex-specific models and integration with molecular datasets.
+
+**Bibliography:**
+
+* Spitzer, Victor M., and David G. Whitlock. 2002. “The Visible Human Dataset: The Anatomical Platform for Human Simulation.” *The Anatomical Record* 253 (2): 49–57. https://doi.org/10.1002/(SICI)1097-0185(199804)253:2<49::AID-AR8>3.0.CO;2-9.
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Nanci, A. Ten Cate's Oral Histology: Development, Structure, and Function. *Elsevier*.
+* Norton, N.S. Netter’s Head and Neck Anatomy for Dentistry, 3rd Edition. *Elsevier*.
+* Berkovitz BKB, Holland GR, Moxham BJ. 1992. *A Colour Atlas and Textbook of Oral Anatomy, Histology and Embryology*, 2nd ed. London: Wolfe Publishing Ltd.
+* Newman, M.G., Takei, H., Klokkevold, P.R., Carranza, F.A. *Carranza’s Clinical Periodontology*, 13th ed. Elsevier.
+
+23. Tuba uterina (uterine-tube)
+------------------------------------------------------------
+Arquivo: models/reference/uterine-tube.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen,	and Heidi Schlehlein.	 2024.	"3D Reference Organ for Fallopian Tube, Female, Left v1.2."	 https://doi.org/10.48539/HBM529.KBQT.896.	Accessed June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/fallopian-tube-female-left/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/fallopian-tube-female-left/v1.2/assets/3d-vh-f-fallopian-tube-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/fallopian-tube-female-left/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-fallopian-tube-female (https://humanatlas.io/3d-reference-library) was created using data
+from the Visible Human Dataset, provided by the National Library of Medicine (Spitzer and Whitlock 2002).
+
+**Bibliography:**
+
+* Spitzer, Victor M., and David G. Whitlock. 2002. “The Visible Human Dataset: The Anatomical Platform for Human Simulation.” *The Anatomical Record* 253 (2): 49–57. https://doi.org/10.1002/(SICI)1097-0185(199804)253:2<49::AID-AR8>3.0.CO;2-9.
+
+24. Glândula mamária (mammary-gland)
+------------------------------------------------------------
+Arquivo: models/reference/mammary-gland.glb
+Autoria declarada: Heidi Schlehlein
+Citação: Schlehlein, Heidi. 2024. "3D Reference Organ for Breast (mammary gland), Female left, v1.1." https://doi.org/10.48539/HBM533.BNJL.834. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/mammary-gland-female-left/v1.1
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/mammary-gland-female-left/v1.1/assets/3d-vh-f-mammary-gland-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/mammary-gland-female-left/v1.1/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-mammary-gland-female (https://humanatlas.io/3d-reference-library) was created using a
+custom sculpted model to include relevant anatomy for placement of registration blocks. The atlas *Human Microscopic
+Anatomy* (Krstić 1991) and *Atlas of Anatomy* (Gilroy, MacPherson, and Ross 2008) was referenced.
+
+**Bibliography:**
+
+* Gilroy, Anne M., Brian R. MacPherson, and Lawrence M. Ross. 2008. *Atlas of Anatomy*. Thieme.
+* Krstić, Radivoj V. 1991. *Human Microscopic Anatomy*. Berlin, Heidelberg: Springer. https://doi.org/10.1007/978-3-662-02676-2.
+
+25. Placenta (placenta)
+------------------------------------------------------------
+Arquivo: models/reference/placenta.glb
+Autoria declarada: Heidi Schlehlein
+Citação: Schlehlein, Heidi. 2024. "3D Reference Organ for Placenta, Full Term, Female v1.1." https://doi.org/10.48539/HBM593.ZRJH.644. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/placenta-full-term-female/v1.1
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/placenta-full-term-female/v1.1/assets/3d-vh-f-placenta-full-term.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/placenta-full-term-female/v1.1/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Placenta-full-term-female (https://humanatlas.io/3d-reference-library) was created using a
+sculpted model of the placenta, partly informed by MRI data from the Department of Obstetrics, Gynecology, and
+Reproductive Sciences, Division of Maternal-Fetal Medicine at UC San Diego Health. *Human Microscopic Anatomy* (Krstić
+1991) and Mannelli et al. 2015 were consulted.
+
+**Bibliography:**
+
+* Krstić, Radivoj V. 1991. *Human Microscopic Anatomy*. Berlin, Heidelberg: Springer. https://doi.org/10.1007/978-3-662-02676-2.
+* Mannelli, Chiara, Francesca Ietta, Anna Maria Avanzati, Dariusz Skarzynski, and Luana Paulesu. 2015. “Biological Tools to Study the Effects of Environmental Contaminants at the Feto–Maternal Interface.” *Dose-Response* 13 (4): 1559325815611902. https://doi.org/10.1177/1559325815611902.
+
+26. Tonsila palatina (tonsil)
+------------------------------------------------------------
+Arquivo: models/reference/tonsil.glb
+Autoria declarada: Heidi Schlehlein, Kristen Browne
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Palatine Tonsil, Male, Left v1.2." https://doi.org/10.48539/HBM366.GHGT.974. Accessed on June 15, 2025.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/palatine-tonsil-male-left/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/palatine-tonsil-male-left/v1.2/assets/3d-vh-m-palatine-tonsil-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/palatine-tonsil-male-left/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-male-palatine-tonsil (https://humanatlas.io/3d-reference-library) was created using data
+from the Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+27. Articulação sinovial (synovial-joint)
+------------------------------------------------------------
+Arquivo: models/reference/synovial-joint.glb
+Autoria declarada: Kristen Browne, Heidi Schlehlein
+Citação: Browne, Kristen, and Heidi Schlehlein. 2024. "3D Reference Organ for Knee, Male, Left v1.2." https://doi.org/10.48539/HBM839.JJQF.873. Accessed on June 15, 2024.
+Licença: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Objeto original: https://purl.humanatlas.io/ref-organ/knee-male-left/v1.2
+Download original: https://cdn.humanatlas.io/digital-objects/ref-organ/knee-male-left/v1.2/assets/3d-vh-m-knee-l.glb
+Metadados de licença: https://lod.humanatlas.io/ref-organ/knee-male-left/v1.2/metadata.jsonld
+
+Origem e créditos complementares declarados pela fonte:
+This reference organ, Left-knee-male (https://humanatlas.io/3d-reference-library) was created using data from the
+Visible Human Male, provided by the National Library of Medicine (Spitzer et al. 1996; Ackerman 1998).
+
+**Bibliography:**
+
+* Ackerman, Michael J. 1998. “The Visible Human Project.” *Proceedings of the IEEE* 86 (3): 504–11. https://doi.org/10.1109/5.662875.
+* Spitzer, V., M. J. Ackerman, A. L. Scherzinger, and D. Whitlock. 1996. “The Visible Human Male: A Technical Report.” *Journal of the American Medical Informatics Association* 3 (2): 118–30. https://doi.org/10.1136/jamia.1996.96236280.
+
+OUTROS CONJUNTOS DO ATLAS
+------------------------
+Coração texturizado Dundee: ver DUNDEE_ATTRIBUTION.txt (CC BY-SA 4.0).
+Corpo e extrações Z-Anatomy: ver UPSTREAM_NOTICE.txt, UPSTREAM_LICENSE.txt
+e License.txt. O conjunto corporal redistribuído possui condições
+CC BY-NC-SA 4.0 e contribuições com licenças distintas; esse conjunto
+não fica licenciado como CC BY 4.0 por estar no mesmo aplicativo do HRA.
+
+Verificação de metadados de origem: 12/10/2026.
+Registro de créditos do Atlas: 13/10/2026.

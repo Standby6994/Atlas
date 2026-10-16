@@ -1,0 +1,1919 @@
+{
+  "version": "2026-10-15-botany-v15",
+  "schemaVersion": "1.0.0",
+  "language": "pt-BR",
+  "updatedOn": "2026-10-15",
+  "scope": "Fundamentos de anatomia, histologia e fisiologia vegetal de angiospermas, com exemplos explícitos e comparações escolares. Não representa todas as espécies nem um atlas botânico exaustivo.",
+  "categories": [
+    {
+      "id": "vegetative",
+      "name": "Órgãos e tecidos vegetativos"
+    },
+    {
+      "id": "transport",
+      "name": "Água, solutos e trocas gasosas"
+    },
+    {
+      "id": "growth",
+      "name": "Crescimento e regulação"
+    },
+    {
+      "id": "reproduction",
+      "name": "Reprodução e germinação"
+    }
+  ],
+  "views": [
+    {
+      "id": "leaf-cross-section",
+      "title": "Folha: tecidos e fotossíntese",
+      "label": "Folha: tecidos e fotossíntese",
+      "category": "vegetative",
+      "description": "Corte dorsiventral de uma folha de eudicotiledônea mesófita. A orientação superior/inferior e a distribuição dos tecidos não representam todas as folhas.",
+      "keyIdeas": [
+        "A organização do mesofilo aproxima cloroplastos da luz e das vias de difusão de CO₂.",
+        "Xilema e floema são tecidos distintos no mesmo feixe vascular.",
+        "A epiderme limita perda de água, enquanto estômatos controlam uma via de troca gasosa."
+      ],
+      "recognition": "Procure epiderme superior contínua, paliçádico alongado, lacunoso irregular e feixe com xilema voltado para a face superior.",
+      "parts": [
+        {
+          "id": "cuticle",
+          "label": "Cutícula",
+          "function": "Reduzir a difusão de água através da superfície foliar.",
+          "mechanism": "A cobertura hidrofóbica externa acrescenta resistência à perda de água pela epiderme; a permeabilidade depende de sua composição e espessura.",
+          "commonMistake": "Cutícula não fecha o poro estomático.",
+          "uerj": "Relacionar revestimento, disponibilidade hídrica e transpiração cuticular.",
+          "cytologyTissue": "cuticle",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "upper-epidermis",
+          "label": "Epiderme superior",
+          "function": "Revestir e proteger o mesofilo, permitindo passagem de luz.",
+          "mechanism": "Células justapostas constituem uma barreira superficial. A maioria das células epidérmicas comuns não apresenta a abundância de cloroplastos do mesofilo.",
+          "commonMistake": "Epiderme não é o principal tecido fotossintético desta folha.",
+          "uerj": "Distinguir proteção epidérmica de assimilação de carbono.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "palisade",
+          "label": "Parênquima paliçádico",
+          "function": "Realizar intensa fotossíntese na região iluminada.",
+          "mechanism": "Células alongadas e ricas em cloroplastos captam luz; o CO₂ alcança suas superfícies por espaços intercelulares e difunde-se até o estroma.",
+          "commonMistake": "Fotossíntese não ocorre apenas no paliçádico.",
+          "uerj": "Associar forma celular, cloroplastos e taxa fotossintética.",
+          "cytologyTissue": "chloroplast",
+          "links": [
+            {
+              "viewId": "cyto-chloroplast",
+              "partId": "stroma",
+              "label": "Abrir cloroplasto",
+              "relation": "O carbono é assimilado no estroma dos cloroplastos do mesofilo.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "spongy",
+          "label": "Parênquima lacunoso",
+          "function": "Integrar fotossíntese e difusão de gases no interior da folha.",
+          "mechanism": "Células de contorno irregular delimitam lacunas comunicantes; essas vias gasosas reduzem o caminho do CO₂ entre a câmara subestomática e células vivas.",
+          "commonMistake": "Lacunas não são vasos de seiva.",
+          "uerj": "Explicar a importância dos espaços intercelulares para trocas gasosas.",
+          "cytologyTissue": "chloroplast",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "bundle-sheath",
+          "label": "Bainha do feixe",
+          "function": "Delimitar a interface entre mesofilo e tecidos vasculares.",
+          "mechanism": "A camada celular envolve xilema e floema e participa das trocas entre o feixe e o tecido fundamental. A especialização varia entre plantas C₃ e C₄.",
+          "commonMistake": "A bainha desta vista não demonstra, por si só, anatomia Kranz.",
+          "uerj": "Evitar atribuir o mecanismo C₄ a qualquer bainha vascular.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "xylem",
+          "label": "Xilema foliar",
+          "function": "Fornecer água e solutos minerais ao mesofilo.",
+          "mechanism": "Elementos condutores lignificados mantêm uma via contínua ligada ao caule; a evaporação foliar contribui para o gradiente de potencial hídrico.",
+          "commonMistake": "Xilema não produz a tensão por contração muscular.",
+          "uerj": "Relacionar nervura, transpiração e coesão da água.",
+          "cytologyTissue": "lignin",
+          "links": [
+            {
+              "viewId": "botany-xylem-water",
+              "partId": "vessel-wall",
+              "label": "Explorar xilema",
+              "relation": "O feixe foliar se conecta aos elementos condutores do xilema.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "phloem",
+          "label": "Floema foliar",
+          "function": "Exportar ou importar compostos orgânicos conforme a relação fonte–dreno.",
+          "mechanism": "Em uma folha madura fonte, açúcares assimilados alcançam tubos crivados. Folhas jovens podem receber carbono antes de se tornarem fontes.",
+          "commonMistake": "Todo floema não transporta sempre no sentido descendente.",
+          "uerj": "Justificar o sentido do transporte pela posição da fonte e do dreno.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-phloem-translocation",
+              "partId": "sieve-tube",
+              "label": "Explorar floema",
+              "relation": "A exportação de carbono utiliza elementos de tubo crivado.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        },
+        {
+          "id": "lower-epidermis",
+          "label": "Epiderme inferior e abertura estomática",
+          "function": "Revestir a face inferior e abrigar vias reguláveis de troca gasosa.",
+          "mechanism": "A camada epidérmica envolve o complexo estomático; abaixo do poro, a câmara subestomática comunica-se com as lacunas do mesofilo.",
+          "commonMistake": "A distribuição inferior dos estômatos não é universal.",
+          "uerj": "Relacionar localização de estômatos e ambiente da folha.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-stomatal-complex",
+              "partId": "guard-cells",
+              "label": "Explorar estômato",
+              "relation": "A abertura depende do estado das células-guarda.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "photosynthesis"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "leaves",
+        "transport",
+        "photosynthesis"
+      ],
+      "links": [
+        {
+          "viewId": "cyto-light-reactions",
+          "partId": "photosystem-ii",
+          "label": "Reações fotoquímicas",
+          "relation": "A energia luminosa é convertida nas membranas tilacoidais.",
+          "scope": "tissue"
+        },
+        {
+          "viewId": "cyto-calvin-cycle",
+          "partId": "rubisco",
+          "label": "Fixação de carbono",
+          "relation": "O mesofilo contém cloroplastos com o ciclo de Calvin.",
+          "scope": "tissue"
+        }
+      ],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "root-primary",
+      "title": "Raiz primária: absorção e seleção",
+      "label": "Raiz primária: absorção e seleção",
+      "category": "vegetative",
+      "description": "Corte de raiz jovem eudicotiledônea na região pilífera; xilema em posição central e floema entre seus polos. A organização de raízes monocotiledôneas difere.",
+      "keyIdeas": [
+        "Pelos absorventes são prolongamentos de células da rizoderme.",
+        "A faixa de Caspary interrompe o caminho apoplástico na endoderme.",
+        "Periciclo pode originar raízes laterais."
+      ],
+      "recognition": "Da periferia para o centro: rizoderme, córtex, endoderme, periciclo e tecidos vasculares alternos.",
+      "parts": [
+        {
+          "id": "rhizodermis",
+          "label": "Rizoderme",
+          "function": "Estabelecer a interface de absorção com a solução do solo.",
+          "mechanism": "Células epidérmicas jovens apresentam paredes externas permeáveis; transportadores de membrana contribuem para absorção seletiva de íons.",
+          "commonMistake": "Absorção de íons não é apenas entrada passiva de água.",
+          "uerj": "Distinguir osmose de transporte ativo de solutos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "root-hairs",
+          "label": "Pelos absorventes",
+          "function": "Aumentar a superfície de contato com água e minerais.",
+          "mechanism": "Um prolongamento contínuo da célula epidérmica aproxima a membrana plasmática da solução retida entre partículas do solo.",
+          "commonMistake": "Pelo absorvente não é uma raiz lateral multicelular.",
+          "uerj": "Relacionar superfície de contato e capacidade de absorção.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-plant-cell",
+              "partId": "plasma-membrane",
+              "label": "Membrana da célula vegetal",
+              "relation": "A membrana da célula que forma o pelo controla a passagem de solutos.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "cortex",
+          "label": "Córtex parenquimático",
+          "function": "Conduzir água radialmente e armazenar reservas.",
+          "mechanism": "Água pode seguir paredes e espaços extracelulares ou atravessar protoplastos conectados; a importância de cada via depende do tecido e das condições.",
+          "commonMistake": "Apoplasto não corresponde ao citoplasma.",
+          "uerj": "Comparar vias apoplástica e simplástica.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "endodermis",
+          "label": "Endoderme",
+          "function": "Delimitar uma barreira seletiva na entrada do cilindro vascular.",
+          "mechanism": "A camada de células vivas circunda o estelo. A barreira apoplástica exige que água e solutos atravessem uma membrana para alcançar o simplasto antes de transpô-la; lamelas adicionais de suberina alteram a permeabilidade.",
+          "commonMistake": "Endoderme não é apenas uma camada morta impermeável.",
+          "uerj": "Explicar seleção de íons na passagem córtex–estelo.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "casparian-strip",
+          "label": "Faixa de Caspary",
+          "function": "Bloquear a continuidade apoplástica entre células endodérmicas.",
+          "mechanism": "Em raízes jovens de Arabidopsis, uma faixa de lignina nas paredes radiais e transversais forma a barreira apoplástica. Ela é distinta das lamelas de suberina depositadas depois; composição e desenvolvimento variam entre espécies.",
+          "commonMistake": "A faixa não envolve toda a parede como uma bainha homogênea de suberina.",
+          "uerj": "Distinguir barreira apoplástica de impermeabilidade completa da célula.",
+          "cytologyTissue": "lignin",
+          "links": [
+            {
+              "viewId": "cyto-active-transport",
+              "partId": "proton-gradient",
+              "label": "Transporte seletivo",
+              "relation": "Depois de deixar o apoplasto, solutos encontram transporte de membrana.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "pericycle",
+          "label": "Periciclo",
+          "function": "Participar da formação endógena de raízes laterais.",
+          "mechanism": "Células localizadas logo dentro da endoderme podem retomar divisões; o primórdio lateral atravessa tecidos externos durante o crescimento.",
+          "commonMistake": "Raiz lateral não se origina de um pelo absorvente.",
+          "uerj": "Identificar o tecido de origem de raízes laterais.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-meristems-growth",
+              "partId": "differentiation",
+              "label": "Divisão e diferenciação",
+              "relation": "Células competentes do periciclo podem iniciar novos órgãos.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "root-xylem",
+          "label": "Xilema primário da raiz",
+          "function": "Conduzir água e minerais ao eixo aéreo.",
+          "mechanism": "Os elementos traqueais centrais ligam a absorção radial a uma via axial. Suas paredes espessas resistem à deformação sob tensão.",
+          "commonMistake": "A estrela desta vista não é a organização de toda raiz.",
+          "uerj": "Reconhecer posição relativa do xilema e do floema.",
+          "cytologyTissue": "lignin",
+          "links": [
+            {
+              "viewId": "botany-xylem-water",
+              "partId": "vessel-wall",
+              "label": "Condução no xilema",
+              "relation": "A água absorvida segue pelos elementos traqueais.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        },
+        {
+          "id": "root-phloem",
+          "label": "Floema primário da raiz",
+          "function": "Importar compostos orgânicos usados por tecidos em crescimento.",
+          "mechanism": "Elementos crivados situam-se entre polos do xilema nesta raiz. A raiz pode ser dreno consumidor ou órgão de reserva com comportamento sazonal.",
+          "commonMistake": "Tecidos subterrâneos também recebem e redistribuem carbono.",
+          "uerj": "Relacionar raiz heterotrófica e distribuição de fotoassimilados.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "roots",
+            "transport",
+            "plant-body",
+            "caspary-primary"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "roots",
+        "transport",
+        "plant-body",
+        "caspary-primary"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "stem-eudicot",
+      "title": "Caule primário de eudicotiledônea",
+      "label": "Caule primário de eudicotiledônea",
+      "category": "vegetative",
+      "description": "Corte de caule jovem com feixes vasculares colaterais abertos em anel.",
+      "keyIdeas": [
+        "Feixes em anel delimitam córtex e medula.",
+        "Xilema é interno, floema é externo e câmbio fica entre eles."
+      ],
+      "recognition": "Observe o anel de feixes, cada um com vasos na face interna e floema na face externa.",
+      "parts": [
+        {
+          "id": "epidermis",
+          "label": "Epiderme do caule",
+          "function": "Proteger o corpo primário do caule.",
+          "mechanism": "Uma camada justaposta limita o contato com o meio; sua superfície pode produzir cutícula e estruturas epidérmicas especializadas.",
+          "commonMistake": "Epiderme não é a periderme de um caule lenhoso.",
+          "uerj": "Distinguir revestimento primário e secundário.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "ground-tissue",
+          "label": "Córtex e medula",
+          "function": "Integrar preenchimento, reserva e suporte.",
+          "mechanism": "O córtex ocupa a periferia dos feixes; a medula é central. O preenchimento não é um espaço vazio, mas tecido vivo com funções de reserva e metabolismo.",
+          "commonMistake": "Aparência de preenchimento não significa tecido sem função.",
+          "uerj": "Relacionar organização do tecido fundamental ao arranjo vascular.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "xylem",
+          "label": "Xilema dos feixes",
+          "function": "Conduzir água e solutos minerais no eixo do caule.",
+          "mechanism": "Elementos traqueais ocupam a porção voltada ao interior de cada feixe; paredes secundárias lignificadas também contribuem para suporte.",
+          "commonMistake": "Cor do modelo não é uma coloração histológica diagnóstica.",
+          "uerj": "Identificar xilema pela posição e pelos elementos condutores.",
+          "cytologyTissue": "lignin",
+          "links": [
+            {
+              "viewId": "botany-xylem-water",
+              "partId": "vessel-wall",
+              "label": "Explorar elementos traqueais",
+              "relation": "Os feixes contêm vias axiais de condução hídrica.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "phloem",
+          "label": "Floema dos feixes",
+          "function": "Distribuir fotoassimilados entre fontes e drenos.",
+          "mechanism": "Os elementos de tubo crivado e suas células companheiras ocupam a porção externa dos feixes colaterais mostrados.",
+          "commonMistake": "Floema não é um segundo xilema com açúcar.",
+          "uerj": "Comparar células vivas crivadas e elementos traqueais maduros.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-phloem-translocation",
+              "partId": "companion-cell",
+              "label": "Explorar célula companheira",
+              "relation": "O suporte metabólico do tubo é fornecido por células associadas.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "cambium",
+          "label": "Câmbio fascicular",
+          "function": "Manter potencial de produção vascular secundária.",
+          "mechanism": "Uma faixa meristemática entre xilema e floema pode integrar-se ao câmbio interfascicular e formar um cilindro cambial.",
+          "commonMistake": "Nem toda eudicotiledônea forma um tronco lenhoso expressivo.",
+          "uerj": "Distinguir feixes colaterais fechados e abertos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "stems",
+        "plant-body"
+      ],
+      "links": [
+        {
+          "viewId": "botany-stem-monocot",
+          "partId": "ground-tissue",
+          "label": "Comparar com monocotiledônea",
+          "relation": "O arranjo disperso difere do anel vascular.",
+          "scope": "organ"
+        },
+        {
+          "viewId": "botany-stem-secondary",
+          "partId": "vascular-cambium",
+          "label": "Crescimento em espessura",
+          "relation": "O câmbio pode originar tecidos vasculares secundários.",
+          "scope": "organ"
+        }
+      ],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "stem-monocot",
+      "title": "Caule primário de monocotiledônea",
+      "label": "Caule primário de monocotiledônea",
+      "category": "vegetative",
+      "description": "Corte de caule com feixes vasculares dispersos e fechados, como em um padrão escolar de gramínea; não representa toda diversidade de monocotiledôneas.",
+      "keyIdeas": [
+        "Feixes dispersos atravessam o tecido fundamental.",
+        "Este padrão não possui o câmbio fascicular típico do caule anterior."
+      ],
+      "recognition": "Compare número e distribuição de feixes, sem usar apenas o formato externo do caule.",
+      "parts": [
+        {
+          "id": "epidermis",
+          "label": "Epiderme do caule",
+          "function": "Proteger o corpo primário do caule.",
+          "mechanism": "Uma camada justaposta limita o contato com o meio; sua superfície pode produzir cutícula e estruturas epidérmicas especializadas.",
+          "commonMistake": "Epiderme não é a periderme de um caule lenhoso.",
+          "uerj": "Distinguir revestimento primário e secundário.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "ground-tissue",
+          "label": "Tecido fundamental",
+          "function": "Integrar preenchimento, reserva e suporte.",
+          "mechanism": "Parênquima vivo ocupa os intervalos entre tecidos condutores. Nesta monocotiledônea, não há separação nítida em córtex periférico e medula central.",
+          "commonMistake": "Aparência de preenchimento não significa tecido sem função.",
+          "uerj": "Relacionar organização do tecido fundamental ao arranjo vascular.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "xylem",
+          "label": "Xilema dos feixes",
+          "function": "Conduzir água e solutos minerais no eixo do caule.",
+          "mechanism": "Elementos traqueais ocupam a porção voltada ao interior de cada feixe; paredes secundárias lignificadas também contribuem para suporte.",
+          "commonMistake": "Cor do modelo não é uma coloração histológica diagnóstica.",
+          "uerj": "Identificar xilema pela posição e pelos elementos condutores.",
+          "cytologyTissue": "lignin",
+          "links": [
+            {
+              "viewId": "botany-xylem-water",
+              "partId": "vessel-wall",
+              "label": "Explorar elementos traqueais",
+              "relation": "Os feixes contêm vias axiais de condução hídrica.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "phloem",
+          "label": "Floema dos feixes",
+          "function": "Distribuir fotoassimilados entre fontes e drenos.",
+          "mechanism": "Os elementos de tubo crivado e suas células companheiras ocupam a porção externa dos feixes colaterais mostrados.",
+          "commonMistake": "Floema não é um segundo xilema com açúcar.",
+          "uerj": "Comparar células vivas crivadas e elementos traqueais maduros.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-phloem-translocation",
+              "partId": "companion-cell",
+              "label": "Explorar célula companheira",
+              "relation": "O suporte metabólico do tubo é fornecido por células associadas.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "bundle-sheath",
+          "label": "Bainha esclerenquimática",
+          "function": "Reforçar os feixes vasculares.",
+          "mechanism": "Fibras de paredes espessas envolvem os feixes dispersos. Os feixes deste exemplo são fechados, sem câmbio vascular entre xilema e floema.",
+          "commonMistake": "Ausência de câmbio típico nesta vista não é regra sem exceções para todas as monocotiledôneas.",
+          "uerj": "Distinguir feixes colaterais fechados e abertos.",
+          "cytologyTissue": "lignin",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "stems",
+        "plant-body"
+      ],
+      "links": [
+        {
+          "viewId": "botany-stem-eudicot",
+          "partId": "cambium",
+          "label": "Comparar com eudicotiledônea",
+          "relation": "Os dois modelos mostram posições vasculares e potencial cambial diferentes.",
+          "scope": "organ"
+        }
+      ],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "stem-secondary",
+      "title": "Caule lenhoso e crescimento secundário",
+      "label": "Caule lenhoso e crescimento secundário",
+      "category": "vegetative",
+      "description": "Setor de caule eudicotiledôneo em espessamento. A janela expõe cilindros concêntricos e raios; a cor não distingue espécies de madeira.",
+      "keyIdeas": [
+        "O câmbio vascular produz xilema para dentro e floema para fora.",
+        "A periderme substitui o revestimento primário.",
+        "Raios permitem transporte radial."
+      ],
+      "recognition": "Localize o câmbio entre o lenho interno e o líber externo; o felogênio está mais periférico.",
+      "parts": [
+        {
+          "id": "secondary-xylem",
+          "label": "Xilema secundário (lenho)",
+          "function": "Conduzir água e sustentar o eixo lenhoso.",
+          "mechanism": "Células produzidas para dentro do câmbio incluem elementos traqueais, fibras e parênquima; nem toda região antiga do lenho mantém igual atividade condutora.",
+          "commonMistake": "Lenho não é composto apenas de células mortas.",
+          "uerj": "Relacionar madeira, condução e suporte.",
+          "cytologyTissue": "lignin",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "vascular-cambium",
+          "label": "Câmbio vascular",
+          "function": "Produzir tecidos vasculares secundários.",
+          "mechanism": "Divisões periclinais das iniciais aumentam as fileiras radiais: xilema se diferencia internamente e floema externamente; divisões anticlinais acompanham a circunferência.",
+          "commonMistake": "Câmbio não é um vaso de condução.",
+          "uerj": "Indicar a direção de produção de xilema e floema.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-mitosis",
+              "partId": "metaphase",
+              "label": "Comparar mitose e citocinese",
+              "relation": "A segregação cromossômica é conservada. A vista de mitose usa um exemplo animal; células vegetais formam placa celular na citocinese e, em geral, não apresentam centríolos típicos.",
+              "scope": "process"
+            }
+          ],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "secondary-phloem",
+          "label": "Floema secundário (líber)",
+          "function": "Redistribuir compostos orgânicos no corpo lenhoso.",
+          "mechanism": "Derivado da face externa do câmbio, mantém elementos crivados funcionais em regiões mais recentes; porções antigas podem ser comprimidas pelo crescimento.",
+          "commonMistake": "Toda casca não corresponde apenas ao floema.",
+          "uerj": "Localizar a região removida no anelamento e prever acúmulo de açúcares.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-phloem-translocation",
+              "partId": "sieve-tube",
+              "label": "Transporte no líber",
+              "relation": "Elementos crivados integram o tecido secundário.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "rays",
+          "label": "Raios parenquimáticos",
+          "function": "Integrar armazenamento e transporte radial.",
+          "mechanism": "Fileiras radiais de parênquima atravessam tecidos vasculares e conectam regiões internas e externas do caule.",
+          "commonMistake": "Transporte no caule não ocorre somente na direção longitudinal.",
+          "uerj": "Relacionar disposição radial e intercâmbio entre tecidos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "cork-cambium",
+          "label": "Felogênio",
+          "function": "Renovar o revestimento secundário.",
+          "mechanism": "O meristema lateral produz súber para fora e, em geral, feloderme para dentro; sua posição depende do órgão e do estágio de desenvolvimento.",
+          "commonMistake": "Felogênio e câmbio vascular são meristemas distintos.",
+          "uerj": "Separar produção da periderme e produção de vasos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "cork",
+          "label": "Súber e periderme externa",
+          "function": "Reduzir perda hídrica e proteger o caule.",
+          "mechanism": "Células com paredes suberizadas compõem uma barreira externa. Lenticelas interrompem localmente a compactação e permitem trocas gasosas.",
+          "commonMistake": "O revestimento secundário não torna o órgão hermeticamente isolado.",
+          "uerj": "Relacionar suberização e existência de lenticelas.",
+          "cytologyTissue": "cuticle",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "phelloderm",
+          "label": "Feloderme",
+          "function": "Constituir a porção viva interna da periderme.",
+          "mechanism": "Células parenquimáticas formadas para dentro do felogênio participam do tecido periférico vivo; sua espessura varia entre espécies.",
+          "commonMistake": "Feloderme não é o conjunto de todo o córtex.",
+          "uerj": "Identificar os três componentes da periderme.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "stems",
+            "plant-body"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "stems",
+        "plant-body"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "stomatal-complex",
+      "title": "Estômato: abertura, parede e turgor",
+      "label": "Estômato: abertura, parede e turgor",
+      "category": "transport",
+      "description": "Vista superficial com janela abaixo do poro; duas células-guarda reniformes correspondem a um padrão frequente em eudicotiledôneas.",
+      "keyIdeas": [
+        "O poro é um espaço entre duas células, não uma célula.",
+        "Turgor e propriedades da parede alteram a abertura.",
+        "Luz, CO₂, estado hídrico e ABA integram-se no controle estomático."
+      ],
+      "recognition": "Identifique a fenda real entre paredes internas espessas, células-guarda curvas e células epidérmicas em mosaico.",
+      "parts": [
+        {
+          "id": "guard-cells",
+          "label": "Células-guarda",
+          "function": "Regular a abertura do poro estomático.",
+          "mechanism": "Mudanças no conteúdo de solutos alteram o potencial osmótico; a entrada de água aumenta o turgor, e a arquitetura da parede transforma essa força em mudança de curvatura.",
+          "commonMistake": "Mais turgor não significa que qualquer célula epidérmica vira célula-guarda.",
+          "uerj": "Explicar abertura por variação osmótica e propriedades da parede.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-osmosis-tonicity",
+              "partId": "semipermeable-membrane",
+              "label": "Osmose e membrana",
+              "relation": "O fluxo de água responde ao gradiente de potencial hídrico.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "responses",
+            "guard-wall-primary"
+          ]
+        },
+        {
+          "id": "inner-wall",
+          "label": "Paredes internas das células-guarda",
+          "function": "Direcionar a deformação das células durante variações de turgor.",
+          "mechanism": "Espessura, orientação das microfibrilas e propriedades das pectinas distribuem resistência à deformação. Regiões polares mais rígidas também restringem o alongamento do complexo; parede e turgor atuam juntos.",
+          "commonMistake": "As paredes não funcionam como músculos.",
+          "uerj": "Integrar resistência da parede e pressão de turgor.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "responses",
+            "guard-wall-primary"
+          ]
+        },
+        {
+          "id": "pore",
+          "label": "Poro estomático",
+          "function": "Permitir difusão entre atmosfera e espaços internos.",
+          "mechanism": "A fenda aberta oferece uma via gasosa para CO₂, O₂ e vapor de água; sua resistência depende da abertura e do caminho de difusão.",
+          "commonMistake": "O poro não bombeia ativamente moléculas de CO₂.",
+          "uerj": "Relacionar abertura, fotossíntese e custo hídrico.",
+          "cytologyTissue": "matrix",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "responses"
+          ]
+        },
+        {
+          "id": "epidermal-cells",
+          "label": "Células epidérmicas adjacentes",
+          "function": "Integrar o complexo ao revestimento contínuo da folha.",
+          "mechanism": "As paredes anticlinais interdigitadas formam um mosaico; o estado mecânico das células vizinhas também influencia a abertura.",
+          "commonMistake": "Toda célula vizinha não é, necessariamente, uma célula subsidiária especializada.",
+          "uerj": "Distinguir célula-guarda e epiderme comum.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "responses"
+          ]
+        },
+        {
+          "id": "vacuoles",
+          "label": "Vacúolos das células-guarda",
+          "function": "Participar do armazenamento de solutos e da pressão de turgor.",
+          "mechanism": "O tonoplasto compartimenta solutos; a expansão vacuolar participa do aumento de volume, sem eliminar a necessidade da membrana plasmática e da parede.",
+          "commonMistake": "O vacúolo não produz sozinho o gradiente eletroquímico da membrana plasmática.",
+          "uerj": "Relacionar compartimentação, solutos e turgor.",
+          "cytologyTissue": "membrane",
+          "links": [
+            {
+              "viewId": "cyto-vacuole",
+              "partId": "tonoplast",
+              "label": "Explorar vacúolo",
+              "relation": "A membrana vacuolar controla trocas com o citosol.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "responses"
+          ]
+        },
+        {
+          "id": "chloroplasts",
+          "label": "Cloroplastos das células-guarda",
+          "function": "Participar do metabolismo das células reguladoras.",
+          "mechanism": "Diferentemente da maioria das células epidérmicas comuns, células-guarda possuem cloroplastos; a regulação estomática integra múltiplas fontes de energia e sinais.",
+          "commonMistake": "A abertura não é uma consequência automática de haver cloroplastos.",
+          "uerj": "Evitar explicações baseadas em um único fator.",
+          "cytologyTissue": "chloroplast",
+          "links": [
+            {
+              "viewId": "cyto-chloroplast",
+              "partId": "granum",
+              "label": "Explorar cloroplasto",
+              "relation": "Os cloroplastos mantêm compartimentos fotoquímicos.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "leaves",
+            "transport",
+            "responses",
+            "guard-chloroplast-primary"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "leaves",
+        "transport",
+        "responses",
+        "guard-chloroplast-primary",
+        "guard-wall-primary"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "xylem-water",
+      "title": "Xilema: coesão, tensão e paredes lignificadas",
+      "label": "Xilema: coesão, tensão e paredes lignificadas",
+      "category": "transport",
+      "description": "Trecho longitudinal ampliado de elementos de vaso com abertura lateral e reforços helicoidais, ligado a uma superfície evaporante didática.",
+      "keyIdeas": [
+        "Os elementos condutores traqueais estão mortos na maturidade funcional.",
+        "O fluxo resulta de gradientes de potencial hídrico.",
+        "Coesão da água e resistência da parede permitem transmissão de tensão."
+      ],
+      "recognition": "Observe o lúmen axial aberto, as paredes espessas, pontuações e uma via de saída para evaporação no alto do trecho.",
+      "parts": [
+        {
+          "id": "vessel-wall",
+          "label": "Parede lignificada do vaso",
+          "function": "Resistir ao colapso e delimitar a via condutora.",
+          "mechanism": "A parede secundária com lignina reforça o elemento traqueal. O lúmen comunica-se axialmente com outros elementos por regiões perfuradas.",
+          "commonMistake": "Lignina não é uma bomba hidráulica.",
+          "uerj": "Associar reforço da parede e condução sob tensão.",
+          "cytologyTissue": "lignin",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "leaves"
+          ]
+        },
+        {
+          "id": "spiral-thickening",
+          "label": "Espessamento helicoidal",
+          "function": "Reforçar a parede mantendo extensibilidade em elementos jovens.",
+          "mechanism": "O reforço secundário acompanha uma hélice contínua; esse padrão é comum em elementos do protoxilema sujeitos ao alongamento do órgão.",
+          "commonMistake": "Todo vaso maduro não apresenta o mesmo padrão helicoidal.",
+          "uerj": "Diferenciar padrão de parede e conteúdo do lúmen.",
+          "cytologyTissue": "lignin",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "leaves"
+          ]
+        },
+        {
+          "id": "perforation",
+          "label": "Placa de perfuração simples",
+          "function": "Permitir continuidade axial entre elementos de vaso.",
+          "mechanism": "A grande abertura na parede terminal reduz resistência ao movimento de água. A placa simples é um padrão; outras espécies apresentam placas múltiplas.",
+          "commonMistake": "Placa de perfuração não é placa crivada do floema.",
+          "uerj": "Comparar comunicação entre células de xilema e floema.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "leaves"
+          ]
+        },
+        {
+          "id": "pits",
+          "label": "Regiões de pontuação",
+          "function": "Permitir passagem lateral de água através de paredes menos reforçadas.",
+          "mechanism": "Nessas regiões a parede secundária é ausente; a membrana da pontuação conserva parede primária e lamela média entre elementos adjacentes.",
+          "commonMistake": "Pontuação não é necessariamente um furo livre sem parede.",
+          "uerj": "Relacionar passagem lateral e manutenção de barreira física.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "leaves"
+          ]
+        },
+        {
+          "id": "water-column",
+          "label": "Coluna de água no lúmen",
+          "function": "Transmitir fluxo e tensão na rede condutora.",
+          "mechanism": "A coesão entre moléculas mantém continuidade da água sob tensão; adesão à parede contribui para a interface. Cavitação pode interromper a condução.",
+          "commonMistake": "Capilaridade isolada não explica a ascensão em árvores altas.",
+          "uerj": "Usar coesão–tensão para explicar o efeito da transpiração.",
+          "cytologyTissue": "matrix",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "leaves"
+          ]
+        },
+        {
+          "id": "evaporating-wall",
+          "label": "Interface evaporante foliar",
+          "function": "Gerar uma importante queda de potencial hídrico na folha.",
+          "mechanism": "A evaporação na superfície úmida de paredes do mesofilo intensifica a curvatura dos meniscos e transmite tensão à água do apoplasto e xilema.",
+          "commonMistake": "A água não evapora dentro do vaso como se ele fosse uma chaminé aberta.",
+          "uerj": "Ligar evaporação no mesofilo a fluxo no xilema.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-leaf-cross-section",
+              "partId": "spongy",
+              "label": "Voltar ao mesofilo",
+              "relation": "A interface representada pertence a paredes do mesofilo, fora do vaso.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "leaves"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "transport",
+        "stems",
+        "leaves"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "phloem-translocation",
+      "title": "Floema: fonte, tubo crivado e dreno",
+      "label": "Floema: fonte, tubo crivado e dreno",
+      "category": "transport",
+      "description": "Trecho longitudinal com dois elementos de tubo crivado, células companheiras e interfaces fonte/dreno. A figura representa um único trajeto funcional, não o sentido obrigatório de toda a rede.",
+      "keyIdeas": [
+        "Carregamento aumenta a concentração de solutos na região fonte.",
+        "Entrada de água pode elevar pressão hidrostática.",
+        "Fluxo em massa segue diferenças de pressão entre regiões fonte e dreno."
+      ],
+      "recognition": "Encontre paredes terminais perfuradas por vários poros, células companheiras nucleadas e a continuidade do lúmen crivado.",
+      "parts": [
+        {
+          "id": "sieve-tube",
+          "label": "Elementos de tubo crivado",
+          "function": "Conduzir solução rica em compostos orgânicos.",
+          "mechanism": "Elementos vivos maduros perdem o núcleo e reduzem organelas, mantendo continuidade funcional por placas crivadas e suporte de células companheiras.",
+          "commonMistake": "Elemento crivado vivo não equivale a célula metabolicamente autônoma.",
+          "uerj": "Comparar maturação de xilema e floema.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "sieve-plates",
+          "label": "Placas crivadas",
+          "function": "Conectar elementos de tubo crivado em série.",
+          "mechanism": "Múltiplos poros atravessam a parede terminal; sua geometria contribui para resistência ao fluxo, e deposição de calose pode modificar a comunicação.",
+          "commonMistake": "Placa crivada não é uma válvula muscular unidirecional.",
+          "uerj": "Relacionar perfuração da parede e continuidade da seiva elaborada.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "companion-cell",
+          "label": "Células companheiras",
+          "function": "Dar suporte metabólico e participar das trocas com o tubo crivado.",
+          "mechanism": "Células nucleadas associadas possuem intensa atividade metabólica e conexões plasmodesmáticas com elementos crivados; a via de carregamento varia entre espécies.",
+          "commonMistake": "Não se deve atribuir o mesmo carregamento apoplástico a todas as plantas.",
+          "uerj": "Explicar dependência funcional entre dois tipos celulares.",
+          "cytologyTissue": "membrane",
+          "links": [
+            {
+              "viewId": "cyto-cell-junctions",
+              "partId": "plasmodesma",
+              "label": "Explorar plasmodesmos",
+              "relation": "Conexões simplásticas permitem intercâmbio entre células associadas.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "source",
+          "label": "Interface fonte",
+          "function": "Fornecer fotoassimilados ao trajeto de translocação.",
+          "mechanism": "Carregamento simplástico ou apoplástico eleva a disponibilidade de açúcares no floema. A entrada de água do xilema pode elevar a pressão na região fonte.",
+          "commonMistake": "Fonte é uma condição funcional, não apenas um nome fixo para qualquer folha.",
+          "uerj": "Prever quando um órgão de reserva passa de dreno a fonte.",
+          "cytologyTissue": "chloroplast",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "sink",
+          "label": "Interface dreno",
+          "function": "Retirar e utilizar ou armazenar fotoassimilados.",
+          "mechanism": "Descarregamento e consumo ou armazenamento mantêm uma diferença de concentração e pressão em relação à fonte; órgãos em crescimento e reservas são drenos possíveis.",
+          "commonMistake": "Dreno não precisa estar abaixo da fonte.",
+          "uerj": "Determinar sentido do transporte pelo metabolismo dos órgãos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "plant-body"
+          ]
+        },
+        {
+          "id": "plasmodesmata",
+          "label": "Plasmodesmos de conexão",
+          "function": "Estabelecer continuidade simplástica entre células vivas.",
+          "mechanism": "Canais que atravessam a parede mantêm conexão citoplasmática regulável; o modelo amplia a região de conexão, sem reproduzir diâmetro molecular.",
+          "commonMistake": "Plasmodesmo não é um espaço intercelular aberto.",
+          "uerj": "Comparar transporte apoplástico e simplástico.",
+          "cytologyTissue": "membrane",
+          "links": [
+            {
+              "viewId": "cyto-cell-junctions",
+              "partId": "plasmodesma",
+              "label": "Plasmodesmo ampliado",
+              "relation": "A continuidade celular sustenta intercâmbio simplástico.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "transport",
+            "stems",
+            "plant-body"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "transport",
+        "stems",
+        "plant-body"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "meristems-growth",
+      "title": "Meristemas e diferenciação vegetal",
+      "label": "Meristemas e diferenciação vegetal",
+      "category": "growth",
+      "description": "Ápice radicular em corte longitudinal e faixa lateral de referência. Os domínios de divisão, alongamento e diferenciação se sobrepõem; não são compartimentos estanques.",
+      "keyIdeas": [
+        "Divisão aumenta número de células; alongamento aumenta tamanho.",
+        "A diferenciação produz células especializadas com o mesmo genoma básico.",
+        "Meristemas laterais e apicais têm posições e produtos distintos."
+      ],
+      "recognition": "Observe células pequenas no ápice protegido pela coifa, fileiras alongadas acima e pelos na região de diferenciação.",
+      "parts": [
+        {
+          "id": "root-cap",
+          "label": "Coifa",
+          "function": "Proteger o ápice e participar da percepção gravitacional.",
+          "mechanism": "Células externas amortecem a interface com o solo e são repostas; células da columela contêm amiloplastos relacionados à percepção da gravidade.",
+          "commonMistake": "A coifa não é o meristema que produz todo o corpo radicular.",
+          "uerj": "Separar proteção do ápice e produção de tecidos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "roots",
+            "stems",
+            "plant-body",
+            "responses",
+            "gravity-primary"
+          ]
+        },
+        {
+          "id": "apical-meristem",
+          "label": "Meristema apical radicular",
+          "function": "Manter a produção de células para crescimento primário.",
+          "mechanism": "Células pequenas com citoplasma denso dividem-se e fornecem descendentes aos tecidos primários; um centro quiescente organiza parte do nicho de células iniciais.",
+          "commonMistake": "Todas as células do meristema não se dividem à mesma taxa.",
+          "uerj": "Associar nicho meristemático e crescimento indeterminado.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-cell-cycle",
+              "partId": "s-phase",
+              "label": "Ciclo celular",
+              "relation": "Divisão exige replicação prévia do DNA.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "stems",
+            "plant-body",
+            "responses",
+            "quiescent-primary"
+          ]
+        },
+        {
+          "id": "elongation",
+          "label": "Zona de alongamento",
+          "function": "Aumentar o comprimento da raiz.",
+          "mechanism": "Expansão vacuolar, entrada de água e remodelamento da parede aumentam o volume celular; a orientação da parede direciona o alongamento.",
+          "commonMistake": "Alongamento não é apenas duplicação do número de células.",
+          "uerj": "Distinguir divisão mitótica de expansão celular.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-vacuole",
+              "partId": "turgor",
+              "label": "Vacúolo e turgor",
+              "relation": "A expansão vacuolar participa do crescimento celular.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "stems",
+            "plant-body",
+            "responses"
+          ]
+        },
+        {
+          "id": "differentiation",
+          "label": "Zona de diferenciação",
+          "function": "Estabelecer funções celulares e tecidos maduros.",
+          "mechanism": "Mudanças de expressão gênica geram células epidérmicas, vasculares e fundamentais; pelos absorventes tornam a especialização epidérmica visível.",
+          "commonMistake": "Diferenciação normalmente não requer perder genes diferentes em cada tecido.",
+          "uerj": "Relacionar expressão gênica e especialização.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-cell-differentiation",
+              "partId": "regulatory-network",
+              "label": "Diferenciação celular",
+              "relation": "Programas regulatórios modificam o fenótipo celular.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "stems",
+            "plant-body",
+            "responses"
+          ]
+        },
+        {
+          "id": "lateral-meristem",
+          "label": "Meristema lateral de referência",
+          "function": "Acrescentar tecidos no crescimento em espessura.",
+          "mechanism": "A faixa lateral destacada representa a localização de um meristema como o câmbio vascular em um eixo que cresce secundariamente, não um anel típico deste ápice jovem.",
+          "commonMistake": "O esquema lateral comparativo não pertence ao meristema apical radicular.",
+          "uerj": "Comparar crescimento primário e secundário.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-stem-secondary",
+              "partId": "vascular-cambium",
+              "label": "Abrir câmbio vascular",
+              "relation": "O modelo lenhoso mostra a posição real do meristema lateral.",
+              "scope": "organ"
+            }
+          ],
+          "sourceIds": [
+            "roots",
+            "stems",
+            "plant-body",
+            "responses"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "roots",
+        "stems",
+        "plant-body",
+        "responses",
+        "quiescent-primary",
+        "gravity-primary"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "flower",
+      "title": "Flor: anatomia e reprodução",
+      "label": "Flor: anatomia e reprodução",
+      "category": "reproduction",
+      "description": "Flor autoral completa com cinco pétalas e gineceu central, em corte parcial. O número de peças e a fusão dos carpelos variam entre espécies.",
+      "keyIdeas": [
+        "Sépala e pétala são peças do perianto.",
+        "Antera contém microsporângios; o ovário contém óvulos.",
+        "Óvulo não é sinônimo de oosfera."
+      ],
+      "recognition": "Observe a sequência externa–interna: cálice, corola, estames e gineceu; a janela do ovário revela óvulos.",
+      "parts": [
+        {
+          "id": "sepals",
+          "label": "Sépalas (cálice)",
+          "function": "Proteger o botão floral.",
+          "mechanism": "Peças externas semelhantes a folhas envolvem as partes florais durante o desenvolvimento; sua persistência e aparência variam.",
+          "commonMistake": "Sépala não é uma célula reprodutiva.",
+          "uerj": "Reconhecer os verticilos protetores.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "petals",
+          "label": "Pétalas (corola)",
+          "function": "Participar da interação da flor com visitantes e proteger peças internas.",
+          "mechanism": "Lâminas curvas podem portar pigmentos e padrões associados a polinizadores; nem toda flor depende de corolas vistosas para polinização.",
+          "commonMistake": "Toda flor não é polinizada por animais.",
+          "uerj": "Relacionar morfologia floral e modo de polinização.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "filaments",
+          "label": "Filetes dos estames",
+          "function": "Sustentar e posicionar as anteras.",
+          "mechanism": "Eixos de tecido diploide do esporófito ligam as anteras ao receptáculo e influenciam sua exposição.",
+          "commonMistake": "Filete não conduz gametas masculinos ao óvulo.",
+          "uerj": "Distinguir filete e tubo polínico.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "anthers",
+          "label": "Anteras e sacos polínicos",
+          "function": "Abrigar a formação de micrósporos e o desenvolvimento do pólen.",
+          "mechanism": "Células-mãe diploides sofrem meiose nos microsporângios; micrósporos haploides originam gametófitos masculinos por mitoses.",
+          "commonMistake": "Pólen não é o próprio gameta masculino.",
+          "uerj": "Indicar em que etapa ocorre meiose no ciclo vegetal.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-meiosis",
+              "partId": "haploid-products",
+              "label": "Meiose e micrósporos",
+              "relation": "A redução de ploidia produz esporos, não diretamente todos os gametas.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "stigma",
+          "label": "Estigma",
+          "function": "Receber e reconhecer grãos de pólen.",
+          "mechanism": "A superfície receptiva permite adesão e germinação de pólen compatível; seu estado depende de mecanismos de reconhecimento da flor.",
+          "commonMistake": "Polinização não é fecundação.",
+          "uerj": "Separar chegada do pólen e fusão dos gametas.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "style",
+          "label": "Estilete",
+          "function": "Oferecer o trajeto até o ovário.",
+          "mechanism": "O tecido transmissor orienta o crescimento do tubo polínico; as células espermáticas são transportadas pelo tubo, não liberadas como pólen no ovário.",
+          "commonMistake": "O tubo polínico é uma estrutura do gametófito masculino.",
+          "uerj": "Relacionar crescimento polar e transporte de gametas.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "ovary",
+          "label": "Ovário floral",
+          "function": "Abrigar óvulos e formar parte do fruto após desenvolvimento.",
+          "mechanism": "A parede do ovário pertence ao esporófito diploide; após a fecundação, participa do pericarpo, embora outros tecidos também possam compor frutos acessórios.",
+          "commonMistake": "Ovário origina fruto; óvulo origina semente.",
+          "uerj": "Relacionar origem dos tecidos de fruto e semente.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "ovules",
+          "label": "Óvulos no ovário",
+          "function": "Proteger o megasporângio e o gametófito feminino.",
+          "mechanism": "Integumentos e nucelo são tecidos maternos diploides; no interior, o saco embrionário contém a oosfera haploide e a célula central.",
+          "commonMistake": "O óvulo não é inteiramente haploide.",
+          "uerj": "Distinguir ploidia dos tecidos maternos e do gametófito.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "botany-double-fertilization",
+              "partId": "integuments",
+              "label": "Explorar óvulo e fecundação",
+              "relation": "A vista ampliada distingue tecidos maternos e gametofíticos.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "reproduction",
+        "fertilization"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "seed-germination",
+      "title": "Semente e germinação",
+      "label": "Semente e germinação",
+      "category": "reproduction",
+      "description": "Corte de uma semente de angiosperma com embrião dicotiledôneo e endosperma persistente, acompanhado de radícula emergente. O destino das reservas difere em feijão, milho e outras espécies.",
+      "keyIdeas": [
+        "Embrião é o novo esporófito diploide.",
+        "Tegumento é de origem materna.",
+        "Endosperma usualmente triploide e cotilédones podem armazenar reservas em proporções diferentes."
+      ],
+      "recognition": "Encontre tegumento externo, reserva, dois cotilédones e eixo embrionário com extremidades radicular e caulinar.",
+      "parts": [
+        {
+          "id": "testa",
+          "label": "Tegumento da semente",
+          "function": "Proteger o embrião e modular a interação com água e ambiente.",
+          "mechanism": "Derivado dos integumentos maternos, o revestimento pode impor barreiras físicas e influenciar dormência e entrada de água.",
+          "commonMistake": "Tegumento não tem a mesma origem do embrião.",
+          "uerj": "Relacionar origem materna e ploidia diploide.",
+          "cytologyTissue": "cuticle",
+          "links": [],
+          "sourceIds": [
+            "fertilization",
+            "responses"
+          ]
+        },
+        {
+          "id": "endosperm",
+          "label": "Endosperma",
+          "function": "Nutrir o embrião em desenvolvimento e/ou a plântula.",
+          "mechanism": "Em muitas angiospermas forma-se pela fusão de um gameta n com a célula central contendo dois complementos n; reservas podem persistir ou ser transferidas aos cotilédones.",
+          "commonMistake": "Todas as sementes maduras não conservam muito endosperma.",
+          "uerj": "Relacionar dupla fecundação e tecido usualmente 3n.",
+          "cytologyTissue": "matrix",
+          "links": [],
+          "sourceIds": [
+            "fertilization",
+            "responses"
+          ]
+        },
+        {
+          "id": "cotyledons",
+          "label": "Cotilédones do embrião",
+          "function": "Participar da nutrição inicial e da organização embrionária.",
+          "mechanism": "As duas folhas embrionárias pertencem ao esporófito 2n; podem absorver reservas do endosperma, armazená-las e/ou tornar-se fotossintéticas.",
+          "commonMistake": "Cotilédone não é endosperma.",
+          "uerj": "Comparar tecidos de reserva e folhas embrionárias.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "fertilization",
+            "responses"
+          ]
+        },
+        {
+          "id": "radicle",
+          "label": "Radícula",
+          "function": "Originar o eixo radicular inicial.",
+          "mechanism": "O polo radicular retoma crescimento após embebição e ativação metabólica; sua emergência é um marco operacional frequente da germinação.",
+          "commonMistake": "Radícula não se origina do tegumento.",
+          "uerj": "Identificar a primeira estrutura embrionária a emergir em muitos casos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "fertilization",
+            "responses"
+          ]
+        },
+        {
+          "id": "plumule",
+          "label": "Plúmula e eixo caulinar embrionário",
+          "function": "Estabelecer a parte aérea da plântula.",
+          "mechanism": "O meristema caulinar e primórdios foliares crescem consumindo reservas antes que a fotossíntese sustente o novo indivíduo.",
+          "commonMistake": "Germinação inicial não depende sempre de luz como fonte direta de energia.",
+          "uerj": "Relacionar respiração e mobilização de reservas.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-mitochondrion",
+              "partId": "cristae",
+              "label": "Respiração na germinação",
+              "relation": "Células embrionárias utilizam respiração para gerar ATP.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "fertilization",
+            "responses"
+          ]
+        },
+        {
+          "id": "reserve-mobilization",
+          "label": "Interface de mobilização de reservas",
+          "function": "Disponibilizar substratos para o embrião.",
+          "mechanism": "Hidrólise de macromoléculas e transporte de produtos abastecem o crescimento; a participação de giberelinas e camadas secretoras é bem caracterizada em cereais, sem ser idêntica em toda semente.",
+          "commonMistake": "O exemplo de aleurona de cereal não deve ser transferido integralmente para toda dicotiledônea.",
+          "uerj": "Separar mecanismo geral e exemplo taxonômico.",
+          "cytologyTissue": "protein",
+          "links": [],
+          "sourceIds": [
+            "fertilization",
+            "responses"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "fertilization",
+        "responses"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "double-fertilization",
+      "title": "Óvulo e dupla fecundação",
+      "label": "Óvulo e dupla fecundação",
+      "category": "reproduction",
+      "description": "Óvulo ampliado em corte, com saco embrionário do padrão monospórico de sete células/oito núcleos antes da fusão dos núcleos polares. Outros padrões existem nas angiospermas.",
+      "keyIdeas": [
+        "Um gameta espermático fecunda a oosfera, formando zigoto 2n.",
+        "O outro se une à célula central e normalmente origina endosperma 3n.",
+        "As duas fusões não produzem dois embriões."
+      ],
+      "recognition": "Localize a micrópila, aparelho oosférico, dois núcleos polares e antipodais; o tubo polínico entra pelo polo micrópilar.",
+      "parts": [
+        {
+          "id": "integuments",
+          "label": "Integumentos e micrópila",
+          "function": "Envolver o óvulo, deixando a abertura micrópilar.",
+          "mechanism": "Tecidos maternos diploides circundam o nucelo e delimitam uma passagem para o tubo polínico; depois participarão do tegumento da semente.",
+          "commonMistake": "Micrópila é uma abertura, não um gameta.",
+          "uerj": "Relacionar óvulo, micrópila e tegumento.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "embryo-sac",
+          "label": "Saco embrionário",
+          "function": "Organizar o gametófito feminino no interior do óvulo.",
+          "mechanism": "No padrão representado, mitoses de um megásporo funcional originam sete células com oito núcleos; a célula central abriga dois núcleos polares antes de sua fusão.",
+          "commonMistake": "Sete células e oito núcleos não significam oito células.",
+          "uerj": "Contar células e núcleos no gametófito feminino.",
+          "cytologyTissue": "membrane",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "egg",
+          "label": "Oosfera (n)",
+          "function": "Contribuir com um genoma haploide para o embrião.",
+          "mechanism": "Sua fusão com um dos gametas espermáticos n produz o zigoto diploide, que origina o embrião por mitoses.",
+          "commonMistake": "Oosfera é uma célula do gametófito, não o óvulo inteiro.",
+          "uerj": "Calcular ploidia do zigoto.",
+          "cytologyTissue": "membrane",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "synergids",
+          "label": "Sinérgides (n)",
+          "function": "Guiar a chegada do tubo polínico e a liberação dos gametas.",
+          "mechanism": "Duas células adjacentes à oosfera participam da sinalização e da recepção; uma pode degenerar durante a entrada do tubo.",
+          "commonMistake": "Sinérgides não são os dois gametas masculinos.",
+          "uerj": "Reconhecer o aparelho oosférico no polo micrópilar.",
+          "cytologyTissue": "membrane",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "polar-nuclei",
+          "label": "Núcleos polares (n + n)",
+          "function": "Fornecer os complementos maternos do endosperma típico.",
+          "mechanism": "Dois núcleos haploides na célula central podem fundir-se antes ou durante o processo; a união com um gameta n produz o núcleo primário usualmente 3n.",
+          "commonMistake": "A célula central binucleada não é formada por duas células separadas.",
+          "uerj": "Calcular a contribuição parental do endosperma.",
+          "cytologyTissue": "chromatin",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "antipodals",
+          "label": "Antípodas (n)",
+          "function": "Compor a região chalazal do gametófito feminino.",
+          "mechanism": "Três células no polo oposto à micrópila integram o padrão mostrado; persistência e função variam entre espécies.",
+          "commonMistake": "Antípodas não formam necessariamente o embrião ou o endosperma.",
+          "uerj": "Evitar atribuir uma função universal a células variáveis.",
+          "cytologyTissue": "membrane",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "pollen-tube",
+          "label": "Tubo polínico",
+          "function": "Entregar os gametas masculinos ao saco embrionário.",
+          "mechanism": "Crescimento apical do gametófito masculino forma um tubo contínuo e polarizado; ao alcançar o alvo, permite liberação das células espermáticas.",
+          "commonMistake": "O tubo não é um vaso materno do estilete.",
+          "uerj": "Distinguir tecidos esporofíticos e gametofíticos.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        },
+        {
+          "id": "sperm-cells",
+          "label": "Dois gametas espermáticos (n)",
+          "function": "Participar das duas fusões da dupla fecundação.",
+          "mechanism": "As duas células espermáticas derivam da linhagem generativa do gametófito masculino por mitose; cada uma participa de uma fusão distinta.",
+          "commonMistake": "Gametas vegetais não são necessariamente produzidos diretamente por meiose.",
+          "uerj": "Relacionar mitose gametofítica e dupla fecundação.",
+          "cytologyTissue": "chromatin",
+          "links": [],
+          "sourceIds": [
+            "reproduction",
+            "fertilization"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "reproduction",
+        "fertilization"
+      ],
+      "links": [
+        {
+          "viewId": "botany-seed-germination",
+          "partId": "endosperm",
+          "label": "Depois da fecundação",
+          "relation": "Embrião e endosperma seguem destinos distintos.",
+          "scope": "organ"
+        },
+        {
+          "viewId": "cyto-meiosis",
+          "partId": "haploid-products",
+          "label": "Origem dos esporos",
+          "relation": "A meiose antecede o desenvolvimento dos gametófitos.",
+          "scope": "process"
+        }
+      ],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    },
+    {
+      "id": "plant-responses",
+      "title": "Sinais vegetais: crescimento e ambiente",
+      "label": "Sinais vegetais: crescimento e ambiente",
+      "category": "growth",
+      "description": "Ápice de ramo com gema lateral e folha, acompanhado de raiz gravitropicamente curvada. Os domínios destacados são locais de resposta; os hormônios são mensageiros e não órgãos visíveis.",
+      "keyIdeas": [
+        "Auxina integra crescimento diferencial e dominância apical.",
+        "ABA participa das respostas ao déficit hídrico.",
+        "Citocininas, giberelinas e etileno têm efeitos dependentes do tecido e do estágio."
+      ],
+      "recognition": "Compare ápice caulinar, gema lateral, região de alongamento, folha e coifa; não identifique um hormônio pela cor do modelo.",
+      "parts": [
+        {
+          "id": "shoot-apex",
+          "label": "Ápice caulinar e auxina",
+          "function": "Integrar crescimento do ramo e influência sobre gemas laterais.",
+          "mechanism": "Auxina produzida em tecidos jovens participa de redes de transporte e sinalização; o controle da ramificação também envolve citocininas, estrigolactonas, recursos e contexto ambiental.",
+          "commonMistake": "Auxina não explica isoladamente toda dominância apical.",
+          "uerj": "Prever efeitos de poda considerando comunicação entre regiões.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "responses",
+            "roots",
+            "stems"
+          ]
+        },
+        {
+          "id": "axillary-bud",
+          "label": "Gema axilar e ramificação",
+          "function": "Estabelecer um ponto potencial de formação de novo ramo.",
+          "mechanism": "A manutenção em repouso ou a ativação depende de sinais locais e de longa distância; disponibilidade de açúcares e interação hormonal modificam a resposta.",
+          "commonMistake": "Gema lateral não é formada de novo sempre que o ápice é removido.",
+          "uerj": "Relacionar gema pré-existente e alteração da dominância apical.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "responses",
+            "roots",
+            "stems"
+          ]
+        },
+        {
+          "id": "elongating-shoot",
+          "label": "Região de alongamento do ramo",
+          "function": "Gerar crescimento diferencial orientado.",
+          "mechanism": "Distribuição assimétrica de sinais modifica expansão celular nos lados do órgão; na fototropia, essa diferença contribui para a curvatura em direção à luz.",
+          "commonMistake": "Hormônios não transportam energia luminosa para o órgão.",
+          "uerj": "Explicar tropismo por expansão desigual.",
+          "cytologyTissue": "wall",
+          "links": [
+            {
+              "viewId": "cyto-cell-signaling",
+              "partId": "receptor",
+              "label": "Sinalização celular",
+              "relation": "Percepção e transdução modificam a atividade celular.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "responses",
+            "roots",
+            "stems"
+          ]
+        },
+        {
+          "id": "leaf-water-response",
+          "label": "Folha e resposta ao déficit hídrico",
+          "function": "Integrar estado hídrico a ajustes nas trocas gasosas.",
+          "mechanism": "ABA e outros sinais regulam canais e transporte de solutos nas células-guarda; perda de turgor favorece o fechamento e reduz transpiração estomática.",
+          "commonMistake": "ABA não é um tampão sólido que entope o poro.",
+          "uerj": "Relacionar sinal hormonal, transporte iônico e turgor.",
+          "cytologyTissue": "chloroplast",
+          "links": [
+            {
+              "viewId": "botany-stomatal-complex",
+              "partId": "guard-cells",
+              "label": "Resposta nas células-guarda",
+              "relation": "O fechamento envolve mudanças de solutos e água nas células especializadas.",
+              "scope": "structure"
+            }
+          ],
+          "sourceIds": [
+            "responses",
+            "roots",
+            "stems"
+          ]
+        },
+        {
+          "id": "root-gravity",
+          "label": "Ápice radicular e gravipercepção",
+          "function": "Orientar crescimento radicular em relação à gravidade.",
+          "mechanism": "Amiloplastos em células especializadas da coifa participam da percepção; sinalização e distribuição de auxina contribuem para expansão desigual na zona de alongamento.",
+          "commonMistake": "A raiz não se curva por peso do amido puxando todo o órgão.",
+          "uerj": "Distinguir percepção na coifa e resposta na zona de crescimento.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "responses",
+            "roots",
+            "stems",
+            "gravity-primary"
+          ]
+        },
+        {
+          "id": "growth-context",
+          "label": "Tecidos jovens e integração hormonal",
+          "function": "Ajustar desenvolvimento ao estágio e ao ambiente.",
+          "mechanism": "Giberelinas participam de alongamento e germinação, citocininas de redes de divisão e desenvolvimento e etileno de respostas como amadurecimento de certos frutos; dose e competência alteram os efeitos.",
+          "commonMistake": "Um hormônio não possui um único efeito universal em todo tecido.",
+          "uerj": "Interpretar experimentos hormonais considerando contexto e dose.",
+          "cytologyTissue": "wall",
+          "links": [],
+          "sourceIds": [
+            "responses",
+            "roots",
+            "stems"
+          ]
+        }
+      ],
+      "sourceIds": [
+        "responses",
+        "roots",
+        "stems",
+        "gravity-primary"
+      ],
+      "links": [],
+      "representation": "Reconstrução 3D autoral para ensino, com superfícies contínuas e cortes intencionais. Cores contrastam tecidos; proporções e número de células são didáticos. Não é microscopia real nem reconstrução de uma espécie ou indivíduo. A exportação 4K aumenta a resolução da imagem, não a evidência biológica do modelo."
+    }
+  ],
+  "sources": [
+    {
+      "id": "plant-body",
+      "title": "OpenStax Biology 2e — Organização vegetal e tipos celulares",
+      "url": "https://openstax.org/books/biology-2e/pages/30-1-the-plant-body"
+    },
+    {
+      "id": "stems",
+      "title": "OpenStax Biology 2e — Anatomia e crescimento dos caules",
+      "url": "https://openstax.org/books/biology-2e/pages/30-2-stems"
+    },
+    {
+      "id": "roots",
+      "title": "OpenStax Biology 2e — Anatomia e crescimento das raízes",
+      "url": "https://openstax.org/books/biology-2e/pages/30-3-roots"
+    },
+    {
+      "id": "leaves",
+      "title": "OpenStax Biology 2e — Organização das folhas",
+      "url": "https://openstax.org/books/biology-2e/pages/30-4-leaves"
+    },
+    {
+      "id": "transport",
+      "title": "OpenStax Biology 2e — Transporte de água e solutos",
+      "url": "https://openstax.org/books/biology-2e/pages/30-5-transport-of-water-and-solutes-in-plants"
+    },
+    {
+      "id": "responses",
+      "title": "OpenStax Biology 2e — Percepção, hormônios e respostas vegetais",
+      "url": "https://openstax.org/books/biology-2e/pages/30-6-plant-sensory-systems-and-responses"
+    },
+    {
+      "id": "reproduction",
+      "title": "OpenStax Biology 2e — Estruturas reprodutivas das angiospermas",
+      "url": "https://openstax.org/books/biology-2e/pages/32-1-reproductive-development-and-structure"
+    },
+    {
+      "id": "fertilization",
+      "title": "OpenStax Biology 2e — Polinização, fecundação e germinação",
+      "url": "https://openstax.org/books/biology-2e/pages/32-2-pollination-and-fertilization"
+    },
+    {
+      "id": "photosynthesis",
+      "title": "OpenStax Biology 2e — Compartimentos da fotossíntese",
+      "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+    },
+    {
+      "id": "light",
+      "title": "OpenStax Biology 2e — Reações fotoquímicas",
+      "url": "https://openstax.org/books/biology-2e/pages/8-2-the-light-dependent-reactions-of-photosynthesis"
+    },
+    {
+      "id": "carbon",
+      "title": "OpenStax Biology 2e — Assimilação de carbono",
+      "url": "https://openstax.org/books/biology-2e/pages/8-3-using-light-energy-to-make-organic-molecules"
+    },
+    {
+      "id": "caspary-primary",
+      "title": "Naseer et al. (2012) — Casparian strip diffusion barrier in Arabidopsis is made of a lignin polymer without suberin",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3382560/"
+    },
+    {
+      "id": "quiescent-primary",
+      "title": "Van den Berg et al. (1997) — Controle local da diferenciação no meristema radicular de Arabidopsis",
+      "url": "https://www.nature.com/articles/36856"
+    },
+    {
+      "id": "gravity-primary",
+      "title": "Blancaflor et al. (1998) — Contribuição de células da coifa à resposta gravitacional",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC35160/"
+    },
+    {
+      "id": "guard-chloroplast-primary",
+      "title": "Suetsugu et al. (2014) — Cloroplastos das células-guarda e abertura estomática dependente de luz azul",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4177113/"
+    },
+    {
+      "id": "guard-wall-primary",
+      "title": "Carter et al. (2017) — Propriedades mecânicas das paredes e abertura dos estômatos",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5640513/"
+    }
+  ]
+}
