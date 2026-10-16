@@ -19,6 +19,7 @@ import * as tissueFinish from './tissue-materials.js';
 import {setupTabletUI} from './tablet-ui.js';
 import {createRenderBatches,BATCHED_LAYER} from './render-batches.js';
 import {createAmbientOcclusion} from './ambient-occlusion.js';
+import {createDrawBoard,mountBoardPanel} from './draw-board.js';
 const {applyTissueFinish,copyTissueFinish,getTissueFinishStats}=tissueFinish;
 const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
 
@@ -659,6 +660,8 @@ function initPicking(){
   raycaster.layers.enable(BATCHED_LAYER);
   // Also available for reproducible local selection measurements.
   renderer.domElement.atlasPick=pick;
+  // Diagnostics: triangles and size of every mesh of one body system.
+  renderer.domElement.atlasMeshReport=system=>{const out=[];const box=new THREE.Box3(),size=new THREE.Vector3();state.groups[system]?.traverse(m=>{if(!m.isMesh)return;const g=m.geometry;box.copy(g.boundingBox||(g.computeBoundingBox(),g.boundingBox)).applyMatrix4(m.matrixWorld);out.push([Math.round((g.index?g.index.count:g.attributes.position.count)/3),+box.getSize(size).length().toFixed(4),g.attributes.position.count])});return out};
   // Verification: pixel difference between the batched frame and the same frame drawn mesh by mesh.
   renderer.domElement.atlasCompareBatches=()=>{const gl=renderer.getContext(),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,read=()=>{renderer.render(scene,camera);const p=new Uint8Array(w*h*4);gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,p);return{p,calls:renderer.info.render.calls}};const a=read();renderBatches.bypass(true);const b=read();renderBatches.bypass(false);let diff=0,changed=0,covered=0;for(let i=0;i<a.p.length;i+=4){const d=Math.abs(a.p[i]-b.p[i])+Math.abs(a.p[i+1]-b.p[i+1])+Math.abs(a.p[i+2]-b.p[i+2])+Math.abs(a.p[i+3]-b.p[i+3]);diff+=d;if(d>12)changed++;if(b.p[i+3]>0)covered++}return{pixels:w*h,coveredByModel:covered,changedPixels:changed,meanDiff:+(diff/(w*h)).toFixed(3),callsBatched:a.calls,callsIndividual:b.calls}};
   // Verification: a frame drawn through the reduced-resolution motion path against the direct full-resolution frame.
@@ -767,7 +770,7 @@ async function switchModel(mode,selectionToken=null,{preserveTrail=false,organCo
   trimStudyModels(mode);rebuildSearch();updateCatalogUi();resetDetail();applyVisibility();fitBody('front');warmUpScene();renderList();$('asset-status').textContent='Modelos locais · pronto para explorar';updateStudyPath();
   document.querySelector('.orientation-label').hidden=isDetailMode(mode);
   for(const b of document.querySelectorAll('[data-camera]'))b.textContent=(isDetailMode(mode)?{front:'Frente',back:'Verso',left:'Lateral'}:{front:'Anterior',back:'Posterior',left:'Lateral'})[b.dataset.camera];
-  document.querySelector('.viewer-top .eyebrow').textContent=mode.startsWith('botany-')?'BOTÂNICA · TECIDOS E FISIOLOGIA':mode.startsWith('cyto-')?'CITOLOGIA · ESTRUTURAS E PROCESSOS':mode.startsWith('histo-')?'HISTOLOGIA · CAMADAS E SUPERFÍCIES 3D':mode.startsWith('internal-')?(studyModels.get(mode)?.anatomicalReference?'MODELO ANATÔMICO DE REFERÊNCIA':studyModels.get(mode)?.authoredReconstruction?'CORTE ANATÔMICO DETALHADO':'ESTRUTURAS INTERNAS · ESQUEMA FUNCIONAL'):mode.startsWith('micro-')?'ESQUEMA DIDÁTICO 3D':'MODELO ANATÔMICO 3D';rememberStudy();return true;
+  document.querySelector('.viewer-top .eyebrow').textContent=mode.startsWith('botany-')?'BOTÂNICA · TECIDOS E FISIOLOGIA':mode.startsWith('cyto-')?'CITOLOGIA · ESTRUTURAS E PROCESSOS':mode.startsWith('histo-')?'HISTOLOGIA · CAMADAS E SUPERFÍCIES 3D':mode.startsWith('internal-')?(studyModels.get(mode)?.anatomicalReference?'MODELO ANATÔMICO DE REFERÊNCIA':studyModels.get(mode)?.authoredReconstruction?'CORTE ANATÔMICO DETALHADO':'ESTRUTURAS INTERNAS · ESQUEMA FUNCIONAL'):mode.startsWith('micro-')?'ESQUEMA DIDÁTICO 3D':'MODELO ANATÔMICO 3D';drawBoard?.setContext(mode);rememberStudy();return true;
 }
 function resetDetail(){
   const female=state.mode==='female';
@@ -819,6 +822,21 @@ function organizeModelNotes(){
   let box=panel.querySelector(':scope>.model-notes');
   if(!box){box=document.createElement('details');box.className='model-notes';const summary=document.createElement('summary');summary.textContent='Sobre este modelo e fontes';box.append(summary)}
   box.append(...notes);panel.append(box);
+}
+// Annotation board over the viewer (draw-board.js). The app supplies colour sampling and a snapshot of the 3D view.
+let drawBoard=null;
+function setupDrawBoard(){
+  const canvas=renderer.domElement;let panel=null;
+  const sample3D=(x,y)=>{renderer.render(scene,camera);const gl=renderer.getContext(),r=canvas.getBoundingClientRect(),d=new Uint8Array(4);gl.readPixels(Math.round((x-r.left)/r.width*gl.drawingBufferWidth),Math.round((1-(y-r.top)/r.height)*gl.drawingBufferHeight),1,1,gl.RGBA,gl.UNSIGNED_BYTE,d);requestRender();return d[3]>20?[0,1,2].map(i=>Math.min(255,d[i]*255/d[3])):null};
+  const snapshot3D=()=>{drawScene();const copy=document.createElement('canvas');copy.width=canvas.width;copy.height=canvas.height;copy.getContext('2d').drawImage(canvas,0,0);requestRender();return copy};
+  drawBoard=createDrawBoard({viewport:$('viewport'),panel:$('board-panel'),toggle:$('open-board'),sample3D,snapshot3D,onChange:kind=>{panel?.refresh();if(kind==='full')toast('A memória de anotações deste aparelho está cheia. Apague anotações de outros modelos.')}});
+  panel=mountBoardPanel($('board-panel'),drawBoard,{surface:document.querySelector('.viewer-panel'),onClose:()=>drawBoard.setActive(false),onExport:async()=>{
+    const blob=await drawBoard.exportImage();if(!blob){toast('Não foi possível gerar a imagem.');return}
+    const name='atlas-humano-anotacoes-'+state.mode+'.png',file=touchDevice&&typeof File==='function'?new File([blob],name,{type:'image/png'}):null;
+    if(file&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'Atlas Humano'});return}catch(error){if(error.name==='AbortError')return}}
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);toast('Imagem com anotações salva.')}});
+  $('open-board').addEventListener('click',()=>drawBoard.toggle());
+  drawBoard.setContext(state.mode);
 }
 function setupEvents(){
   new MutationObserver(organizeModelNotes).observe($('detail-panel'),{childList:true,subtree:true});
@@ -948,7 +966,7 @@ async function start(){
     syncBotanyOptions();
     $('cytology-category').innerHTML='<option value="all">Todos os temas</option>'+cytologyContent.categories.map(c=>`<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
     const options=[['Por dentro',studyContent.organs||[],'internal-'],['Histologia',studyContent.histology||[],'histo-'],['Citologia',cytologyContent.views||[],'cyto-']];for(const [label,entries,prefix] of options){const group=document.createElement('optgroup');group.label=label;for(const entry of entries){const option=document.createElement('option');option.value=prefix+entry.id;option.textContent=entry.label||entry.title;group.append(option)}$('model-mode').append(group)}
-    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupEvents();setupOffline();
+    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupEvents();setupOffline();
     $('load-progress').max=2;$('load-detail').textContent='Órgãos internos e esqueleto…';await Promise.all([loadSystem('visceral'),loadSystem('skeletal')]);$('viewer-loading').hidden=true;fitBody('front',true);fadeInCanvas();$('load-progress').max=7;
     const saved=studySessions.load(),view=location.hash.replace('#',''),restored=await restoreStudySession(saved);if(['atlas','physiology','practice','about'].includes(view))setView(view);else if(saved)setView(saved.view);sessionReady=true;if(restored)rememberStudy();
     window.atlas={state,scene,camera,renderer,botanyContent,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
