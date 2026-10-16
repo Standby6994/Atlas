@@ -59,7 +59,31 @@ function animalCell(c){
  for(const [p,s] of[[[.25,.15,.018],[.13,.060,.045]],[[.13,-.24,.018],[.14,.065,.05]]])smallMitochondrion(c,'mitochondria',p,s);
  for(let j=0;j<3;j++){c.cisterna('rough-er',[-.135,-.13-j*.038,.028],[.19,.017,.030],{bend:.045,ripple:.008,nu:c.quality.smallU,nv:c.quality.smallV});for(let i=0;i<5;i++)c.ribosome('rough-er',[-.285+i*.070,-.13-j*.038,.061],.009)}
  smallGolgi(c,'golgi',[.285,-.05,.024],.85);c.shell('lysosome',[-.32,-.21,.025],[.064,.055,.047],{thickness:.008,nu:c.quality.smallU,nv:c.quality.smallV});protein(c,'lysosome',[-.325,-.215,.016],[.022,.024,.018]);
+ for(const [p,s] of[[[.36,.06,.02],[.10,.046,.036]],[[-.30,.25,.02],[.11,.050,.04]]])smallMitochondrion(c,'mitochondria',p,s);
+ animalCellDetail(c);
  c.group.userData.cellArchitecture='animal-eukaryote-cutaway';
+}
+// Smooth ER, free ribosomes, centrosome with microtubules and secretory vesicles: the rest of a generic animal
+// cell, laid out around the organelles above. Positions are deterministic so every load looks the same.
+function animalCellDetail(c){
+ const centre=[.04,.17,.040];
+ // Smooth ER: branched tubules continuing from the rough ER, without ribosomes.
+ for(const [ox,oy,ph] of[[.04,-.075,0],[.10,-.13,1.3],[.00,-.17,2.1]]){const pts=[];for(let i=0;i<=8;i++){const t=i/8;pts.push([ox+.11*t-.04,oy+.018*Math.sin(t*TAU*1.5+ph),.034+.006*Math.cos(t*TAU+ph)])}c.tube('smooth-er',pts,.0075,{tissue:'membrane',color:C.lipid,segments:c.mobile?24:40,radial:c.mobile?6:8})}
+ c.loop('smooth-er',[.07,-.12,.034],.035,.022,{radius:.0065,tissue:'membrane',color:C.lipid,phase:.7});
+ // Free ribosomes scattered through the cytosol (golden-angle layout, skipping the organelles).
+ const busy=[[-.16,.06,.19],[.285,-.04,.12],[-.135,-.17,.21],[.25,.15,.14],[.13,-.24,.15],[.36,.06,.11],[-.30,.25,.12],[-.32,-.21,.08],centre.slice(0,2).concat(.05)];
+ let placed=0;for(let i=0;placed<(c.mobile?24:36)&&i<400;i++){const a=i*2.39996,r=Math.sqrt((i+.5)/400),x=.46*r*Math.cos(a),y=.34*r*Math.sin(a);if(busy.some(([bx,by,br])=>Math.hypot(x-bx,y-by)<br))continue;c.ribosome('free-ribosomes',[x,y,.036+.012*Math.sin(i)],.0085);placed++}
+ // Centrosome: two perpendicular centrioles, each a ring of nine microtubule triplets.
+ const centriole=(p,axis)=>{for(let k=0;k<9;k++){const a=k/9*TAU;for(let t=0;t<3;t++){const r=.014+t*.0028,u=r*Math.cos(a+t*.18),w=r*Math.sin(a+t*.18),half=.022;const ends=axis==='x'?[[p[0]-half,p[1]+u,p[2]+w],[p[0]+half,p[1]+u,p[2]+w]]:[[p[0]+u,p[1]-half,p[2]+w],[p[0]+u,p[1]+half,p[2]+w]];c.tube('centrosome',ends,.0016,{tissue:'protein',color:C.blue,segments:2,radial:5})}}};
+ centriole([centre[0]-.012,centre[1],centre[2]],'x');centriole([centre[0]+.016,centre[1]+.006,centre[2]+.004],'y');
+ c.body('centrosome',centre,[.05,.045,.012],{tissue:'matrix',color:C.pale,lobes:.1,nu:c.quality.smallU,nv:c.quality.smallV});
+ // Microtubules radiating from the centrosome to the cell cortex; any point that would cross the nucleus is pushed
+ // onto an ellipse just outside it, so the filaments wrap around the nuclear envelope instead of passing over it.
+ const nucleus={x:-.16,y:.06,rx:.20,ry:.17},aroundNucleus=([x,y,z])=>{const dx=(x-nucleus.x)/nucleus.rx,dy=(y-nucleus.y)/nucleus.ry,d=Math.hypot(dx,dy);return d<1?[nucleus.x+dx/d*nucleus.rx,nucleus.y+dy/d*nucleus.ry,z]:[x,y,z]};
+ const count=c.mobile?12:18;
+ for(let k=0;k<count;k++){const a=-1.25+k*(4.5/(count-1)),end=[.47*Math.cos(a)*.92,.355*Math.sin(a)*.92],pts=[];for(let i=0;i<=10;i++){const t=i/10;pts.push(aroundNucleus([centre[0]+(end[0]-centre[0])*t+.02*Math.sin(t*Math.PI+k),centre[1]+(end[1]-centre[1])*t+.015*Math.sin(t*Math.PI*2+k*.7),.046+.006*Math.sin(t*Math.PI)]))}c.tube('cytoskeleton',pts,.0028,{tissue:'filament',color:C.blue,segments:c.mobile?24:40,radial:c.mobile?5:6})}
+ // Secretory vesicles budding from the Golgi towards the plasma membrane.
+ for(const [x,y,r] of[[.25,.09,.017],[.33,.12,.015],[.40,-.02,.016],[.43,-.12,.014],[.20,-.13,.013]])c.body('vesicles',[x,y,.03],[r,r,r*.9],{tissue:'membrane',color:C.lipid,lobes:.05,nu:c.quality.smallU,nv:c.quality.smallV});
 }
 function plantCell(c){
  c.shell('cell-wall',[0,0,0],[.50,.43,.24],{thickness:.024,tissue:'wall',exponent:.45,lobes:.022});

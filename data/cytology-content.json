@@ -121,6 +121,46 @@
           "mechanism": "Hidrolases atuam em compartimento ácido delimitado por membrana.",
           "uerj": "Relacionar compartimentalização, síntese proteica e destino de produtos celulares.",
           "commonMistake": "Lisossomo não é uma vesícula que contém todas as enzimas celulares."
+        },
+        {
+          "id": "smooth-er",
+          "label": "Retículo endoplasmático liso",
+          "function": "Sintetizar lipídios e desintoxicar substâncias.",
+          "mechanism": "Túbulos sem ribossomos concentram enzimas da síntese de lipídios e armazenam Ca²⁺.",
+          "uerj": "Comparar o RE liso, sem ribossomos, com o RE rugoso, ligado à síntese de proteínas de exportação.",
+          "commonMistake": "O RE liso não produz as proteínas de secreção; isso cabe ao RE rugoso."
+        },
+        {
+          "id": "free-ribosomes",
+          "label": "Ribossomos livres",
+          "function": "Sintetizar proteínas que ficam no citosol.",
+          "mechanism": "Traduzem o RNA mensageiro em cadeias de aminoácidos sem se prender ao retículo.",
+          "uerj": "Diferenciar o destino das proteínas feitas por ribossomos livres e pelos ribossomos do RE rugoso.",
+          "commonMistake": "Ribossomos não têm membrana; não são organelas membranosas."
+        },
+        {
+          "id": "cytoskeleton",
+          "label": "Citoesqueleto (microtúbulos)",
+          "function": "Dar forma à célula e guiar o transporte interno.",
+          "mechanism": "Microtúbulos partem do centrossomo e servem de trilhos para proteínas motoras levarem vesículas e organelas.",
+          "uerj": "Relacionar microtúbulos ao transporte de vesículas e à formação do fuso na divisão celular.",
+          "commonMistake": "O citoesqueleto não é fixo: seus filamentos se montam e desmontam continuamente."
+        },
+        {
+          "id": "centrosome",
+          "label": "Centrossomo e centríolos",
+          "function": "Organizar os microtúbulos.",
+          "mechanism": "Dois centríolos perpendiculares, cada um com nove trincas de microtúbulos, ficam no centro de nucleação dos microtúbulos.",
+          "uerj": "Associar o centrossomo à formação do fuso mitótico em células animais.",
+          "commonMistake": "Células vegetais típicas formam o fuso sem centríolos."
+        },
+        {
+          "id": "vesicles",
+          "label": "Vesículas de secreção",
+          "function": "Levar produtos do complexo golgiense até a membrana.",
+          "mechanism": "Brotam do Golgi e se fundem à membrana plasmática, liberando o conteúdo por exocitose.",
+          "uerj": "Ordenar o caminho de uma proteína secretada: RE rugoso → Golgi → vesícula → exocitose.",
+          "commonMistake": "A exocitose depende da fusão de membranas e gasta energia; não é difusão simples."
         }
       ],
       "steps": [

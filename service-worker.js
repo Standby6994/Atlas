@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-16-smooth-orbit-v24';
+const APP_VERSION = '2026-10-16-physiology-units-v25';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
