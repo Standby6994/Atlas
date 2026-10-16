@@ -73,6 +73,7 @@ Tudo fica na raiz; não há pasta `src/`.
 - Troca de modelo: `warmUpScene()` envia texturas e compila shaders (`compileAsync`) antes do primeiro quadro; enquanto isso a imagem anterior fica na tela (`compileGate`). `clearMaterialCache(root)` descarta só os materiais do modelo removido; limpar tudo recompila o corpo inteiro.
 - Lotes de desenho são fatias por altura (≤ 250 mil triângulos), para o recorte de câmera descartar o que está fora da tela.
 - `moveCamera` zera a inércia do OrbitControls antes de animar.
+- O índice de toque (BVH, `picking-index.js`) é montado em blocos que não podem ser interrompidos (~90 ms para 190 mil triângulos no PC). `deferPickingIndex()` adia a montagem enquanto a câmera se move (chamado em `noteMotion` e no início do gesto); sem índice, o toque usa o raycast comum.
 - Seleção no corpo: raio-X (`updateXray`) desenha em dourado só as partes encobertas da peça; não deixe os outros órgãos transparentes (transparência em massa desfaz os lotes e multiplica o custo).
 - Nada de `backdrop-filter` sobre o canvas: o navegador refaz o desfoque a cada quadro.
 - Medição: Ajustes → "Mostrar FPS". No console: `document.getElementById('anatomy-canvas').atlasRenderStats()` (chamadas, triângulos e peças por sistema) `.atlasCompareBatches()` (diferença de pixels entre lotes e desenho peça a peça; deve ficar perto de zero) e `.atlasCompareMotion(0.75)` (quadro em movimento contra o quadro direto).

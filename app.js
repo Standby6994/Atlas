@@ -6,7 +6,7 @@ import {MODEL_SYSTEMS, normalise, translatedName, familyInfo} from './anatomy-in
 import {resolveCore, getCoreMeshNames} from './core-mapping.js';
 import {computeSimulation} from './simulation-engine.js';
 import {createSmartSearch} from './smart-search.js';
-import {preparePickingMesh,refreshPickCandidates,raycastVisible} from './picking-index.js';
+import {preparePickingMesh,refreshPickCandidates,raycastVisible,deferPickingIndex} from './picking-index.js';
 import {studySelectionContext,equivalentStudyPart} from './study-selection.js';
 import {highlightSelectedMaterial,SELECTION_COLOR} from './selection-highlight.js';
 import {createLearningDetails} from './learning-details.js';
@@ -243,7 +243,7 @@ function init3D(){
   renderQuality.rest=touchDevice?Math.min(devicePixelRatio,1.5):1.5;renderQuality.motion=storedMotionRatio(renderQuality.rest);renderer.setPixelRatio(renderQuality.rest);$('quality').value=String(renderQuality.rest);if(touchDevice){$('export-4k').textContent='Salvar imagem';document.querySelector('.viewer-help').firstChild.textContent='Um dedo gira · dois dedos movem e ampliam · toque para selecionar'}renderer.setClearColor(0x0e1927,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.9;renderer.localClippingEnabled=true;
   camera=new THREE.PerspectiveCamera(35,1,.005,30);camera.position.set(0,.85,3.2);
   controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=touchDevice?.1:.14;controls.zoomToCursor=true;controls.minPolarAngle=.01;controls.maxPolarAngle=Math.PI-.01;controls.minDistance=.025;controls.maxDistance=6;controls.panSpeed=.6;controls.rotateSpeed=.65;controls.autoRotateSpeed=.6;
-  controls.addEventListener('change',requestRender);controls.addEventListener('start',()=>{tween=null;renderQuality.dragging=true;$('hover-label').hidden=true});controls.addEventListener('end',()=>{renderQuality.dragging=false});
+  controls.addEventListener('change',requestRender);controls.addEventListener('start',()=>{deferPickingIndex();tween=null;renderQuality.dragging=true;$('hover-label').hidden=true});controls.addEventListener('end',()=>{renderQuality.dragging=false});
   scene.add(new THREE.HemisphereLight(0xd9eaf6,0x3e342d,1.3));
   const key=new THREE.DirectionalLight(0xffeee0,2.2);key.position.set(-2,3,3);scene.add(key);
   const fill=new THREE.DirectionalLight(0xbedbea,1.1);fill.position.set(2,1,2);scene.add(fill);
@@ -297,7 +297,7 @@ function storedMotionRatio(rest){try{const saved=Number(localStorage.getItem('at
 function storeMotionRatio(){try{localStorage.setItem('atlas-motion-ratio-'+renderQuality.rest,String(renderQuality.motion))}catch{}}
 // Each moving frame pushes back the return to full resolution; 160 ms without motion renders one sharp frame.
 function noteMotion(){
-  const q=renderQuality;clearTimeout(q.idle);if(!q.moving){q.moving=true;q.last=0;q.sum=q.count=0}
+  deferPickingIndex();const q=renderQuality;clearTimeout(q.idle);if(!q.moving){q.moving=true;q.last=0;q.sum=q.count=0}
   q.idle=setTimeout(()=>{q.moving=false;requestRender()},160);
 }
 // While moving below the full resolution the scene is drawn into a smaller multisampled target and scaled onto

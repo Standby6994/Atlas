@@ -6,12 +6,17 @@ THREE.Mesh.prototype.raycast=acceleratedRaycast;
 const queue=new Set(),queued=new WeakSet(),disposeListeners=new WeakMap();let scheduled=false;
 const now=()=>globalThis.performance?.now?.()??Date.now();
 const SLICE_MS=4,MAX_TREES_PER_SLICE=2;
+// A single tree build cannot be interrupted (~90 ms for 190k triangles on a desktop, several times that on a tablet),
+// so builds wait while the camera moves. Until a mesh has its tree, picking falls back to the plain raycast.
+let quietUntil=0;
+export function deferPickingIndex(ms=1200){quietUntil=Math.max(quietUntil,now()+ms)}
 const idle=globalThis.requestIdleCallback||((fn)=>setTimeout(()=>{
   const started=now();
   fn({timeRemaining:()=>Math.max(0,SLICE_MS-(now()-started))});
 },20));
 function buildSlice(deadline){
-  scheduled=false;let done=0;const started=now();
+  scheduled=false;if(now()<quietUntil){scheduled=true;setTimeout(()=>{scheduled=false;schedule()},quietUntil-now()+20);return}
+  let done=0;const started=now();
   // One individual tree cannot be interrupted. Limit both elapsed time and
   // tree count so Safari's timer fallback always yields between small batches.
   while(queue.size&&done<MAX_TREES_PER_SLICE&&
