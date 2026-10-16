@@ -8,7 +8,9 @@ import * as THREE from 'three';
 // itself; a hidden mesh drops out of both. Geometry is never simplified.
 
 export const BATCHED_LAYER=1;
-const MAX_TRIANGLES=600000; // bounds the temporary memory of one merge on tablets
+// Bounds the temporary memory of one merge on tablets and keeps batches regional, so frustum culling still skips
+// the parts of the body that are off screen when the camera is close to an organ.
+const MAX_TRIANGLES=250000;
 const ATTRIBUTES=['position','normal','uv','color'];
 const matrix=new THREE.Matrix4(),normalMatrix=new THREE.Matrix3(),vector=new THREE.Vector3();
 
@@ -74,7 +76,11 @@ export function createRenderBatches(parent,onChange=()=>{}){
     queue=queue.then(async()=>{
       root.updateWorldMatrix(true,false);container.updateMatrixWorld(true);
       const inverse=root.matrixWorld.clone().invert();
+      const center=new THREE.Vector3(),height=new Map();
       for(const meshes of groups.values()){
+        // Slice each material group by height (then side), so a batch covers one region of the body.
+        for(const mesh of meshes){mesh.geometry.boundingBox||mesh.geometry.computeBoundingBox();mesh.geometry.boundingBox.getCenter(center).applyMatrix4(mesh.matrixWorld);height.set(mesh,[Math.round(center.y*12),center.x])}
+        meshes.sort((a,b)=>height.get(a)[0]-height.get(b)[0]||height.get(a)[1]-height.get(b)[1]);
         for(let i=0;i<meshes.length;){
           const chunk=[];let size=0;
           while(i<meshes.length&&(chunk.length===0||size+triangles(meshes[i].geometry)<=MAX_TRIANGLES)){size+=triangles(meshes[i].geometry);chunk.push(meshes[i++])}

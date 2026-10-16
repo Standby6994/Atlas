@@ -150,7 +150,13 @@ function refreshLayerUi(){
   $('toggle-layers').textContent=Object.values(state.layers).every(Boolean)?'Ocultar todos':'Mostrar todos';
   if($('isolate-part'))$('isolate-part').textContent=state.isolated?'Mostrar contexto':state.selected?.raw?.customInfo?.annotationKind==='cavity-boundary'?'Isolar contorno':'Isolar';
 }
-function clearMaterialCache(){for(const material of materialCache.values())material.dispose();materialCache.clear()}
+// With a root, only the styled copies of that model's materials go; clearing everything forced the whole body
+// to rebuild ~1,400 materials and recompile their shaders after every organ switch.
+function clearMaterialCache(root){
+  if(!root){for(const material of materialCache.values())material.dispose();materialCache.clear();return}
+  const owned=new Set();root.traverse(o=>{if(o.isMesh)for(const m of [].concat(o.userData.originalMaterial||[]))owned.add(m.uuid)});
+  for(const [key,material] of materialCache)if(owned.has(key.slice(0,key.indexOf('|')))){material.dispose();materialCache.delete(key)}
+}
 function surfaceOptions(){return {quality:touchDevice?'mobile':'balanced',naturalColors:$('tissue-colors')?.checked??true}}
 function updateSurfaceQuality(){
   clearMaterialCache();
@@ -236,7 +242,7 @@ function init3D(){
   renderer=new THREE.WebGLRenderer({canvas:$('anatomy-canvas'),antialias:true,alpha:true,preserveDrawingBuffer:false,powerPreference:'high-performance'});
   renderQuality.rest=touchDevice?Math.min(devicePixelRatio,1.5):1.5;renderQuality.motion=storedMotionRatio(renderQuality.rest);renderer.setPixelRatio(renderQuality.rest);$('quality').value=String(renderQuality.rest);if(touchDevice){$('export-4k').textContent='Salvar imagem';document.querySelector('.viewer-help').firstChild.textContent='Um dedo gira · dois dedos movem e ampliam · toque para selecionar'}renderer.setClearColor(0x0e1927,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.9;renderer.localClippingEnabled=true;
   camera=new THREE.PerspectiveCamera(35,1,.005,30);camera.position.set(0,.85,3.2);
-  controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=touchDevice?.1:.14;controls.minDistance=.025;controls.maxDistance=6;controls.panSpeed=.6;controls.rotateSpeed=.65;controls.autoRotateSpeed=.6;
+  controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=touchDevice?.1:.14;controls.zoomToCursor=true;controls.minPolarAngle=.01;controls.maxPolarAngle=Math.PI-.01;controls.minDistance=.025;controls.maxDistance=6;controls.panSpeed=.6;controls.rotateSpeed=.65;controls.autoRotateSpeed=.6;
   controls.addEventListener('change',requestRender);controls.addEventListener('start',()=>{tween=null;renderQuality.dragging=true;$('hover-label').hidden=true});controls.addEventListener('end',()=>{renderQuality.dragging=false});
   scene.add(new THREE.HemisphereLight(0xd9eaf6,0x3e342d,1.3));
   const key=new THREE.DirectionalLight(0xffeee0,2.2);key.position.set(-2,3,3);scene.add(key);
@@ -270,32 +276,64 @@ function setViewInset(x,y,target={x,y}){viewInset.x=x;viewInset.y=y;viewInset.ta
 function visibleFraction(){const w=renderer.domElement.clientWidth,h=renderer.domElement.clientHeight,chrome=chromeInset();if(!w||!h)return{x:1,y:1};const inset=viewInset.target;return{x:Math.max(.25,(w-inset.x)/w),y:Math.max(.25,(h-inset.y-chrome.top-chrome.bottom)/h)}}
 function requestRender(){if(!frameRequested){frameRequested=true;requestAnimationFrame(renderFrame)}}
 function renderFrame(now){
-  frameRequested=false;if(!renderer||state.view!=='atlas'||document.hidden)return;
+  frameRequested=false;if(!renderer||state.view!=='atlas'||document.hidden||compileGate)return;
   let moving=!!tween||controls.autoRotate||renderQuality.dragging;
   if(tween){const f=Math.min(1,(now-tween.start)/600),smooth=f<.5?4*f*f*f:1-(-2*f+2)**3/2;camera.position.lerpVectors(tween.fromPosition,tween.toPosition,smooth);controls.target.lerpVectors(tween.fromTarget,tween.toTarget,smooth);controls.update();if(f===1)tween=null}
   else if((controls.enableDamping||controls.autoRotate)&&controls.update())moving=true;
   if(moving)noteMotion();
-  renderer.render(scene,camera);updateSelectedMarker();if(moving)measureMotion(now);updateFpsMeter();
+  drawScene();updateSelectedMarker();if(moving)measureMotion(now);updateFpsMeter();
   if(tween||controls.autoRotate)requestRender();
+}
+// A newly shown model compiles its shaders and uploads its textures before its first frame, so the switch
+// does not freeze mid-animation; the previous image stays on screen meanwhile and the new one fades in.
+let compileGate=null;const uploadedTextures=new WeakSet();
+function warmUpScene(){
+  scene.traverseVisible(o=>{if(!o.isMesh)return;for(const m of [].concat(o.material))for(const key of ['map','normalMap','roughnessMap','metalnessMap','aoMap','emissiveMap','alphaMap']){const t=m?.[key];if(t&&!uploadedTextures.has(t)){uploadedTextures.add(t);renderer.initTexture(t)}}});
+  const gate=Promise.race([renderer.compileAsync(scene,camera),new Promise(resolve=>setTimeout(resolve,4000))]).catch(()=>{}).then(()=>{if(compileGate!==gate)return;compileGate=null;if(tween)tween.start=performance.now();fadeInCanvas();requestRender()});
+  compileGate=gate;
 }
 function setRenderRatio(ratio){if(Math.abs(renderer.getPixelRatio()-ratio)>.01)renderer.setPixelRatio(ratio)}
 function storedMotionRatio(rest){try{const saved=Number(localStorage.getItem('atlas-motion-ratio-'+rest));return saved>=.75&&saved<=rest?saved:rest}catch{return rest}}
 function storeMotionRatio(){try{localStorage.setItem('atlas-motion-ratio-'+renderQuality.rest,String(renderQuality.motion))}catch{}}
 // Each moving frame pushes back the return to full resolution; 160 ms without motion renders one sharp frame.
 function noteMotion(){
-  const q=renderQuality;clearTimeout(q.idle);if(!q.moving){q.moving=true;q.last=0;q.sum=q.count=0;setRenderRatio(q.motion)}
-  q.idle=setTimeout(()=>{q.moving=false;setRenderRatio(q.rest);requestRender()},160);
+  const q=renderQuality;clearTimeout(q.idle);if(!q.moving){q.moving=true;q.last=0;q.sum=q.count=0}
+  q.idle=setTimeout(()=>{q.moving=false;requestRender()},160);
 }
-// Lower the moving resolution in 0.25 steps while frames take longer than ~18 ms; climb back only to levels that kept up.
+// While moving below the full resolution the scene is drawn into a smaller multisampled target and scaled onto
+// the canvas, so switching resolution never reallocates the canvas (that reallocation stalled each gesture).
+let motionTarget=null,composite=null;
+function createComposite(){
+  const material=new THREE.ShaderMaterial({uniforms:{tScene:{value:null}},depthTest:false,depthWrite:false,transparent:true,toneMapped:true,
+    blending:THREE.CustomBlending,blendSrc:THREE.OneFactor,blendDst:THREE.OneMinusSrcAlphaFactor,blendSrcAlpha:THREE.OneFactor,blendDstAlpha:THREE.OneMinusSrcAlphaFactor,
+    vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+    // The target holds linear, premultiplied colour: un-premultiply, tone map and encode exactly like a direct draw, then premultiply again.
+    fragmentShader:`uniform sampler2D tScene;varying vec2 vUv;
+void main(){vec4 s=texture2D(tScene,vUv);gl_FragColor=vec4(s.a>.0001?s.rgb/s.a:vec3(0.),1.);
+#include <tonemapping_fragment>
+#include <colorspace_fragment>
+gl_FragColor=vec4(gl_FragColor.rgb*s.a,s.a);}`});
+  const quad=new THREE.Mesh(new THREE.PlaneGeometry(2,2),material);quad.frustumCulled=false;const quadScene=new THREE.Scene();quadScene.add(quad);
+  return{scene:quadScene,camera:new THREE.OrthographicCamera(-1,1,1,-1,0,1),material};
+}
+function drawScene(){
+  const q=renderQuality;
+  if(!q.moving||q.motion>=q.rest-.01){renderer.render(scene,camera);return}
+  const w=Math.max(1,Math.round(renderer.domElement.clientWidth*q.motion)),h=Math.max(1,Math.round(renderer.domElement.clientHeight*q.motion));
+  if(!motionTarget)motionTarget=new THREE.WebGLRenderTarget(w,h,{type:THREE.HalfFloatType,samples:4});else if(motionTarget.width!==w||motionTarget.height!==h)motionTarget.setSize(w,h);
+  composite||=createComposite();composite.material.uniforms.tScene.value=motionTarget.texture;
+  renderer.setRenderTarget(motionTarget);renderer.render(scene,camera);renderer.setRenderTarget(null);renderer.render(composite.scene,composite.camera);
+}
+// Lower the moving resolution in 0.25 steps while frames average over 17.5 ms (below ~57 fps); climb back only to levels that kept up.
 function measureMotion(now){
   const q=renderQuality,delta=now-q.last;q.last=now;if(delta<=0||delta>100){q.sum=q.count=0;return}
-  q.sum+=delta;if(++q.count<20)return;const average=q.sum/q.count;q.sum=q.count=0;q.fps=Math.round(1000/average);
-  if(average>18&&q.motion>.75){q.tooSlow.add(q.motion);q.motion=Math.max(.75,q.motion-.25);q.good=0;setRenderRatio(q.motion);storeMotionRatio()}
-  else if(average<17.5&&q.motion<q.rest&&!q.tooSlow.has(q.motion+.25)&&++q.good>=6){q.good=0;q.motion=Math.min(q.rest,q.motion+.25);setRenderRatio(q.motion);storeMotionRatio()}
+  q.sum+=delta;if(++q.count<12)return;const average=q.sum/q.count;q.sum=q.count=0;q.fps=Math.round(1000/average);
+  if(average>17.5&&q.motion>.75){q.tooSlow.add(q.motion);q.motion=Math.max(.75,q.motion-.25);q.good=0;storeMotionRatio()}
+  else if(average<17.5&&q.motion<q.rest&&!q.tooSlow.has(q.motion+.25)&&++q.good>=6){q.good=0;q.motion=Math.min(q.rest,q.motion+.25);storeMotionRatio()}
 }
 function updateFpsMeter(){
   const meter=$('fps-meter');if(!meter||meter.hidden)return;const q=renderQuality,info=renderer.info.render;
-  meter.textContent=(q.moving&&q.fps?q.fps+' fps':'parado')+' · resolução '+renderer.getPixelRatio().toFixed(2)+'× · '+info.calls+' chamadas · '+Math.round(info.triangles/1000)+' mil triângulos';
+  meter.textContent=(q.moving&&q.fps?q.fps+' fps':'parado')+' · resolução '+(q.moving?Math.min(q.motion,q.rest):q.rest).toFixed(2)+'× · '+info.calls+' chamadas · '+Math.round(info.triangles/1000)+' mil triângulos';
 }
 function selectedMarkerPosition(width,height){
   const raw=state.selected?.raw,object=raw?.object;
@@ -322,6 +360,8 @@ function updateSelectedMarker(){
 // Soften model swaps: the canvas fades in instead of the new model popping into view.
 function fadeInCanvas(){if(!matchMedia('(prefers-reduced-motion:reduce)').matches)renderer?.domElement.animate([{opacity:0},{opacity:1}],{duration:380,easing:'ease-out'})}
 function moveCamera(target,position,instant=false){
+  // Leftover inertia from the last drag would keep pushing the camera during and after the animation.
+  controls._sphericalDelta?.set(0,0,0);controls._panOffset?.set(0,0,0);if('_scale' in controls)controls._scale=1;
   if(instant){tween=null;camera.position.copy(position);controls.target.copy(target);controls.update()}else tween={start:performance.now(),fromPosition:camera.position.clone(),fromTarget:controls.target.clone(),toPosition:position.clone(),toTarget:target.clone()};requestRender();
 }
 function fitBounds(bounds,direction='front',instant=false){
@@ -575,7 +615,7 @@ function trimStudyModels(keep){
   const limit=touchDevice?2:3;let changed=false;
   for(const [mode,model] of studyModels){
     if(studyModels.size<=limit)break;if(mode===keep||mode===state.mode||mode===latestRequestedMode||modelLoading.has(mode))continue;
-    if(!changed)clearMaterialCache();changed=true;
+    clearMaterialCache(model.group);changed=true;
     const removed=new Set();model.group.traverse(o=>{if(o.isMesh){removed.add(o);meshSet.delete(o)}});allMeshObjects=allMeshObjects.filter(o=>!removed.has(o));
     for(const part of model.parts){state.registry.delete(part.registryName);state.hidden.delete(part.registryName)}
     scene.remove(model.group);releaseTissueFinish(model.group);model.dispose?.();studyModels.delete(mode);
@@ -584,7 +624,7 @@ function trimStudyModels(keep){
 }
 function removeStudyModel(mode){
   const model=studyModels.get(mode);if(!model)return;
-  clearMaterialCache();const removed=new Set();model.group.traverse(o=>{if(o.isMesh){removed.add(o);meshSet.delete(o)}});allMeshObjects=allMeshObjects.filter(o=>!removed.has(o));
+  clearMaterialCache(model.group);const removed=new Set();model.group.traverse(o=>{if(o.isMesh){removed.add(o);meshSet.delete(o)}});allMeshObjects=allMeshObjects.filter(o=>!removed.has(o));
   for(const p of model.parts){state.registry.delete(p.registryName);state.hidden.delete(p.registryName)}
   scene.remove(model.group);releaseTissueFinish(model.group);model.dispose?.();studyModels.delete(mode);
 }
@@ -616,6 +656,14 @@ function initPicking(){
   renderer.domElement.atlasPick=pick;
   // Verification: pixel difference between the batched frame and the same frame drawn mesh by mesh.
   renderer.domElement.atlasCompareBatches=()=>{const gl=renderer.getContext(),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,read=()=>{renderer.render(scene,camera);const p=new Uint8Array(w*h*4);gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,p);return{p,calls:renderer.info.render.calls}};const a=read();renderBatches.bypass(true);const b=read();renderBatches.bypass(false);let diff=0,changed=0,covered=0;for(let i=0;i<a.p.length;i+=4){const d=Math.abs(a.p[i]-b.p[i])+Math.abs(a.p[i+1]-b.p[i+1])+Math.abs(a.p[i+2]-b.p[i+2])+Math.abs(a.p[i+3]-b.p[i+3]);diff+=d;if(d>12)changed++;if(b.p[i+3]>0)covered++}return{pixels:w*h,coveredByModel:covered,changedPixels:changed,meanDiff:+(diff/(w*h)).toFixed(3),callsBatched:a.calls,callsIndividual:b.calls}};
+  // Verification: a frame drawn through the reduced-resolution motion path against the direct full-resolution frame.
+  renderer.domElement.atlasCompareMotion=(ratio=.75)=>{
+    const gl=renderer.getContext(),q=renderQuality,keep={motion:q.motion,moving:q.moving},W=gl.drawingBufferWidth,H=gl.drawingBufferHeight;
+    const read=()=>{const p=new Uint8Array(W*H*4);gl.readPixels(0,0,W,H,gl.RGBA,gl.UNSIGNED_BYTE,p);return p};
+    q.moving=false;drawScene();const direct=read();q.motion=ratio;q.moving=true;drawScene();const motion=read();Object.assign(q,keep);drawScene();
+    let covA=0,covB=0,changed=0,sumA=[0,0,0],sumB=[0,0,0];
+    for(let i=0;i<direct.length;i+=4){if(direct[i+3]>8){covA++;for(let k=0;k<3;k++)sumA[k]+=direct[i+k]}if(motion[i+3]>8){covB++;for(let k=0;k<3;k++)sumB[k]+=motion[i+k]}let d=0;for(let k=0;k<4;k++)d+=Math.abs(direct[i+k]-motion[i+k]);if(d>40)changed++}
+    return{coverageDirect:covA,coverageMotion:covB,avgDirect:sumA.map(v=>Math.round(v/(covA||1))),avgMotion:sumB.map(v=>Math.round(v/(covB||1))),changedPixels:changed}};
   // Synchronous frame measurement (draw calls, CPU submit time) that works even when the page is not painting.
   renderer.domElement.atlasRenderStats=(frames=20)=>{const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();renderer.render(scene,camera)}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
   renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){touchPointers.add(e.pointerId);if(touchPointers.size>1||e.isPrimary===false){down=null;$('hover-label').hidden=true;return}}down={id:e.pointerId,x:e.clientX,y:e.clientY,time:performance.now(),moved:false};$('hover-label').hidden=true});
@@ -711,7 +759,7 @@ async function switchModel(mode,selectionToken=null,{preserveTrail=false,organCo
     if(mode.startsWith('botany-'))state.studyOrgan=null;
   }else if(['internal','histology','cytology','botany'].includes(state.tab)){state.tab='core';state.search='';$('search').value=''}
   state.mode=mode;$('model-mode').value=mode;const cut=clipSettings.get(clippingKey());$('clip-mode').value=cut?.mode||studyModels.get(mode)?.defaultClip||'none';$('clip-position').value=cut?.position||50;state.isolated=null;state.selectedNames.clear();state.selected=null;$('selected-label').hidden=true;
-  trimStudyModels(mode);rebuildSearch();updateCatalogUi();resetDetail();applyVisibility();fitBody('front');fadeInCanvas();renderList();$('asset-status').textContent='Modelos locais · pronto para explorar';updateStudyPath();
+  trimStudyModels(mode);rebuildSearch();updateCatalogUi();resetDetail();applyVisibility();fitBody('front');warmUpScene();renderList();$('asset-status').textContent='Modelos locais · pronto para explorar';updateStudyPath();
   document.querySelector('.orientation-label').hidden=isDetailMode(mode);
   for(const b of document.querySelectorAll('[data-camera]'))b.textContent=(isDetailMode(mode)?{front:'Frente',back:'Verso',left:'Lateral'}:{front:'Anterior',back:'Posterior',left:'Lateral'})[b.dataset.camera];
   document.querySelector('.viewer-top .eyebrow').textContent=mode.startsWith('botany-')?'BOTÂNICA · TECIDOS E FISIOLOGIA':mode.startsWith('cyto-')?'CITOLOGIA · ESTRUTURAS E PROCESSOS':mode.startsWith('histo-')?'HISTOLOGIA · CAMADAS E SUPERFÍCIES 3D':mode.startsWith('internal-')?(studyModels.get(mode)?.anatomicalReference?'MODELO ANATÔMICO DE REFERÊNCIA':studyModels.get(mode)?.authoredReconstruction?'CORTE ANATÔMICO DETALHADO':'ESTRUTURAS INTERNAS · ESQUEMA FUNCIONAL'):mode.startsWith('micro-')?'ESQUEMA DIDÁTICO 3D':'MODELO ANATÔMICO 3D';rememberStudy();return true;
