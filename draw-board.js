@@ -150,8 +150,11 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
   // ---- actions ----
   const api={
     get settings(){return settings},get active(){return active},get penSeen(){return penSeen},get strokeCount(){return strokes.length},
-    setActive(on){active=on;viewport.classList.toggle('board-active',on);toggle?.setAttribute('aria-pressed',String(on));panel&&(panel.hidden=!on);onChange('active')},
+    // Drawing mode (any pointer draws, compact bar visible) is independent from the full options panel.
+    setActive(on){active=on;viewport.classList.toggle('board-active',on);toggle?.setAttribute('aria-pressed',String(on));if(!on&&panel)panel.hidden=true;onChange('active')},
     toggle(){api.setActive(!active)},
+    setPanel(open){if(panel)panel.hidden=!open;onChange('panel')},
+    get panelOpen(){return !!panel&&!panel.hidden},
     set(key,value){if(key==='tool'&&value==='eyedropper'&&settings.tool!=='eyedropper')settings.previousTool=['eraser','stroke-eraser','text'].includes(settings.tool)?'pen':settings.tool;settings[key]=value;saveSettings();if(key==='visible')redraw();onChange('settings')},
     undo(){if(!strokes.length)return;undone.push(strokes.pop());save();redraw();onChange('stroke')},
     redo(){if(!undone.length)return;strokes.push(undone.pop());save();redraw();onChange('stroke')},
@@ -194,9 +197,15 @@ export function mountBoardPanel(panel,board,{surface,onExport,onClose}={}){
     <div class="board-row board-actions">
       <button type="button" data-action="undo" title="Desfazer (Ctrl+Z)">↶ Desfazer</button><button type="button" data-action="redo" title="Refazer (Ctrl+Shift+Z)">↷ Refazer</button>
       <button type="button" data-action="visible" aria-pressed="false">Ocultar anotações</button><button type="button" data-action="clear">Limpar</button>
-      <button type="button" data-action="export" class="primary">Salvar imagem</button><button type="button" data-action="close" class="board-close" aria-label="Fechar quadro">✕</button>
+      <button type="button" data-action="export" class="primary">Salvar imagem</button><button type="button" data-action="close" class="board-close" aria-label="Fechar opções (continua desenhando)">✕</button>
     </div>
-    <p class="board-hint">Com Apple Pencil você desenha a qualquer momento e o dedo continua girando o modelo. As anotações ficam salvas neste aparelho, separadas por modelo.</p>`;
+    <p class="board-hint">Fechar este painel não sai do desenho; use “Concluir” na barra lateral. Com Apple Pencil você desenha a qualquer momento e o dedo continua girando o modelo. As anotações ficam salvas neste aparelho, por modelo.</p>`;
+  const mini=document.createElement('div');mini.className='board-mini';mini.hidden=true;mini.setAttribute('role','toolbar');mini.setAttribute('aria-label','Quadro: ferramentas rápidas');
+  mini.innerHTML=[['pen','Caneta','✒'],['highlighter','Marca-texto','▮'],['eraser','Borracha','◻']].map(([id,label,icon])=>`<button type="button" data-tool="${id}" title="${label}" aria-label="${label}">${icon}</button>`).join('')+
+    '<button type="button" class="mini-color" data-mini="panel" title="Cor e mais opções" aria-label="Cor e mais opções"><span></span></button><button type="button" data-action="undo" title="Desfazer" aria-label="Desfazer">↶</button><button type="button" data-action="redo" title="Refazer" aria-label="Refazer">↷</button>'+
+    '<button type="button" data-mini="panel" class="mini-more" aria-label="Mais opções" title="Mais opções">⋯</button><button type="button" data-mini="done" class="mini-done" title="Concluir desenho" aria-label="Concluir desenho">✓</button>';
+  panel.before(mini);
+  mini.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.tool)board.set('tool',b.dataset.tool);if(b.dataset.action==='undo')board.undo();if(b.dataset.action==='redo')board.redo();if(b.dataset.mini==='panel')board.setPanel(!board.panelOpen);if(b.dataset.mini==='done')onClose?.()});
   const q=s=>panel.querySelector(s);
   panel.addEventListener('click',e=>{
     const tool=e.target.closest('[data-tool]'),color=e.target.closest('[data-color]'),action=e.target.closest('[data-action]');
@@ -205,7 +214,7 @@ export function mountBoardPanel(panel,board,{surface,onExport,onClose}={}){
     if(!action)return;const a=action.dataset.action;
     if(a==='undo')board.undo();if(a==='redo')board.redo();if(a==='visible')board.set('visible',!board.settings.visible);
     if(a==='clear'&&board.strokeCount&&confirm('Apagar todas as anotações deste modelo? Você pode desfazer logo em seguida.'))board.clear();
-    if(a==='export')onExport?.();if(a==='close')onClose?.();
+    if(a==='export')onExport?.();if(a==='close')board.setPanel(false);
   });
   q('#board-color').addEventListener('input',e=>board.set('color',e.target.value));
   q('#board-size').addEventListener('input',e=>board.set('size',Number(e.target.value)));
@@ -213,7 +222,8 @@ export function mountBoardPanel(panel,board,{surface,onExport,onClose}={}){
   q('#board-background').addEventListener('change',e=>board.set('background',e.target.value));
   function refresh(){
     const s=board.settings;
-    for(const b of panel.querySelectorAll('[data-tool]'))b.setAttribute('aria-pressed',String(b.dataset.tool===s.tool));
+    for(const b of [...panel.querySelectorAll('[data-tool]'),...mini.querySelectorAll('[data-tool]')])b.setAttribute('aria-pressed',String(b.dataset.tool===s.tool));
+    mini.hidden=!board.active;mini.querySelector('.mini-more').setAttribute('aria-pressed',String(board.panelOpen));mini.style.setProperty('--board-color',s.color);
     for(const b of panel.querySelectorAll('[data-color]'))b.setAttribute('aria-pressed',String(b.dataset.color.toLowerCase()===s.color.toLowerCase()));
     q('#board-color').value=s.color;q('#board-size').value=s.size;q('#board-opacity').value=Math.round(s.opacity*100);q('#board-background').value=s.background;
     const visible=q('[data-action="visible"]');visible.textContent=s.visible?'Ocultar anotações':'Mostrar anotações';visible.setAttribute('aria-pressed',String(!s.visible));

@@ -264,3 +264,22 @@ details>summary{transition:color .18s}
 .tablet-ui .board-hint{font-size:13px}
 .tablet-ui .atlas-layout[data-detail=open] .board-panel{left:calc((100% - var(--drawer-w) - 12px)/2);width:min(680px,calc(100% - var(--drawer-w) - 48px))}
 .tablet-portrait .atlas-layout[data-detail=open] .board-panel{left:50%;width:min(760px,calc(100% - 24px));max-height:calc(100% - var(--sheet-h) - 150px)}
+/* Board v2: compact side bar while drawing; the options panel sits beside it instead of over the model. */
+.board-mini{position:absolute;z-index:5;left:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid #2c3d52;border-radius:16px;background:rgba(17,27,41,.95);box-shadow:0 10px 30px #0007;animation:rise-in .2s var(--ease-out,ease)}
+.board-mini[hidden]{display:none}
+.board-mini button{width:44px;height:44px;min-height:0;padding:0;font-size:19px;line-height:1;border-radius:12px;background:transparent;border-color:transparent}
+.board-mini button[aria-pressed=true]{background:var(--selected);border-color:#4c7366;color:var(--accent)}
+.board-mini .mini-color span{display:block;width:24px;height:24px;margin:auto;border-radius:50%;background:var(--board-color,#d8343f);border:2px solid #fff8}
+.board-mini .mini-done{background:var(--accent);color:#092b25;font-weight:700}
+.board-panel{top:12px;left:72px;transform:none;width:min(380px,calc(100% - 96px));max-height:calc(100% - 24px)}
+.board-tools{display:grid;grid-template-columns:repeat(4,1fr)}
+.board-tools button{min-width:0}
+.board-sliders input[type=range]{width:100%}
+.board-sliders label{flex:1 1 140px}
+.tablet-ui .board-panel{top:12px;left:72px;width:min(400px,calc(100% - 96px));max-height:calc(100% - 110px - env(safe-area-inset-bottom))}
+.tablet-ui .atlas-layout[data-detail=open] .board-panel,.tablet-portrait .atlas-layout[data-detail=open] .board-panel{left:72px;width:min(400px,calc(100% - var(--drawer-w) - 110px))}
+.tablet-portrait .atlas-layout[data-detail=open] .board-panel{width:min(400px,calc(100% - 96px));max-height:calc(100% - var(--sheet-h) - 110px)}
+.tablet-ui .board-mini{top:calc(50% - 20px)}
+.tablet-portrait .atlas-layout[data-detail=open] .board-mini{top:calc((100% - var(--sheet-h))/2)}
+.tablet-ui .board-tools button{min-height:56px}
+.viewer-panel:has(.board-mini:not([hidden])) .orientation-label{display:none}
