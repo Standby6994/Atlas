@@ -312,3 +312,37 @@ details>summary{transition:color .18s}
 /* The Apple Pencil must not start text selection, the loupe or callouts over the viewer. */
 .viewport{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .viewport .draw-text-input,.viewport input,.viewport textarea{-webkit-user-select:text;user-select:text}
+/* Process animations: control bar and menu over the 3D view (process-animations.js). */
+.process-menu{position:absolute;z-index:6;left:50%;bottom:12px;transform:translateX(-50%);width:min(440px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;padding:10px;border:1px solid #2c3d52;border-radius:16px;background:rgba(17,27,41,.97);box-shadow:0 14px 40px #0008;animation:label-in .22s var(--ease-out,ease)}
+.process-menu-head{margin:2px 6px 8px;font-weight:600}.process-menu-head small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.process-list{display:flex;flex-direction:column;gap:4px}
+.process-list button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-height:52px;padding:8px 12px;text-align:left;background:transparent;border-color:transparent;border-radius:10px}
+.process-list button small{color:var(--muted);font-size:12px}
+.process-list button:hover,.process-list button:focus-visible{background:var(--surface);border-color:var(--line)}
+.process-list button.suggested{border-color:#4c7366}.process-list button.suggested small{color:var(--accent)}
+.process-bar{position:absolute;z-index:5;left:50%;bottom:12px;transform:translateX(-50%);width:min(720px,calc(100% - 24px));display:flex;flex-direction:column;gap:8px;padding:12px 14px 10px;border:1px solid #2c3d52;border-radius:16px;background:rgba(17,27,41,.94);box-shadow:0 14px 40px #0008;animation:label-in .24s var(--ease-out,ease)}
+.process-name{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.process-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.process-head strong{font-size:16px}
+.process-step{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.process-caption p{margin:3px 0 0;font-size:14px;line-height:1.45;color:#d3dee7}
+.process-link{margin-top:6px;min-height:44px;padding:6px 12px;font-size:13px;background:var(--selected);border-color:#4c7366;color:var(--accent)}
+.process-controls{display:flex;align-items:center;gap:6px}
+.process-controls button{min-width:44px;min-height:44px;padding:0 10px;font-size:18px;line-height:1;border-radius:12px}
+.process-controls button:disabled{opacity:.4;cursor:default}
+.process-controls #process-speed,.process-controls #process-close{font-size:15px}
+.process-controls input[type=range]{flex:1;min-width:60px;height:44px;margin:0 4px;accent-color:var(--accent)}
+.process-note{font-size:11.5px;color:var(--muted)}
+.process-bar.still #process-play,.process-bar.still #process-speed,.process-bar.still #process-scrub{display:none}
+.process-bar.still .process-controls{justify-content:center}
+.viewport.process-open #selected-label,.viewport.process-open #selected-marker{display:none}
+.tablet-ui .process-bar,.tablet-ui .process-menu{bottom:calc(84px + env(safe-area-inset-bottom))}
+.tablet-ui .process-caption p{font-size:15px}
+.tablet-ui .atlas-layout[data-detail=open] .process-bar,.tablet-ui .atlas-layout[data-detail=open] .process-menu{left:calc((100% - var(--drawer-w) - 12px)/2);width:min(680px,calc(100% - var(--drawer-w) - 48px))}
+.tablet-portrait .atlas-layout[data-detail=open] .process-bar,.tablet-portrait .atlas-layout[data-detail=open] .process-menu{left:50%;width:min(720px,calc(100% - 24px));bottom:calc(var(--sheet-h) + 84px)}
+@media(max-width:650px){.process-controls{gap:3px}.process-controls button{min-width:42px;padding:0 6px}.process-caption p{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.process-bar,.process-menu{animation:none}}
+.process-chart{margin:0}.process-chart canvas{display:block;width:100%;height:84px}.process-chart figcaption{font-size:11px;color:var(--muted)}
+@media(max-height:700px){.process-chart canvas{height:64px}}
+/* Portrait tablets: the extra toolbar button shows only its icon and the toolbar packs tighter, so it still fits. */
+.tablet-portrait #open-process .tool-label,.tablet-ui .atlas-layout[data-detail=open] #open-process .tool-label{display:none}
+.tablet-portrait .viewer-tools button,.tablet-ui .atlas-layout[data-detail=open] .viewer-tools button{padding:0 10px;min-width:44px}

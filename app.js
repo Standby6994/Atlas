@@ -20,6 +20,7 @@ import {setupTabletUI} from './tablet-ui.js';
 import {createRenderBatches,BATCHED_LAYER} from './render-batches.js';
 import {createAmbientOcclusion} from './ambient-occlusion.js';
 import {createDrawBoard,mountBoardPanel} from './draw-board.js';
+import {createProcessPlayer} from './process-animations.js';
 import {createSystematicsView} from './systematics-view.js';
 const {applyTissueFinish,copyTissueFinish,getTissueFinishStats}=tissueFinish;
 const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
@@ -285,7 +286,9 @@ function createGroundShadow(){
 function resize(){if(!renderer||state.view!=='atlas')return;const rect=$('viewport').getBoundingClientRect();if(rect.width<1||rect.height<1)return;renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;applyViewOffset();requestRender()}
 // Drawers on tablets cover part of the viewer; shift the projection so the model stays centred in what remains visible.
 // Floating tablet toolbars also cover the top and bottom of the viewer.
-function chromeInset(){return tabletUI.active?{top:isStudyMode(state.mode)?122:64,bottom:80}:{top:0,bottom:0}}
+// An open process bar covers the bottom of the viewer as well (measured once when it opens, so steps do not shift the view).
+let processInset=0;
+function chromeInset(){return tabletUI.active?{top:isStudyMode(state.mode)?122:64,bottom:80+processInset}:{top:0,bottom:processInset}}
 function applyViewOffset(){const w=renderer.domElement.clientWidth,h=renderer.domElement.clientHeight,chrome=chromeInset(),x=viewInset.x/2,y=(viewInset.y+chrome.bottom-chrome.top)/2;if(w&&h&&(x||y))camera.setViewOffset(w,h,x,y,w,h);else camera.clearViewOffset()}
 // While a drawer slides, frames take the light motion path (no occlusion pass); the settled frame is drawn in full 160 ms later.
 function setViewInset(x,y,target={x,y}){viewInset.x=x;viewInset.y=y;viewInset.target=target;if(camera){if(x!==target.x||y!==target.y)noteMotion();applyViewOffset();requestRender()}}
@@ -299,9 +302,11 @@ function renderFrame(now){
   selectionFade.value=tween&&selectionFade.start?Math.min(1,(now-selectionFade.start)/(tween.duration*.55)):1;
   if(tween){const f=Math.min(1,(now-tween.start)/tween.duration),smooth=f<.5?4*f*f*f:1-(-2*f+2)**3/2;camera.position.lerpVectors(tween.fromPosition,tween.toPosition,smooth);controls.target.lerpVectors(tween.fromTarget,tween.toTarget,smooth);controls.update();if(f===1)tween=null}
   else if((controls.enableDamping||controls.autoRotate)&&controls.update())moving=true;
+  // A playing process animation counts as motion: lighter frames while it runs, one sharp frame after it pauses.
+  if(processPlayer?.update(now))moving=true;
   if(moving)noteMotion();
   drawScene();updateSelectedMarker();if(moving)measureMotion(now);updateFpsMeter();
-  if(tween||controls.autoRotate)requestRender();
+  if(tween||controls.autoRotate||processPlayer?.playing)requestRender();
 }
 // A newly shown model compiles its shaders and uploads its textures before its first frame, so the switch
 // does not freeze mid-animation; the previous image stays on screen meanwhile and the new one fades in.
@@ -878,6 +883,32 @@ function setupDrawBoard(){
   $('open-board').addEventListener('click',()=>drawBoard.toggle());
   drawBoard.setContext(state.mode);
 }
+// Process animations (process-animations.js): the player asks the app to open the right model, then animates helper objects.
+let processPlayer=null;
+async function openProcessTarget(target){
+  if(target.mode==='body'){
+    if(state.mode!=='body'&&!await switchModel('body'))return false;
+    for(const id of target.layers||[]){if(!state.layers[id]){state.layers[id]=true;renderLayers()}await loadSystem(id)}
+    state.isolated=null;applyVisibility();requestRender();return state.mode==='body';
+  }
+  if(target.representation)organRepresentations.set(target.mode,target.representation);
+  const ready=()=>state.mode===target.mode&&(!target.representation||studyModels.get(target.mode)?.viewRepresentation===target.representation);
+  if(ready())return true;
+  if(target.mode.startsWith('internal-')){if(state.mode===target.mode)await changeStudyRepresentation(target.representation);else await openStudy(target.mode,target.organ)}
+  else await switchModel(target.mode);
+  return ready();
+}
+function setupProcesses(){
+  processPlayer=createProcessPlayer({bar:$('process-bar'),menu:$('process-menu'),toggle:$('open-process'),app:{
+    scene,camera,renderer,viewport:$('viewport'),touchDevice,toast,requestRender,
+    mode:()=>state.mode,registry:state.registry,studyModel:mode=>studyModels.get(mode),microModel:mode=>microModels.get(mode),
+    open:openProcessTarget,// A tight frame zooms right onto a small region (the synapse) instead of keeping half of the model around it.
+    frame:(box,tight)=>{if(!box){fitBody('front');return}if(!tight){fitBounds(box,'front');return}const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),fit=Math.max(size.y/visibleFraction().y,size.x/(camera.aspect*visibleFraction().x))*.62/Math.tan(THREE.MathUtils.degToRad(camera.fov/2));moveCamera(center,center.clone().add(new THREE.Vector3(0,0,fit+size.z)))},
+    layout:height=>{processInset=height;applyViewOffset();requestRender()},
+    warm:()=>Promise.race([renderer.compileAsync(scene,camera),new Promise(resolve=>setTimeout(resolve,3000))]).catch(()=>{})}});
+  // Verification: place the animation at a time (seconds) and draw that frame synchronously.
+  renderer.domElement.atlasProcessFrame=t=>{const info=processPlayer.seekTo(t);drawScene();renderer.getContext().finish();return info};
+}
 function setupEvents(){
   new MutationObserver(organizeModelNotes).observe($('detail-panel'),{childList:true,subtree:true});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestRender()});
@@ -1041,10 +1072,10 @@ async function start(){
     setupSystematics(await getJSON('./data/systematics-content.json',true));
     $('cytology-category').innerHTML='<option value="all">Todos os temas</option>'+cytologyContent.categories.map(c=>`<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
     const options=[['Por dentro',studyContent.organs||[],'internal-'],['Histologia',studyContent.histology||[],'histo-'],['Citologia',cytologyContent.views||[],'cyto-']];for(const [label,entries,prefix] of options){const group=document.createElement('optgroup');group.label=label;for(const entry of entries){const option=document.createElement('option');option.value=prefix+entry.id;option.textContent=entry.label||entry.title;group.append(option)}$('model-mode').append(group)}
-    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupEvents();setupOffline();
+    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupProcesses();setupEvents();setupOffline();
     $('load-progress').max=2;$('load-detail').textContent='Órgãos internos e esqueleto…';await Promise.all([loadSystem('visceral'),loadSystem('skeletal')]);$('viewer-loading').hidden=true;fitBody('front',true);fadeInCanvas();$('load-progress').max=7;
     const saved=studySessions.load(),view=location.hash.replace('#',''),restored=await restoreStudySession(saved);if(['atlas','physiology','practice','about'].includes(view))setView(view);else if(saved)setView(saved.view);sessionReady=true;if(restored)rememberStudy();
-    window.atlas={state,scene,camera,renderer,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
+    window.atlas={state,scene,camera,renderer,controls,processPlayer,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
   }catch(error){console.error(error);$('viewer-loading').hidden=true;showError('O atlas não pôde iniciar: '+error.message+'. Recarregue a página. Se o acervo ainda não foi salvo para uso off-line, conecte-se à internet e tente novamente.');$('asset-status').textContent='Falha no carregamento'}
 }
 start();
