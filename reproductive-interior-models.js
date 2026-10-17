@@ -16,7 +16,8 @@ const VAGINA_KEYS=['epithelium','lamina-propria','muscle','adventitia','rugae'];
 const VAGINA_LABELS=['Epitélio estratificado pavimentoso','Lâmina própria','Camada muscular','Adventícia','Pregas vaginais'];
 const vector=p=>new THREE.Vector3(...p);
 
-function context(id,definition,mobile,title,description){
+// Also used by authored-interiors.js to rebuild the precomputed meshes with the same parts, materials and stats.
+export function createReproductiveContext(id,definition,mobile,title,description){
  const group=new THREE.Group(),parts=[],geometries=new Set(),materials=new Map();let disposed=false;
  group.name='INTERNAL_'+id;group.userData={schematic:true,educational:true,notRealHistology:true,internalOrgan:id,authoredReconstruction:true,anatomicalReference:false,geometryIdentified:true,mobile,defaultClip:'none',sourceUrls:reproductiveInteriorSources[id]};
  const material=color=>{if(!materials.has(color))materials.set(color,new THREE.MeshStandardMaterial({color,roughness:.69,metalness:0,side:THREE.DoubleSide,forceSinglePass:true}));return materials.get(color)};
@@ -87,7 +88,7 @@ function lobularVolume(anchor,start,end,boundary,mobile){
 }
 
 export function createTestisInteriorModel(definition={}, {mobile=false}={}){
- const r=context('testis',definition,mobile,'Testículo — lóbulos e ductos em corte','Envoltório contínuo com septos, lóbulos preenchidos por túbulos curvos e via de saída identificável até epidídimo e ducto deferente. Organização ampliada para leitura; quantidades ilustrativas.');
+ const r=createReproductiveContext('testis',definition,mobile,'Testículo — lóbulos e ductos em corte','Envoltório contínuo com septos, lóbulos preenchidos por túbulos curvos e via de saída identificável até epidídimo e ducto deferente. Organização ampliada para leitura; quantidades ilustrativas.');
  const cx=-.12,rx=.29,ry=.43,rz=.24,anchor=[.14,0],count=9,step=Math.PI/count;
  const boundary=a=>[cx+rx*Math.cos(a),ry*Math.sin(a)];
  const capsule=[hemiShell(cx,rx,ry,rz,.019,mobile)],lobules=[],tubules=[],rete=[];
@@ -164,7 +165,7 @@ function wallLayer(inner,outer,nt,na,nr,{foldStrength=0,foldOuter=0,micro=0,micr
 }
 
 export function createVaginaInteriorModel(definition={}, {mobile=false}={}){
- const r=context('vagina',definition,mobile,'Vagina — parede contínua em corte','Canal aberto para expor pregas da mucosa e as camadas contínuas do epitélio, lâmina própria, músculo e adventícia. A abertura é didática; o lúmen em repouso é habitualmente colabado.');
+ const r=createReproductiveContext('vagina',definition,mobile,'Vagina — parede contínua em corte','Canal aberto para expor pregas da mucosa e as camadas contínuas do epitélio, lâmina própria, músculo e adventícia. A abertura é didática; o lúmen em repouso é habitualmente colabado.');
  const nt=mobile?80:144,na=mobile?48:88,nr=mobile?2:4;
  const layers=[
   ['epithelium',[.163,.087],[.179,.103],COLORS.epithelium,'organ',1,.82,.0008,.0008],
