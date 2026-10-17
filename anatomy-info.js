@@ -9,6 +9,21 @@ export const MODEL_SYSTEMS = {
   muscular:{name:'Músculos',color:'#c77f79',file:'muscular.glb',role:'musculoskeletal'},
   joints:{name:'Articulações',color:'#8ec3c9',file:'joints.glb',role:'musculoskeletal'}
 };
+// Female body: HRA United Female v1.10 (Visible Human Female), split by system. 'female' keeps the id of the
+// reproductive model it grew from (same node names). `tissue` is the male layer whose surface finish it shares.
+export const FEMALE_SYSTEMS = {
+  'female-skeletal':{name:'Esqueleto (parcial)',color:'#e8d7b6',files:['female-skeletal.glb'],tissue:'skeletal',role:'musculoskeletal'},
+  'female-visceral':{name:'Órgãos e vísceras',color:'#d99d89',files:['female-visceral.glb'],tissue:'visceral',role:'digestive'},
+  female:{name:'Reprodutor feminino',color:'#d98aa6',files:['female-reproductive.glb','female-reproductive-extra.glb'],tissue:'female',role:'reproductive'},
+  'female-cardiovascular':{name:'Coração e vasos',color:'#d8707b',files:['female-cardiovascular.glb'],tissue:'cardiovascular',role:'cardiovascular'},
+  'female-nervous':{name:'Encéfalo, medula e olhos',color:'#e0bd6a',files:['female-nervous.glb'],tissue:'nervous',role:'nervous'},
+  'female-lymphatic':{name:'Órgãos linfáticos',color:'#90be88',files:['female-lymphatic.glb'],tissue:'lymphatic',role:'lymphatic-immune'},
+  'female-muscular':{name:'Músculos (olhos e joelhos)',color:'#c77f79',files:['female-muscular.glb'],tissue:'muscular',role:'musculoskeletal'},
+  'female-joints':{name:'Discos, cartilagens e ligamentos',color:'#8ec3c9',files:['female-joints.glb'],tissue:'joints',role:'musculoskeletal'},
+  'female-skin':{name:'Pele e mamas',color:'#e3b49b',files:['female-skin.glb'],tissue:'visceral',role:'integumentary'}
+};
+export const isFemaleSystem=id=>id==='female'||String(id||'').startsWith('female-');
+export const bodySystem=id=>MODEL_SYSTEMS[id]||FEMALE_SYSTEMS[id]||null;
 const exact = {
   Heart:'Coração', 'Right atrium':'Átrio direito','Left atrium':'Átrio esquerdo','Right ventricle':'Ventrículo direito','Left ventricle':'Ventrículo esquerdo',
   'Ascending aorta':'Aorta ascendente','Arch of aorta':'Arco da aorta','Descending aorta':'Aorta descendente','Abdominal aorta':'Aorta abdominal','Thoracic aorta':'Aorta torácica',

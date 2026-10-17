@@ -1,0 +1,56 @@
+CORPO FEMININO POR SISTEMAS — CRÉDITOS E LICENÇA
+================================================
+
+Fonte: 3D Reference Organ Set for United, Female v1.10
+Human Reference Atlas (HRA) / HuBMAP
+Autoria: Kristen Browne e Heidi Schlehlein
+DOI: https://doi.org/10.48539/HBM637.DWBM.744
+Metadados: https://lod.humanatlas.io/ref-organ/united-female/v1.10
+Arquivo original: https://cdn.humanatlas.io/digital-objects/ref-organ/united-female/v1.10/assets/3d-vh-f-united.glb
+(374.505.632 bytes; SHA-256 95f0c3d2f918582608692ca1139e8bdb18c147a16470e9ee9af8b276bd77c422)
+Licença: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Os órgãos de referência do HRA foram criados com dados do Visible Human
+Female, disponibilizado pela National Library of Medicine (EUA)
+(Spitzer et al. 1996; Ackerman 1998).
+
+ARQUIVOS
+--------
+models/female-skeletal.glb          esqueleto parcial (coluna C1–L6, sacro, cóccix, quadril, esterno, joelhos)
+models/female-joints.glb            discos intervertebrais, cartilagens e ligamentos dos joelhos
+models/female-visceral.glb          órgãos torácicos e abdominais, boca, vias aéreas, vias urinárias
+models/female-cardiovascular.glb    coração e vasos principais
+models/female-nervous.glb           encéfalo (atlas Allen), medula espinal, olhos e nervos ópticos
+models/female-lymphatic.glb         baço, timo e linfonodo mesentérico (modelo Yao)
+models/female-muscular.glb          músculos extrínsecos dos olhos e reto femoral junto ao joelho
+models/female-skin.glb              pele, tecido adiposo subcutâneo do abdome e glândulas mamárias
+models/female-reproductive-extra.glb vagina, junção cervicovaginal, ligamentos do útero e dos ovários
+models/female-reproductive.glb      útero, tubas e ovários (arquivo já existente; ver FEMALE_ATTRIBUTION.txt)
+Inventário, nomes em português, hashes e contagens: data/atlas-female-body.json.
+
+ALTERAÇÕES
+----------
+- Nós separados por sistema; nomes dos nós, cores dos materiais e coordenadas
+  da fonte preservados. O deslocamento que apoia o corpo no chão é aplicado
+  no aplicativo, não nos arquivos.
+- Removidos: placenta a termo (vista de gestação separada) e as cópias de
+  útero, tubas e ovários, idênticas às do arquivo female-reproductive.glb.
+- Removidos atributos sem uso: coordenadas de textura e tangentes (a fonte
+  não tem imagens) e cores de vértice inteiramente brancas.
+- 136 superfícies exportadas com normais por face (pele, boca, olhos,
+  mucosas) foram soldadas por posição e receberam normais suaves.
+- Simplificação (meshoptimizer) limitada a 0,05 mm de desvio de superfície:
+  7.756.626 → 2.842.980 triângulos (mais 74.069 do arquivo reprodutor).
+- Termo emissivo cinza deixado pela exportação removido.
+- Compressão Draco: posição 16 bits, normal 12 bits, cor 10 bits.
+
+LIMITES
+-------
+O conjunto não contém crânio, costelas, clavículas, escápulas, membros
+superiores, mãos, pés, músculos do tronco e dos membros, nervos periféricos,
+estômago, esôfago, tireoide, suprarrenais nem vasos linfáticos. A doadora tem
+seis vértebras lombares (variação individual). Não se afirma validação clínica.
+
+Mantenha autoria, citação, licença, fonte e esta indicação de alterações ao
+redistribuir. Não atribua apoio ou validação dos autores ao aplicativo.
