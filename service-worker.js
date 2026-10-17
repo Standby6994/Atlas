@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-17-systematics-v32';
+const APP_VERSION = '2026-10-17-systematics-models-v36';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
@@ -67,6 +67,10 @@ const APP_ASSETS = [
   "tablet-ui.js",
   "render-batches.js",
   "lod-worker.js",
+  "process-animations.js",
+  "process-digestion.js",
+  "process-neuron.js",
+  "process-heart.js",
   "ambient-occlusion.js",
   "draw-board.js",
   "index.html",
@@ -95,6 +99,7 @@ const APP_ASSETS = [
   "data/atlas-systems.json",
   "data/atlas-lexicon.json",
   "data/atlas-female.json",
+  "data/atlas-female-body.json",
   "data/simulations.json",
   "data/simulation-sources.json",
   "data/internal-content.json",
@@ -193,7 +198,16 @@ const APP_ASSETS = [
   "assets/histology/gastric-histology-desktop-v20.bin",
   "assets/histology/gastric-histology-touch-v20.bin",
   "assets/histology/colon-histology-desktop-v20.bin",
-  "assets/histology/colon-histology-touch-v20.bin"
+  "assets/histology/colon-histology-touch-v20.bin",
+  "authored-interiors.js",
+  "assets/interiors/heart-desktop-a1.bin",
+  "assets/interiors/heart-touch-a1.bin",
+  "assets/interiors/ovary-desktop-a1.bin",
+  "assets/interiors/ovary-touch-a1.bin",
+  "assets/interiors/testis-desktop-a1.bin",
+  "assets/interiors/testis-touch-a1.bin",
+  "assets/interiors/vagina-desktop-a1.bin",
+  "assets/interiors/vagina-touch-a1.bin"
 ];
 const MODEL_ASSETS = [
   "models/skeletal.glb",
@@ -204,6 +218,15 @@ const MODEL_ASSETS = [
   "models/muscular.glb",
   "models/joints.glb",
   "models/female-reproductive.glb",
+  "models/female-skin.glb",
+  "models/female-skeletal.glb",
+  "models/female-joints.glb",
+  "models/female-muscular.glb",
+  "models/female-visceral.glb",
+  "models/female-cardiovascular.glb",
+  "models/female-nervous.glb",
+  "models/female-lymphatic.glb",
+  "models/female-reproductive-extra.glb",
   "models/heart-dundee.glb",
   "models/reference/bladder.glb",
   "models/reference/brain.glb",
@@ -309,6 +332,15 @@ const CONTENT_SHA256 = {
   "models/muscular.glb": "f69ed1287f802a2d603d23293e01512bb57ae77ee7cca1d5527ba00496e51de2",
   "models/joints.glb": "9fdab1a257652597cf8f0b2ac93d12abc817e8f9a9099b9628e764018490afa2",
   "models/female-reproductive.glb": "67b5c7d1a07aface8a0c4611736ebb4d9bc14eb5b68fb5cfdbc504ce93ed7982",
+  "models/female-skin.glb": "a11e57628bb411398789b68f8fc8354d0b9269d2c6b7ac0231e3e6a280260a1a",
+  "models/female-skeletal.glb": "b74541d157b04e944a6cd477026c7182ed670e61cd81a4abb04abf58cd4ce369",
+  "models/female-joints.glb": "f6e1010b382dcc31a4c738ea9623559caa80ca45f111d3361e5297a9a3b4dca3",
+  "models/female-muscular.glb": "2d952dce743b95bf42d2f5fe7b2f2ceee3c03acbd26559edb345ff509cb201dc",
+  "models/female-visceral.glb": "8d54bc5f98ef0a2ef851afdfe2e082e037df6b2ab314dd6be6f94cc3cb3350b7",
+  "models/female-cardiovascular.glb": "591082fa876ff71c3e864e58be525de94df9cf8238ce0c3f59cb5ffe0dcad2ef",
+  "models/female-nervous.glb": "391b2039500aa72a1a80cb77d8fa8442e5ae684a373456bb7f7d60472f66b741",
+  "models/female-lymphatic.glb": "d405b73af2c1c09b853b0e05da176da38dafbbc8360440b13ea59d50dd345e3f",
+  "models/female-reproductive-extra.glb": "e4e99bafcf8215f89aa6d279db624c444137a682716b463dc00761d9fad023b8",
   "models/heart-dundee.glb": "69bd08b81c4577a38ddbe175ccc0c4e933de5bea41ae532e7cf93fecfa35da67",
   "models/reference/bladder.glb": "5be534d0b2cc570d967520403e53ea4c7edc09a9cd48d12d942511225ccda6c4",
   "models/reference/brain.glb": "6dec0c532bdd3c8805af771c973e9e06ed227639e1608770a22510e5aab809d5",
@@ -396,7 +428,15 @@ const CONTENT_SHA256 = {
   "assets/histology/gastric-histology-desktop-v20.bin": "c2bcea43cf66c314de941888555d96402c415082188c67ebf73987d5ecf795ac",
   "assets/histology/gastric-histology-touch-v20.bin": "70a022bb89f5404e66adcdbb77730d23e4c62ac580fe2050ad3f9f39681bb474",
   "assets/histology/colon-histology-desktop-v20.bin": "a067c99818e41a7e087d6fe412c3572e28fdc635340b26eae7254d3d4fbf3692",
-  "assets/histology/colon-histology-touch-v20.bin": "731ac190627bdffc38dc60e6665e1a4baf058d609cfc6e30dbe1255d2913e0bd"
+  "assets/histology/colon-histology-touch-v20.bin": "731ac190627bdffc38dc60e6665e1a4baf058d609cfc6e30dbe1255d2913e0bd",
+  "assets/interiors/heart-desktop-a1.bin": "d7ffbf367e599c107758b925d28f85766b8fb0047bb7ef6e586724a8d9e09eb5",
+  "assets/interiors/heart-touch-a1.bin": "2f489cc7c1c4dc765897981104cb92a97cc450ed3512a73bd0cb81c7ca476780",
+  "assets/interiors/ovary-desktop-a1.bin": "5747b19bef946b5295728be9aadf56e78a063007953ed889d4c0d6b08fc54414",
+  "assets/interiors/ovary-touch-a1.bin": "a4eda7a716b84440ece9fcb3b4a579ba3bcf32f4d5c9c2fceef67c8387f37482",
+  "assets/interiors/testis-desktop-a1.bin": "3048d30e67a5549277f118c33e4e3514b58d4a7a633b5f649d0cad78fc87c765",
+  "assets/interiors/testis-touch-a1.bin": "9901241066918d84f6442d92677bb737b58ef6cca34f94a3af160f529d076eb6",
+  "assets/interiors/vagina-desktop-a1.bin": "466dac317949322fa601adaaef8b795a3ce88698518d28b01d7b3efd47e34214",
+  "assets/interiors/vagina-touch-a1.bin": "21bc44e3e9a0cc5837ac52e98a90051cc904682d73fc12d96eee2ded1f6b63da"
 };
 const ALL_ASSETS = [...APP_ASSETS, ...MODEL_ASSETS];
 const BOOTSTRAP_ASSETS = APP_ASSETS.filter(asset => !CONTENT_SHA256[asset]);

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
-import {MODEL_SYSTEMS, normalise, translatedName, familyInfo} from './anatomy-info.js';
+import {MODEL_SYSTEMS, FEMALE_SYSTEMS, isFemaleSystem, bodySystem, normalise, translatedName, familyInfo} from './anatomy-info.js';
 import {resolveCore, getCoreMeshNames} from './core-mapping.js';
 import {computeSimulation} from './simulation-engine.js';
 import {createSmartSearch} from './smart-search.js';
@@ -20,6 +20,7 @@ import {setupTabletUI} from './tablet-ui.js';
 import {createRenderBatches,BATCHED_LAYER} from './render-batches.js';
 import {createAmbientOcclusion} from './ambient-occlusion.js';
 import {createDrawBoard,mountBoardPanel} from './draw-board.js';
+import {createProcessPlayer} from './process-animations.js';
 import {createSystematicsView} from './systematics-view.js';
 const {applyTissueFinish,copyTissueFinish,getTissueFinishStats}=tissueFinish;
 const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
@@ -29,8 +30,8 @@ const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const fmt=n=>Number(n).toLocaleString('pt-BR',{maximumFractionDigits:2});
 // The registry counts its changes, so derived lists (core mesh names, part search) are rebuilt only when it changes.
 class VersionedMap extends Map{version=0;set(k,v){this.version++;return super.set(k,v)}delete(k){this.version++;return super.delete(k)}clear(){this.version++;super.clear()}}
-const state={view:'atlas',tab:'core',search:'',studySystem:'all',studyOrgan:null,cytologyCategory:'all',botanyCategory:'all',cytologyReturnMode:'body',layers:{skeletal:true,visceral:true,cardiovascular:false,nervous:false,lymphatic:false,muscular:false,joints:false},registry:new VersionedMap(),groups:{},loaded:new Set(),loading:new Map(),core:[],coreMap:new Map(),selected:null,selectedNames:new Set(),hidden:new Set(),isolated:null,opacity:1,mode:'body',clip:'none',simulation:null,questionIndex:0};
-let physiology,simulations,atlasSystems,lexicon,contentSources,simulationSources,femaleMeta,studyContent,cytologyContent;
+const state={view:'atlas',tab:'core',search:'',studySystem:'all',studyOrgan:null,cytologyCategory:'all',botanyCategory:'all',cytologyReturnMode:'body',layers:{skeletal:true,visceral:true,cardiovascular:false,nervous:false,lymphatic:false,muscular:false,joints:false,'female-skeletal':true,'female-visceral':true,female:true,'female-cardiovascular':false,'female-nervous':false,'female-lymphatic':false,'female-muscular':false,'female-joints':false,'female-skin':false},registry:new VersionedMap(),groups:{},loaded:new Set(),loading:new Map(),core:[],coreMap:new Map(),selected:null,selectedNames:new Set(),hidden:new Set(),isolated:null,opacity:1,mode:'body',clip:'none',simulation:null,questionIndex:0};
+let physiology,simulations,atlasSystems,lexicon,contentSources,simulationSources,femaleMeta,femaleBody,studyContent,cytologyContent;
 let referenceCatalog=null,referencePartFunctions={parts:[]};
 let learningDetails,studyConnections,modelCoverage;
 let botanyContent={views:[],categories:[],sources:[]},botanySearch;
@@ -42,7 +43,7 @@ function rememberStudy(){if(!sessionReady)return;studySessions.save({...studySna
 function interactionFocus(){const node=document.activeElement;if(!node||node===document.body||!node.closest('#structure-list,#detail-panel'))return null;return{node,id:node.id,part:node.dataset.part,key:node.dataset.key,core:node.dataset.core}}
 function restoreInteractionFocus(saved){if(!saved||saved.node.isConnected||document.activeElement!==document.body)return;const target=saved.id&&$(saved.id)||[...document.querySelectorAll('[data-part],[data-key]')].find(n=>saved.part?n.dataset.part===saved.part:saved.key&&n.dataset.key===saved.key&&n.dataset.core===saved.core)||$('detail-panel').querySelector('h2');if(target){if(target.tagName==='H2')target.tabIndex=-1;target.focus({preventScroll:true})}}
 state.studyRepresentation='reference';
-const detailedInteriors={esophagus:{module:'./esophagus-interior-models.js',factory:'createEsophagusInterior'},'large-intestine':{module:'./large-intestine-interior-models.js',factory:'createLargeIntestineInterior'},stomach:{module:'./stomach-interior-models.js',factory:'createStomachInterior'},'small-intestine':{module:'./small-intestine-interior-models.js',factory:'createSmallIntestineInterior'},lungs:{module:'./pulmonary-interior-models.js',factory:'createPulmonaryInterior'},kidney:{module:'./renal-interior-models.js',factory:'createKidneyInterior'},heart:{module:'./heart-interior-model.js',factory:'createHeartInteriorModel'},ovary:{module:'./ovary-interior-model.js',factory:'createOvaryInteriorModel'},testis:{module:'./reproductive-interior-models.js',factory:'createTestisInteriorModel'},vagina:{module:'./reproductive-interior-models.js',factory:'createVaginaInteriorModel'}};
+const detailedInteriors={esophagus:{module:'./esophagus-interior-models.js',factory:'createEsophagusInterior'},'large-intestine':{module:'./large-intestine-interior-models.js',factory:'createLargeIntestineInterior'},stomach:{module:'./stomach-interior-models.js',factory:'createStomachInterior'},'small-intestine':{module:'./small-intestine-interior-models.js',factory:'createSmallIntestineInterior'},lungs:{module:'./pulmonary-interior-models.js',factory:'createPulmonaryInterior'},kidney:{module:'./renal-interior-models.js',factory:'createKidneyInterior'},heart:{module:'./authored-interiors.js',factory:'createHeartInterior'},ovary:{module:'./authored-interiors.js',factory:'createOvaryInterior'},testis:{module:'./authored-interiors.js',factory:'createTestisInterior'},vagina:{module:'./authored-interiors.js',factory:'createVaginaInterior'}};
 const organRepresentations=new Map();
 let representationVersion=0;
 const organSelectionContexts=new Map();
@@ -61,7 +62,7 @@ const histologicalCorrespondences={
 const interiorSpec=mode=>mode.startsWith('internal-')?detailedInteriors[mode.slice(9)]:null;
 const studyRepresentationFor=mode=>organRepresentations.get(mode)||(interiorSpec(mode)?'detailed':'reference');
 function hasSelectableGeometry(object){let found=false;object?.traverse(mesh=>{if(mesh.isMesh&&mesh.geometry?.attributes.position?.count)found=true});return found}
-let scene,camera,renderer,controls,loader,bodyGroup,femaleGroup,groundShadow,xrayGroup,renderBatches,bodyBounds,frameRequested=false,tween=null,draco;
+let scene,camera,renderer,controls,loader,bodyGroup,femaleGroup,groundShadow,xrayGroup,renderBatches,bodyBounds,femaleBounds,femaleReady=false,frameRequested=false,tween=null,draco;
 let resizeObserver,environmentHandle,tabletUI={active:false,showDetail(){},hideDetail(){},closeAll(){}};
 const viewInset={x:0,y:0,target:{x:0,y:0}};
 // Full resolution whenever the view is still; while it moves, the resolution adapts to hold 60 fps.
@@ -158,8 +159,12 @@ function updateStudyPath(){
   $('study-related').textContent=state.mode.startsWith('internal-')?'Abrir tecido da seleção':'Voltar à estrutura no órgão';
   const link=studyConnections?.resolve(state.mode,state.selected?.raw?.customInfo)?.links.find(l=>l.viewId.startsWith('histo-'));$('study-related').hidden=state.mode.startsWith('internal-')?!link:!organ;
 }
+// The female body and the male body each have their own layers; the panel shows those of the body on screen.
+const layerBody=()=>state.mode==='female'?'female':'body';
+const bodyLayers=(body=layerBody())=>Object.keys(body==='female'?FEMALE_SYSTEMS:MODEL_SYSTEMS);
+const tissueSystem=id=>bodySystem(id)?.tissue||id;
 function refreshLayerUi(){
-  $('toggle-layers').textContent=Object.values(state.layers).every(Boolean)?'Ocultar todos':'Mostrar todos';
+  $('toggle-layers').textContent=bodyLayers().every(k=>state.layers[k])?'Ocultar todos':'Mostrar todos';
   if($('isolate-part'))$('isolate-part').textContent=state.isolated?'Mostrar contexto':state.selected?.raw?.customInfo?.annotationKind==='cavity-boundary'?'Isolar contorno':'Isolar';
 }
 // With a root, only the styled copies of that model's materials go; clearing everything forced the whole body
@@ -172,8 +177,7 @@ function clearMaterialCache(root){
 function surfaceOptions(){return {quality:touchDevice?'mobile':'balanced',naturalColors:$('tissue-colors')?.checked??true}}
 function updateSurfaceQuality(){
   clearMaterialCache();
-  for(const [id,group] of Object.entries(state.groups))applyTissueFinish(group,{system:id},surfaceOptions());
-  if(state.loaded.has('female'))applyTissueFinish(femaleGroup,{system:'female'},surfaceOptions());
+  for(const [id,group] of Object.entries(state.groups))applyTissueFinish(group,{system:tissueSystem(id)},surfaceOptions());
   for(const [mode,model] of studyModels)if(!model.preserveMaterials)applyTissueFinish(model.group,{system:studyDefinition(mode)?.system},surfaceOptions());
   applyVisibility();
 }
@@ -191,30 +195,32 @@ function coreMeshNames(core){if(coreMeshVersion!==state.registry.version){coreMe
 function namesForCore(core){
   const entry=resolveStudyEntry(core?.id);if(entry?.mode===state.mode){const ids=new Set(entry.partIds);return(studyModels.get(state.mode)?.parts||[]).filter(p=>ids.has(p.id)).map(p=>p.registryName)}
   if(state.mode.startsWith('micro-')&&['nephron','alveoli','neuron','sarcomere','skin'].includes(core.id)&&MICRO_CORE_MODELS[core.id]===state.mode.slice(6))return [...state.registry.values()].filter(r=>r.system===state.mode).map(r=>r.name);
-  return coreMeshNames(core).filter(n=>{const system=state.registry.get(n)?.system;return state.mode.startsWith('micro-')?system===state.mode:state.mode==='female'?system==='female':system!=='female'&&!isDetailMode(system||'')});
+  return coreMeshNames(core).filter(n=>{const system=state.registry.get(n)?.system;return state.mode.startsWith('micro-')?system===state.mode:state.mode==='female'?isFemaleSystem(system):!isFemaleSystem(system)&&!isDetailMode(system||'')});
 }
 function createRegistry(){
   for(const [system,names] of Object.entries(atlasSystems)){
     for(const name of names){namedSystems.set(name,system);const core=matchCore(name);state.registry.set(name,{name,system,pt:translatedName(name,lexicon),coreId:core?.id||null,object:null,search:normalise([name,lexicon[name]?.la||'',core?.name||'',...(core?.aliases||[])].join(' '))})}
   }
-  for(const node of femaleMeta?.nodes||[]){if(node.mesh===null||node.mesh===undefined)continue;const core=resolveCore(node.name,'female',state.core);state.registry.set(node.name,{name:node.name,system:'female',pt:translatedName(node.name,lexicon),coreId:core?.id||null,object:null,search:normalise([node.name,node.label,core?.name||'',...(core?.aliases||[])].join(' '))})}
+  // Female body parts: [source name, Portuguese label, source label, ontology id] per system (data/atlas-female-body.json).
+  for(const [system,parts] of Object.entries(femaleBody?.systems||{}))for(const [name,pt,label,ontology] of parts){namedSystems.set(name,tissueSystem(system));const core=matchCore(name);if(pt)lexicon[name]||={pt};state.registry.set(name,{name,system,pt:pt||translatedName(name,lexicon),coreId:core?.id||null,object:null,search:normalise([name,label,ontology||'',core?.name||'',...(core?.aliases||[])].join(' '))})}
   for(const c of state.core)state.coreMap.set(c.id,c);rebuildSearch();
 }
 function renderLayers(){
-  $('layers').innerHTML=Object.entries(MODEL_SYSTEMS).map(([id,s])=>`<label class="layer-row" style="--system-color:${s.color}"><input type="checkbox" data-layer="${id}" ${state.layers[id]?'checked':''}><span class="layer-color"></span><span class="layer-text">${s.name}</span><span class="layer-count">${atlasSystems[id]?.length||0}</span><button type="button" data-only-layer="${id}" aria-label="Mostrar somente ${s.name}" title="Mostrar somente este sistema">◎</button></label>`).join('');
+  const body=layerBody(),systems=body==='female'?FEMALE_SYSTEMS:MODEL_SYSTEMS;
+  $('layers').innerHTML=Object.entries(systems).map(([id,s])=>`<label class="layer-row" style="--system-color:${s.color}"><input type="checkbox" data-layer="${id}" ${state.layers[id]?'checked':''}><span class="layer-color"></span><span class="layer-text">${s.name}</span><span class="layer-count">${(body==='female'?femaleBody?.systems[id]:atlasSystems[id])?.length||0}</span><button type="button" data-only-layer="${id}" aria-label="Mostrar somente ${s.name}" title="Mostrar somente este sistema">◎</button></label>`).join('');
   $('layers').querySelectorAll('[data-layer]').forEach(input=>input.addEventListener('change',async()=>{
     const id=input.dataset.layer,enabled=input.checked;
     ++selectionVersion;state.layers[id]=enabled;state.isolated=null;
     try{
-      if(state.mode!=='body')await switchModel('body');
+      if(state.mode!==body)await switchModel(body);
       if(enabled){input.disabled=true;await loadSystem(id)}
     }catch{toast('Esta camada não carregou. Tente novamente.')}finally{input.disabled=false;applyVisibility();renderList();refreshLayerUi()}
   }));
   $('layers').querySelectorAll('[data-only-layer]').forEach(button=>button.addEventListener('click',async e=>{
     e.preventDefault();e.stopPropagation();++selectionVersion;
-    const id=button.dataset.onlyLayer;for(const k in state.layers)state.layers[k]=k===id;
+    const id=button.dataset.onlyLayer;for(const k of bodyLayers(body))state.layers[k]=k===id;
     state.isolated=null;
-    try{if(state.mode!=='body')await switchModel('body');await loadSystem(id)}catch{toast('Esta camada não carregou. Tente novamente.')}
+    try{if(state.mode!==body)await switchModel(body);await loadSystem(id)}catch{toast('Esta camada não carregou. Tente novamente.')}
     renderLayers();applyVisibility();renderList();
   }));refreshLayerUi();
 }
@@ -241,9 +247,11 @@ function renderList(){
   if(useCore&&state.search&&(!result.items.length||result.approximate)){
     const parts=partsSearch(state.search);if(parts.items.length&&(!result.items.length||!parts.approximate)){useCore=false;result=parts}
   }
+  // Parts of the body on screen come first; the other body's homonyms follow (stable order otherwise).
+  if(!useCore&&['body','female'].includes(state.mode)){const here=item=>isFemaleSystem(state.registry.get(item.key)?.system)===(state.mode==='female')?0:1;result={...result,items:[...result.items].sort((a,b)=>here(a)-here(b))}}
   const items=result.items.map(item=>{
     if(useCore){const c=state.coreMap.get(item.key);return {key:c.id,title:c.name,subtitle:systemLabel(c.system),core:true,hasMesh:coreMeshNames(c).length>0||!!MICRO_CORE_MODELS[c.id]}}
-    const r=state.registry.get(item.key);return {key:r.name,title:r.pt,subtitle:MODEL_SYSTEMS[r.system]?.name||(r.system==='female'?'Reprodutor feminino':r.system.startsWith('cyto-')?'Citologia · modelo didático':r.system.startsWith('histo-')?'Histologia · modelo didático':r.system.startsWith('internal-')?'Interior do órgão · corte didático':'Esquema microscópico 3D'),core:false,hasMesh:true};
+    const r=state.registry.get(item.key);return {key:r.name,title:r.pt,subtitle:(MODEL_SYSTEMS[r.system]?'Corpo masculino · '+MODEL_SYSTEMS[r.system].name:null)||(isFemaleSystem(r.system)?'Corpo feminino · '+FEMALE_SYSTEMS[r.system].name:r.system.startsWith('cyto-')?'Citologia · modelo didático':r.system.startsWith('histo-')?'Histologia · modelo didático':r.system.startsWith('internal-')?'Interior do órgão · corte didático':'Esquema microscópico 3D'),core:false,hasMesh:true};
   });
   $('list-title').textContent=useCore?'Estruturas essenciais':state.tab==='core'?'Encontradas no modelo':'Peças do modelo';
   $('list-count').textContent=items.length+' itens';
@@ -264,9 +272,12 @@ function init3D(){
   const fill=new THREE.DirectionalLight(0xbedbea,1.1);fill.position.set(2,1,2);scene.add(fill);
   const rim=new THREE.DirectionalLight(0x8ecbb9,.9);rim.position.set(0,2,-3);scene.add(rim);
   if(tissueFinish.createTissueEnvironment){environmentHandle=tissueFinish.createTissueEnvironment(renderer,{size:128});scene.environment=environmentHandle.texture;scene.environmentIntensity=.55}
-  bodyGroup=new THREE.Group();femaleGroup=new THREE.Group();femaleGroup.visible=false;scene.add(bodyGroup,femaleGroup);
+  // Both bodies share one parent, so one set of draw batches serves both (each batch bakes its pieces' world matrices).
+  const anatomyGroup=new THREE.Group();anatomyGroup.name='anatomy';bodyGroup=new THREE.Group();femaleGroup=new THREE.Group();femaleGroup.visible=false;anatomyGroup.add(bodyGroup,femaleGroup);scene.add(anatomyGroup);
   bodyBounds=new THREE.Box3(new THREE.Vector3(-.335,.003,-.166),new THREE.Vector3(.335,1.708,.155));
-  xrayGroup=new THREE.Group();xrayGroup.matrixAutoUpdate=false;scene.add(xrayGroup);renderBatches=createRenderBatches(bodyGroup,requestRender);
+  // The female files keep the HRA coordinates; the group stands the body on the floor, centred like the male body.
+  const placement=femaleBody?.placement;if(placement){femaleGroup.position.fromArray(placement.offset);femaleBounds=new THREE.Box3(new THREE.Vector3(...placement.bounds.min),new THREE.Vector3(...placement.bounds.max))}else femaleBounds=bodyBounds.clone();femaleGroup.updateMatrixWorld(true);
+  xrayGroup=new THREE.Group();xrayGroup.matrixAutoUpdate=false;scene.add(xrayGroup);renderBatches=createRenderBatches(anatomyGroup,requestRender);
   groundShadow=createGroundShadow();groundShadow.userData.noOcclusion=true;groundShadow.position.set(0,0,-.005);groundShadow.scale.set(.9,.55,1);scene.add(groundShadow);
   draco=new DRACOLoader();draco.setDecoderPath('./models/draco/');draco.setWorkerLimit(touchDevice?1:2);
   loader=new GLTFLoader();loader.setDRACOLoader(draco);
@@ -285,7 +296,9 @@ function createGroundShadow(){
 function resize(){if(!renderer||state.view!=='atlas')return;const rect=$('viewport').getBoundingClientRect();if(rect.width<1||rect.height<1)return;renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;applyViewOffset();requestRender()}
 // Drawers on tablets cover part of the viewer; shift the projection so the model stays centred in what remains visible.
 // Floating tablet toolbars also cover the top and bottom of the viewer.
-function chromeInset(){return tabletUI.active?{top:isStudyMode(state.mode)?122:64,bottom:80}:{top:0,bottom:0}}
+// An open process bar covers the bottom of the viewer as well (measured once when it opens, so steps do not shift the view).
+let processInset=0;
+function chromeInset(){return tabletUI.active?{top:isStudyMode(state.mode)?122:64,bottom:80+processInset}:{top:0,bottom:processInset}}
 function applyViewOffset(){const w=renderer.domElement.clientWidth,h=renderer.domElement.clientHeight,chrome=chromeInset(),x=viewInset.x/2,y=(viewInset.y+chrome.bottom-chrome.top)/2;if(w&&h&&(x||y))camera.setViewOffset(w,h,x,y,w,h);else camera.clearViewOffset()}
 // While a drawer slides, frames take the light motion path (no occlusion pass); the settled frame is drawn in full 160 ms later.
 function setViewInset(x,y,target={x,y}){viewInset.x=x;viewInset.y=y;viewInset.target=target;if(camera){if(x!==target.x||y!==target.y)noteMotion();applyViewOffset();requestRender()}}
@@ -299,9 +312,11 @@ function renderFrame(now){
   selectionFade.value=tween&&selectionFade.start?Math.min(1,(now-selectionFade.start)/(tween.duration*.55)):1;
   if(tween){const f=Math.min(1,(now-tween.start)/tween.duration),smooth=f<.5?4*f*f*f:1-(-2*f+2)**3/2;camera.position.lerpVectors(tween.fromPosition,tween.toPosition,smooth);controls.target.lerpVectors(tween.fromTarget,tween.toTarget,smooth);controls.update();if(f===1)tween=null}
   else if((controls.enableDamping||controls.autoRotate)&&controls.update())moving=true;
+  // A playing process animation counts as motion: lighter frames while it runs, one sharp frame after it pauses.
+  if(processPlayer?.update(now))moving=true;
   if(moving)noteMotion();
   drawScene();updateSelectedMarker();if(moving)measureMotion(now);updateFpsMeter();
-  if(tween||controls.autoRotate)requestRender();
+  if(tween||controls.autoRotate||processPlayer?.playing)requestRender();
 }
 // A newly shown model compiles its shaders and uploads its textures before its first frame, so the switch
 // does not freeze mid-animation; the previous image stays on screen meanwhile and the new one fades in.
@@ -418,24 +433,26 @@ function fitBounds(bounds,direction='front',instant=false){
 function fitBody(direction='front',instant=false){
   const bounds=activeBounds();
   if(!bounds.isEmpty())fitBounds(bounds,direction,instant);
-  $('model-caption').textContent=(state.mode==='female'?'Reprodutor feminino · modelo anatômico separado':isStudyMode(state.mode)?(studyModels.get(state.mode)?.title||'Vista ampliada')+(studyModels.get(state.mode)?.anatomicalReference?' · referência anatômica':state.mode.startsWith('histo-')||studyModels.get(state.mode)?.specimenScan?' · espécime escaneado':studyModels.get(state.mode)?.authoredReconstruction?' · reconstrução educacional':' · esquema funcional'):state.mode.startsWith('micro-')?(microModels.get(state.mode)?.title||'Modelo microscópico')+' · esquema didático 3D':'Corpo humano masculino')+' · '+(isDetailMode(state.mode)?{front:'frente do modelo',back:'verso do modelo',left:'lateral do modelo'}:{front:'vista anterior',back:'vista posterior',left:'vista lateral esquerda'})[direction];
+  $('model-caption').textContent=(state.mode==='female'?'Corpo humano feminino · HRA, Visible Human Female':isStudyMode(state.mode)?(studyModels.get(state.mode)?.title||'Vista ampliada')+(studyModels.get(state.mode)?.anatomicalReference?' · referência anatômica':state.mode.startsWith('histo-')||studyModels.get(state.mode)?.specimenScan?' · espécime escaneado':studyModels.get(state.mode)?.authoredReconstruction?' · reconstrução educacional':' · esquema funcional'):state.mode.startsWith('micro-')?(microModels.get(state.mode)?.title||'Modelo microscópico')+' · esquema didático 3D':'Corpo humano masculino')+' · '+(isDetailMode(state.mode)?{front:'frente do modelo',back:'verso do modelo',left:'lateral do modelo'}:{front:'vista anterior',back:'vista posterior',left:'vista lateral esquerda'})[direction];
   document.querySelectorAll('[data-camera]').forEach(b=>b.classList.toggle('active',b.dataset.camera===direction));
 }
-function activeBounds(){return state.mode==='female'?new THREE.Box3().setFromObject(femaleGroup):isStudyMode(state.mode)?studyModels.get(state.mode)?.fitBounds?.clone()||new THREE.Box3().setFromObject(studyModels.get(state.mode)?.group||new THREE.Group()):state.mode.startsWith('micro-')?new THREE.Box3().setFromObject(microModels.get(state.mode)?.group||new THREE.Group()):bodyBounds}
+function activeBounds(){return state.mode==='female'?femaleBounds:isStudyMode(state.mode)?studyModels.get(state.mode)?.fitBounds?.clone()||new THREE.Box3().setFromObject(studyModels.get(state.mode)?.group||new THREE.Group()):state.mode.startsWith('micro-')?new THREE.Box3().setFromObject(microModels.get(state.mode)?.group||new THREE.Group()):bodyBounds}
 async function loadSystem(id){
   if(state.loaded.has(id))return;if(state.loading.has(id))return state.loading.get(id);
   const promise=(async()=>{
-    const meta=MODEL_SYSTEMS[id];$('asset-status').textContent='Carregando '+meta.name.toLowerCase()+'…';
+    const meta=bodySystem(id),female=isFemaleSystem(id);$('asset-status').textContent='Carregando '+(female?'corpo feminino · ':'')+meta.name.toLowerCase()+'…';
     try{
-      const gltf=await loader.loadAsync('./models/'+meta.file);const root=gltf.scene;root.updateMatrixWorld(true);
-      const container=new THREE.Group();container.name=id;bodyGroup.add(container);const named=[];
-      root.traverse(o=>{if(o.userData.za_name&&state.registry.has(o.userData.za_name))named.push(o)});
+      const roots=(await Promise.all((meta.files||[meta.file]).map(file=>loader.loadAsync('./models/'+file)))).map(gltf=>gltf.scene);
+      // Pieces are attached while the container is still at the origin (source coordinates), then the container joins its body.
+      const container=new THREE.Group();container.name=id;const named=[];
+      for(const root of roots){root.updateMatrixWorld(true);root.traverse(o=>{if(o.userData.za_name&&state.registry.get(o.userData.za_name)?.system===id)named.push(o)})}
       // Two passes preserve each world transform before parent visibility can affect children.
       for(const object of named)container.attach(object);
-      applyTissueFinish(container,{system:id},surfaceOptions());
+      (female?femaleGroup:bodyGroup).add(container);
+      applyTissueFinish(container,{system:meta.tissue||id},surfaceOptions());
       for(const object of named){const raw=object.userData.za_name,r=state.registry.get(raw);r.object=object;object.traverse(m=>{if(m.isMesh){m.userData.atlasName=raw;m.userData.originalMaterial=m.material;m.frustumCulled=true;registerMesh(m)}})}
       freezeModel(container);state.groups[id]=container;state.loaded.add(id);renderBatches.build(id,container);applyVisibility();
-      const count=Object.keys(MODEL_SYSTEMS).filter(id=>state.loaded.has(id)).length;$('load-progress').value=count;$('asset-status').textContent=count+' de 7 camadas carregadas';
+      const layers=bodyLayers(female?'female':'body'),count=layers.filter(id=>state.loaded.has(id)).length;$('load-progress').max=layers.length;$('load-progress').value=count;$('asset-status').textContent=count+' de '+layers.length+' camadas '+(female?'do corpo feminino ':'')+'carregadas';
       $('render-status').textContent=isStudyMode(state.mode)?(studyModels.get(state.mode)?.parts.length||0)+' partes neste esquema · carregamento sob demanda':state.registry.size.toLocaleString('pt-BR')+' peças catalogadas · carregamento por camada';
     }catch(error){console.error(error);showError('Não foi possível carregar '+meta.name+'. Verifique se todos os arquivos do programa estão na mesma pasta.');throw error}
   })();state.loading.set(id,promise);try{await promise}finally{state.loading.delete(id)}
@@ -457,15 +474,14 @@ function styledMaterial(original,opacity,selected){
 
 function applyVisibility(){
   if(!scene)return;
-  bodyGroup.visible=state.mode==='body';femaleGroup.visible=state.mode==='female';groundShadow.visible=bodyGroup.visible;
-    if(bodyGroup.visible)for(const [raw,r] of state.registry){if(!r.object||r.system==='female'||isDetailMode(r.system))continue;const selected=state.selectedNames.has(raw);const isolated=state.isolated===null||state.isolated.has(raw);
+  bodyGroup.visible=state.mode==='body';femaleGroup.visible=state.mode==='female';groundShadow.visible=bodyGroup.visible||femaleGroup.visible;
+    if(bodyGroup.visible||femaleGroup.visible)for(const [raw,r] of state.registry){if(!r.object||isDetailMode(r.system)||isFemaleSystem(r.system)!==femaleGroup.visible)continue;const selected=state.selectedNames.has(raw);const isolated=state.isolated===null||state.isolated.has(raw);
     r.object.visible=!!state.layers[r.system]&&!state.hidden.has(raw)&&isolated;
-    const ghost=r.system==='skeletal'&&$('context-bones').checked&&!selected&&state.isolated===null;
-    const covering=/^(Pleura|Greater omentum|Lesser omentum)$/i.test(raw)&&!selected;
+    const ghost=(r.system==='skeletal'||r.system==='female-skeletal')&&$('context-bones').checked&&!selected&&state.isolated===null;
+    const covering=/^(Pleura|Greater omentum|Lesser omentum|VH_F_omentum)$/i.test(raw)&&!selected;
     const opacity=selected?state.opacity:ghost?.16:covering?.08:1;
     r.object.traverse(m=>{if(m.isMesh){const original=m.userData.originalMaterial;m.material=Array.isArray(original)?original.map(x=>styledMaterial(x,opacity,selected)):styledMaterial(original,opacity,selected)}});
   }
-  if(femaleGroup.visible){femaleGroup.traverse(m=>{if(m.isMesh&&m.userData.originalMaterial){const selected=state.selectedNames.has(m.userData.atlasName);m.visible=!state.hidden.has(m.userData.atlasName)&&(state.isolated===null||state.isolated.has(m.userData.atlasName));const original=m.userData.originalMaterial;m.material=Array.isArray(original)?original.map(x=>styledMaterial(x,selected?state.opacity:1,selected)):styledMaterial(original,selected?state.opacity:1,selected)}})}
   for(const [mode,model] of [...microModels,...studyModels]){model.group.visible=state.mode===mode;if(!model.group.visible)continue;if(model.cutaway)model.cutaway.sync(systSelectedIds(mode));for(const context of model.group.children)if(context.userData.contextOnly)context.visible=state.isolated===null;for(const part of model.parts){const raw=part.registryName,selected=state.selectedNames.has(raw);let needed=false;if(state.isolated!==null)part.object.traverse(m=>{if(m.isMesh&&state.isolated.has(m.userData.atlasName))needed=true});part.object.visible=!state.hidden.has(raw)&&(state.isolated===null||state.isolated.has(raw)||needed);part.object.traverse(m=>{if(m.isMesh){const original=m.userData.originalMaterial;m.material=Array.isArray(original)?original.map(x=>styledMaterial(x,selected?state.opacity:1,selected)):styledMaterial(original,selected?state.opacity:1,selected)}})}}
   pickCandidates=refreshPickCandidates(allMeshObjects);refreshLayerUi();updateClipping();updateXray();renderBatches.sync();updateSelectedMarker();requestRender();
 }
@@ -499,7 +515,8 @@ async function selectItem(key,isCore=false,focus=true,{allowAlternative=true,pre
     for(const name of names)state.hidden.delete(name);state.selected={key,isCore:true,core,raw:parts.length===1?state.registry.get(parts[0].registryName):null,entryRoute:entry};state.selectedNames=new Set(names);state.isolated=null;state.opacity=1;
     renderLayers();applyVisibility();renderDetail();tabletUI.showDetail();renderList();restoreInteractionFocus(savedFocus);rememberStudy();if(focus)fitBody();return true;
   }
-  const femaleWanted=(isCore&&/uterus|ovar|uterine/.test(core.id))||rawItem?.system==='female';
+  // Reproductive entries open the female body; other entries stay in the female body while it is on screen and has them.
+  const femaleWanted=isCore?/uterus|ovar|uterine|vagina|mammary/.test(core.id)||state.mode==='female'&&coreMeshNames(core).some(n=>isFemaleSystem(state.registry.get(n)?.system)):isFemaleSystem(rawItem?.system);
   const microWanted=isCore&&MICRO_CORE_MODELS[core.id]?'micro-'+MICRO_CORE_MODELS[core.id]:rawItem?.system.startsWith('micro-')?rawItem.system:null;
   const targetMode=rawItem&&isStudyMode(rawItem.system)?rawItem.system:femaleWanted?'female':microWanted||'body';
   if(state.mode!==targetMode){if(!await switchModel(targetMode,version))return}else {++modeVersion;latestRequestedMode=targetMode}
@@ -511,7 +528,7 @@ async function selectItem(key,isCore=false,focus=true,{allowAlternative=true,pre
   }
   const names=isCore?namesForCore(core):[key];
   if(!isCore&&isDetailMode(rawItem?.system||'')&&rawItem.object?.isGroup)rawItem.object.traverse(m=>{if(m.isMesh&&m.userData.atlasName&&!names.includes(m.userData.atlasName))names.push(m.userData.atlasName)});
-  const required=[...new Set(names.map(n=>state.registry.get(n)?.system).filter(s=>s&&MODEL_SYSTEMS[s]))];
+  const required=[...new Set(names.map(n=>state.registry.get(n)?.system).filter(s=>s&&bodySystem(s)))];
   try{await Promise.all(required.map(loadSystem))}catch{return}
   if(version!==selectionVersion)return;
   for(const id of required)state.layers[id]=true;
@@ -532,7 +549,7 @@ function renderDetail(){
   const broadClass=new Set(['bone','cartilage','tendons','ligaments','skeletal-muscle','peripheral-nerves','veins','lymphatic-vessels','lymph-nodes','synovial-joints']);
   const info=(selected.entryRoute?core:raw?.customInfo)||(!selected.isCore&&core&&broadClass.has(core.id)?{...core,isFamily:true}:core)||familyInfo(raw.name,raw.system);
   const name=selected.isCore?core.name:raw.pt;
-  const category=raw?.system.startsWith('botany-')?'Botânica · '+botanyCategory(studyDefinition(raw.system)?.category):raw?.system.startsWith('cyto-')?cytologyCategory(studyDefinition(raw.system)?.category):core?systemLabel(core.system):(isStudyMode(raw.system)?systemLabel(studyDefinition(raw.system)?.system):MODEL_SYSTEMS[raw.system]?.name||(raw.system==='female'?'Reprodutor feminino':'Esquema microscópico 3D'));
+  const category=raw?.system.startsWith('botany-')?'Botânica · '+botanyCategory(studyDefinition(raw.system)?.category):raw?.system.startsWith('cyto-')?cytologyCategory(studyDefinition(raw.system)?.category):core?systemLabel(core.system):(isStudyMode(raw.system)?systemLabel(studyDefinition(raw.system)?.system):MODEL_SYSTEMS[raw.system]?.name||(isFemaleSystem(raw.system)?'Corpo feminino · '+FEMALE_SYSTEMS[raw.system].name:'Esquema microscópico 3D'));
   const hasMesh=raw?.customInfo?.geometryIdentified!==false&&[...state.selectedNames].some(n=>hasSelectableGeometry(state.registry.get(n)?.object));
   const functionText=info.function||info.shortFunction;
   $('detail-panel').innerHTML=`<span class="eyebrow">ANATOMIA E FISIOLOGIA</span><span class="system-tag">${escapeHtml(category)}</span><h2 class="detail-name">${escapeHtml(name)}</h2><p class="detail-original">${raw&&isStudyMode(raw.system)?(raw.system.startsWith('histo-')?'Histologia · parte de um modelo didático ampliado':'Estrutura interna · parte de um corte didático'):raw?(raw.name.includes('?')?'Nome específico ausente na fonte':escapeHtml(raw.name))+(lexicon[raw.name]?.la?' · '+escapeHtml(lexicon[raw.name].la):''):'Conteúdo essencial para a Biologia discursiva'}</p>${hasMesh?'':`<div class="model-availability">Esta entrada explica uma estrutura microscópica, processo ou parte sem malha própria neste acervo. O conteúdo está disponível abaixo.</div>`}<div class="detail-controls"><button id="focus-part" ${hasMesh?'':'disabled'}>Aproximar</button><button id="isolate-part" ${hasMesh?'':'disabled'}>${state.isolated?'Mostrar contexto':'Isolar'}</button><button id="hide-part" ${hasMesh?'':'disabled'}>Ocultar</button><button id="restore-body">Restaurar</button></div>${hasMesh?'<label class="opacity-control">Opacidade <input id="part-opacity" type="range" min="15" max="100" value="100" aria-label="Opacidade da estrutura selecionada"></label>':''}<div class="detail-block"><h3>${info.isFamily?'Função geral da classe anatômica':!selected.isCore&&core&&!raw?.customInfo?'Função da estrutura relacionada':'Função'}</h3><p>${escapeHtml(functionText)}</p></div><div class="detail-block mechanism"><h3>Como funciona</h3><p>${escapeHtml(info.mechanism)}</p></div><div class="detail-block uerj"><h3>Conexão com a discursiva UERJ</h3><p>${escapeHtml(info.uerj)}</p></div><div class="detail-block mistake"><h3>Evite esta confusão</h3><p>${escapeHtml(info.commonMistake)}</p></div><p class="detail-footnote">${info.isFamily?'Resumo de família: não substitui a descrição individual da inserção, ação ou território desta subdivisão.':'Explicação educacional baseada nas fontes do atlas.'} ${!selected.isCore&&core?'Esta peça foi associada ao conteúdo de '+escapeHtml(core.name)+'.':''}</p>`;
@@ -689,7 +706,9 @@ function initPicking(){
     const radius=e.pointerType==='touch'||touchDevice?24:12;let nearest=null,distance=radius*radius;
     for(const marker of markers){marker.getWorldPosition(world);if(renderer.clippingPlanes.some(p=>p.distanceToPoint(world)<0))continue;viewPoint.copy(world).applyMatrix4(camera.matrixWorldInverse);if(viewPoint.z>=0)continue;projected.copy(world).project(camera);if(projected.z<-1||projected.z>1||Math.abs(projected.x)>1||Math.abs(projected.y)>1)continue;const dx=e.clientX-(rect.left+(projected.x+1)*rect.width/2),dy=e.clientY-(rect.top+(1-projected.y)*rect.height/2),d=dx*dx+dy*dy;if(d<distance){distance=d;nearest=marker}}
     if(nearest)return state.registry.get(nearest.userData.atlasName);
-    const hit=raycastVisible(raycaster,pickCandidates,renderer.clippingPlanes);
+    // A translucent source surface (the HRA skin, clear parts of the eye) lets the tap reach what shows through it.
+    let candidates=pickCandidates,hit=raycastVisible(raycaster,candidates,renderer.clippingPlanes);
+    for(let i=0;i<3&&hit&&[].concat(hit.object.userData.originalMaterial||[]).every(m=>m.transparent&&m.opacity<.8);i++){candidates=candidates.filter(m=>m!==hit.object);const behind=raycastVisible(raycaster,candidates,renderer.clippingPlanes);if(!behind)break;hit=behind}
     return hit?state.registry.get(hit.object.userData.atlasName):null;
   }
   raycaster.layers.enable(BATCHED_LAYER);
@@ -730,7 +749,7 @@ async function ensureModelLoaded(mode){
       let anatomicalModel=null;
       if(mode.startsWith('internal-')&&!sourcedHeart&&!detailed&&representation!=='diagram'){
         const reference=await import('./reference-organ-models.js');
-        if(reference.hasReferenceOrgan(definition.id,referenceCatalog))anatomicalModel=await reference.createReferenceOrganModel(definition,{loader,catalog:referenceCatalog,lexicon,partFunctions:referencePartFunctions,sourceGroups:{...state.groups,female:state.loaded.has('female')?femaleGroup:null}});
+        if(reference.hasReferenceOrgan(definition.id,referenceCatalog))anatomicalModel=await reference.createReferenceOrganModel(definition,{loader,catalog:referenceCatalog,lexicon,partFunctions:referencePartFunctions,sourceGroups:state.groups});
       }
       const module=await import(detailed?detailed.module:sourcedHeart?'./heart-model.js':mode.startsWith('syst-')?'./systematics-models.js':mode.startsWith('botany-')?'./botany-models.js':mode.startsWith('cyto-')?'./cytology-models.js':definition.supplementary?'./supplementary-models.js':mode.startsWith('internal-')?'./internal-models.js':'./histology-models.js');
       const histology=mode.startsWith('histo-'),histologyOptions={mobile:touchDevice};
@@ -771,21 +790,10 @@ async function ensureModelLoaded(mode){
       freezeModel(model.group);
     }catch(error){console.error(error);toast('Não foi possível abrir o esquema 3D.');return}
   }
-  if(mode==='female'&&!state.loaded.has('female')){
-    $('asset-status').textContent='Carregando órgãos reprodutores femininos…';
-    try{
-      const gltf=await loader.loadAsync('./models/female-reproductive.glb');femaleGroup.add(gltf.scene);femaleGroup.updateMatrixWorld(true);
-      const named=[];gltf.scene.traverse(o=>{if(o.isMesh)named.push(o)});
-      for(const object of named)femaleGroup.attach(object);
-      applyTissueFinish(femaleGroup,{system:'female'},surfaceOptions());
-      for(const [index,m] of named.entries()){
-        const raw=m.userData.atlas_name||m.userData.za_name||m.name||'Female structure '+index;
-        let name=raw;while(state.registry.has(name)&&state.registry.get(name).system!=='female')name+=' female';
-        const core=matchCore(name);m.userData.atlasName=name;m.userData.originalMaterial=Array.isArray(m.material)?m.material[0]:m.material;
-        state.registry.set(name,{name,system:'female',pt:translatedName(name,lexicon),coreId:core?.id||null,object:m,search:normalise(name+' '+(core?.name||''))});registerMesh(m);
-      }
-      freezeModel(femaleGroup);state.loaded.add('female');
-    }catch(error){console.error(error);toast('Modelo feminino indisponível. O conteúdo fisiológico continua no catálogo.');return}
+  if(mode==='female'&&!femaleReady){
+    if(!femaleBody){toast('Corpo feminino indisponível. O conteúdo fisiológico continua no catálogo.');return}
+    try{await nextPaint();await Promise.all(bodyLayers('female').filter(id=>state.layers[id]).map(loadSystem));femaleReady=true}
+    catch(error){console.error(error);toast('Corpo feminino indisponível. O conteúdo fisiológico continua no catálogo.');return}
   }
   }
 async function switchModel(mode,selectionToken=null,{preserveTrail=false,organContext=undefined}={}){
@@ -796,7 +804,7 @@ async function switchModel(mode,selectionToken=null,{preserveTrail=false,organCo
   if(!modelLoading.has(mode))modelLoading.set(mode,ensureModelLoaded(mode));updateModelBusy();
   try{await modelLoading.get(mode)}catch{return false}finally{modelLoading.delete(mode);updateModelBusy()}
   if(token!==modeVersion||selection!==selectionVersion){if(trimStudyModels(state.mode)){rebuildSearch();applyVisibility();renderList()}return false}
-  if(mode==='female'&&!state.loaded.has('female')||mode.startsWith('micro-')&&!microModels.has(mode)||isStudyMode(mode)&&!studyModels.has(mode))return false;
+  if(mode==='female'&&!femaleReady||mode.startsWith('micro-')&&!microModels.has(mode)||isStudyMode(mode)&&!studyModels.has(mode))return false;
   if(mode.startsWith('cyto-')&&!state.mode.startsWith('cyto-')){state.cytologyReturnMode=state.mode;cytologyOrigin=studySnapshot()}
   if(!preserveTrail){studyTrail=[];activeArrival=null;++connectionVersion;if(!isStudyMode(mode)){state.studyOrgan=null;cytologyOrigin=null;state.cytologyReturnMode='body'}}
   if(isStudyMode(mode)){
@@ -806,7 +814,7 @@ async function switchModel(mode,selectionToken=null,{preserveTrail=false,organCo
     if(organContext!==undefined&&!mode.startsWith('internal-'))state.studyOrgan=organContext;
     if(mode.startsWith('botany-')||mode.startsWith('syst-'))state.studyOrgan=null;
   }else if(['internal','histology','cytology','botany'].includes(state.tab)){state.tab='core';state.search='';$('search').value=''}
-  state.mode=mode;$('model-mode').value=mode;const cut=clipSettings.get(clippingKey());$('clip-mode').value=cut?.mode||studyModels.get(mode)?.defaultClip||'none';$('clip-position').value=cut?.position||50;state.isolated=null;state.selectedNames.clear();state.selected=null;$('selected-label').hidden=true;
+  const bodyChanged=(state.mode==='female')!==(mode==='female');state.mode=mode;$('model-mode').value=mode;if(bodyChanged)renderLayers();const cut=clipSettings.get(clippingKey());$('clip-mode').value=cut?.mode||studyModels.get(mode)?.defaultClip||'none';$('clip-position').value=cut?.position||50;state.isolated=null;state.selectedNames.clear();state.selected=null;$('selected-label').hidden=true;
   trimStudyModels(mode);rebuildSearch();updateCatalogUi();resetDetail();applyVisibility();fitBody('front');warmUpScene();renderList();$('asset-status').textContent='Modelos locais · pronto para explorar';updateStudyPath();
   document.querySelector('.orientation-label').hidden=isDetailMode(mode);
   for(const b of document.querySelectorAll('[data-camera]'))b.textContent=(isDetailMode(mode)?{front:'Frente',back:'Verso',left:'Lateral'}:{front:'Anterior',back:'Posterior',left:'Lateral'})[b.dataset.camera];
@@ -818,7 +826,7 @@ function resetDetail(){
     const model=studyModels.get(state.mode);$('detail-panel').innerHTML=`<div class="detail-empty"><span class="eyebrow">${state.mode.startsWith('syst-')?'DOMÍNIO → GRUPO → ORGANISMO':state.mode.startsWith('botany-')?'ÓRGÃO VEGETAL → TECIDO → CÉLULA':state.mode.startsWith('cyto-')?'CÉLULA → ESTRUTURA → PROCESSO':state.mode.startsWith('histo-')?'TECIDO → CÉLULA → FUNÇÃO':'ÓRGÃO → ESTRUTURAS INTERNAS'}</span><h2>${escapeHtml(model.title)}</h2><p>${escapeHtml(model.description)}</p><p class="study-intro">Gire o modelo e selecione uma parte pelo toque ou pelos nomes abaixo. Cada parte explica sua função e a relação com ${state.mode.startsWith('syst-')?'a fisiologia do grupo':state.mode.startsWith('botany-')?'a fisiologia vegetal':state.mode.startsWith('cyto-')?'a organização e os processos celulares':'o funcionamento do órgão'}.</p></div>`;appendStudyDetail(null,{system:state.mode});return;
   }
   if(state.mode.startsWith('micro-')){const model=microModels.get(state.mode);$('detail-panel').innerHTML=`<div class="detail-empty"><span class="eyebrow">ESQUEMA DIDÁTICO 3D</span><h2>${escapeHtml(model.title)}</h2><p>${escapeHtml(model.description)}</p><div class="empty-tip">Selecione uma parte no modelo. As formas e dimensões são simplificadas para mostrar mecanismos; não são uma reconstrução histológica.</div></div>`;return}
-  $('detail-panel').innerHTML=`<div class="detail-empty"><span class="eyebrow">ESTRUTURA → MECANISMO → FUNÇÃO</span><h2>${female?'Anatomia reprodutiva feminina.':'Explore além do nome.'}</h2><p>${female?'Modelo separado de útero, colo, tubas e ovários. Clique em uma peça para explorar sua função.':'Selecione uma parte para entender sua função e construir uma explicação causal.'}</p><button class="primary" id="empty-explore">${female?'Explorar o útero':'Explorar o coração'} →</button></div>`;
+  $('detail-panel').innerHTML=`<div class="detail-empty"><span class="eyebrow">ESTRUTURA → MECANISMO → FUNÇÃO</span><h2>${female?'Corpo feminino por sistemas.':'Explore além do nome.'}</h2><p>${female?'Modelo do Human Reference Atlas, feito a partir do Visible Human Female. Esqueleto parcial: faltam crânio, costelas e membros superiores; músculos só dos olhos e joelhos. Ative os sistemas em Camadas e clique em uma peça.':'Selecione uma parte para entender sua função e construir uma explicação causal.'}</p><button class="primary" id="empty-explore">${female?'Explorar o útero':'Explorar o coração'} →</button></div>`;
   $('empty-explore').addEventListener('click',()=>selectItem(female?'uterus':'heart',true));
 }
 async function export4K(){
@@ -878,6 +886,32 @@ function setupDrawBoard(){
   $('open-board').addEventListener('click',()=>drawBoard.toggle());
   drawBoard.setContext(state.mode);
 }
+// Process animations (process-animations.js): the player asks the app to open the right model, then animates helper objects.
+let processPlayer=null;
+async function openProcessTarget(target){
+  if(target.mode==='body'){
+    if(state.mode!=='body'&&!await switchModel('body'))return false;
+    for(const id of target.layers||[]){if(!state.layers[id]){state.layers[id]=true;renderLayers()}await loadSystem(id)}
+    state.isolated=null;applyVisibility();requestRender();return state.mode==='body';
+  }
+  if(target.representation)organRepresentations.set(target.mode,target.representation);
+  const ready=()=>state.mode===target.mode&&(!target.representation||studyModels.get(target.mode)?.viewRepresentation===target.representation);
+  if(ready())return true;
+  if(target.mode.startsWith('internal-')){if(state.mode===target.mode)await changeStudyRepresentation(target.representation);else await openStudy(target.mode,target.organ)}
+  else await switchModel(target.mode);
+  return ready();
+}
+function setupProcesses(){
+  processPlayer=createProcessPlayer({bar:$('process-bar'),menu:$('process-menu'),toggle:$('open-process'),app:{
+    scene,camera,renderer,viewport:$('viewport'),touchDevice,toast,requestRender,
+    mode:()=>state.mode,registry:state.registry,studyModel:mode=>studyModels.get(mode),microModel:mode=>microModels.get(mode),
+    open:openProcessTarget,// A tight frame zooms right onto a small region (the synapse) instead of keeping half of the model around it.
+    frame:(box,tight)=>{if(!box){fitBody('front');return}if(!tight){fitBounds(box,'front');return}const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),fit=Math.max(size.y/visibleFraction().y,size.x/(camera.aspect*visibleFraction().x))*.62/Math.tan(THREE.MathUtils.degToRad(camera.fov/2));moveCamera(center,center.clone().add(new THREE.Vector3(0,0,fit+size.z)))},
+    layout:height=>{processInset=height;applyViewOffset();requestRender()},
+    warm:()=>Promise.race([renderer.compileAsync(scene,camera),new Promise(resolve=>setTimeout(resolve,3000))]).catch(()=>{})}});
+  // Verification: place the animation at a time (seconds) and draw that frame synchronously.
+  renderer.domElement.atlasProcessFrame=t=>{const info=processPlayer.seekTo(t);drawScene();renderer.getContext().finish();return info};
+}
 function setupEvents(){
   new MutationObserver(organizeModelNotes).observe($('detail-panel'),{childList:true,subtree:true});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestRender()});
@@ -907,7 +941,7 @@ function setupEvents(){
   $('model-representation').addEventListener('change',e=>changeStudyRepresentation(e.target.value));
   $('toggle-layers').addEventListener('click',async()=>{
     const button=$('toggle-layers');button.disabled=true;++selectionVersion;
-    try{if(state.mode!=='body')await switchModel('body');const all=Object.values(state.layers).every(Boolean);for(const k in state.layers)state.layers[k]=!all;state.isolated=null;renderLayers();if(!all){toast('Carregando as camadas…');for(const k in state.layers)await loadSystem(k)}}
+    try{const body=layerBody(),layers=bodyLayers(body);if(state.mode!==body)await switchModel(body);const all=layers.every(k=>state.layers[k]);for(const k of layers)state.layers[k]=!all;state.isolated=null;renderLayers();if(!all){toast('Carregando as camadas…');for(const k of layers)await loadSystem(k)}}
     catch{toast('Uma camada não carregou. Você pode tentar ativá-la novamente.')}
     finally{button.disabled=false;applyVisibility();renderLayers();renderList()}
   });
@@ -959,7 +993,7 @@ function renderQuestion(){
 }
 function renderAbout(){
   const sources=[...(contentSources?.sources||[]),...(simulationSources?.sources||[]),...(studyContent?.sources||[]),...(cytologyContent?.sources||[]),...(botanyContent?.sources||[]),...(learningDetails?.sourceList()||[])];const unique=[...new Map(sources.map(s=>[s.url,s])).values()];
-  $('about-content').innerHTML=`<article class="about-section full"><h2>O que está disponível</h2><div class="coverage-stats"><div><strong>${[...state.registry.values()].filter(r=>!isDetailMode(r.system)).length.toLocaleString('pt-BR')}</strong><small>peças anatômicas 3D</small></div><div><strong>${state.core.length}</strong><small>entradas de fisiologia</small></div><div><strong>${simulationEntries().length}</strong><small>módulos interativos</small></div></div><p>As sete camadas Z-Anatomy representam uma anatomia de referência masculina e são carregadas conforme o uso. Útero, tubas e ovários aparecem em um modelo feminino separado, baseado no HuBMAP Human Reference Atlas; não são encaixados artificialmente no corpo masculino.</p><p>Cada peça traz o nome do acervo e uma explicação. Estruturas principais recebem descrições próprias. Subdivisões sem texto próprio recebem uma função geral de sua classe, explicitamente identificada. As entradas essenciais de néfron, alvéolos, neurônio, sarcômero e pele abrem diretamente vistas histológicas ou celulares detalhadas. Uma nota informa quando a vista mostra a estrutura exata, apenas uma parte ou o contexto do tecido. Alguns processos e estruturas microscópicas ainda não possuem malha própria neste conjunto.</p></article><article class="about-section"><h2>Detalhe e 4K</h2><p>O atlas usa malhas anatômicas reais, iluminação em tempo real, seleção, transparência e cortes. A exportação produz PNG com <strong>3840 × 2160 pixels</strong>. Esse número define a resolução da imagem exportada, não implica texturas em 4K, histologia realista ou presença de todas as células e tecidos.</p><p>Os órgãos e tecidos receberam acabamento PBR específico, grão em várias escalas, variação de brilho e reflexos suaves compartilhados. Esse acabamento melhora a aparência sem acrescentar anatomia ou reduzir a malha. Não são texturas fotográficas nem histologia medida. Três peças vasculares têm nome específico ausente no acervo e recebem rótulos descritivos de contexto. Os esquemas microscópicos têm formas e proporções didáticas. A visualização depende do tamanho da tela e da capacidade gráfica. Em computadores mais lentos, mantenha poucas camadas visíveis e selecione qualidade Leve. Os cortes são planos de visualização e não imagens reais de tomografia.</p></article><article class="about-section full"><h2>Órgãos por dentro e histologia</h2><div class="coverage-stats"><div><strong>${studyContent.organs.length}</strong><small>vistas internas</small></div><div><strong>${studyContent.histology.length}</strong><small>tecidos e unidades</small></div><div><strong>${studyContent.organs.reduce((n,o)=>n+(o.internalParts?.length||0),0)+studyContent.histology.reduce((n,o)=>n+(o.parts?.length||0),0)}</strong><small>partes explicadas</small></div></div><p>Órgãos por dentro mostra cortes e ampliações com câmaras, camadas, ductos, regiões e unidades funcionais. Histologia relaciona essas regiões a epitélios, células e tecidos. Toque em uma parte para ler sua função, mecanismo e conexão com a discursiva. A navegação permite voltar ao órgão e ao corpo.</p><p>As vistas internas usam referências anatômicas licenciadas quando disponíveis. O coração tem texturas originais de 2048 × 2048; os modelos HRA têm peças identificadas, mas não texturas fotográficas em 4K. Alguns órgãos trazem apenas a superfície externa. O esquema funcional, a histologia e a citologia continuam sendo representações didáticas, com cores, quantidades e proporções ilustrativas. O atlas não promete um inventário de todas as células nem uma reconstrução clínica de cada órgão. Referências universitárias e fontes de lâminas reais estão ligadas às vistas; os modelos 3D não são fotografias de microscopia. Novas vistas são carregadas conforme o uso, com até dois modelos retidos em dispositivos de toque e três no computador.</p></article><article class="about-section"><h2>Nível UERJ</h2><p>O foco é o ensino médio com explicações causais: homeostase, fisiologia humana, transporte, metabolismo, hormônios e integração entre sistemas. As questões são autorais, inspiradas no estilo discursivo da UERJ, e não constituem material oficial da universidade.</p><p>As simulações mostram relações didáticas e declaram suas simplificações. Não realizam diagnóstico, previsão de fertilidade ou cálculo individual de risco.</p></article><article class="about-section full"><h2>Modelos e licenças</h2><p>Coração com interior detalhado: <a href="models/DUNDEE_ATTRIBUTION.txt" target="_blank">Universidade de Dundee / BodyParts3D, CC BY-SA 4.0</a>. Peças anatômicas dos demais órgãos: <a href="models/REFERENCE_ATTRIBUTION.txt" target="_blank">Human Reference Atlas, CC BY 4.0</a>. Consulte a <a href="MODELOS-ANATOMICOS.md" target="_blank">cobertura e os limites de cada órgão</a>. A exportação de 3840 × 2160 pixels não transforma uma textura 2K em uma textura original 4K.</p><p>Modelos: <a href="https://www.z-anatomy.com/" target="_blank" rel="noreferrer">Z-Anatomy</a> e <a href="https://lifesciencedb.jp/bp3d/" target="_blank" rel="noreferrer">BodyParts3D</a>. Exportação GLB: <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. O pacote conserva os créditos e licenças upstream, incluindo componentes com restrição de uso comercial. Consulte <a href="models/License.txt" target="_blank">créditos das malhas</a>, <a href="models/UPSTREAM_LICENSE.txt" target="_blank">licença</a> e <a href="models/UPSTREAM_NOTICE.txt" target="_blank">avisos</a>.</p><p>Órgãos femininos: <a href="https://humanatlas.io/" target="_blank" rel="noreferrer">HuBMAP Human Reference Atlas</a>, CC BY 4.0. Three.js e three-mesh-bvh: MIT; decodificador Draco: Apache 2.0. Textos educacionais são redação original em português baseada nas referências indicadas abaixo. Os nomes de estruturas aparecem em português brasileiro. Os nomes originais permanecem apenas nos dados de origem e no índice de busca.</p></article><article class="about-section full"><h2>Referências de anatomia e fisiologia</h2><ul>${unique.map(s=>`<li><a href="${escapeHtml(s.url)}" target="_blank" rel="noreferrer">${escapeHtml(s.title)}</a> ${s.publisher?'— '+escapeHtml(s.publisher):''}</li>`).join('')}</ul></article>`;
+  $('about-content').innerHTML=`<article class="about-section full"><h2>O que está disponível</h2><div class="coverage-stats"><div><strong>${[...state.registry.values()].filter(r=>!isDetailMode(r.system)).length.toLocaleString('pt-BR')}</strong><small>peças anatômicas 3D</small></div><div><strong>${state.core.length}</strong><small>entradas de fisiologia</small></div><div><strong>${simulationEntries().length}</strong><small>módulos interativos</small></div></div><p>As sete camadas Z-Anatomy representam uma anatomia de referência masculina e são carregadas conforme o uso. O corpo feminino é outro modelo, com nove camadas, vindo do conjunto United Female v1.10 do HuBMAP Human Reference Atlas (Kristen Browne e Heidi Schlehlein, CC BY 4.0), construído a partir do Visible Human Female da National Library of Medicine. Ele tem coluna, pelve, órgãos torácicos e abdominais, coração e vasos principais, encéfalo, medula, olhos, mamas, pele e o reprodutor completo com vagina e ligamentos; não tem crânio, costelas, membros superiores, músculos do tronco e dos membros, nervos periféricos, estômago, esôfago nem tireoide. Órgãos de um corpo não são encaixados no outro.</p><p>Cada peça traz o nome do acervo e uma explicação. Estruturas principais recebem descrições próprias. Subdivisões sem texto próprio recebem uma função geral de sua classe, explicitamente identificada. As entradas essenciais de néfron, alvéolos, neurônio, sarcômero e pele abrem diretamente vistas histológicas ou celulares detalhadas. Uma nota informa quando a vista mostra a estrutura exata, apenas uma parte ou o contexto do tecido. Alguns processos e estruturas microscópicas ainda não possuem malha própria neste conjunto.</p></article><article class="about-section"><h2>Detalhe e 4K</h2><p>O atlas usa malhas anatômicas reais, iluminação em tempo real, seleção, transparência e cortes. A exportação produz PNG com <strong>3840 × 2160 pixels</strong>. Esse número define a resolução da imagem exportada, não implica texturas em 4K, histologia realista ou presença de todas as células e tecidos.</p><p>Os órgãos e tecidos receberam acabamento PBR específico, grão em várias escalas, variação de brilho e reflexos suaves compartilhados. Esse acabamento melhora a aparência sem acrescentar anatomia ou reduzir a malha. Não são texturas fotográficas nem histologia medida. Três peças vasculares têm nome específico ausente no acervo e recebem rótulos descritivos de contexto. Os esquemas microscópicos têm formas e proporções didáticas. A visualização depende do tamanho da tela e da capacidade gráfica. Em computadores mais lentos, mantenha poucas camadas visíveis e selecione qualidade Leve. Os cortes são planos de visualização e não imagens reais de tomografia.</p></article><article class="about-section full"><h2>Órgãos por dentro e histologia</h2><div class="coverage-stats"><div><strong>${studyContent.organs.length}</strong><small>vistas internas</small></div><div><strong>${studyContent.histology.length}</strong><small>tecidos e unidades</small></div><div><strong>${studyContent.organs.reduce((n,o)=>n+(o.internalParts?.length||0),0)+studyContent.histology.reduce((n,o)=>n+(o.parts?.length||0),0)}</strong><small>partes explicadas</small></div></div><p>Órgãos por dentro mostra cortes e ampliações com câmaras, camadas, ductos, regiões e unidades funcionais. Histologia relaciona essas regiões a epitélios, células e tecidos. Toque em uma parte para ler sua função, mecanismo e conexão com a discursiva. A navegação permite voltar ao órgão e ao corpo.</p><p>As vistas internas usam referências anatômicas licenciadas quando disponíveis. O coração tem texturas originais de 2048 × 2048; os modelos HRA têm peças identificadas, mas não texturas fotográficas em 4K. Alguns órgãos trazem apenas a superfície externa. O esquema funcional, a histologia e a citologia continuam sendo representações didáticas, com cores, quantidades e proporções ilustrativas. O atlas não promete um inventário de todas as células nem uma reconstrução clínica de cada órgão. Referências universitárias e fontes de lâminas reais estão ligadas às vistas; os modelos 3D não são fotografias de microscopia. Novas vistas são carregadas conforme o uso, com até dois modelos retidos em dispositivos de toque e três no computador.</p></article><article class="about-section"><h2>Nível UERJ</h2><p>O foco é o ensino médio com explicações causais: homeostase, fisiologia humana, transporte, metabolismo, hormônios e integração entre sistemas. As questões são autorais, inspiradas no estilo discursivo da UERJ, e não constituem material oficial da universidade.</p><p>As simulações mostram relações didáticas e declaram suas simplificações. Não realizam diagnóstico, previsão de fertilidade ou cálculo individual de risco.</p></article><article class="about-section full"><h2>Modelos e licenças</h2><p>Coração com interior detalhado: <a href="models/DUNDEE_ATTRIBUTION.txt" target="_blank">Universidade de Dundee / BodyParts3D, CC BY-SA 4.0</a>. Peças anatômicas dos demais órgãos: <a href="models/REFERENCE_ATTRIBUTION.txt" target="_blank">Human Reference Atlas, CC BY 4.0</a>. Consulte a <a href="MODELOS-ANATOMICOS.md" target="_blank">cobertura e os limites de cada órgão</a>. A exportação de 3840 × 2160 pixels não transforma uma textura 2K em uma textura original 4K.</p><p>Modelos: <a href="https://www.z-anatomy.com/" target="_blank" rel="noreferrer">Z-Anatomy</a> e <a href="https://lifesciencedb.jp/bp3d/" target="_blank" rel="noreferrer">BodyParts3D</a>. Exportação GLB: <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. O pacote conserva os créditos e licenças upstream, incluindo componentes com restrição de uso comercial. Consulte <a href="models/License.txt" target="_blank">créditos das malhas</a>, <a href="models/UPSTREAM_LICENSE.txt" target="_blank">licença</a> e <a href="models/UPSTREAM_NOTICE.txt" target="_blank">avisos</a>.</p><p>Órgãos femininos: <a href="https://humanatlas.io/" target="_blank" rel="noreferrer">HuBMAP Human Reference Atlas</a>, CC BY 4.0. Three.js e three-mesh-bvh: MIT; decodificador Draco: Apache 2.0. Textos educacionais são redação original em português baseada nas referências indicadas abaixo. Os nomes de estruturas aparecem em português brasileiro. Os nomes originais permanecem apenas nos dados de origem e no índice de busca.</p></article><article class="about-section full"><h2>Referências de anatomia e fisiologia</h2><ul>${unique.map(s=>`<li><a href="${escapeHtml(s.url)}" target="_blank" rel="noreferrer">${escapeHtml(s.title)}</a> ${s.publisher?'— '+escapeHtml(s.publisher):''}</li>`).join('')}</ul></article>`;
   const cytology=document.createElement('article');cytology.className='about-section full';cytology.innerHTML='<h2>Citologia: células e processos</h2><div class="coverage-stats"><div><strong>'+cytologyContent.views.length+'</strong><small>vistas celulares</small></div><div><strong>'+cytologyContent.views.reduce((n,v)=>n+v.parts.length,0)+'</strong><small>partes explicadas</small></div><div><strong>'+cytologyContent.categories.length+'</strong><small>grupos de temas</small></div></div><p>A cobertura inclui '+cytologyContent.categories.map(c=>escapeHtml(c.name.toLowerCase())).join(', ')+'. Células animais, vegetais, fúngicas e bacterianas são comparadas; vírus aparecem explicitamente como entidades acelulares. O catálogo relaciona organelas, biomoléculas e mecanismos, com sequências estáticas, comparações e ligações à histologia.</p><p>Esta é uma cobertura ampla de citologia escolar e de fundamentos avançados. Os modelos ampliados têm cores, quantidades e proporções ilustrativas; não esgotam a biologia celular contemporânea nem representam estruturas moleculares medidas. As etapas de processos são esquemas estáticos. Cada vista indica seus limites e referências.</p>';$('about-content').querySelector('.about-section.full').after(cytology);
   const botanical=document.createElement('article');botanical.className='about-section full';botanical.dataset.botanyCoverage='';botanical.innerHTML='<h2>Histologia e fisiologia vegetal</h2><div class="coverage-stats"><div><strong>'+botanyContent.views.length+'</strong><small>vistas vegetais</small></div><div><strong>'+botanyContent.views.reduce((n,v)=>n+v.parts.length,0)+'</strong><small>componentes explicados</small></div></div><p>Folha, raiz, caules, estômatos, xilema, floema, meristemas, flor, semente, dupla fecundação e respostas vegetais são ligados à citologia por componentes identificados. As reconstruções representam exemplos de angiospermas; a organização varia entre espécies e ambientes.</p><p>Citologia e botânica usam superfícies trianguladas de membranas, cisternas, paredes e tecidos. Os três mapas procedurais de cor, relevo e rugosidade compartilham um atlas de 4096 × 4096 pixels por mapa no computador, e de 2048 × 2048 no toque. Cada superfície usa uma região desse atlas; isso não equivale a uma fotografia 4K independente por componente. As cores e os cortes são educativos, sem reconstrução molecular medida.</p>';$('about-content').append(botanical);
   if(systematicsView){const st=systematicsView.stats(),syst=document.createElement('article');syst.className='about-section full';syst.dataset.systematicsCoverage='';syst.innerHTML='<h2>Sistemática e fisiologia comparada</h2><div class="coverage-stats"><div><strong>'+st.leaves+'</strong><small>grupos na árvore</small></div><div><strong>'+st.withModel+'</strong><small>organismos em 3D</small></div><div><strong>'+systematicsContent.functions.length+'</strong><small>funções comparadas</small></div></div><p>A árvore segue os três domínios (Bacteria, Archaea, Eukarya) e relações de parentesco aceitas em livros universitários. Protistas, peixes e répteis tradicionais são agrupamentos parafiléticos, mantidos por serem usados no vestibular. Grupos sem modelo 3D próprio já trazem classificação e fisiologia comparada.</p><p>Treze organismos usam a superfície de espécimes reais escaneados em 3D (licenças CC0 e CC BY 4.0, com autores em <a href="models/systematics/ATTRIBUTION.md" target="_blank">models/systematics/ATTRIBUTION.md</a>); seus órgãos internos e as lupas ampliadas são reconstruções didáticas. Os demais são reconstruções autorais geradas no próprio aparelho, fora da linha principal da interface. Cores, número de estruturas repetidas, tamanhos e posições internas são aproximados, e o toque usa versões mais leves. Consulte o <a href="COBERTURA-MODELOS.md" target="_blank">inventário de modelos</a>.</p>';$('about-content').append(syst)}
@@ -1029,6 +1063,7 @@ async function start(){
     studyContent||={organs:[],histology:[],sources:[]};
     const supplementary=await getJSON('./data/supplementary-content.json',true);if(supplementary)for(const key of ['organs','histology','sources'])studyContent[key]=[...(studyContent[key]||[]),...(supplementary[key]||[])];
     referenceCatalog=await getJSON('./data/reference-organs.json',true);
+    femaleBody=await getJSON('./data/atlas-female-body.json',true);
     referencePartFunctions=await getJSON('./data/reference-part-functions.json',true)||{parts:[]};
     botanyContent=await getJSON('./data/botany-content.json',true)||{views:[],categories:[],sources:[]};
     const [organDetails,histologyDetails,microscopyReferences,connectionData,coverageData]=await Promise.all([getJSON('./data/organ-detail.json',true),getJSON('./data/histology-detail.json',true),getJSON('./data/microscopy-references.json',true),getJSON('./data/study-connections.json',true),getJSON('./data/organ-model-coverage.json',true)]);
@@ -1044,10 +1079,10 @@ async function start(){
     setupSystematics(await getJSON('./data/systematics-content.json',true));
     $('cytology-category').innerHTML='<option value="all">Todos os temas</option>'+cytologyContent.categories.map(c=>`<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
     const options=[['Por dentro',studyContent.organs||[],'internal-'],['Histologia',studyContent.histology||[],'histo-'],['Citologia',cytologyContent.views||[],'cyto-']];for(const [label,entries,prefix] of options){const group=document.createElement('optgroup');group.label=label;for(const entry of entries){const option=document.createElement('option');option.value=prefix+entry.id;option.textContent=entry.label||entry.title;group.append(option)}$('model-mode').append(group)}
-    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupEvents();setupOffline();
+    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupProcesses();setupEvents();setupOffline();
     $('load-progress').max=2;$('load-detail').textContent='Órgãos internos e esqueleto…';await Promise.all([loadSystem('visceral'),loadSystem('skeletal')]);$('viewer-loading').hidden=true;fitBody('front',true);fadeInCanvas();$('load-progress').max=7;
     const saved=studySessions.load(),view=location.hash.replace('#',''),restored=await restoreStudySession(saved);if(['atlas','physiology','practice','about'].includes(view))setView(view);else if(saved)setView(saved.view);sessionReady=true;if(restored)rememberStudy();
-    window.atlas={state,scene,camera,renderer,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
+    window.atlas={state,scene,camera,renderer,controls,processPlayer,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
   }catch(error){console.error(error);$('viewer-loading').hidden=true;showError('O atlas não pôde iniciar: '+error.message+'. Recarregue a página. Se o acervo ainda não foi salvo para uso off-line, conecte-se à internet e tente novamente.');$('asset-status').textContent='Falha no carregamento'}
 }
 start();

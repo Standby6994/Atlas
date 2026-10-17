@@ -4,6 +4,27 @@ O Atlas dispõe de 51 vistas e 349 entradas de estruturas internas. A cobertura 
 
 Os dez cortes autorais são coração (22 peças), ovário (15), testículo (7), vagina (5), rim (10), pulmões (9), estômago (9) delgado (9 peças de tecido e um contorno da luz), esôfago (5 camadas e um contorno) e intestino grosso (10 peças/recortes em duas escalas). São 101 entradas com geometria própria e dois contornos educativos de cavidades; estes não são tecido nem preenchimento sólido. Há 103 entradas nesses cortes ao incluir essas indicações de espaço. As 49 vistas que já contavam com referência anatômica continuam com suas fontes integradas, inclusive como alternativas quando há um corte autoral. O vaso linfático mantém um esquema educativo.
 
+## Corpo feminino por sistemas
+
+O seletor "Corpo feminino" abre um segundo corpo, com nove camadas, a partir do conjunto United Female v1.10 do Human Reference Atlas (Kristen Browne e Heidi Schlehlein, CC BY 4.0), feito com o Visible Human Female da National Library of Medicine. Os créditos e as alterações estão em [FEMALE_BODY_ATTRIBUTION.txt](models/FEMALE_BODY_ATTRIBUTION.txt); o inventário com nomes em português, hashes e posicionamento está em data/atlas-female-body.json.
+
+| Camada | Peças | Triângulos | Arquivo(s) |
+|---|---:|---:|---:|
+| Esqueleto (parcial) | 65 | 272.639 | 1,04 MB |
+| Órgãos e vísceras | 241 | 581.494 | 2,39 MB |
+| Reprodutor feminino | 38 | 111.258 | 1,67 MB |
+| Coração e vasos | 124 | 322.982 | 1,49 MB |
+| Encéfalo, medula e olhos | 362 | 893.717 | 4,12 MB |
+| Órgãos linfáticos | 14 | 75.542 | 0,33 MB |
+| Músculos (olhos e joelhos) | 16 | 95.020 | 0,50 MB |
+| Discos, cartilagens e ligamentos | 68 | 73.392 | 0,38 MB |
+| Pele e mamas | 20 | 491.005 | 1,52 MB |
+| **Total** | **948** | **2.917.049** | **13,4 MB** |
+
+O reprodutor reaproveita o arquivo female-reproductive.glb (útero, colo, tubas e ovários, geometria idêntica à do conjunto) e acrescenta vagina, junção cervicovaginal, escavação vesicouterina e ligamentos. A placenta a termo ficou fora deste corpo. A fonte tinha 7.756.626 triângulos; a simplificação foi limitada a 0,05 mm de desvio de superfície, e as superfícies exportadas com normais por face (pele, boca, olhos, mucosas) receberam normais suaves. Não há textura fotográfica.
+
+Limites: o esqueleto tem coluna (C1–L6; a doadora tem seis vértebras lombares), sacro, cóccix, ossos do quadril, esterno, manúbrio e a região dos joelhos; faltam crânio, costelas, clavículas, escápulas, membros superiores, mãos e pés. Os músculos são só os extrínsecos dos olhos e o reto femoral junto ao joelho. Não há nervos periféricos, estômago, esôfago, tireoide, suprarrenais nem vasos linfáticos. O linfonodo é um modelo mesentérico detalhado (Yao). Os dois corpos não são misturados: nenhum órgão masculino é encaixado no feminino.
+
 ## Resolução, textura e evidência
 
 A exportação 4K gera uma imagem de 3840 × 2160 pixels. O coração Dundee tem três mapas incorporados de 2048 × 2048; os 27 arquivos do catálogo HRA não contêm imagens ou mapas de textura. Nenhuma textura fotográfica 4K de órgão foi confirmada. O acabamento procedural da anatomia é ilustrativo e compartilha um mapa de microvariação de 256 × 256; não deriva de fotografia ou escaneamento tecidual.
