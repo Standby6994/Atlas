@@ -112,17 +112,32 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
 
   // ---- input routing: capture phase on the viewport, before OrbitControls and picking see the event ----
   const drawsWith=e=>e.pointerType==='pen'||active;
+  // Buttons, panels and toolbars inside the viewer keep working with the Pencil instead of starting a stroke.
+  const UI='button,input,select,textarea,a,label,summary,[role=button],.board-panel,.board-mini,.viewer-tools,.study-path,.viewer-settings,#selected-label,.viewer-loading,.draw-text-input';
+  const onUI=e=>!!e.target.closest?.(UI);
+  // Palm rejection once a Pencil is in use: wide contacts and touches right after a stroke neither draw nor rotate.
+  const PALM_PX=44,PEN_GRACE=500;let pointerType=null,penUp=0;const touches=new Set();
+  const palm=e=>penSeen&&e.pointerType==='touch'&&(active||e.width>PALM_PX||e.height>PALM_PX||performance.now()-penUp<PEN_GRACE);
+  const canvas3D=()=>viewport.querySelector('#anatomy-canvas');
+  // A palm that landed first may already be rotating the model: end those touches for the 3D controls.
+  function releaseTouches(){for(const id of touches){try{canvas3D()?.dispatchEvent(new PointerEvent('pointercancel',{pointerId:id,pointerType:'touch',bubbles:true}))}catch{}}touches.clear()}
   let pointerId=null;
   viewport.addEventListener('pointerdown',e=>{
-    if(e.target.closest('.draw-text-input'))return;
+    if(onUI(e))return;
     if(e.pointerType==='pen')penSeen=true;
-    // While the Pencil is drawing, ignore resting palms and other fingers.
-    if(pointerId!==null){e.stopPropagation();e.preventDefault();return}
-    if(!drawsWith(e))return;
+    if(pointerId!==null){
+      // The Pencil wins over a palm (or finger) stroke that started first; that stroke is discarded.
+      if(e.pointerType==='pen'&&pointerType!=='pen'){if(current?.tool!=='eraser')liveCtx.clearRect(0,0,live.width,live.height);current=null;pointerId=null}
+      // While the Pencil is drawing, ignore resting palms and other fingers.
+      else{e.stopPropagation();e.preventDefault();return}
+    }
+    if(palm(e)){e.stopPropagation();e.preventDefault();return}
+    if(!drawsWith(e)){if(e.pointerType==='touch')touches.add(e.pointerId);return}
+    if(e.pointerType==='pen')releaseTouches();
     e.stopPropagation();e.preventDefault();const pt=toLocal(e);
     if(settings.tool==='eyedropper'){pickColor(e);return}
     if(settings.tool==='text'){placeText(pt,e);return}
-    pointerId=e.pointerId;try{viewport.setPointerCapture(e.pointerId)}catch{}
+    pointerId=e.pointerId;pointerType=e.pointerType;try{viewport.setPointerCapture(e.pointerId)}catch{}
     if(settings.tool==='stroke-eraser'){current={tool:'stroke-eraser',points:[pt]};eraseStrokesAt(pt);return}
     current={tool:settings.tool,color:settings.color,size:settings.size,opacity:settings.opacity,points:[pt],seed:(Math.random()*1e9)|0};
     if(settings.tool==='eraser'){ctx.save();drawFreehand(ctx,current);ctx.restore()}else drawLive();
@@ -138,7 +153,8 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
     if(current.tool==='eraser'){ctx.save();drawFreehand(ctx,{...current,points:current.points.slice(-3)});ctx.restore()}else if(current.tool!=='stroke-eraser')drawLive();
   },true);
   const finish=e=>{
-    if(e.pointerId!==pointerId)return;e.stopPropagation();pointerId=null;const stroke=current;current=null;liveCtx.clearRect(0,0,live.width,live.height);
+    touches.delete(e.pointerId);
+    if(e.pointerId!==pointerId)return;e.stopPropagation();if(pointerType==='pen')penUp=performance.now();pointerId=null;const stroke=current;current=null;liveCtx.clearRect(0,0,live.width,live.height);
     if(!stroke||stroke.tool==='stroke-eraser')return;
     if(SHAPES.has(stroke.tool)&&stroke.points.length<2)return;
     commit(stroke);
@@ -146,6 +162,8 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
   viewport.addEventListener('pointerup',finish,true);viewport.addEventListener('pointercancel',finish,true);
   // Safari starts page gestures from touch events; block them only while a stroke is in progress.
   viewport.addEventListener('touchmove',e=>{if(pointerId!==null)e.preventDefault()},{passive:false});
+  // A slow Pencil start would otherwise become text selection, the loupe or Scribble and cancel the stroke.
+  viewport.addEventListener('touchstart',e=>{if([...e.changedTouches].some(t=>t.touchType==='stylus')&&!e.target.closest?.(UI))e.preventDefault()},{passive:false});
 
   // ---- actions ----
   const api={

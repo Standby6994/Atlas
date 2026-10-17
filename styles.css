@@ -291,3 +291,6 @@ details>summary{transition:color .18s}
 .viewport.is-building #anatomy-canvas{opacity:.45;transition:opacity .25s .12s var(--ease-out)}
 .viewport.is-building .model-busy{opacity:1;transform:translate(-50%,-50%);transition:opacity .2s .15s,transform .25s .15s var(--ease-out)}
 @media(prefers-reduced-motion:reduce){.viewport.is-building #anatomy-canvas{opacity:.6}.model-busy .loader{animation:none}}
+/* The Apple Pencil must not start text selection, the loupe or callouts over the viewer. */
+.viewport{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.viewport .draw-text-input,.viewport input,.viewport textarea{-webkit-user-select:text;user-select:text}
