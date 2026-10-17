@@ -76,15 +76,38 @@ Há 65 registros explícitos entre fonte e entrada canônica, correspondentes a 
 
 ## Sistemática: organismos 3D
 
-Reconstruções autorais geradas no aparelho (sem arquivo de malha baixado), em `systematics-*.js`. Não são escaneamentos de espécimes; cores, espessuras de envoltórios, padrões moleculares e o número de estruturas repetidas são didáticos. Contagens medidas em 2026-10-17 (desktop / toque).
+Todos os 21 grupos da árvore têm organismo em 3D; mamíferos abrem o corpo humano do Atlas. Há dois tipos de modelo:
 
-| Grupo | Organismo | Partes | Triângulos | Limites declarados |
-|---|---|---|---|---|
-| Bacteria | Escherichia coli | 10 | 327.810 / 110.720 | Envoltório espessado, flagelos encurtados, amostra de ribossomos e fímbrias; célula real quase incolor. |
-| Archaea | Halobacterium salinarum | 9 | 334.880 / 113.398 | Rede da camada S e nervuras das vesículas de gás ampliadas; cor lembra carotenoides. |
-| Eukarya (protozoários) | Paramecium caudatum | 12 | 621.569 / 79.664 | Menos cílios que os reais, relevo da película ampliado, organelas em tamanhos aproximados. |
+- **Espécimes escaneados** (13): superfície real de exemplares fotografados em 3D, baixados do Sketchfab (CC0 ou CC BY 4.0; autores, links e alterações em `models/systematics/ATTRIBUTION.md`). Os órgãos internos são reconstruções didáticas encaixadas no contorno medido de cada exemplar e aparecem num corte lateral, que abre ao selecionar uma estrutura interna ou pelo botão "Abrir corte lateral". Nas plantas, no fungo e na esponja, o que o escaneamento não mostra (cápsula, soros, óvulos, pólen, basídios, canais) aparece em lupas ampliadas abaixo do exemplar, fora de escala.
+- **Reconstruções autorais** (8): geradas no aparelho (sem arquivo de malha baixado), em `systematics-*.js`. Não são escaneamentos; cores, espessuras, padrões e o número de estruturas repetidas são didáticos.
 
-Os outros 19 grupos da árvore têm classificação e fisiologia comparada em `data/systematics-content.json`, sem modelo 3D próprio por enquanto; mamíferos abrem o corpo humano do Atlas.
+Contagens medidas em 2026-10-17 (computador / toque). Triângulos somam escaneamento e interior. Arquivos GLB com Draco e texturas JPEG de 2048 px (computador) e 1024 px (toque).
+
+| Grupo | Organismo | Fonte | Partes | Triângulos | GLB |
+|---|---|---|---|---|---|
+| Bacteria | Escherichia coli | autoral | 10 | 327.810 / 110.720 | — |
+| Archaea | Halobacterium salinarum | autoral | 9 | 334.880 / 113.398 | — |
+| Protozoários | Paramecium caudatum | autoral | 12 | 621.569 / 79.664 | — |
+| Algas | Volvox sp. | autoral | 5 | 129.234 / 50.264 | — |
+| Fungos | cogumelo (Basidiomycota, espécie não informada) | escaneamento CC0 | 6 | 439.969 / 199.076 | 5,3 MB / 2,2 MB |
+| Briófitas | Pogonatum inflexum | escaneamento CC0 | 6 | 343.698 / 137.974 | 2,7 MB / 1,1 MB |
+| Pteridófitas | Dryopteris erythrosora | escaneamento CC0 | 4 | 417.734 / 198.478 | 4,2 MB / 1,7 MB |
+| Gimnospermas | Pinus densiflora | escaneamento CC0 | 6 | 423.858 / 196.184 | 6,6 MB / 2,7 MB |
+| Angiospermas | Lilium lancifolium | escaneamento CC0 | 7 | 419.906 / 90.885 | 4,2 MB / 1,2 MB |
+| Poríferos | Aplysina fistularis (esqueleto seco) | escaneamento CC BY 4.0 | 4 | 183.418 / 59.440 | 1,5 MB / 0,5 MB |
+| Cnidários | Hydra sp. | autoral | 9 | 53.754 / 12.417 | — |
+| Platelmintos | Dugesia sp. | autoral | 7 | 42.242 / 11.329 | — |
+| Nematódeos | Ascaris lumbricoides (fêmea) | autoral | 7 | 45.932 / 10.633 | — |
+| Anelídeos | Lumbricus terrestris | autoral | 21 | 236.394 / 67.496 | — |
+| Moluscos | Euhadra herklotsi (exemplar preservado) | escaneamento CC0 | 12 | 39.722 / 24.256 | 1,0 MB / 0,5 MB |
+| Artrópodes | Locusta migratoria | escaneamento CC0 | 17 | 352.433 / 126.083 | 2,5 MB / 1,0 MB |
+| Equinodermos | Patiria pectinifera | escaneamento CC0 | 7 | 477.239 / 199.796 | 6,4 MB / 2,3 MB |
+| Peixes | Cyprinus carpio | escaneamento CC0 | 16 | 517.418 / 271.042 | 3,5 MB / 1,6 MB |
+| Anfíbios | Pelophylax nigromaculatus (macho) | escaneamento CC0 | 17 | 436.046 / 79.175 | 3,8 MB / 1,0 MB |
+| Répteis | Takydromus tachydromoides | escaneamento CC0 | 17 | 401.995 / 115.684 | 3,4 MB / 1,2 MB |
+| Aves | Falco peregrinus (taxidermia) | escaneamento CC BY 4.0 | 20 | 335.597 / 71.811 | 2,9 MB / 0,8 MB |
+
+Limites: os escaneamentos foram simplificados até o limite das costuras de textura (fotogrametria), por isso alguns passam de 100 mil triângulos no toque; as texturas trazem a iluminação do estúdio de origem. Interiores e lupas têm tamanhos, posições e números de estruturas repetidas aproximados, e cada vista declara isso no texto "representation". O caramujo é um exemplar preservado, com o corpo contraído; a esponja é o esqueleto de espongina, sem o tecido vivo; o falcão é taxidermizado e teve a base de rocha removida.
 
 ## Verificação técnica e limites
 

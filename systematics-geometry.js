@@ -57,6 +57,18 @@ export function frames(S,up=[0,1,0]){
  return{T,N,B}}
 function rotateAround(v,k,a){const c=Math.cos(a),s=Math.sin(a),kv=cross(k,v),kd=dot(k,v);return[v[0]*c+kv[0]*s+k[0]*kd*(1-c),v[1]*c+kv[1]*s+k[1]*kd*(1-c),v[2]*c+kv[2]*s+k[2]*kd*(1-c)]}
 
+// ---------- body sections ----------
+// Elliptical cross-sections from keys [x, back, belly, halfWidth, midZ?]; midZ (default zc) lets the
+// mid-plane follow a body that bends sideways.
+export function bodyShape(keys,zc=0){
+ const at=x=>{let i=0;while(i<keys.length-2&&x>keys[i+1][0])i++;const a=keys[i],b=keys[i+1],u=Math.max(0,Math.min(1,(x-a[0])/(b[0]-a[0])));return[a[1]+(b[1]-a[1])*u,a[2]+(b[2]-a[2])*u,a[3]+(b[3]-a[3])*u,(a[4]??zc)+((b[4]??zc)-(a[4]??zc))*u]};
+ const mid=x=>{const o=at(x);return(o[0]+o[1])/2},semi=x=>{const o=at(x);return(o[0]-o[1])/2},half=x=>at(x)[2],zcAt=x=>at(x)[3];
+ // Point on the section at x: angle 0 = back, pi/2 = left side (+z), pi = belly; s = fraction of the radius.
+ const ring=(x,ang,s=1)=>[x,mid(x)+semi(x)*s*Math.cos(ang),zcAt(x)+half(x)*s*Math.sin(ang)];
+ // Point from fractions of the section: v in [-1,1] (belly to back), w in [-1,1] (right to left).
+ const at2=(x,v,w)=>[x,mid(x)+semi(x)*v,zcAt(x)+half(x)*w];
+ return{mid,semi,half,ring,at:at2,zc,zcAt};
+}
 // ---------- builder ----------
 class Buf{constructor(T,n=1<<14){this.T=T;this.a=new T(n);this.n=0}reserve(k){if(this.n+k>this.a.length){let m=this.a.length*2;while(m<this.n+k)m*=2;const b=new this.T(m);b.set(this.a.subarray(0,this.n));this.a=b}}out(){return this.a.slice(0,this.n)}}
 

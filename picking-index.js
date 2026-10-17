@@ -55,8 +55,9 @@ export function refreshPickCandidates(meshes){
 }
 export function raycastVisible(raycaster,candidates,planes){
   // When cutting, search all hits so a clipped front face cannot hide a valid back face.
-  raycaster.firstHitOnly=planes.length===0;
-  const narrowed=candidates.filter(mesh=>raycaster.ray.intersectsBox(mesh.userData.pickBounds));
+  // Materials with their own clipping (cutaways of scanned specimens) count as well.
+  const narrowed=candidates.filter(mesh=>raycaster.ray.intersectsBox(mesh.userData.pickBounds)),own=mesh=>mesh.material?.clippingPlanes||[];
+  raycaster.firstHitOnly=planes.length===0&&!narrowed.some(mesh=>own(mesh).length);
   const hits=raycaster.intersectObjects(narrowed,false);
-  return hits.find(hit=>!planes.some(plane=>plane.distanceToPoint(hit.point)<0));
+  return hits.find(hit=>!planes.some(plane=>plane.distanceToPoint(hit.point)<0)&&!own(hit.object).some(plane=>plane.distanceToPoint(hit.point)<0));
 }

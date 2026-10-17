@@ -3,7 +3,7 @@
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const fold=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 
-export function createSystematicsView(content,{openView,openAtlas,showGroup,highlight,activeFunction}){
+export function createSystematicsView(content,{openView,openAtlas,showGroup,highlight,activeFunction,cutaway=null}){
  const groups=new Map((content?.groups||[]).map(g=>[g.id,g])),views=new Map((content?.views||[]).map(v=>[v.id,v])),functions=content?.functions||[];
  const nodes=[],parents=new Map();(function walk(n,parent){nodes.push(n);if(parent)parents.set(n.id,parent);for(const c of n.children||[])walk(c,n)})(content?.tree||{id:'empty'},null);
  const leaves=nodes.filter(n=>n.groupId),viewOf=groupId=>leaves.find(n=>n.groupId===groupId)?.viewId||null,leafOf=groupId=>leaves.find(n=>n.groupId===groupId);
@@ -42,6 +42,10 @@ export function createSystematicsView(content,{openView,openAtlas,showGroup,high
  /** Details panel block for a group (with or without a 3D model on screen). */
  function appendPanel(panel,groupId,{viewId=null,onFunction=null}={}){
   const g=groups.get(groupId);if(!g)return;const fn=activeFunction(),wrap=el('section','syst-panel');wrap.dataset.systPanel=groupId;
+  const view=viewId&&views.get(viewId);
+  if(view?.scan){const box=el('section','syst-specimen');box.append(el('h3',null,'Espécime escaneado'));box.append(el('p','syst-hint',view.scan.note||'Superfície real fotografada em 3D. Os órgãos internos são reconstruções didáticas colocadas dentro do contorno do espécime.'));
+   if(cutaway&&view.scan.cutaway!==false&&view.parts.some(p=>!(view.scan.regions||[]).some(r=>r.part===p.id)&&p.id!==view.scan.part)){const label=open=>open?'Fechar corte lateral':'Abrir corte lateral',b=el('button','syst-cutaway',label(cutaway.isOpen()));b.type='button';b.setAttribute('aria-pressed',String(cutaway.isOpen()));b.addEventListener('click',()=>{const open=cutaway.toggle();if(open!=null){b.textContent=label(open);b.setAttribute('aria-pressed',String(open))}});box.append(b)}
+   const credit=el('p','syst-credit');const a=el('a',null,view.scan.title||'Modelo original');a.href=view.scan.url;a.target='_blank';a.rel='noreferrer';credit.append('Escaneamento: ',a,' · '+view.scan.author+' · '+view.scan.license+(view.scan.changes?' · '+view.scan.changes:''));box.append(credit);wrap.append(box)}
   wrap.append(classification(g));
   const phys=el('section','syst-physiology');phys.append(el('h3',null,'Fisiologia comparada'));phys.append(el('p','syst-hint',viewId?'Escolha uma função: as estruturas correspondentes ficam destacadas no 3D e os outros grupos aparecem logo abaixo.':'Escolha uma função para comparar este grupo com os demais.'));
   phys.append(functionChips(next=>{(onFunction||highlight)(next)},fn));
