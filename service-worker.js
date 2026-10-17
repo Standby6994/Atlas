@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-17-cardiac-cycle-v34';
+const APP_VERSION = '2026-10-17-cardiac-cycle-v35';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
@@ -194,7 +194,16 @@ const APP_ASSETS = [
   "assets/histology/gastric-histology-desktop-v20.bin",
   "assets/histology/gastric-histology-touch-v20.bin",
   "assets/histology/colon-histology-desktop-v20.bin",
-  "assets/histology/colon-histology-touch-v20.bin"
+  "assets/histology/colon-histology-touch-v20.bin",
+  "authored-interiors.js",
+  "assets/interiors/heart-desktop-a1.bin",
+  "assets/interiors/heart-touch-a1.bin",
+  "assets/interiors/ovary-desktop-a1.bin",
+  "assets/interiors/ovary-touch-a1.bin",
+  "assets/interiors/testis-desktop-a1.bin",
+  "assets/interiors/testis-touch-a1.bin",
+  "assets/interiors/vagina-desktop-a1.bin",
+  "assets/interiors/vagina-touch-a1.bin"
 ];
 const MODEL_ASSETS = [
   "models/skeletal.glb",
@@ -363,7 +372,15 @@ const CONTENT_SHA256 = {
   "assets/histology/gastric-histology-desktop-v20.bin": "c2bcea43cf66c314de941888555d96402c415082188c67ebf73987d5ecf795ac",
   "assets/histology/gastric-histology-touch-v20.bin": "70a022bb89f5404e66adcdbb77730d23e4c62ac580fe2050ad3f9f39681bb474",
   "assets/histology/colon-histology-desktop-v20.bin": "a067c99818e41a7e087d6fe412c3572e28fdc635340b26eae7254d3d4fbf3692",
-  "assets/histology/colon-histology-touch-v20.bin": "731ac190627bdffc38dc60e6665e1a4baf058d609cfc6e30dbe1255d2913e0bd"
+  "assets/histology/colon-histology-touch-v20.bin": "731ac190627bdffc38dc60e6665e1a4baf058d609cfc6e30dbe1255d2913e0bd",
+  "assets/interiors/heart-desktop-a1.bin": "d7ffbf367e599c107758b925d28f85766b8fb0047bb7ef6e586724a8d9e09eb5",
+  "assets/interiors/heart-touch-a1.bin": "2f489cc7c1c4dc765897981104cb92a97cc450ed3512a73bd0cb81c7ca476780",
+  "assets/interiors/ovary-desktop-a1.bin": "5747b19bef946b5295728be9aadf56e78a063007953ed889d4c0d6b08fc54414",
+  "assets/interiors/ovary-touch-a1.bin": "a4eda7a716b84440ece9fcb3b4a579ba3bcf32f4d5c9c2fceef67c8387f37482",
+  "assets/interiors/testis-desktop-a1.bin": "3048d30e67a5549277f118c33e4e3514b58d4a7a633b5f649d0cad78fc87c765",
+  "assets/interiors/testis-touch-a1.bin": "9901241066918d84f6442d92677bb737b58ef6cca34f94a3af160f529d076eb6",
+  "assets/interiors/vagina-desktop-a1.bin": "466dac317949322fa601adaaef8b795a3ce88698518d28b01d7b3efd47e34214",
+  "assets/interiors/vagina-touch-a1.bin": "21bc44e3e9a0cc5837ac52e98a90051cc904682d73fc12d96eee2ded1f6b63da"
 };
 const ALL_ASSETS = [...APP_ASSETS, ...MODEL_ASSETS];
 const BOOTSTRAP_ASSETS = APP_ASSETS.filter(asset => !CONTENT_SHA256[asset]);

@@ -17,6 +17,8 @@ O Atlas mantém 51 vistas e 349 entradas anatômicas descritas. A configuração
 | Esôfago |5 + 1 indicação| Parede aberta contínua, pregas longitudinais e camadas aninhadas; cavidade vazia indicada por contorno. |
 | Intestino grosso |10| Trajeto regional, haustros e tênias; apêndice de ponta cega ligado ao ceco e janela de mucosa com criptas comunicantes com a superfície, em escala independente. |
 
+Os cortes de coração, ovário, testículo e vagina são gerados uma única vez a partir dos mesmos geradores autorais e guardados sem perdas (posições, normais, tons e índices do gerador, em Float32), para abrir sem a pausa de geração no aparelho. A forma, as peças e os limites descritos acima não mudam.
+
 Há 101 entradas com peças selecionáveis e geometria própria; dois contornos de cavidades são indicações separadas, totalizando 103 entradas nos cortes. Isso não completa todas as 349 entradas do catálogo nem as microestruturas de cada órgão. [COBERTURA-MODELOS.md](COBERTURA-MODELOS.md) contém o inventário por órgão, a proveniência das referências e as lacunas conservadoras de correspondência.
 
 Os novos cortes renal e pulmonar usam superfícies trianguladas pré-construídas. No rim, o sistema coletor é contínuo; medula e pirâmides são faces complementares do mesmo parênquima. As sete silhuetas papilares são um exemplo de corte, não uma contagem anatômica total. Os trechos vasculares expostos são hilares e não mostram toda a microcirculação.
