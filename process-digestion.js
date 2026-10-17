@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {glowSprite,xrayMaterial,smoothstep,clamp01,helper,disposeObject} from './process-animations.js';
+import {glowSprite,xrayMaterial,smoothstep,clamp01,helper,disposeObject,createWaveField} from './process-animations.js';
 
 // Digestion animations. Routes are centre lines measured once from the models' own meshes (slices of the
 // tube walls, in scene coordinates); the small intestine of the body model is a single coiled piece, so its
@@ -128,39 +128,6 @@ export async function createBodyDigestion({app}){
   }
   helper(root);
   return{steps,update,dispose(){disposeObject(root)}};
-}
-
-// --- Wall motion in the detailed cuts. ---
-// Each vertex stores its position along the route (s) and the nearest route point (in its own mesh space);
-// a vertex shader scales the wall towards/away from that point with up to six Gaussian waves along s.
-const WAVES={value:Array.from({length:6},()=>new THREE.Vector4(-10,1,0,0))};
-const WAVE_KEY='atlas-process-wave-v1';
-function wrapMaterial(material){
-  if(!material||material.userData.atlasProcessWave||!(material.isMeshStandardMaterial||material.isMeshPhysicalMaterial))return;
-  material.userData.atlasProcessWave=true;const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
-  material.onBeforeCompile=function(shader,renderer){compile.call(this,shader,renderer);shader.uniforms.atlasWaves=WAVES;
-    shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nattribute vec4 atlasWave;\nuniform vec4 atlasWaves[6];')
-      .replace('#include <begin_vertex>',`#include <begin_vertex>
-      if(atlasWave.x>-50.0){float atlasK=0.0;for(int i=0;i<6;i++){vec4 w=atlasWaves[i];float d=(atlasWave.x-w.x)/w.y;atlasK+=w.z*exp(-d*d);}transformed=atlasWave.yzw+(transformed-atlasWave.yzw)*(1.0+atlasK);}`)};
-  material.customProgramCacheKey=()=>key+'|'+WAVE_KEY;material.needsUpdate=true;
-}
-function createWaveField(group,routes,key){
-  const meshes=[];group.updateMatrixWorld(true);group.traverse(o=>{if(o.isMesh&&o.geometry?.attributes.position)meshes.push(o)});
-  const samples=[],cell=Math.max(...routes.map(r=>r.reach));for(const r of routes){const n=Math.max(64,Math.round(r.curve.getLength()/.006));for(let i=0;i<=n;i++){const u=i/n;samples.push({s:r.offset+u,p:r.curve.getPointAt(u),reach:r.reach})}}
-  const grid=new Map(),k=(x,y,z)=>x+','+y+','+z;for(const s of samples){const id=k(Math.floor(s.p.x/cell),Math.floor(s.p.y/cell),Math.floor(s.p.z/cell));(grid.get(id)||grid.set(id,[]).get(id)).push(s)}
-  const v=new THREE.Vector3(),a=new THREE.Vector3(),inverse=new THREE.Matrix4();
-  for(const mesh of meshes){
-    const g=mesh.geometry;if(g.userData.atlasWaveKey===key)continue;
-    const pos=g.attributes.position,data=new Float32Array(pos.count*4);inverse.copy(mesh.matrixWorld).invert();
-    for(let i=0;i<pos.count;i++){
-      v.fromBufferAttribute(pos,i).applyMatrix4(mesh.matrixWorld);const gx=Math.floor(v.x/cell),gy=Math.floor(v.y/cell),gz=Math.floor(v.z/cell);let best=null,bd=Infinity;
-      for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(let dz=-1;dz<=1;dz++){const list=grid.get(k(gx+dx,gy+dy,gz+dz));if(list)for(const s of list){const d=s.p.distanceToSquared(v);if(d<bd&&d<s.reach*s.reach){bd=d;best=s}}}
-      if(best){a.copy(best.p).applyMatrix4(inverse);data.set([best.s,a.x,a.y,a.z],i*4)}else data.set([-100,0,0,0],i*4);
-    }
-    g.setAttribute('atlasWave',new THREE.BufferAttribute(data,4));g.userData.atlasWaveKey=key;
-  }
-  // Materials can be swapped (selection, opacity): wrap whatever each mesh currently uses, every frame.
-  return{set(i,s,width,amplitude){WAVES.value[i].set(s,width,amplitude,0)},clear(){for(const w of WAVES.value)w.set(-10,1,0,0)},ensure(){for(const m of meshes)for(const material of [].concat(m.material))wrapMaterial(material)}};
 }
 
 // Shared frame of the four cut animations: a bolus on a route through the cut and wall waves around it.

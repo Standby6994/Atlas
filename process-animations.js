@@ -9,6 +9,7 @@ export const PROCESSES=[
   {id:'stomach',title:'Mistura e esvaziamento do estômago',where:'Corte do estômago',target:{mode:'internal-stomach',organ:'stomach',representation:'detailed'},module:'./process-digestion.js',factory:'createStomachProcess'},
   {id:'small-intestine',title:'Intestino delgado: segmentação e absorção',where:'Corte do intestino delgado',target:{mode:'internal-small-intestine',organ:'small-intestine',representation:'detailed'},module:'./process-digestion.js',factory:'createSmallIntestineProcess'},
   {id:'large-intestine',title:'Intestino grosso: haustros e movimento de massa',where:'Corte do intestino grosso',target:{mode:'internal-large-intestine',organ:'large-intestine',representation:'detailed'},module:'./process-digestion.js',factory:'createLargeIntestineProcess'},
+  {id:'cardiac-cycle',title:'Ciclo cardíaco',where:'Corte do coração',target:{mode:'internal-heart',organ:'heart',representation:'detailed'},module:'./process-heart.js',factory:'createCardiacCycle'},
   {id:'nerve-impulse',title:'Impulso nervoso e sinapse',where:'Neurônio do tecido nervoso',target:{mode:'histo-nervous-tissue'},module:'./process-neuron.js',factory:'createNerveImpulse'}
 ];
 const SPEEDS=[.5,1,2];
@@ -34,6 +35,42 @@ export const clamp01=x=>Math.min(1,Math.max(0,x));
 // Marks helper objects so picking, occlusion and the catalogue ignore them.
 export function helper(object){object.traverse(o=>{o.userData.noOcclusion=true;o.userData.processHelper=true;o.raycast=()=>{}});return object}
 export function disposeObject(root){root.removeFromParent();root.traverse(o=>{if(o.geometry&&!o.userData.sharedGeometry)o.geometry.dispose();for(const m of [].concat(o.material||[]))if(m&&!m.userData?.shared)m.dispose()})}
+
+// --- Wall motion (detailed cuts, heart). ---
+// Each vertex stores its position along a route (s, offset by 1000 so a missing attribute, read as 0, never moves)
+// and the nearest route point in its own mesh space; a vertex shader scales the surface towards/away from that
+// point with up to six Gaussian waves along s. With every wave at zero the drawing is identical to the original.
+const WAVES={value:Array.from({length:6},()=>new THREE.Vector4(-10,1,0,0))};
+const WAVE_KEY='atlas-process-wave-v2';
+function wrapMaterial(material){
+  if(!material||material.userData.atlasProcessWave||!(material.isMeshStandardMaterial||material.isMeshPhysicalMaterial))return;
+  material.userData.atlasProcessWave=true;const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
+  material.onBeforeCompile=function(shader,renderer){compile.call(this,shader,renderer);shader.uniforms.atlasWaves=WAVES;
+    shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nattribute vec4 atlasWave;\nuniform vec4 atlasWaves[6];')
+      .replace('#include <begin_vertex>',`#include <begin_vertex>
+      if(atlasWave.x>500.0){float atlasS=atlasWave.x-1000.0,atlasK=0.0;for(int i=0;i<6;i++){vec4 w=atlasWaves[i];float d=(atlasS-w.x)/w.y;atlasK+=w.z*exp(-d*d);}transformed=atlasWave.yzw+(transformed-atlasWave.yzw)*(1.0+atlasK);}`)};
+  material.customProgramCacheKey=()=>key+'|'+WAVE_KEY;material.needsUpdate=true;
+}
+/** routes: [{curve, offset, reach, accept?(mesh)}] in scene space; s = offset + arc-length position (0–1). */
+export function createWaveField(group,routes,key){
+  const meshes=[];group.updateMatrixWorld(true);group.traverse(o=>{if(o.isMesh&&o.geometry?.attributes.position)meshes.push(o)});
+  const k=(x,y,z)=>x+','+y+','+z;
+  const sets=routes.map(r=>{const cell=r.reach,grid=new Map(),n=Math.max(64,Math.round(r.curve.getLength()/.006));for(let i=0;i<=n;i++){const u=i/n,p=r.curve.getPointAt(u),id=k(Math.floor(p.x/cell),Math.floor(p.y/cell),Math.floor(p.z/cell));(grid.get(id)||grid.set(id,[]).get(id)).push({s:r.offset+u,p})}return{r,cell,grid}});
+  const v=new THREE.Vector3(),a=new THREE.Vector3(),inverse=new THREE.Matrix4();
+  for(const mesh of meshes){
+    const g=mesh.geometry;if(g.userData.atlasWaveKey===key)continue;
+    const pos=g.attributes.position,data=new Float32Array(pos.count*4),allowed=sets.filter(x=>!x.r.accept||x.r.accept(mesh));inverse.copy(mesh.matrixWorld).invert();
+    for(let i=0;i<pos.count;i++){
+      v.fromBufferAttribute(pos,i).applyMatrix4(mesh.matrixWorld);let best=null,bd=Infinity;
+      for(const {r,cell,grid} of allowed){const gx=Math.floor(v.x/cell),gy=Math.floor(v.y/cell),gz=Math.floor(v.z/cell),limit=r.reach*r.reach;
+        for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(let dz=-1;dz<=1;dz++){const list=grid.get(k(gx+dx,gy+dy,gz+dz));if(list)for(const s of list){const d=s.p.distanceToSquared(v);if(d<bd&&d<limit){bd=d;best=s}}}}
+      if(best){a.copy(best.p).applyMatrix4(inverse);data.set([best.s+1000,a.x,a.y,a.z],i*4)}else data.set([-100,0,0,0],i*4);
+    }
+    g.setAttribute('atlasWave',new THREE.BufferAttribute(data,4));g.userData.atlasWaveKey=key;
+  }
+  // Materials can be swapped (selection, opacity): wrap whatever each mesh currently uses, every frame.
+  return{set(i,s,width,amplitude){WAVES.value[i].set(s,width,amplitude,0)},clear(){for(const w of WAVES.value)w.set(-10,1,0,0)},ensure(){for(const m of meshes)for(const material of [].concat(m.material))wrapMaterial(material)}};
+}
 
 /** Control bar and timeline. `app` supplies the scene and how to open each model. */
 export function createProcessPlayer({bar,menu,toggle,app}){
@@ -85,7 +122,7 @@ export function createProcessPlayer({bar,menu,toggle,app}){
       const anim=await mod[def.factory]({THREE,app,mode:def.target.mode});if(mine!==token){anim.dispose();return}
       let t=0;const steps=anim.steps.map(s=>{const out={...s,start:t};t+=s.duration;return out});
       active={def,anim,steps,duration:t,time:0,speed:1,playing:false,last:0,shown:-1,mode:def.target.mode};ui.speed.textContent='1×';
-      ui.chart.hidden=!anim.chart;if(anim.chart)ui.chart.querySelector('figcaption').textContent=anim.chart.caption||'';
+      ui.chart.hidden=!anim.chart;bar.classList.toggle('with-chart',!!anim.chart);if(anim.chart)ui.chart.querySelector('figcaption').textContent=anim.chart.caption||'';
       // Helper materials compile before the first animated frame, so playback does not start with a hitch.
       await app.warm();if(mine!==token)return;
       ui.play.disabled=false;seek(stillMode()?stillTime(0):0);
