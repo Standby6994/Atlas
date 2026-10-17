@@ -214,9 +214,11 @@ function attachShader(material, finish) {
     }
     shader.uniforms.tissueAtlas = { value: getTissueTexture() };
     shader.uniforms.tissueScale = { value: p.scale };
-    shader.uniforms.tissueTone = { value: p.tone * strength };
+    // relief: authored organ cuts are shown ~10× larger than the same organ in the body, so their finish needs more relief.
+    const relief = finish.relief || 1;
+    shader.uniforms.tissueTone = { value: p.tone * strength * Math.sqrt(relief) };
     shader.uniforms.tissueRoughness = { value: p.variation * strength };
-    shader.uniforms.tissueBump = { value: p.bump * strength };
+    shader.uniforms.tissueBump = { value: p.bump * strength * relief };
     shader.uniforms.tissueWeights = { value: new THREE.Vector4(...p.weights) };
     shader.uniforms.tissueWarmth = { value: p.warmth * strength };
     shader.uniforms.tissueFrame = { value: new THREE.Matrix3().fromArray(finish.frame || [1,0,0,0,1,0,0,0,1]) };
@@ -317,7 +319,8 @@ export function createTissueMaterial(original, metadata = {}, options = {}) {
   const customShader = source.onBeforeCompile !== THREE.Material.prototype.onBeforeCompile;
   const textured = !optical && quality !== 'light' && !hasSurfaceMap && !customShader && strength > 0;
   const frame = surfaceFrame(metadata), surfaceScale = THREE.MathUtils.clamp(Number.isFinite(metadata.surfaceScale) ? metadata.surfaceScale : 1, .01, 100);
-  const key = [tissue, profile, quality, strength, textured, frame.join(','), surfaceScale, palette || 'authored', optical?.id || 'solid', !!optical && options.naturalColors === true].join('|');
+  const relief = THREE.MathUtils.clamp(Number.isFinite(metadata.relief) ? metadata.relief : 1, 1, 40);
+  const key = [tissue, profile, quality, strength, textured, frame.join(','), surfaceScale, relief, palette || 'authored', optical?.id || 'solid', !!optical && options.naturalColors === true].join('|');
   let variants = materialCache.get(source);
   if (!variants) { variants = new Map(); materialCache.set(source, variants); }
   if (variants.has(key)) return variants.get(key);
@@ -337,7 +340,7 @@ export function createTissueMaterial(original, metadata = {}, options = {}) {
     material.forceSinglePass = true;
     if (options.naturalColors === true) material.color.setHex(0xe7f0f2);
   }
-  const finish = { version: VERSION, tissue, profile, quality, strength, textured, frame, surfaceScale,
+  const finish = { version: VERSION, tissue, profile, quality, strength, textured, frame, surfaceScale, relief,
     naturalColors: !!palette && !source.map, naturalPalette: palette && !source.map ? palette : null,
     opticalDisplay: optical && !hasSurfaceMap && !customShader ? { ...optical, measured: false } : null,
     description: p.label + (palette && !source.map ? ' Paleta de tecido aproximativa, não fotográfica.' : '') };
@@ -371,7 +374,7 @@ export function copyTissueFinish(source, target, options = {}) {
 
 function meshMetadata(mesh, supplied) {
   const names = []; let current = mesh, schematic = false, system = supplied.system || supplied.za_system;
-  let tissue = supplied.tissue, fiberAxis = supplied.fiberAxis, surfaceScale = supplied.surfaceScale, organ = supplied.organ;
+  let tissue = supplied.tissue, fiberAxis = supplied.fiberAxis, surfaceScale = supplied.surfaceScale, organ = supplied.organ, relief = supplied.relief;
   let sourceName = supplied.sourceName;
   for (let depth = 0; current && depth < 12; depth++, current = current.parent) {
     const u = current.userData || {};
@@ -385,8 +388,9 @@ function meshMetadata(mesh, supplied) {
     organ ||= u.organ;
     fiberAxis ||= u.fiberAxis;
     surfaceScale ??= u.surfaceScale;
+    relief ??= u.relief;
   }
-  return { ...supplied, tissue, fiberAxis, surfaceScale, organ, sourceName, name: names.join(' ') || supplied.name || mesh.userData.name || mesh.name, system, schematic: schematic || supplied.schematic };
+  return { ...supplied, tissue, fiberAxis, surfaceScale, relief, organ, sourceName, name: names.join(' ') || supplied.name || mesh.userData.name || mesh.name, system, schematic: schematic || supplied.schematic };
 }
 
 /** Apply before saving originalMaterial in the app's selection registry. Safe

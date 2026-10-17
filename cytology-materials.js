@@ -12,7 +12,9 @@ async function acquire(mobile){
   // allocated textures after the first error. Dispose this shared batch once,
   // rather than once for every caller waiting on the same record.
   record.promise=Promise.allSettled(['albedo','normal','roughness'].map(async kind=>{
-   const texture=await loader.loadAsync(new URL('./assets/cytology/cytology-'+kind+'-'+resolution+(kind==='albedo'?'.jpg':'.png'),import.meta.url).href);
+   const url=new URL('./assets/cytology/cytology-'+kind+'-'+resolution+(kind==='albedo'?'.jpg':'.png'),import.meta.url).href;
+   // ImageBitmap decodes off the main thread, so the GPU upload no longer pays for decoding (same pixels: flipped here, not by WebGL).
+   const texture=typeof createImageBitmap==='function'?await fetch(url).then(r=>{if(!r.ok)throw Error('Textura celular indisponível.');return r.blob()}).then(blob=>createImageBitmap(blob,{imageOrientation:'flipY',premultiplyAlpha:'none',colorSpaceConversion:kind==='albedo'?'default':'none'})).then(bitmap=>{const t=new THREE.Texture(bitmap);t.flipY=false;t.needsUpdate=true;return t}):await loader.loadAsync(url);
    try{texture.colorSpace=kind==='albedo'?THREE.SRGBColorSpace:THREE.NoColorSpace;texture.wrapS=texture.wrapT=THREE.ClampToEdgeWrapping;texture.minFilter=THREE.LinearMipmapLinearFilter;texture.magFilter=THREE.LinearFilter;texture.anisotropy=mobile?1:4;texture.userData={cytologyPBR:true,resolution,procedural:true};return texture}
    catch(error){texture.dispose();throw error}
   })).then(results=>{
@@ -24,7 +26,7 @@ async function acquire(mobile){
  }
  record.users++;try{await record.promise;return record}catch(error){record.users--;throw error}
 }
-function release(record){if(record.users<=0)return;record.users--;if(record.users>0)return;if(sets.get(record.resolution)===record)sets.delete(record.resolution);for(const texture of record.textures||[])texture.dispose();record.textures=[]}
+function release(record){if(record.users<=0)return;record.users--;if(record.users>0)return;if(sets.get(record.resolution)===record)sets.delete(record.resolution);for(const texture of record.textures||[]){texture.dispose();texture.image?.close?.()}record.textures=[]}
 export async function applyCytologyMaterials(root,{mobile=false}={}){
  const record=await acquire(mobile),atlases=new Map(),materials=new Map(),ownedMaps=new Set();let disposed=false;
  function maps(role){if(atlases.has(role))return atlases.get(role);const index=Math.max(0,roles.indexOf(role)),margin=2/record.resolution;const textures=record.textures.map(base=>{const t=base.clone();t.repeat.set(.25-2*margin,.25-2*margin);t.offset.set((index%4)*.25+margin,1-(Math.floor(index/4)+1)*.25+margin);ownedMaps.add(t);return t});atlases.set(role,textures);return textures}

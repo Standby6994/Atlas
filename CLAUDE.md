@@ -48,11 +48,11 @@ Tudo fica na raiz; não há pasta `src/`.
 - `smart-search.js`, `picking-index.js` (raycast com BVH em `vendor/bvh`), `selection-highlight.js`.
 - `learning-details.js` + `microscopy-viewer.js`: painéis de detalhe e visualizador de microfotografias.
 - `study-*.js`, `practice-session.js`: sessão de estudo, rotas de entrada, conexões entre tópicos e rascunhos da prática discursiva (persistidos em `localStorage`).
-- `tissue-materials.js`: acabamento procedural dos tecidos.
+- `tissue-materials.js`: acabamento procedural dos tecidos. `userData.relief` (lido dos pais da malha) multiplica o relevo e o contraste do acabamento; os cortes autorais usam `relief:5, surfaceScale:1.2` porque aparecem ~10× maiores que o órgão no corpo.
 
 ### Geradores de modelos 3D (carregados sob demanda)
 - Cortes autorais de órgãos: `heart-*.js`, `ovary-interior-model.js`, `reproductive-interior-models.js`, `renal-*`, `pulmonary-*`, `stomach-*`, `small-intestine-*`, `large-intestine-*`, `esophagus-*`. Vários decodificam malhas pré-calculadas de `assets/interiors/*.bin` com perfis `desktop` e `touch`.
-- `internal-models.js`: modelos internos procedurais e pool de geometria/material compartilhado (`createOrganModelContext`).
+- `internal-models.js`: modelos internos procedurais e pool de geometria/material compartilhado (`createOrganModelContext`). `organicGeometry` gera uma faixa plana na borda do corte cujo anel externo é compartilhado com a lateral (borda arredondada pelas normais, sem mover vértices originais; `options.bevel=0` desliga) e um atributo `color` com tons de profundidade (cavidades escurecem ao fundo). `mesh()` liga `vertexColors` sozinho quando a geometria tem `color`. As cavidades do coração (`cavitySurface`) usam os mesmos tons.
 - `reference-organ-models.js`: órgãos de referência a partir de `models/reference/*.glb`.
 - Histologia: `histology-models.js`, `histology-geometry.js`, `histology-materials.js`, `gastric-histology-models.js`, `colon-histology-models.js` (estes últimos leem `assets/histology/*.bin`).
 - Citologia: `cytology-models.js`, `cytology-organelles.js`, `cytology-processes.js`, `cytology-surfaces.js`, `cytology-materials.js`, `cytology-tools.js`.
@@ -72,13 +72,18 @@ Tudo fica na raiz; não há pasta `src/`.
 
 - Meta: 60 fps no iPad 9. A cena só é redesenhada quando algo muda (`requestRender`).
 - Resolução: `renderQuality.rest` (seletor Qualidade) quando a vista está parada. Durante giro e animações, `drawScene()` desenha numa textura intermediária menor (`renderQuality.motion`, que cai em passos de 0,25 até 0,75× se a média passar de 17,5 ms, salva em `localStorage`) e a amplia no canvas por um shader que repete tone mapping e espaço de cor. O canvas nunca é realocado durante um gesto. 160 ms após parar, um quadro na resolução cheia.
-- Troca de modelo: `warmUpScene()` envia texturas e compila shaders (`compileAsync`) antes do primeiro quadro; enquanto isso a imagem anterior fica na tela (`compileGate`). `clearMaterialCache(root)` descarta só os materiais do modelo removido; limpar tudo recompila o corpo inteiro.
+- Troca de modelo: `warmUpScene()` envia texturas (uma por tarefa, com `nextTask()`, para não congelar a tela) e compila shaders (`compileAsync`) antes do primeiro quadro; enquanto isso a imagem anterior fica na tela, esmaecida, com o aviso "Montando o modelo 3D…" (`compileGate`, `updateModelBusy`, classe `.is-building` no `#viewport`). `ensureModelLoaded` espera um quadro pintado (`nextPaint`) antes da geração síncrona. `clearMaterialCache(root)` descarta só os materiais do modelo removido; limpar tudo recompila o corpo inteiro. Ficam prontos em memória 3 modelos de estudo no toque e 4 no computador (`trimStudyModels`).
+- Texturas grandes (citologia, histologia) são decodificadas com `createImageBitmap` (fora da thread principal; `imageOrientation:'flipY'` e `texture.flipY=false`). Não volte ao `TextureLoader` para imagens de 2048–4096 px: o envio custava ~280 ms por textura.
+- Lista do catálogo e busca: `state.registry` é um `VersionedMap`; `coreMeshNames()` e o índice de peças (`partsSearch`, montado só no primeiro uso) são refeitos apenas quando o registro muda, e os demais índices quando a fonte de conteúdo muda. Antes disso, voltar ao corpo inteiro gastava ~0,9 s só na lista.
+- Medir pausas da troca com o painel oculto: um laço de `MessageChannel` (não é limitado em segundo plano como `setTimeout`) registra intervalos > 50 ms.
 - Lotes de desenho são fatias por altura (≤ 250 mil triângulos), para o recorte de câmera descartar o que está fora da tela.
 - `moveCamera` zera a inércia do OrbitControls antes de animar.
 - Versão leve em movimento: cada lote ganha uma cópia simplificada por agrupamento de vértices numa grade de 2,5 mm (`lod-worker.js`, Web Worker). `renderBatches.updateDetail()` (chamado em `drawScene`) só a usa durante o movimento e enquanto a célula ocupa até ~3 px; o quadro parado usa sempre a malha completa. Com todas as camadas: ~10,4 → ~4,0 milhões de triângulos no giro. Verificação: `.atlasCompareLod()` e `.atlasCaptureLod()`.
 - O índice de toque (BVH, `picking-index.js`) é montado em blocos que não podem ser interrompidos (~90 ms para 190 mil triângulos no PC). `deferPickingIndex()` adia a montagem enquanto a câmera se move (chamado em `noteMotion` e no início do gesto); sem índice, o toque usa o raycast comum.
 - Seleção no corpo: raio-X (`updateXray`) desenha em dourado só as partes encobertas da peça; não deixe os outros órgãos transparentes (transparência em massa desfaz os lotes e multiplica o custo).
 - Nada de `backdrop-filter` sobre o canvas: o navegador refaz o desfoque a cada quadro.
+- Gavetas do iPad: enquanto `setViewInset` anima o deslocamento da projeção, os quadros seguem a via de movimento (`noteMotion`, sem oclusão); o quadro final, cheio, vem 160 ms depois.
+- Seleção: o contorno dourado entra com a câmera (`selectionFade` em `selection-highlight.js`, 1 em todo quadro parado). `moveCamera` dura 420–850 ms conforme o percurso e é instantâneo com `prefers-reduced-motion`.
 - Medição: Ajustes → "Mostrar FPS". No console: `document.getElementById('anatomy-canvas').atlasRenderStats()` (chamadas, triângulos e peças por sistema) `.atlasCompareBatches()` (diferença de pixels entre lotes e desenho peça a peça; deve ficar perto de zero) e `.atlasCompareMotion(0.75)` (quadro em movimento contra o quadro direto).
 
 ## Convenções

@@ -26,17 +26,19 @@ function sampledLoop(points,n){
   return loop;
 }
 function cavitySurface(loop,levels){
-  const n=loop.length,center=loop.reduce((a,p)=>a.add(p),new THREE.Vector2()).multiplyScalar(1/n),v=[],ix=[];
+  const n=loop.length,center=loop.reduce((a,p)=>a.add(p),new THREE.Vector2()).multiplyScalar(1/n),v=[],ix=[],tones=[];
+  // Same depth tones as the wall's cavity sides (internal-models.js organicGeometry): deeper lining reads darker.
+  const tone=shade=>[1-.30*shade**1.4,1-.36*shade**1.4,1-.35*shade**1.4];
   for(let j=0;j<levels;j++){
     const t=j/(levels-1)*Math.PI*.47,s=Math.cos(t),z=FRONT-INNER_DEPTH*Math.sin(t)+.0007;
-    for(const p of loop)v.push(center.x+(p.x-center.x)*s,center.y+(p.y-center.y)*s,z);
+    for(const p of loop){v.push(center.x+(p.x-center.x)*s,center.y+(p.y-center.y)*s,z);tones.push(...tone(Math.sin(t)))}
   }
   for(let j=0;j<levels-1;j++)for(let i=0;i<n;i++){
     const a=j*n+i,b=j*n+(i+1)%n,c=b+n,d=a+n;ix.push(a,b,c,a,c,d);
   }
-  const tip=v.length/3;v.push(center.x,center.y,FRONT-INNER_DEPTH+.0007);
+  const tip=v.length/3;v.push(center.x,center.y,FRONT-INNER_DEPTH+.0007);tones.push(...tone(1));
   for(let i=0;i<n;i++)ix.push((levels-1)*n+i,(levels-1)*n+(i+1)%n,tip);
-  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(v,3));g.setAttribute('color',new THREE.Float32BufferAttribute(tones,3));g.setIndex(ix);g.computeVertexNormals();
   g.userData={continuousEndocardium:true,sharedWallBoundary:true,depth:INNER_DEPTH};
   return {geometry:g,center,loop};
 }
@@ -44,19 +46,19 @@ function cavitySurface(loop,levels){
 // Clip the rear lining into selectable atrial/ventricular patches without
 // introducing a transverse plate that would block the AV communication.
 function splitSurface(geometry,yCut){
-  const pos=geometry.attributes.position,norm=geometry.attributes.normal,index=geometry.index.array,out=[{p:[],n:[]},{p:[],n:[]}];
-  const at=i=>({p:new THREE.Vector3().fromBufferAttribute(pos,i),n:new THREE.Vector3().fromBufferAttribute(norm,i)});
+  const pos=geometry.attributes.position,norm=geometry.attributes.normal,color=geometry.attributes.color,index=geometry.index.array,out=[{p:[],n:[],c:[]},{p:[],n:[],c:[]}];
+  const at=i=>({p:new THREE.Vector3().fromBufferAttribute(pos,i),n:new THREE.Vector3().fromBufferAttribute(norm,i),c:color?new THREE.Vector3().fromBufferAttribute(color,i):null});
   for(let q=0;q<index.length;q+=3)for(let side=0;side<2;side++){
     const polygon=[at(index[q]),at(index[q+1]),at(index[q+2])],clipped=[];
     const inside=p=>side?p.p.y<=yCut:p.p.y>=yCut;
     for(let i=0;i<polygon.length;i++){
       const a=polygon[i],b=polygon[(i+1)%polygon.length],ia=inside(a),ib=inside(b);
       if(ia)clipped.push(a);
-      if(ia!==ib){const t=(yCut-a.p.y)/(b.p.y-a.p.y);clipped.push({p:a.p.clone().lerp(b.p,t),n:a.n.clone().lerp(b.n,t).normalize()})}
+      if(ia!==ib){const t=(yCut-a.p.y)/(b.p.y-a.p.y);clipped.push({p:a.p.clone().lerp(b.p,t),n:a.n.clone().lerp(b.n,t).normalize(),c:a.c&&a.c.clone().lerp(b.c,t)})}
     }
-    for(let i=1;i<clipped.length-1;i++)for(const e of[clipped[0],clipped[i],clipped[i+1]]){out[side].p.push(...e.p.toArray());out[side].n.push(...e.n.toArray())}
+    for(let i=1;i<clipped.length-1;i++)for(const e of[clipped[0],clipped[i],clipped[i+1]]){out[side].p.push(...e.p.toArray());out[side].n.push(...e.n.toArray());if(e.c)out[side].c.push(...e.c.toArray())}
   }
-  return out.map(data=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(data.p,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(data.n,3));g.userData={...geometry.userData,sharedCutSeam:yCut};return g});
+  return out.map(data=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(data.p,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(data.n,3));if(data.c.length)g.setAttribute('color',new THREE.Float32BufferAttribute(data.c,3));g.userData={...geometry.userData,sharedCutSeam:yCut};return g});
 }
 
 // Position on the exact bowl used above, found by a ray from its polar center.

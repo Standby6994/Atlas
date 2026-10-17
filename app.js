@@ -8,7 +8,7 @@ import {computeSimulation} from './simulation-engine.js';
 import {createSmartSearch} from './smart-search.js';
 import {preparePickingMesh,refreshPickCandidates,raycastVisible,deferPickingIndex} from './picking-index.js';
 import {studySelectionContext,equivalentStudyPart} from './study-selection.js';
-import {highlightSelectedMaterial,SELECTION_COLOR} from './selection-highlight.js';
+import {highlightSelectedMaterial,SELECTION_COLOR,selectionFade} from './selection-highlight.js';
 import {createLearningDetails} from './learning-details.js';
 import {createStudyConnections} from './study-connections.js';
 import {chromosomeCounts,representationMagnification} from './cytology-tools.js';
@@ -26,7 +26,9 @@ const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
 const $=id=>document.getElementById(id);
 const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number(n).toLocaleString('pt-BR',{maximumFractionDigits:2});
-const state={view:'atlas',tab:'core',search:'',studySystem:'all',studyOrgan:null,cytologyCategory:'all',botanyCategory:'all',cytologyReturnMode:'body',layers:{skeletal:true,visceral:true,cardiovascular:false,nervous:false,lymphatic:false,muscular:false,joints:false},registry:new Map(),groups:{},loaded:new Set(),loading:new Map(),core:[],coreMap:new Map(),selected:null,selectedNames:new Set(),hidden:new Set(),isolated:null,opacity:1,mode:'body',clip:'none',simulation:null,questionIndex:0};
+// The registry counts its changes, so derived lists (core mesh names, part search) are rebuilt only when it changes.
+class VersionedMap extends Map{version=0;set(k,v){this.version++;return super.set(k,v)}delete(k){this.version++;return super.delete(k)}clear(){this.version++;super.clear()}}
+const state={view:'atlas',tab:'core',search:'',studySystem:'all',studyOrgan:null,cytologyCategory:'all',botanyCategory:'all',cytologyReturnMode:'body',layers:{skeletal:true,visceral:true,cardiovascular:false,nervous:false,lymphatic:false,muscular:false,joints:false},registry:new VersionedMap(),groups:{},loaded:new Set(),loading:new Map(),core:[],coreMap:new Map(),selected:null,selectedNames:new Set(),hidden:new Set(),isolated:null,opacity:1,mode:'body',clip:'none',simulation:null,questionIndex:0};
 let physiology,simulations,atlasSystems,lexicon,contentSources,simulationSources,femaleMeta,studyContent,cytologyContent;
 let referenceCatalog=null,referencePartFunctions={parts:[]};
 let learningDetails,studyConnections,modelCoverage;
@@ -106,13 +108,17 @@ function setupOffline(){
 }
 function registerMesh(mesh){if(!meshSet.has(mesh)){meshSet.add(mesh);allMeshObjects.push(mesh)}preparePickingMesh(mesh)}
 function freezeModel(root){root.updateMatrixWorld(true);root.traverse(object=>{object.matrixAutoUpdate=false;object.matrixWorldAutoUpdate=false})}
+// Indexes are rebuilt only when their source changes; the part index (thousands of pieces) is built on first use.
+const searchCache=new Map();
+function cachedSearch(key,source,build){const hit=searchCache.get(key);if(hit?.source===source)return hit.search;const search=createSmartSearch(build());searchCache.set(key,{source,search});return search}
+let partsIndex=null,partsIndexVersion=-1;
 function rebuildSearch(){
-  coreSearch=createSmartSearch(state.core.map(c=>({key:c.id,title:c.name,terms:[c.id,...c.aliases||[]],description:[c.shortFunction,c.function,c.mechanism].join(' ')})));
-  partsSearch=createSmartSearch([...state.registry.values()].map(r=>({key:r.name,title:r.pt,terms:[r.name,lexicon[r.name]?.la||'',state.coreMap.get(r.coreId)?.name||'',...state.coreMap.get(r.coreId)?.aliases||[]],description:r.customInfo?.function||state.coreMap.get(r.coreId)?.shortFunction||''})));
-  organSearch=createSmartSearch((studyContent?.organs||[]).map(o=>({key:o.id,title:o.label,terms:[...(o.coreIds||[]),...(o.internalParts||[]).map(p=>p.label)],description:[o.description,...(o.internalParts||[]).map(p=>p.function)].join(' ')})));
-  histologySearch=createSmartSearch((studyContent?.histology||[]).map(o=>({key:o.id,title:o.title||o.label,terms:[o.id,...(o.parts||[]).map(p=>p.label)],description:[o.description,...(o.parts||[]).map(p=>p.function)].join(' ')})));
-  cytologySearch=createSmartSearch((cytologyContent?.views||[]).map(v=>({key:v.id,title:v.title||v.label,terms:[v.id,...(v.aliases||[]),...(v.parts||[]).map(p=>p.label)],description:[v.description,...(v.keyIdeas||[]),...(v.parts||[]).map(p=>p.function)].join(' ')})));
-  botanySearch=createSmartSearch(botanyContent.views.map(v=>({key:v.id,title:v.title||v.label,terms:[v.id,...v.parts.map(p=>p.label)],description:[v.description,...v.parts.map(p=>p.mechanism)].join(' ')})));
+  coreSearch=cachedSearch('core',state.core,()=>state.core.map(c=>({key:c.id,title:c.name,terms:[c.id,...c.aliases||[]],description:[c.shortFunction,c.function,c.mechanism].join(' ')})));
+  partsSearch=query=>{if(partsIndexVersion!==state.registry.version){partsIndex=createSmartSearch([...state.registry.values()].map(r=>({key:r.name,title:r.pt,terms:[r.name,lexicon[r.name]?.la||'',state.coreMap.get(r.coreId)?.name||'',...state.coreMap.get(r.coreId)?.aliases||[]],description:r.customInfo?.function||state.coreMap.get(r.coreId)?.shortFunction||''})));partsIndexVersion=state.registry.version}return partsIndex(query)};
+  organSearch=cachedSearch('organ',studyContent?.organs,()=>(studyContent?.organs||[]).map(o=>({key:o.id,title:o.label,terms:[...(o.coreIds||[]),...(o.internalParts||[]).map(p=>p.label)],description:[o.description,...(o.internalParts||[]).map(p=>p.function)].join(' ')})));
+  histologySearch=cachedSearch('histology',studyContent?.histology,()=>(studyContent?.histology||[]).map(o=>({key:o.id,title:o.title||o.label,terms:[o.id,...(o.parts||[]).map(p=>p.label)],description:[o.description,...(o.parts||[]).map(p=>p.function)].join(' ')})));
+  cytologySearch=cachedSearch('cytology',cytologyContent?.views,()=>(cytologyContent?.views||[]).map(v=>({key:v.id,title:v.title||v.label,terms:[v.id,...(v.aliases||[]),...(v.parts||[]).map(p=>p.label)],description:[v.description,...(v.keyIdeas||[]),...(v.parts||[]).map(p=>p.function)].join(' ')})));
+  botanySearch=cachedSearch('botany',botanyContent.views,()=>botanyContent.views.map(v=>({key:v.id,title:v.title||v.label,terms:[v.id,...v.parts.map(p=>p.label)],description:[v.description,...v.parts.map(p=>p.mechanism)].join(' ')})));
 }
 function updateCatalogUi(){
   for(const tab of ['core','all','internal','histology','cytology','botany']){const button=$(tab+'-tab');button.classList.toggle('active',state.tab===tab);button.setAttribute('aria-pressed',String(state.tab===tab))}
@@ -176,10 +182,12 @@ function matchCore(name){
   return resolveCore(name,namedSystems.get(name)||(/^VH_F/.test(name)?'female':null),state.core);
 }
 
+const coreMeshCache=new Map();let coreMeshVersion=-1;
+function coreMeshNames(core){if(coreMeshVersion!==state.registry.version){coreMeshCache.clear();coreMeshVersion=state.registry.version}let names=coreMeshCache.get(core.id);if(!names){names=getCoreMeshNames(core,state.registry);coreMeshCache.set(core.id,names)}return names}
 function namesForCore(core){
   const entry=resolveStudyEntry(core?.id);if(entry?.mode===state.mode){const ids=new Set(entry.partIds);return(studyModels.get(state.mode)?.parts||[]).filter(p=>ids.has(p.id)).map(p=>p.registryName)}
   if(state.mode.startsWith('micro-')&&['nephron','alveoli','neuron','sarcomere','skin'].includes(core.id)&&MICRO_CORE_MODELS[core.id]===state.mode.slice(6))return [...state.registry.values()].filter(r=>r.system===state.mode).map(r=>r.name);
-  return getCoreMeshNames(core,state.registry).filter(n=>{const system=state.registry.get(n)?.system;return state.mode.startsWith('micro-')?system===state.mode:state.mode==='female'?system==='female':system!=='female'&&!isDetailMode(system||'')});
+  return coreMeshNames(core).filter(n=>{const system=state.registry.get(n)?.system;return state.mode.startsWith('micro-')?system===state.mode:state.mode==='female'?system==='female':system!=='female'&&!isDetailMode(system||'')});
 }
 function createRegistry(){
   for(const [system,names] of Object.entries(atlasSystems)){
@@ -229,7 +237,7 @@ function renderList(){
     const parts=partsSearch(state.search);if(parts.items.length&&(!result.items.length||!parts.approximate)){useCore=false;result=parts}
   }
   const items=result.items.map(item=>{
-    if(useCore){const c=state.coreMap.get(item.key);return {key:c.id,title:c.name,subtitle:systemLabel(c.system),core:true,hasMesh:getCoreMeshNames(c,state.registry).length>0||!!MICRO_CORE_MODELS[c.id]}}
+    if(useCore){const c=state.coreMap.get(item.key);return {key:c.id,title:c.name,subtitle:systemLabel(c.system),core:true,hasMesh:coreMeshNames(c).length>0||!!MICRO_CORE_MODELS[c.id]}}
     const r=state.registry.get(item.key);return {key:r.name,title:r.pt,subtitle:MODEL_SYSTEMS[r.system]?.name||(r.system==='female'?'Reprodutor feminino':r.system.startsWith('cyto-')?'Citologia · modelo didático':r.system.startsWith('histo-')?'Histologia · modelo didático':r.system.startsWith('internal-')?'Interior do órgão · corte didático':'Esquema microscópico 3D'),core:false,hasMesh:true};
   });
   $('list-title').textContent=useCore?'Estruturas essenciais':state.tab==='core'?'Encontradas no modelo':'Peças do modelo';
@@ -274,13 +282,17 @@ function resize(){if(!renderer||state.view!=='atlas')return;const rect=$('viewpo
 // Floating tablet toolbars also cover the top and bottom of the viewer.
 function chromeInset(){return tabletUI.active?{top:isStudyMode(state.mode)?122:64,bottom:80}:{top:0,bottom:0}}
 function applyViewOffset(){const w=renderer.domElement.clientWidth,h=renderer.domElement.clientHeight,chrome=chromeInset(),x=viewInset.x/2,y=(viewInset.y+chrome.bottom-chrome.top)/2;if(w&&h&&(x||y))camera.setViewOffset(w,h,x,y,w,h);else camera.clearViewOffset()}
-function setViewInset(x,y,target={x,y}){viewInset.x=x;viewInset.y=y;viewInset.target=target;if(camera){applyViewOffset();requestRender()}}
+// While a drawer slides, frames take the light motion path (no occlusion pass); the settled frame is drawn in full 160 ms later.
+function setViewInset(x,y,target={x,y}){viewInset.x=x;viewInset.y=y;viewInset.target=target;if(camera){if(x!==target.x||y!==target.y)noteMotion();applyViewOffset();requestRender()}}
 function visibleFraction(){const w=renderer.domElement.clientWidth,h=renderer.domElement.clientHeight,chrome=chromeInset();if(!w||!h)return{x:1,y:1};const inset=viewInset.target;return{x:Math.max(.25,(w-inset.x)/w),y:Math.max(.25,(h-inset.y-chrome.top-chrome.bottom)/h)}}
 function requestRender(){if(!frameRequested){frameRequested=true;requestAnimationFrame(renderFrame)}}
 function renderFrame(now){
   frameRequested=false;if(!renderer||state.view!=='atlas'||document.hidden||compileGate)return;
   let moving=!!tween||controls.autoRotate||renderQuality.dragging;
-  if(tween){const f=Math.min(1,(now-tween.start)/600),smooth=f<.5?4*f*f*f:1-(-2*f+2)**3/2;camera.position.lerpVectors(tween.fromPosition,tween.toPosition,smooth);controls.target.lerpVectors(tween.fromTarget,tween.toTarget,smooth);controls.update();if(f===1)tween=null}
+  // A new selection's gold rim fades in while the camera travels to it; without a camera move it appears at once.
+  const selectedKey=state.selected?.key||null;if(selectedKey!==fadeSelectionKey){fadeSelectionKey=selectedKey;selectionFade.start=selectedKey&&tween?now:0}
+  selectionFade.value=tween&&selectionFade.start?Math.min(1,(now-selectionFade.start)/(tween.duration*.55)):1;
+  if(tween){const f=Math.min(1,(now-tween.start)/tween.duration),smooth=f<.5?4*f*f*f:1-(-2*f+2)**3/2;camera.position.lerpVectors(tween.fromPosition,tween.toPosition,smooth);controls.target.lerpVectors(tween.fromTarget,tween.toTarget,smooth);controls.update();if(f===1)tween=null}
   else if((controls.enableDamping||controls.autoRotate)&&controls.update())moving=true;
   if(moving)noteMotion();
   drawScene();updateSelectedMarker();if(moving)measureMotion(now);updateFpsMeter();
@@ -289,10 +301,18 @@ function renderFrame(now){
 // A newly shown model compiles its shaders and uploads its textures before its first frame, so the switch
 // does not freeze mid-animation; the previous image stays on screen meanwhile and the new one fades in.
 let compileGate=null;const uploadedTextures=new WeakSet();
+// Yields to pending input and other tasks; unlike setTimeout it is not throttled in background tabs.
+const nextTask=()=>new Promise(resolve=>{const channel=new MessageChannel();channel.port1.onmessage=()=>resolve();channel.port2.postMessage(0)});
+// While a model is built or compiled the previous image stays, dimmed, with a small progress chip (CSS only, runs on the compositor).
+function updateModelBusy(){$('viewport')?.classList.toggle('is-building',modelLoading.size>0||!!compileGate)}
+// Lets the browser paint the progress chip before a long synchronous model build.
+const nextPaint=()=>new Promise(resolve=>{requestAnimationFrame(()=>setTimeout(resolve));setTimeout(resolve,120)});
 function warmUpScene(){
-  scene.traverseVisible(o=>{if(!o.isMesh)return;for(const m of [].concat(o.material))for(const key of ['map','normalMap','roughnessMap','metalnessMap','aoMap','emissiveMap','alphaMap']){const t=m?.[key];if(t&&!uploadedTextures.has(t)){uploadedTextures.add(t);renderer.initTexture(t)}}});
-  const gate=Promise.race([renderer.compileAsync(scene,camera),new Promise(resolve=>setTimeout(resolve,4000))]).catch(()=>{}).then(()=>{if(compileGate!==gate)return;compileGate=null;if(tween)tween.start=performance.now();fadeInCanvas();requestRender()});
-  compileGate=gate;
+  const pending=[];scene.traverseVisible(o=>{if(!o.isMesh)return;for(const m of [].concat(o.material))for(const key of ['map','normalMap','roughnessMap','metalnessMap','aoMap','emissiveMap','alphaMap']){const t=m?.[key];if(t&&!uploadedTextures.has(t)){uploadedTextures.add(t);pending.push(t)}}});
+  // Large maps (2048–4096 px) go to the GPU one per task: input and CSS animations keep running between uploads.
+  const gate=(async()=>{await null;for(let i=0;i<pending.length;i++){if(i)await nextTask();if(compileGate!==gate){for(const t of pending.slice(i))uploadedTextures.delete(t);return}renderer.initTexture(pending[i])}
+    await Promise.race([renderer.compileAsync(scene,camera),new Promise(resolve=>setTimeout(resolve,4000))]).catch(()=>{})})().then(()=>{if(compileGate!==gate)return;compileGate=null;updateModelBusy();if(tween)tween.start=performance.now();fadeInCanvas();requestRender()});
+  compileGate=gate;updateModelBusy();
 }
 function setRenderRatio(ratio){if(Math.abs(renderer.getPixelRatio()-ratio)>.01)renderer.setPixelRatio(ratio)}
 function storedMotionRatio(rest){try{const saved=Number(localStorage.getItem('atlas-motion-ratio-'+rest));return saved>=.75&&saved<=rest?saved:rest}catch{return rest}}
@@ -366,11 +386,16 @@ function updateSelectedMarker(){
   if(position||!key)markerSelectionKey=key;
 }
 // Soften model swaps: the canvas fades in instead of the new model popping into view.
-function fadeInCanvas(){if(!matchMedia('(prefers-reduced-motion:reduce)').matches)renderer?.domElement.animate([{opacity:0},{opacity:1}],{duration:380,easing:'ease-out'})}
+function fadeInCanvas(){if(!matchMedia('(prefers-reduced-motion:reduce)').matches)renderer?.domElement.animate([{opacity:.15,transform:'scale(.985)'},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.22,.8,.24,1)'})}
+let fadeSelectionKey=null;
 function moveCamera(target,position,instant=false){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)instant=true;
   // Leftover inertia from the last drag would keep pushing the camera during and after the animation.
   controls._sphericalDelta?.set(0,0,0);controls._panOffset?.set(0,0,0);if('_scale' in controls)controls._scale=1;
-  if(instant){tween=null;camera.position.copy(position);controls.target.copy(target);controls.update()}else tween={start:performance.now(),fromPosition:camera.position.clone(),fromTarget:controls.target.clone(),toPosition:position.clone(),toTarget:target.clone()};requestRender();
+  if(instant){tween=null;camera.position.copy(position);controls.target.copy(target);controls.update()}else{
+    // Short hops stay quick and long flights get more time: 420–850 ms by the distance travelled relative to the view.
+    const reach=Math.max(1e-3,camera.position.distanceTo(controls.target)),travel=(camera.position.distanceTo(position)+controls.target.distanceTo(target))/reach;
+    tween={start:performance.now(),duration:Math.min(850,420+260*Math.log2(1+travel)),fromPosition:camera.position.clone(),fromTarget:controls.target.clone(),toPosition:position.clone(),toTarget:target.clone()}}requestRender();
 }
 function fitBounds(bounds,direction='front',instant=false){
   if(renderer)applyViewOffset();
@@ -620,7 +645,8 @@ async function openStudy(mode,organId,context=null,{allowAlternative=true,preser
 }
 function histologyOrgans(id){return [...new Set([...(studyTissue(id)?.organIds||[]),...(studyContent?.organs||[]).filter(o=>o.histologyId===id||o.histologyIds?.includes(id)).map(o=>o.id)])]}
 function trimStudyModels(keep){
-  const limit=touchDevice?2:3;let changed=false;
+  // Built models stay ready for quick returns; three on the iPad (each detailed cut is a few MB of geometry).
+  const limit=touchDevice?3:4;let changed=false;
   for(const [mode,model] of studyModels){
     if(studyModels.size<=limit)break;if(mode===keep||mode===state.mode||mode===latestRequestedMode||modelLoading.has(mode))continue;
     clearMaterialCache(model.group);changed=true;
@@ -679,7 +705,7 @@ function initPicking(){
     for(let i=0;i<direct.length;i+=4){if(direct[i+3]>8){covA++;for(let k=0;k<3;k++)sumA[k]+=direct[i+k]}if(motion[i+3]>8){covB++;for(let k=0;k<3;k++)sumB[k]+=motion[i+k]}let d=0;for(let k=0;k<4;k++)d+=Math.abs(direct[i+k]-motion[i+k]);if(d>40)changed++}
     return{coverageDirect:covA,coverageMotion:covB,avgDirect:sumA.map(v=>Math.round(v/(covA||1))),avgMotion:sumB.map(v=>Math.round(v/(covB||1))),changedPixels:changed}};
   // Synchronous frame measurement (draw calls, CPU submit time) that works even when the page is not painting.
-  renderer.domElement.atlasRenderStats=(frames=20)=>{if(tween){camera.position.copy(tween.toPosition);controls.target.copy(tween.toTarget);controls.update();tween=null}const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();drawScene()}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
+  renderer.domElement.atlasRenderStats=(frames=20)=>{if(tween){camera.position.copy(tween.toPosition);controls.target.copy(tween.toTarget);controls.update();tween=null}selectionFade.value=1;const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();drawScene()}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
   renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){touchPointers.add(e.pointerId);if(touchPointers.size>1||e.isPrimary===false){down=null;$('hover-label').hidden=true;return}}down={id:e.pointerId,x:e.clientX,y:e.clientY,time:performance.now(),moved:false};$('hover-label').hidden=true});
   renderer.domElement.addEventListener('pointercancel',e=>{touchPointers.delete(e.pointerId);down=null});
   renderer.domElement.addEventListener('pointerup',e=>{if(down&&!down.moved&&down.id===e.pointerId&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&performance.now()-down.time<800&&e.button===0){const hit=pick(e);if(hit)selectItem(hit.name,false,false)}touchPointers.delete(e.pointerId);down=null});
@@ -691,6 +717,7 @@ async function ensureModelLoaded(mode){
   if(isStudyMode(mode)&&!studyModels.has(mode)){
     const definition=studyDefinition(mode);if(!definition)return;
     try{
+      await nextPaint();
       const representation=studyRepresentationFor(mode),detailed=representation==='detailed'&&interiorSpec(mode);
       const sourcedHeart=mode==='internal-heart'&&representation==='reference';
       let anatomicalModel=null;
@@ -732,7 +759,7 @@ async function ensureModelLoaded(mode){
     }catch(error){console.error(error);toast('Não foi possível abrir esta vista. Tente novamente.');return}
   }
   if(mode.startsWith('micro-')&&!microModels.has(mode)){
-    try{const {buildMicroModel}=await import('./micro-models.js');const model=buildMicroModel(mode.slice(6));model.group.visible=false;scene.add(model.group);model.group.updateMatrixWorld(true);microModels.set(mode,model);
+    try{await nextPaint();const {buildMicroModel}=await import('./micro-models.js');const model=buildMicroModel(mode.slice(6));model.group.visible=false;scene.add(model.group);model.group.updateMatrixWorld(true);microModels.set(mode,model);
       for(const [i,part] of model.parts.entries()){const raw=mode+':'+(part.name||i);part.registryName=raw;part.object.userData.atlasName=raw;part.object.traverse(m=>{if(m.isMesh){m.userData.atlasName=raw;m.userData.originalMaterial=m.material;registerMesh(m)}});state.registry.set(raw,{name:raw,system:mode,pt:part.pt||part.name,coreId:part.coreId||null,object:part.object,customInfo:{...part,shortFunction:part.function},search:normalise([part.pt,part.name,part.coreId,part.function].join(' '))})}
       freezeModel(model.group);
     }catch(error){console.error(error);toast('Não foi possível abrir o esquema 3D.');return}
@@ -759,8 +786,8 @@ async function switchModel(mode,selectionToken=null,{preserveTrail=false,organCo
   latestRequestedMode=mode;
   const token=++modeVersion,selection=selectionToken??++selectionVersion;
   const cached=studyModels.get(mode);if(mode.startsWith('internal-')&&cached&&cached.viewRepresentation!==studyRepresentationFor(mode))removeStudyModel(mode);
-  if(!modelLoading.has(mode))modelLoading.set(mode,ensureModelLoaded(mode));
-  try{await modelLoading.get(mode)}catch{return false}finally{modelLoading.delete(mode)}
+  if(!modelLoading.has(mode))modelLoading.set(mode,ensureModelLoaded(mode));updateModelBusy();
+  try{await modelLoading.get(mode)}catch{return false}finally{modelLoading.delete(mode);updateModelBusy()}
   if(token!==modeVersion||selection!==selectionVersion){if(trimStudyModels(state.mode)){rebuildSearch();applyVisibility();renderList()}return false}
   if(mode==='female'&&!state.loaded.has('female')||mode.startsWith('micro-')&&!microModels.has(mode)||isStudyMode(mode)&&!studyModels.has(mode))return false;
   if(mode.startsWith('cyto-')&&!state.mode.startsWith('cyto-')){state.cytologyReturnMode=state.mode;cytologyOrigin=studySnapshot()}

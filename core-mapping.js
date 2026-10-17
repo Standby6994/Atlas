@@ -2,7 +2,17 @@
 // the app's tissue/class description; it does not mean the mesh is unidentified.
 // Do not infer an organ's function from an artery, ligament or nerve named after it.
 
+// Mesh names repeat on every catalog refresh; remembering them avoids re-running the Unicode steps.
+const normalized = new Map();
 function normalize(value) {
+  const key = String(value ?? ''), hit = normalized.get(key);
+  if (hit !== undefined) return hit;
+  const result = normalizeText(key);
+  if (normalized.size > 20000) normalized.clear();
+  normalized.set(key, result);
+  return result;
+}
+function normalizeText(value) {
   return String(value ?? '').slice(0, 600).normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').replace(/([a-z])([A-Z])/g, '$1 $2')
     .toLowerCase().replace(/\.(?:l|r|\d+)$/g, '')
@@ -240,17 +250,18 @@ export function listMappings(cores, atlas) {
 // Selecting "heart" can reveal chambers and valves without relabeling each part.
 export function getCoreMeshNames(selectedCore, registry) {
   if (!selectedCore?.id || !registry) return [];
-  const entries = registry instanceof Map ? [...registry.entries()]
+  const entries = registry instanceof Map ? registry
     : Array.isArray(registry) ? registry.map((v, i) => [i, v]) : Object.entries(registry);
-  const names = new Set();
+  const names = new Set(), byName = ['heart', 'lungs', 'kidneys'].includes(selectedCore.id);
   const heartIds = new Set(['heart', 'right-atrium', 'left-atrium', 'right-ventricle', 'left-ventricle',
     'tricuspid-valve', 'mitral-valve', 'aortic-valve', 'pulmonary-valve', 'sinoatrial-node']);
   const foreignVessel = /\b(artery|arteries|arterial|vein|veins|venous|vessel|vessels|nerve|nerves|aorta|vena cava|pulmonary trunk|arteria|veia|nervo|lymphatic)\b/;
   for (const [key, item] of entries) {
     const name = typeof item === 'string' ? item : item?.name ?? (typeof key === 'string' ? key : null);
     if (!name) continue;
+    // Only the heart, lungs and kidneys match by name; every other core matches by coreId alone.
+    if (!byName) { if (item?.coreId === selectedCore.id) names.add(name); continue; }
     const n = normalize(name), system = normalize(item?.system);
-    const direct = item?.coreId === selectedCore.id;
     if (selectedCore.id === 'heart') {
       if (foreignVessel.test(n) || system === 'nervous' || /\b(cerebral|brain|lateral ventricle|third ventricle|fourth ventricle)\b/.test(n)) continue;
       if (heartIds.has(item?.coreId) || /\b(heart|coracao|right atrium|left atrium|right ventricle|left ventricle|atrium|atrial|ventricular|myocardium|pericardium|epicardium|endocardium|interatrial|interventricular|tricuspid|mitral|papillary muscle|trabeculae carneae|atrioventricular valve|left coronary leaflet|right coronary leaflet|non coronary leaflet)\b/.test(n)
@@ -267,7 +278,6 @@ export function getCoreMeshNames(selectedCore, registry) {
       if (item?.coreId === 'kidneys' || /\b(kidney|kidneys|rim|rins|renal cortex|renal medulla|renal pelvis|renal pyramid|renal papilla)\b/.test(n)) names.add(name);
       continue;
     }
-    if (direct) names.add(name);
   }
   return [...names];
 }

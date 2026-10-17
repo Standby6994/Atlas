@@ -283,3 +283,11 @@ details>summary{transition:color .18s}
 .tablet-portrait .atlas-layout[data-detail=open] .board-mini{top:calc((100% - var(--sheet-h))/2)}
 .tablet-ui .board-tools button{min-height:56px}
 .viewer-panel:has(.board-mini:not([hidden])) .orientation-label{display:none}
+
+/* Model switch: the previous image dims while the next model is built; a chip appears only if the wait passes ~150 ms. */
+.model-busy{position:absolute;left:50%;top:50%;z-index:3;display:flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid #2c4252;border-radius:999px;background:#0e1927e6;color:var(--text);font-size:13px;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.96);transition:opacity .15s,transform .15s}
+.model-busy .loader{width:18px;height:18px;will-change:transform}
+#anatomy-canvas{transition:opacity .25s var(--ease-out)}
+.viewport.is-building #anatomy-canvas{opacity:.45;transition:opacity .25s .12s var(--ease-out)}
+.viewport.is-building .model-busy{opacity:1;transform:translate(-50%,-50%);transition:opacity .2s .15s,transform .25s .15s var(--ease-out)}
+@media(prefers-reduced-motion:reduce){.viewport.is-building #anatomy-canvas{opacity:.6}.model-busy .loader{animation:none}}
