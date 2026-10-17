@@ -91,7 +91,7 @@ body{padding-bottom:env(safe-area-inset-bottom)}
 .tablet-only{display:none}
 .viewer-settings,.detail-drawer{display:contents}
 .tablet-ui{--header-h:calc(60px + env(safe-area-inset-top));--ease-out:cubic-bezier(.22,.8,.24,1);--sheet-h:min(52%,560px);--drawer-w:min(390px,40vw)}
-.tablet-ui [hidden]{display:none!important}
+[hidden]{display:none!important}
 .tablet-ui body{font-size:15px;padding-bottom:0;overscroll-behavior:none}
 .tablet-ui .app-header{position:relative;z-index:8;height:var(--header-h);min-height:0;flex-wrap:nowrap;gap:16px;padding:env(safe-area-inset-top) max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
 .tablet-ui .brand{font-size:17px}.tablet-ui .brand small{display:none}.tablet-ui .brand-mark{width:36px;height:36px}
