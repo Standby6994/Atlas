@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-16-pencil-v30';
+const APP_VERSION = '2026-10-17-systematics-v31';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
@@ -25,6 +25,13 @@ const APP_ASSETS = [
   "cytology-materials.js",
   "botany-models.js",
   "data/botany-content.json",
+  "systematics-view.js",
+  "systematics-models.js",
+  "systematics-worker.js",
+  "systematics-builders.js",
+  "systematics-geometry.js",
+  "systematics-microbes.js",
+  "data/systematics-content.json",
   "assets/cytology/cytology-albedo-4096.jpg",
   "assets/cytology/cytology-albedo-2048.jpg",
   "assets/cytology/cytology-normal-4096.png",

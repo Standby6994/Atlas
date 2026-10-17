@@ -1,0 +1,490 @@
+{
+  "version": "1.0",
+  "schemaVersion": 1,
+  "language": "pt-BR",
+  "updatedOn": "2026-10-16",
+  "scope": "Sistemática para o vestibular: três domínios, reinos tradicionais e principais filos e classes, com a fisiologia característica comparada. A árvore segue a proposta de três domínios (Woese) e relações aceitas em livros universitários; hipóteses alternativas e grupos parafiléticos são indicados no texto.",
+  "functions": [
+    {"id": "nutrition", "name": "Nutrição", "short": "Nutrição"},
+    {"id": "respiration", "name": "Respiração e trocas gasosas", "short": "Respiração"},
+    {"id": "circulation", "name": "Circulação e transporte interno", "short": "Circulação"},
+    {"id": "excretion", "name": "Excreção e osmorregulação", "short": "Excreção"},
+    {"id": "reproduction", "name": "Reprodução", "short": "Reprodução"},
+    {"id": "support", "name": "Sustentação e locomoção", "short": "Sustentação"}
+  ],
+  "tree": {
+    "id": "luca", "label": "Ancestral comum universal", "trait": "Células com membrana, DNA, RNA e ribossomos",
+    "children": [
+      {"id": "bacteria", "label": "Bacteria", "rank": "Domínio", "groupId": "bacteria", "viewId": "escherichia-coli"},
+      {"id": "archaea-eukarya", "label": "Archaea + Eukarya", "trait": "Histonas e maquinaria de transcrição semelhantes",
+        "children": [
+          {"id": "archaea", "label": "Archaea", "rank": "Domínio", "groupId": "archaea", "viewId": "halobacterium"},
+          {"id": "eukarya", "label": "Eukarya", "rank": "Domínio", "trait": "Núcleo, endomembranas e mitocôndrias (endossimbiose)",
+            "children": [
+              {"id": "protists", "label": "Protistas", "rank": "Reino Protista · grupo parafilético",
+                "children": [
+                  {"id": "protozoa", "label": "Protozoários", "rank": "Protistas heterotróficos", "groupId": "protozoa", "viewId": "paramecium"},
+                  {"id": "algae", "label": "Algas", "rank": "Protistas fotossintetizantes", "groupId": "algae"}
+                ]},
+              {"id": "plantae", "label": "Plantae", "rank": "Reino", "trait": "Embrião protegido pela planta-mãe (embriófitas)",
+                "children": [
+                  {"id": "bryophytes", "label": "Briófitas", "rank": "Avasculares", "groupId": "bryophytes"},
+                  {"id": "tracheophytes", "label": "Traqueófitas", "trait": "Xilema e floema",
+                    "children": [
+                      {"id": "pteridophytes", "label": "Pteridófitas", "rank": "Vasculares sem sementes", "groupId": "pteridophytes"},
+                      {"id": "spermatophytes", "label": "Espermatófitas", "trait": "Sementes e grão de pólen",
+                        "children": [
+                          {"id": "gymnosperms", "label": "Gimnospermas", "rank": "Sementes nuas", "groupId": "gymnosperms"},
+                          {"id": "angiosperms", "label": "Angiospermas", "rank": "Flores e frutos", "groupId": "angiosperms"}
+                        ]}
+                    ]}
+                ]},
+              {"id": "opisthokonta", "label": "Opistocontes", "trait": "Células flageladas com um flagelo posterior, quando presentes",
+                "children": [
+                  {"id": "fungi", "label": "Fungi", "rank": "Reino", "groupId": "fungi"},
+                  {"id": "animalia", "label": "Animalia", "rank": "Reino", "trait": "Multicelulares heterótrofos com desenvolvimento embrionário",
+                    "children": [
+                      {"id": "porifera", "label": "Poríferos", "rank": "Filo", "groupId": "porifera"},
+                      {"id": "eumetazoa", "label": "Eumetazoários", "trait": "Tecidos verdadeiros e células nervosas",
+                        "children": [
+                          {"id": "cnidaria", "label": "Cnidários", "rank": "Filo · diblásticos", "groupId": "cnidaria"},
+                          {"id": "bilateria", "label": "Bilatérios", "trait": "Simetria bilateral e três folhetos embrionários",
+                            "children": [
+                              {"id": "protostomia", "label": "Protostômios", "trait": "Blastóporo origina a boca",
+                                "children": [
+                                  {"id": "lophotrochozoa", "label": "Lofotrocozoários",
+                                    "children": [
+                                      {"id": "platyhelminthes", "label": "Platelmintos", "rank": "Filo · acelomados", "groupId": "platyhelminthes"},
+                                      {"id": "annelida", "label": "Anelídeos", "rank": "Filo · metaméricos", "groupId": "annelida"},
+                                      {"id": "mollusca", "label": "Moluscos", "rank": "Filo", "groupId": "mollusca"}
+                                    ]},
+                                  {"id": "ecdysozoa", "label": "Ecdisozoários", "trait": "Cutícula trocada por muda",
+                                    "children": [
+                                      {"id": "nematoda", "label": "Nematódeos", "rank": "Filo · pseudocelomados", "groupId": "nematoda"},
+                                      {"id": "arthropoda", "label": "Artrópodes", "rank": "Filo", "groupId": "arthropoda"}
+                                    ]}
+                                ]},
+                              {"id": "deuterostomia", "label": "Deuterostômios", "trait": "Blastóporo origina o ânus",
+                                "children": [
+                                  {"id": "echinodermata", "label": "Equinodermos", "rank": "Filo", "groupId": "echinodermata"},
+                                  {"id": "chordata", "label": "Cordados", "rank": "Filo", "trait": "Notocorda, tubo nervoso dorsal e fendas faríngeas",
+                                    "children": [
+                                      {"id": "fishes", "label": "Peixes", "rank": "Grupo parafilético", "groupId": "fishes"},
+                                      {"id": "tetrapoda", "label": "Tetrápodes", "trait": "Quatro membros",
+                                        "children": [
+                                          {"id": "amphibians", "label": "Anfíbios", "rank": "Classe", "groupId": "amphibians"},
+                                          {"id": "amniota", "label": "Amniotas", "trait": "Ovo amniótico",
+                                            "children": [
+                                              {"id": "reptiles", "label": "Répteis", "rank": "Classe tradicional", "groupId": "reptiles"},
+                                              {"id": "birds", "label": "Aves", "rank": "Classe", "groupId": "birds"},
+                                              {"id": "mammals", "label": "Mamíferos", "rank": "Classe", "groupId": "mammals", "atlasMode": "body"}
+                                            ]}
+                                        ]}
+                                    ]}
+                                ]}
+                            ]}
+                        ]}
+                    ]}
+                ]}
+            ]}
+        ]}
+    ]
+  },
+  "groups": [
+    {"id": "bacteria", "name": "Bactérias", "rank": "Domínio Bacteria · Reino Monera (classificação tradicional)", "cell": "Procariontes", "organization": "Unicelulares; isoladas, em colônias ou filamentos", "examples": "Escherichia coli, cianobactérias, Staphylococcus, Rhizobium",
+      "traits": ["Sem núcleo e sem organelas membranosas", "Parede com peptidoglicano na maioria", "Ribossomos 70S e cromossomo circular", "Plasmídeos frequentes"],
+      "physiology": {
+        "nutrition": "Muito diversa. Heterótrofas liberam enzimas e absorvem moléculas pequenas (decompositoras, parasitas, mutualistas). Autótrofas fazem fotossíntese (cianobactérias) ou quimiossíntese.",
+        "respiration": "Aeróbica, anaeróbica ou fermentação, conforme a espécie. Sem mitocôndrias: a cadeia respiratória fica na membrana plasmática.",
+        "circulation": "Sem sistema circulatório. O tamanho pequeno (alta razão superfície/volume) permite que difusão e transportadores de membrana bastem.",
+        "excretion": "Resíduos saem por difusão e transportadores da membrana. A parede resiste à entrada de água e evita a lise em meio hipotônico.",
+        "reproduction": "Assexuada, por divisão binária. Há recombinação genética sem reprodução: conjugação, transformação e transdução. Endósporos são formas de resistência, não de reprodução.",
+        "support": "Parede de peptidoglicano dá forma e resistência osmótica. Locomoção por flagelos que giram como hélices, quando presentes."
+      },
+      "uerj": "Penicilina interfere na formação do peptidoglicano, ausente nas células humanas: daí sua toxicidade seletiva.",
+      "commonMistake": "Bactérias não têm mitocôndrias, mas muitas fazem respiração aeróbica na membrana plasmática.",
+      "sourceIds": ["prokaryote-diversity", "prokaryote-structure", "prokaryote-metabolism"]},
+    {"id": "archaea", "name": "Arqueas", "rank": "Domínio Archaea · antes incluídas em Monera", "cell": "Procariontes", "organization": "Unicelulares", "examples": "Halobacterium, metanogênicas (Methanobrevibacter), termoacidófilas (Sulfolobus)",
+      "traits": ["Lipídios de membrana ligados por éter", "Parede sem peptidoglicano (frequentemente camada S)", "Transcrição e tradução mais parecidas com as dos eucariontes", "Comuns também em solo, oceanos e intestino, não só em ambientes extremos"],
+      "physiology": {
+        "nutrition": "Quimiotróficas ou heterotróficas. Halófilas podem usar a luz pela bacteriorrodopsina para produzir ATP, sem clorofila e sem fixar CO₂. Metanogênicas produzem metano.",
+        "respiration": "Aeróbica ou anaeróbica; a metanogênese é um metabolismo exclusivo de arqueas. A cadeia transportadora fica na membrana.",
+        "circulation": "Sem sistema de transporte interno: difusão no citoplasma e transporte pela membrana.",
+        "excretion": "Trocas pela membrana. Halófilas acumulam K⁺ e Cl⁻ no citoplasma e equilibram a pressão osmótica de um meio muito salino.",
+        "reproduction": "Assexuada: divisão binária, brotamento ou fragmentação. Trocam genes por transferência horizontal.",
+        "support": "Camada S de glicoproteína ou pseudopeptidoglicano sustenta a célula. Locomoção pelo arquelo, rotatório, de origem diferente do flagelo bacteriano."
+      },
+      "uerj": "A divisão em três domínios veio da comparação de sequências do RNA ribossômico.",
+      "commonMistake": "Arqueas não são bactérias primitivas. Não se conhecem arqueas que causem doença humana.",
+      "sourceIds": ["prokaryote-diversity", "prokaryote-structure", "micro-archaea"]},
+    {"id": "protozoa", "name": "Protozoários", "rank": "Eukarya · Reino Protista (heterotróficos)", "cell": "Eucariontes", "organization": "Unicelulares", "examples": "Paramecium, ameba, Trypanosoma cruzi, Plasmodium, Giardia",
+      "traits": ["Locomoção por pseudópodes, cílios ou flagelos (ou imóveis, nos esporozoários)", "Digestão intracelular", "Muitos parasitas importantes em saúde pública"],
+      "physiology": {
+        "nutrition": "Heterótrofos por fagocitose ou absorção. A digestão ocorre em vacúolos digestivos, dentro da célula.",
+        "respiration": "Maioria aeróbica, com mitocôndrias; O₂ entra por difusão pela membrana. Alguns parasitas intestinais vivem em pouco O₂ e têm mitocôndrias reduzidas.",
+        "circulation": "Sem sistema circulatório. A ciclose, corrente do citoplasma, distribui substâncias e vacúolos.",
+        "excretion": "Amônia sai por difusão. Em água doce, o vacúolo contrátil expulsa o excesso de água que entra por osmose. Resíduos não digeridos saem por exocitose ou pelo citoprocto.",
+        "reproduction": "Assexuada por divisão binária ou múltipla. Sexuada em alguns grupos: conjugação nos ciliados, gametas no ciclo do Plasmodium.",
+        "support": "Membrana reforçada por película e citoesqueleto; alguns têm carapaça. Movem-se por pseudópodes, cílios ou flagelos."
+      },
+      "uerj": "Ciclos da malária e da doença de Chagas; vacúolo contrátil e tonicidade do meio.",
+      "commonMistake": "Protista não é um grupo natural: reúne linhagens eucarióticas distantes por conveniência.",
+      "sourceIds": ["protist-characteristics", "protist-groups", "micro-protist-parasites"]},
+    {"id": "algae", "name": "Algas", "rank": "Eukarya · Reino Protista (fotossintetizantes)", "cell": "Eucariontes", "organization": "Unicelulares, coloniais ou multicelulares sem tecidos verdadeiros", "examples": "Diatomáceas, dinoflagelados, Euglena, algas verdes, vermelhas e pardas",
+      "traits": ["Cloroplastos de origens diferentes e pigmentos acessórios variados", "Sem raiz, caule, folha ou vasos", "Algas verdes são as parentes mais próximas das plantas"],
+      "physiology": {
+        "nutrition": "Autótrofas fotossintetizantes. Algumas são mixotróficas: Euglena também absorve matéria orgânica no escuro.",
+        "respiration": "Aeróbica, com mitocôndrias; trocas gasosas por difusão pela superfície.",
+        "circulation": "Sem sistema. Difusão entre células; em algas pardas grandes, células alongadas conduzem açúcares, sem formar vasos verdadeiros.",
+        "excretion": "Difusão pela superfície. Formas de água doce usam vacúolos contráteis.",
+        "reproduction": "Assexuada (divisão, zoósporos, fragmentação) e sexuada. Muitas multicelulares têm alternância de gerações.",
+        "support": "Parede de celulose (verdes), sílica (diatomáceas) ou placas (dinoflagelados). Flutuadores em algas pardas; flagelos nas formas móveis."
+      },
+      "uerj": "O fitoplâncton produz grande parte do O₂ e sustenta as cadeias alimentares aquáticas; dinoflagelados causam marés vermelhas.",
+      "commonMistake": "Alga não é planta: falta embrião protegido, tecidos e órgãos.",
+      "sourceIds": ["protist-groups", "green-algae", "micro-algae"]},
+    {"id": "fungi", "name": "Fungos", "rank": "Eukarya · Reino Fungi", "cell": "Eucariontes", "organization": "Unicelulares (leveduras) ou multicelulares (hifas e micélio)", "examples": "Cogumelos, bolores (Penicillium, Rhizopus), leveduras (Saccharomyces)",
+      "traits": ["Parede celular de quitina", "Reserva de glicogênio", "Corpo de hifas formando o micélio", "Parentes mais próximos dos animais que das plantas"],
+      "physiology": {
+        "nutrition": "Heterótrofos por absorção: liberam enzimas digestivas no meio e absorvem moléculas pequenas. Decompositores, parasitas ou mutualistas (micorrizas, liquens).",
+        "respiration": "Maioria aeróbica. Leveduras fermentam na falta de O₂, produzindo etanol e CO₂.",
+        "circulation": "Sem sistema. O citoplasma flui pelas hifas, através de poros nos septos, e distribui nutrientes pelo micélio.",
+        "excretion": "Difusão pela parede e membrana; liberam metabólitos e enzimas no ambiente.",
+        "reproduction": "Assexuada por esporos, brotamento ou fragmentação. Sexuada por fusão de hifas, fase dicariótica, meiose e esporos (no cogumelo, nos basídios das lamelas).",
+        "support": "Parede de quitina e hifas compactadas no corpo de frutificação. Imóveis; só os esporos flagelados de alguns grupos nadam."
+      },
+      "uerj": "Penicillium e antibióticos; fermentação no pão e em bebidas; micoses.",
+      "commonMistake": "O cogumelo é só o corpo de frutificação; a maior parte do fungo é o micélio no substrato.",
+      "sourceIds": ["fungi-characteristics", "fungi-classification", "micro-fungi"]},
+    {"id": "bryophytes", "name": "Briófitas", "rank": "Plantae · avasculares", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Musgos, hepáticas e antóceros",
+      "traits": ["Sem xilema e floema lignificados", "Gametófito (n) dominante", "Anterozoide flagelado precisa de água"],
+      "physiology": {
+        "nutrition": "Autótrofas fotossintetizantes. Absorvem água e sais por toda a superfície; rizoides fixam a planta.",
+        "respiration": "Aeróbica; trocas gasosas por difusão. Alguns esporófitos têm estômatos simples.",
+        "circulation": "Sem vasos condutores: transporte por difusão e capilaridade de célula a célula, o que limita a altura a poucos centímetros.",
+        "excretion": "Plantas não têm sistema excretor; resíduos ficam em vacúolos ou saem por difusão.",
+        "reproduction": "Alternância de gerações com gametófito (n) dominante. O anterozoide nada na água até a oosfera; o esporófito (2n) cresce preso ao gametófito e libera esporos.",
+        "support": "Sem tecidos lignificados; o turgor das células sustenta o corpo. Dependem de ambientes úmidos."
+      },
+      "uerj": "A dependência de água para a fecundação explica o porte pequeno e os ambientes úmidos.",
+      "commonMistake": "Rizoide não é raiz: não tem tecidos condutores.",
+      "sourceIds": ["early-plants", "bryophytes"]},
+    {"id": "pteridophytes", "name": "Pteridófitas", "rank": "Plantae · vasculares sem sementes", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Samambaias, avencas, cavalinhas, licopódios",
+      "traits": ["Xilema e floema", "Esporófito (2n) dominante", "Gametófito (protalo) pequeno e independente", "Sem sementes"],
+      "physiology": {
+        "nutrition": "Autótrofas; raízes absorvem água e sais minerais.",
+        "respiration": "Aeróbica; estômatos e espaços entre as células permitem as trocas gasosas.",
+        "circulation": "Vasculares: xilema conduz água e sais; floema conduz a seiva com açúcares.",
+        "excretion": "Sem sistema excretor; perda de água por transpiração e armazenamento em vacúolos.",
+        "reproduction": "Esporófito dominante com esporângios agrupados em soros. O esporo origina o protalo, onde ocorre a fecundação; o anterozoide ainda depende de água.",
+        "support": "Xilema lignificado sustenta o corpo; caule geralmente subterrâneo (rizoma). Fetos arborescentes alcançam vários metros."
+      },
+      "uerj": "Os vasos condutores permitiram maior porte; a água ainda é necessária para a fecundação.",
+      "commonMistake": "Os pontos sob as folhas da samambaia são soros (esporângios), não pragas.",
+      "sourceIds": ["seedless-vascular", "early-plants"]},
+    {"id": "gymnosperms", "name": "Gimnospermas", "rank": "Plantae · espermatófitas", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Pinheiros, araucária, cicas, ginkgo",
+      "traits": ["Sementes nuas, sem fruto", "Estróbilos (cones) masculinos e femininos", "Grão de pólen e tubo polínico", "Madeira com traqueídes"],
+      "physiology": {
+        "nutrition": "Autótrofas; raízes frequentemente associadas a fungos (micorrizas).",
+        "respiration": "Aeróbica, por estômatos; folhas em agulha reduzem a perda de água.",
+        "circulation": "Xilema formado principalmente por traqueídes e floema.",
+        "excretion": "Sem sistema excretor; resinas produzidas em canais resiníferos atuam na defesa.",
+        "reproduction": "O pólen, levado pelo vento, chega ao óvulo; o tubo polínico conduz os gametas masculinos, sem depender de água externa. A semente se forma exposta na escama do cone.",
+        "support": "Crescimento secundário produz madeira; porte geralmente arbóreo."
+      },
+      "uerj": "O pinhão da araucária é semente, não fruto.",
+      "commonMistake": "A pinha é um estróbilo, não um fruto.",
+      "sourceIds": ["seed-plants", "gymnosperms"]},
+    {"id": "angiosperms", "name": "Angiospermas", "rank": "Plantae · espermatófitas", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Gramíneas, feijão, mangueira, orquídeas",
+      "traits": ["Flores", "Óvulos dentro do ovário e sementes dentro de frutos", "Dupla fecundação", "Elementos de vaso no xilema"],
+      "physiology": {
+        "nutrition": "Autótrofas; pelos absorventes das raízes captam água e sais. Muitas formam micorrizas ou nódulos com bactérias fixadoras de nitrogênio.",
+        "respiration": "Aeróbica; O₂ e CO₂ passam por estômatos, lenticelas e espaços entre as células. Não há órgão respiratório.",
+        "circulation": "Xilema com elementos de vaso (transpiração, coesão e tensão) e floema com tubos crivados (fluxo da fonte ao dreno).",
+        "excretion": "Sem sistema excretor: transpiração, gutação, acúmulo em vacúolos e queda de folhas.",
+        "reproduction": "Polinização por vento ou animais e dupla fecundação: zigoto (2n) e endosperma (3n). O ovário origina o fruto. Também há reprodução vegetativa.",
+        "support": "Parede celular, colênquima, esclerênquima e xilema lignificado; crescimento secundário nas eudicotiledôneas lenhosas."
+      },
+      "uerj": "Fruto e semente favorecem a dispersão; a dupla fecundação forma o endosperma, reserva da semente.",
+      "commonMistake": "O fruto vem do ovário. Partes carnosas de outra origem formam pseudofrutos.",
+      "sourceIds": ["angiosperms", "seed-plants"]},
+    {"id": "porifera", "name": "Poríferos", "rank": "Animalia · filo Porifera", "cell": "Eucariontes", "organization": "Multicelulares sem tecidos verdadeiros", "examples": "Esponjas marinhas e de água doce",
+      "traits": ["Sem tecidos verdadeiros, órgãos ou células nervosas", "Coanócitos e sistema aquífero", "Espículas e espongina", "Sésseis quando adultos"],
+      "physiology": {
+        "nutrition": "Filtradores: a água entra pelos óstios e os coanócitos capturam partículas. A digestão é intracelular e amebócitos distribuem nutrientes.",
+        "respiration": "Difusão nas células banhadas pela corrente de água.",
+        "circulation": "Sem sistema: a própria corrente de água do sistema aquífero e os amebócitos fazem a distribuição.",
+        "excretion": "Amônia difunde para a água, que sai pelo ósculo.",
+        "reproduction": "Assexuada (brotamento, gêmulas, regeneração) e sexuada; muitas são hermafroditas e têm larva ciliada.",
+        "support": "Espículas calcárias ou silicosas e fibras de espongina. Adultos fixos ao substrato."
+      },
+      "uerj": "Organização celular sem tecidos: o fluxo de água substitui sistemas de órgãos.",
+      "commonMistake": "Esponjas são animais, não plantas nem colônias de protistas.",
+      "sourceIds": ["animal-features", "porifera"]},
+    {"id": "cnidaria", "name": "Cnidários", "rank": "Animalia · filo Cnidaria", "cell": "Eucariontes", "organization": "Multicelulares diblásticos", "examples": "Hidra, águas-vivas, anêmonas, corais",
+      "traits": ["Cnidócitos com nematocistos", "Cavidade gastrovascular com abertura única", "Simetria radial", "Rede nervosa difusa"],
+      "physiology": {
+        "nutrition": "Carnívoros: cnidócitos capturam presas. A cavidade gastrovascular tem uma só abertura; a digestão começa fora das células e termina dentro delas.",
+        "respiration": "Difusão pelas duas camadas de células (epiderme e gastroderme).",
+        "circulation": "Sem sistema; a cavidade gastrovascular distribui o alimento.",
+        "excretion": "Amônia sai por difusão pela superfície.",
+        "reproduction": "Pólipos se reproduzem por brotamento; medusas, por gametas. Muitas espécies alternam pólipo e medusa.",
+        "support": "Esqueleto hidrostático e mesogleia; corais formam esqueleto calcário. Pólipos fixos, medusas nadam por contração."
+      },
+      "uerj": "Branqueamento de corais: perda das algas simbiontes com o aquecimento da água.",
+      "commonMistake": "A queimadura da água-viva vem do disparo dos nematocistos, não de um ácido na pele.",
+      "sourceIds": ["animal-classify", "cnidaria"]},
+    {"id": "platyhelminthes", "name": "Platelmintos", "rank": "Animalia · filo Platyhelminthes", "cell": "Eucariontes", "organization": "Multicelulares triblásticos acelomados", "examples": "Planária, Schistosoma mansoni, Taenia solium",
+      "traits": ["Corpo achatado dorsoventralmente", "Acelomados", "Protonefrídios", "Cefalização inicial"],
+      "physiology": {
+        "nutrition": "Planárias têm faringe e intestino ramificado sem ânus. Tênias não têm tubo digestório e absorvem nutrientes pelo tegumento.",
+        "respiration": "Difusão pela superfície; o corpo achatado aproxima todas as células do meio.",
+        "circulation": "Ausente; o intestino ramificado leva nutrientes perto das células.",
+        "excretion": "Protonefrídios com células-flama retiram o excesso de água e excretas.",
+        "reproduction": "A maioria é hermafrodita com fecundação cruzada; planárias também se regeneram. Parasitas têm hospedeiros intermediários.",
+        "support": "Esqueleto hidrostático formado pelo parênquima; musculatura sob a epiderme."
+      },
+      "uerj": "Esquistossomose (caramujo Biomphalaria) e teníase/cisticercose: ciclos e saneamento.",
+      "commonMistake": "Schistosoma é exceção: tem sexos separados.",
+      "sourceIds": ["lophotrochozoa-flatworms", "micro-helminths"]},
+    {"id": "nematoda", "name": "Nematódeos", "rank": "Animalia · filo Nematoda", "cell": "Eucariontes", "organization": "Multicelulares pseudocelomados", "examples": "Ascaris lumbricoides, ancilóstomos, Wuchereria",
+      "traits": ["Corpo cilíndrico com cutícula trocada por muda", "Tubo digestório completo", "Pseudoceloma", "Só músculos longitudinais"],
+      "physiology": {
+        "nutrition": "Tubo digestório completo, com boca, faringe muscular e ânus.",
+        "respiration": "Difusão pela cutícula; não há órgãos respiratórios.",
+        "circulation": "Ausente; o líquido do pseudoceloma distribui substâncias.",
+        "excretion": "Canais excretores longitudinais ou células glandulares.",
+        "reproduction": "Sexos separados, com machos menores; fecundação interna e ovos resistentes.",
+        "support": "Esqueleto hidrostático: pseudoceloma sob pressão contra a cutícula. Músculos longitudinais produzem movimento ondulante."
+      },
+      "uerj": "Ascaridíase, ancilostomíase e filariose: transmissão e prevenção.",
+      "commonMistake": "Lombriga é nematódeo, não anelídeo: não tem segmentos nem celoma verdadeiro.",
+      "sourceIds": ["ecdysozoa-nematodes", "micro-helminths"]},
+    {"id": "annelida", "name": "Anelídeos", "rank": "Animalia · filo Annelida", "cell": "Eucariontes", "organization": "Multicelulares celomados metaméricos", "examples": "Minhoca, sanguessuga, poliquetas",
+      "traits": ["Corpo segmentado (metameria)", "Celoma verdadeiro", "Sistema circulatório fechado", "Cadeia nervosa ventral"],
+      "physiology": {
+        "nutrition": "Tubo completo e especializado; na minhoca: faringe, esôfago, papo, moela e intestino.",
+        "respiration": "Cutânea na minhoca, pela pele úmida e vascularizada; brânquias nos poliquetas.",
+        "circulation": "Fechada: vasos dorsal e ventral; vasos laterais contráteis (corações) bombeiam sangue com hemoglobina dissolvida.",
+        "excretion": "Metanefrídios, um par por segmento, filtram o líquido celômico.",
+        "reproduction": "A minhoca é hermafrodita com fecundação cruzada; o clitelo forma o casulo. Poliquetas têm sexos separados e larva trocófora.",
+        "support": "Esqueleto hidrostático: celoma segmentado e músculos circulares e longitudinais; cerdas ancoram o corpo."
+      },
+      "uerj": "Minhocas arejam e fertilizam o solo; pele úmida é condição para a respiração cutânea.",
+      "commonMistake": "Os corações da minhoca são vasos contráteis, não um coração com câmaras.",
+      "sourceIds": ["lophotrochozoa-mollusks-annelids"]},
+    {"id": "mollusca", "name": "Moluscos", "rank": "Animalia · filo Mollusca", "cell": "Eucariontes", "organization": "Multicelulares celomados", "examples": "Caramujos, mexilhões, ostras, polvos, lulas",
+      "traits": ["Corpo mole com pé, massa visceral e manto", "Concha calcária na maioria", "Rádula (exceto bivalves)"],
+      "physiology": {
+        "nutrition": "Tubo completo; a rádula raspa o alimento. Bivalves filtram partículas com as brânquias.",
+        "respiration": "Brânquias nos aquáticos; nos caramujos terrestres, a cavidade do manto funciona como pulmão.",
+        "circulation": "Aberta na maioria (coração e hemocele); fechada nos cefalópodes. Hemocianina, com cobre, transporta O₂.",
+        "excretion": "Nefrídios (rins) ligados à cavidade pericárdica.",
+        "reproduction": "Sexuada; sexos separados ou hermafroditas; desenvolvimento direto ou com larvas.",
+        "support": "Concha secretada pelo manto, reduzida ou interna em lulas e lesmas; pé muscular para rastejar ou cavar; cefalópodes nadam por jato."
+      },
+      "uerj": "O caramujo Biomphalaria é hospedeiro intermediário do esquistossomo.",
+      "commonMistake": "Polvo e lula são moluscos, apesar de não terem concha externa.",
+      "sourceIds": ["lophotrochozoa-mollusks-annelids"]},
+    {"id": "arthropoda", "name": "Artrópodes", "rank": "Animalia · filo Arthropoda", "cell": "Eucariontes", "organization": "Multicelulares celomados", "examples": "Insetos, aracnídeos, crustáceos, miriápodes",
+      "traits": ["Exoesqueleto de quitina com mudas", "Apêndices articulados", "Corpo em tagmas", "Circulação aberta"],
+      "physiology": {
+        "nutrition": "Tubo completo; peças bucais adaptadas para mastigar, sugar, picar ou lamber.",
+        "respiration": "Traqueias nos insetos (o ar chega direto aos tecidos), brânquias nos crustáceos, pulmões foliáceos nos aracnídeos.",
+        "circulation": "Aberta: coração dorsal tubular bombeia hemolinfa para a hemocele. Nos insetos, a hemolinfa quase não transporta O₂.",
+        "excretion": "Túbulos de Malpighi nos insetos, com ácido úrico e economia de água; glândulas antenais nos crustáceos.",
+        "reproduction": "Geralmente sexos separados e fecundação interna nos terrestres; metamorfose completa ou incompleta nos insetos.",
+        "support": "Exoesqueleto de quitina, trocado em mudas reguladas por hormônios; músculos presos por dentro movem os apêndices articulados."
+      },
+      "uerj": "Mosquitos vetores (dengue, malária) e controle biológico; traqueias e tamanho dos insetos.",
+      "commonMistake": "Aranha não é inseto: tem oito patas e dois tagmas.",
+      "sourceIds": ["ecdysozoa-arthropods"]},
+    {"id": "echinodermata", "name": "Equinodermos", "rank": "Animalia · filo Echinodermata", "cell": "Eucariontes", "organization": "Multicelulares celomados deuterostômios", "examples": "Estrelas-do-mar, ouriços, pepinos-do-mar",
+      "traits": ["Endoesqueleto calcário de ossículos", "Sistema ambulacral (hidrovascular)", "Simetria pentarradial no adulto, larva bilateral", "Exclusivamente marinhos"],
+      "physiology": {
+        "nutrition": "Tubo geralmente completo; estrelas-do-mar evertem o estômago sobre a presa; ouriços raspam com a lanterna de Aristóteles.",
+        "respiration": "Pápulas (brânquias dérmicas) e pés ambulacrais.",
+        "circulation": "Sistema hemal reduzido; o líquido celômico distribui substâncias.",
+        "excretion": "Sem órgão excretor: difusão pelas pápulas e pés ambulacrais.",
+        "reproduction": "Sexos separados e fecundação externa, com larva bilateral. Grande capacidade de regeneração.",
+        "support": "Ossículos calcários de origem mesodérmica; pés ambulacrais movidos por pressão de água."
+      },
+      "uerj": "Como os cordados, são deuterostômios: parentesco evolutivo próximo.",
+      "commonMistake": "O esqueleto dos equinodermos é interno, coberto pela epiderme.",
+      "sourceIds": ["deuterostomia"]},
+    {"id": "fishes", "name": "Peixes", "rank": "Chordata · Vertebrata (grupo parafilético)", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Tilápia, sardinha (ósseos); tubarão, raia (cartilaginosos)",
+      "traits": ["Brânquias", "Nadadeiras", "Coração com duas cavidades", "Linha lateral"],
+      "physiology": {
+        "nutrition": "Tubo completo; carnívoros, onívoros, herbívoros ou filtradores.",
+        "respiration": "Brânquias com fluxo contracorrente: água e sangue correm em sentidos opostos e mantêm a difusão de O₂.",
+        "circulation": "Fechada e simples: coração com átrio e ventrículo recebe só sangue pobre em O₂ e o envia às brânquias e depois ao corpo.",
+        "excretion": "Amônia sai principalmente pelas brânquias. Ósseos de água doce eliminam urina diluída; marinhos bebem água e eliminam sais. Cartilaginosos retêm ureia.",
+        "reproduction": "Ósseos geralmente com fecundação externa; cartilaginosos com fecundação interna.",
+        "support": "Endoesqueleto ósseo ou cartilaginoso; bexiga natatória regula a flutuação nos ósseos."
+      },
+      "uerj": "Osmorregulação em água doce e salgada; contracorrente nas brânquias.",
+      "commonMistake": "Peixes de água doce não bebem água; eles a ganham por osmose.",
+      "sourceIds": ["chordates", "fishes", "circulation", "osmoregulation"]},
+    {"id": "amphibians", "name": "Anfíbios", "rank": "Chordata · classe Amphibia", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Sapos, rãs, salamandras, cecílias",
+      "traits": ["Pele fina, úmida e glandular", "Metamorfose", "Ovos sem casca, postos na água ou em locais úmidos"],
+      "physiology": {
+        "nutrition": "Girinos geralmente herbívoros; adultos carnívoros, muitos com língua protrátil.",
+        "respiration": "Girino por brânquias; adulto por pulmões simples, pela pele úmida e pela cavidade bucal.",
+        "circulation": "Fechada, dupla e incompleta: dois átrios e um ventrículo, com mistura parcial de sangue.",
+        "excretion": "Girinos excretam amônia; adultos, ureia.",
+        "reproduction": "Fecundação geralmente externa, na água; metamorfose controlada por hormônios da tireoide.",
+        "support": "Endoesqueleto ósseo e quatro membros; pele sem escamas."
+      },
+      "uerj": "A pele permeável torna os anfíbios sensíveis à poluição: bons bioindicadores.",
+      "commonMistake": "Respiração cutânea exige pele úmida; em pele seca, o O₂ não se dissolve para difundir.",
+      "sourceIds": ["amphibians", "gas-exchange", "circulation"]},
+    {"id": "reptiles", "name": "Répteis", "rank": "Chordata · Reptilia (sentido tradicional, parafilético)", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Lagartos, serpentes, tartarugas, jacarés",
+      "traits": ["Pele seca com escamas de queratina", "Ovo amniótico com casca", "Ectotérmicos"],
+      "physiology": {
+        "nutrition": "Tubo completo; carnívoros ou herbívoros. A ectotermia reduz o gasto de energia.",
+        "respiration": "Exclusivamente pulmonar, com pulmões mais divididos e ventilação por músculos das costelas.",
+        "circulation": "Fechada, dupla e incompleta: ventrículo com septo parcial. Crocodilianos têm quatro cavidades.",
+        "excretion": "Ácido úrico, pouco solúvel, economiza água.",
+        "reproduction": "Fecundação interna e ovo amniótico (âmnio, córion, alantoide, saco vitelino), independente da água.",
+        "support": "Endoesqueleto ósseo; escamas de queratina reduzem a perda de água."
+      },
+      "uerj": "Ovo amniótico e ácido úrico: adaptações à vida em terra firme.",
+      "commonMistake": "Pela filogenia, aves descendem de répteis; o grupo tradicional não inclui todos os descendentes.",
+      "sourceIds": ["reptiles", "osmoregulation"]},
+    {"id": "birds", "name": "Aves", "rank": "Chordata · classe Aves", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Pombo, galinha, beija-flor, pinguim",
+      "traits": ["Penas", "Bico sem dentes", "Endotermia", "Ossos pneumáticos e sacos aéreos"],
+      "physiology": {
+        "nutrition": "Papo armazena; proventrículo digere quimicamente; moela tritura. Metabolismo alto.",
+        "respiration": "Pulmões com parabrônquios e sacos aéreos: o ar passa num só sentido, inclusive na expiração.",
+        "circulation": "Fechada, dupla e completa: quatro cavidades, sem mistura de sangue.",
+        "excretion": "Ácido úrico eliminado com as fezes pela cloaca; sem bexiga urinária.",
+        "reproduction": "Fecundação interna; ovo com casca calcária incubado; na maioria só o ovário esquerdo funciona.",
+        "support": "Ossos leves e pneumáticos; quilha do esterno ancora os músculos do voo; penas de queratina."
+      },
+      "uerj": "Circulação completa e endotermia: maior oferta de O₂ para alto metabolismo.",
+      "commonMistake": "Sacos aéreos ventilam os pulmões, mas as trocas gasosas ocorrem nos parabrônquios.",
+      "sourceIds": ["birds", "gas-exchange"]},
+    {"id": "mammals", "name": "Mamíferos", "rank": "Chordata · classe Mammalia", "cell": "Eucariontes", "organization": "Multicelulares", "examples": "Ser humano, morcego, baleia, canguru, ornitorrinco",
+      "traits": ["Glândulas mamárias", "Pelos", "Diafragma", "Dentes diferenciados", "Endotermia"],
+      "physiology": {
+        "nutrition": "Dentes diferenciados; o leite nutre os filhotes. Ruminantes digerem celulose com a ajuda de micro-organismos.",
+        "respiration": "Pulmões com alvéolos; o diafragma participa da ventilação.",
+        "circulation": "Fechada, dupla e completa: quatro cavidades; hemácias sem núcleo.",
+        "excretion": "Ureia; rins com néfrons e alça de Henle concentram a urina.",
+        "reproduction": "Fecundação interna; a maioria é placentária. Marsupiais completam o desenvolvimento na bolsa; monotremados põem ovos.",
+        "support": "Endoesqueleto ósseo; pelos isolam e ajudam a manter a temperatura corporal."
+      },
+      "uerj": "O corpo humano do Atlas 3D é o representante dos mamíferos: compare coração, pulmões e rins com os outros grupos.",
+      "commonMistake": "Nem todo mamífero é placentário: há marsupiais e monotremados.",
+      "sourceIds": ["mammals", "circulation", "osmoregulation"]}
+  ],
+  "views": [
+    {"id": "escherichia-coli", "groupId": "bacteria", "title": "Bactéria: Escherichia coli", "label": "Escherichia coli", "scientificName": "Escherichia coli",
+      "description": "Bacilo gram-negativo do intestino, com envoltório de três camadas aberto em corte. Comprimento real de cerca de 2 µm.",
+      "scale": "Cerca de 2 µm de comprimento e 0,5 a 1 µm de diâmetro.",
+      "frameParts": ["outer-membrane"],
+      "cytologyLink": {"viewId": "bacterial-cell", "label": "Célula bacteriana na Citologia"},
+      "keyIdeas": ["Sem núcleo: o DNA fica no nucleoide, em contato com o citoplasma.", "O envoltório gram-negativo tem membrana externa, parede fina de peptidoglicano e membrana plasmática.", "Flagelos giram como hélices; fímbrias prendem a célula a superfícies."],
+      "recognition": "Procure a forma de bastão, o envoltório em camadas no corte e a ausência de organelas membranosas.",
+      "representation": "Reconstrução 3D autoral para ensino. Camadas do envoltório espessadas e flagelos encurtados para caber na tela; quantidades de ribossomos e fímbrias são amostras ilustrativas. Cores não existem na célula real, que é praticamente incolor.",
+      "sourceIds": ["prokaryote-structure", "micro-prokaryote-cells"],
+      "parts": [
+        {"id": "outer-membrane", "label": "Membrana externa", "functions": ["support", "nutrition"], "function": "Barreira externa das gram-negativas, com lipopolissacarídeos e porinas.", "mechanism": "Porinas deixam passar moléculas pequenas; os lipopolissacarídeos dificultam a entrada de detergentes e de alguns antibióticos.", "uerj": "Explica por que algumas gram-negativas resistem a antibióticos que agem bem nas gram-positivas.", "commonMistake": "A membrana externa não é a membrana plasmática; fica do lado de fora da parede."},
+        {"id": "peptidoglycan", "label": "Parede de peptidoglicano", "functions": ["support"], "function": "Dar forma e resistir à pressão osmótica.", "mechanism": "Cadeias de açúcares ligadas por peptídeos formam uma rede contínua que impede a célula de estourar em meio hipotônico.", "uerj": "Penicilinas bloqueiam a montagem dessa rede; células humanas não a têm.", "commonMistake": "Nas gram-negativas a camada é fina; nas gram-positivas, espessa."},
+        {"id": "plasma-membrane", "label": "Membrana plasmática", "functions": ["nutrition", "respiration", "excretion"], "function": "Controlar trocas, fazer a cadeia respiratória e produzir ATP.", "mechanism": "Transportadores importam nutrientes e exportam resíduos; enzimas respiratórias bombeiam H⁺ e a ATP sintase usa esse gradiente.", "uerj": "Sem mitocôndrias, a membrana assume a função das cristas mitocondriais.", "commonMistake": "Respiração aeróbica não exige mitocôndria."},
+        {"id": "cytoplasm", "label": "Citoplasma", "functions": ["circulation"], "function": "Meio onde ocorrem o metabolismo e a síntese de proteínas.", "mechanism": "Em células tão pequenas, a difusão distribui moléculas em frações de segundo, sem sistema de transporte.", "uerj": "Razão superfície/volume alta dispensa circulação.", "commonMistake": "Procariontes têm proteínas de citoesqueleto (parentes da actina e da tubulina), mas não fazem ciclose."},
+        {"id": "nucleoid", "label": "Nucleoide (cromossomo)", "functions": ["reproduction"], "function": "Guardar o genoma principal, circular.", "mechanism": "O DNA superenrolado ocupa uma região sem membrana; é duplicado e repartido na divisão binária.", "uerj": "Ausência de envoltório nuclear permite transcrição e tradução simultâneas.", "commonMistake": "Nucleoide não é núcleo."},
+        {"id": "plasmids", "label": "Plasmídeos", "functions": ["reproduction"], "function": "Carregar genes extras, como os de resistência a antibióticos.", "mechanism": "Moléculas circulares pequenas que se replicam de forma independente e podem passar a outra bactéria por conjugação.", "uerj": "Base da transferência de resistência e da engenharia genética (vetores).", "commonMistake": "Plasmídeo não é obrigatório para a sobrevivência da célula."},
+        {"id": "ribosomes", "label": "Ribossomos 70S", "functions": [], "function": "Sintetizar proteínas.", "mechanism": "Leem o RNA mensageiro e unem aminoácidos; diferem dos 80S eucarióticos, alvo de antibióticos como tetraciclinas.", "uerj": "Toxicidade seletiva de antibióticos que atuam em ribossomos 70S.", "commonMistake": "Ribossomo não é organela membranosa."},
+        {"id": "flagella", "label": "Flagelos", "functions": ["support"], "function": "Locomoção.", "mechanism": "Um motor na base gira o filamento helicoidal usando o fluxo de íons H⁺; vários flagelos se juntam num feixe que empurra a célula.", "uerj": "Quimiotaxia: a célula muda a rotação ao detectar nutrientes.", "commonMistake": "O flagelo bacteriano gira; não ondula como o flagelo eucariótico."},
+        {"id": "fimbriae", "label": "Fímbrias", "functions": [], "function": "Aderir a superfícies e células.", "mechanism": "Proteínas da ponta reconhecem receptores; em linhagens patogênicas, ajudam a colonizar o trato urinário.", "uerj": "Adesão como etapa inicial de infecções.", "commonMistake": "Fímbrias não servem para locomoção."},
+        {"id": "sex-pilus", "label": "Pilus sexual (pilus F)", "functions": ["reproduction"], "function": "Iniciar a conjugação.", "mechanism": "Prende e aproxima uma célula receptora; o DNA do plasmídeo passa pelo contato entre as células.", "uerj": "Conjugação recombina genes, mas não aumenta o número de indivíduos.", "commonMistake": "Conjugação não é reprodução sexuada."}
+      ]},
+    {"id": "halobacterium", "groupId": "archaea", "title": "Arquea: Halobacterium salinarum", "label": "Halobacterium salinarum", "scientificName": "Halobacterium salinarum",
+      "description": "Arquea halófila de salinas, com camada S, membrana púrpura e vesículas de gás. Corte em degraus mostra a camada S e a membrana.",
+      "scale": "Bastonete de cerca de 2 a 6 µm de comprimento e 0,5 µm de largura.",
+      "frameParts": ["s-layer"],
+      "cytologyLink": {"viewId": "bacterial-cell", "label": "Comparar com a célula bacteriana"},
+      "keyIdeas": ["Procarionte, mas de outro domínio: membrana com lipídios ligados por éter e parede sem peptidoglicano.", "A bacteriorrodopsina da membrana púrpura bombeia H⁺ com a luz e gera ATP, sem fotossíntese.", "Acumula KCl no citoplasma para equilibrar a salinidade do meio."],
+      "recognition": "Procure a camada S em rede hexagonal, a membrana alaranjada com placas púrpura e as vesículas de gás no citoplasma.",
+      "representation": "Reconstrução 3D autoral para ensino. A rede da camada S e as nervuras das vesículas de gás estão ampliadas para serem visíveis; a cor alaranjada lembra os carotenoides (bacteriorruberina) que tingem as salinas. Quantidades e proporções internas são ilustrativas.",
+      "sourceIds": ["micro-archaea", "prokaryote-structure", "prokaryote-metabolism"],
+      "parts": [
+        {"id": "s-layer", "label": "Camada S", "functions": ["support"], "function": "Envoltório externo que dá forma e protege.", "mechanism": "Glicoproteínas se encaixam numa rede hexagonal regular, sem peptidoglicano.", "uerj": "Ausência de peptidoglicano: penicilina não age nas arqueas.", "commonMistake": "Camada S não é cápsula nem parede de celulose."},
+        {"id": "cell-membrane", "label": "Membrana com lipídios éter", "functions": ["nutrition", "respiration", "excretion"], "function": "Controlar trocas e produzir ATP.", "mechanism": "Lipídios com ligação éter e cadeias ramificadas são mais estáveis; a cadeia respiratória e a ATP sintase ficam nela.", "uerj": "Lipídios de membrana diferentes ajudam a separar Archaea de Bacteria.", "commonMistake": "Arqueas também têm bicamada ou monocamada lipídica, não parede no lugar da membrana."},
+        {"id": "purple-membrane", "label": "Membrana púrpura (bacteriorrodopsina)", "functions": ["nutrition"], "function": "Captar luz para produzir ATP.", "mechanism": "A bacteriorrodopsina, pigmento ligado ao retinal, bombeia H⁺ para fora com a luz; o gradiente aciona a ATP sintase.", "uerj": "Fototrofia sem clorofila e sem fixação de CO₂ não é fotossíntese.", "commonMistake": "A cor púrpura não indica cloroplasto: procariontes não têm organelas."},
+        {"id": "cytoplasm", "label": "Citoplasma rico em KCl", "functions": ["circulation", "excretion"], "function": "Meio do metabolismo, com alta concentração de sais.", "mechanism": "A célula acumula K⁺ e Cl⁻ e equilibra a pressão osmótica do meio hipersalino; suas proteínas funcionam com muito sal.", "uerj": "Osmorregulação por acúmulo de solutos.", "commonMistake": "Halófilas não excluem todo o sal: acumulam íons por dentro."},
+        {"id": "chromosome", "label": "Cromossomo (nucleoide)", "functions": ["reproduction"], "function": "Genoma principal, circular.", "mechanism": "Fica no citoplasma, sem envoltório; proteínas semelhantes a histonas ajudam a compactá-lo em muitas arqueas.", "uerj": "Semelhanças moleculares com eucariontes apoiam Archaea + Eukarya.", "commonMistake": "Ter histonas não significa ter núcleo."},
+        {"id": "plasmids", "label": "Megaplasmídeos", "functions": ["reproduction"], "function": "Genes adicionais, incluindo os das vesículas de gás.", "mechanism": "Grandes moléculas circulares replicadas junto à divisão celular.", "uerj": "Transferência e variação gênica em procariontes.", "commonMistake": "Plasmídeos não são exclusivos de bactérias."},
+        {"id": "gas-vesicles", "label": "Vesículas de gás", "functions": ["support"], "function": "Flutuação.", "mechanism": "Cascas de proteína permeáveis a gases e impermeáveis à água mantêm a célula perto da superfície, onde há luz e O₂.", "uerj": "Adaptação à baixa solubilidade de O₂ em salmoura.", "commonMistake": "Não são vacúolos de membrana lipídica."},
+        {"id": "ribosomes", "label": "Ribossomos 70S", "functions": [], "function": "Sintetizar proteínas.", "mechanism": "Mesmo tamanho dos bacterianos, mas com proteínas e sensibilidade a antibióticos mais parecidas com as eucarióticas.", "uerj": "Diferenças no RNA ribossômico fundamentam os três domínios.", "commonMistake": "Ribossomos 70S não indicam parentesco direto com bactérias."},
+        {"id": "archaella", "label": "Arquelos", "functions": ["support"], "function": "Locomoção.", "mechanism": "Filamentos finos giram movidos por ATP; o tufo polar empurra ou puxa a célula.", "uerj": "Estruturas parecidas podem ter origens diferentes (convergência).", "commonMistake": "Arquelo não é um flagelo bacteriano: proteínas e motor são outros."}
+      ]},
+    {"id": "paramecium", "groupId": "protozoa", "title": "Protozoário: Paramecium caudatum", "label": "Paramecium caudatum", "scientificName": "Paramecium caudatum",
+      "description": "Ciliado de água doce, eucarionte unicelular. O corte na metade posterior mostra núcleos, vacúolos digestivos, vacúolo contrátil e tricocistos.",
+      "scale": "Cerca de 200 a 300 µm de comprimento.",
+      "frameParts": ["pellicle"],
+      "cytologyLink": {"viewId": "cilia-flagella", "label": "Cílios na Citologia"},
+      "keyIdeas": ["Uma única célula executa nutrição, osmorregulação, locomoção e reprodução.", "Dois tipos de núcleo: macronúcleo (metabolismo) e micronúcleo (reprodução sexuada).", "O vacúolo contrátil compensa a entrada de água por osmose em água doce."],
+      "recognition": "Forma de chinelo, cílios em fileiras, sulco oral oblíquo e vacúolos contráteis em estrela.",
+      "representation": "Reconstrução 3D autoral para ensino. Cílios em menor número que os milhares reais, película com relevo ampliado e organelas em tamanhos aproximados. A célula real é translúcida; as cores separam estruturas.",
+      "sourceIds": ["protist-groups", "micro-protist-parasites", "osmoregulation"],
+      "parts": [
+        {"id": "pellicle", "label": "Película", "functions": ["support", "respiration"], "function": "Revestimento que mantém a forma e permite trocas.", "mechanism": "Membrana apoiada em alvéolos e citoesqueleto; O₂ e CO₂ atravessam por difusão.", "uerj": "Trocas gasosas pela superfície em organismos unicelulares.", "commonMistake": "Película não é parede celular."},
+        {"id": "cilia", "label": "Cílios", "functions": ["support", "nutrition"], "function": "Locomoção e corrente de alimento.", "mechanism": "Batem em ondas coordenadas (metacrônicas) e fazem a célula girar enquanto nada.", "uerj": "Cílios e flagelos eucarióticos têm o padrão 9+2 de microtúbulos.", "commonMistake": "Cílios não giram como o flagelo bacteriano."},
+        {"id": "oral-groove", "label": "Sulco oral", "functions": ["nutrition"], "function": "Conduzir partículas até a boca celular.", "mechanism": "Cílios especializados criam um redemoinho que leva bactérias e leveduras ao citóstoma.", "uerj": "Ingestão por fagocitose em protozoários.", "commonMistake": "O sulco oral não é uma boca com dentes nem um órgão."},
+        {"id": "cytopharynx", "label": "Citóstoma e citofaringe", "functions": ["nutrition"], "function": "Formar vacúolos digestivos.", "mechanism": "No fundo da citofaringe, a membrana envolve o alimento e destaca um vacúolo (fagocitose).", "uerj": "Endocitose como forma de nutrição.", "commonMistake": "A digestão não ocorre na citofaringe, e sim nos vacúolos."},
+        {"id": "food-vacuoles", "label": "Vacúolos digestivos", "functions": ["nutrition"], "function": "Digestão intracelular.", "mechanism": "Lisossomos se fundem ao vacúolo, que circula pela ciclose; nutrientes passam ao citoplasma.", "uerj": "Digestão intracelular em contraste com a extracelular dos animais.", "commonMistake": "Vacúolo digestivo não é vacúolo contrátil."},
+        {"id": "cytoplasm", "label": "Endoplasma (ciclose)", "functions": ["circulation"], "function": "Distribuir substâncias e organelas.", "mechanism": "Correntes citoplasmáticas movidas pelo citoesqueleto levam vacúolos por um trajeto regular.", "uerj": "Ciclose como transporte interno sem sistema circulatório.", "commonMistake": "Ciclose não é bombeada por um coração nem por vacúolo contrátil."},
+        {"id": "macronucleus", "label": "Macronúcleo", "functions": [], "function": "Controlar o metabolismo diário.", "mechanism": "Contém muitas cópias de genes ativos e produz os RNA usados pela célula.", "uerj": "Divisão de funções entre dois núcleos numa mesma célula.", "commonMistake": "O macronúcleo não participa da troca de material genético na conjugação."},
+        {"id": "micronucleus", "label": "Micronúcleo", "functions": ["reproduction"], "function": "Guardar a linhagem germinativa.", "mechanism": "Divide-se por mitose na divisão binária; na conjugação faz meiose e troca núcleos haploides com o parceiro.", "uerj": "Conjugação recombina genes; a divisão binária multiplica indivíduos.", "commonMistake": "Conjugação de ciliados não é a mesma coisa que conjugação bacteriana."},
+        {"id": "contractile-vacuoles", "label": "Vacúolos contráteis", "functions": ["excretion"], "function": "Osmorregulação.", "mechanism": "Canais radiais coletam a água que entra por osmose e o vacúolo central a expulsa por um poro, gastando ATP.", "uerj": "Em meio hipotônico o vacúolo contrai mais vezes; em meio mais concentrado, menos.", "commonMistake": "O vacúolo contrátil elimina principalmente água, não fezes."},
+        {"id": "mitochondria", "label": "Mitocôndrias", "functions": ["respiration"], "function": "Respiração celular aeróbica.", "mechanism": "Oxidam nutrientes e produzem a maior parte do ATP que move os cílios.", "uerj": "Eucariontes respiram na mitocôndria; procariontes, na membrana.", "commonMistake": "Respiração celular não é o mesmo que trocas gasosas."},
+        {"id": "trichocysts", "label": "Tricocistos", "functions": [], "function": "Defesa.", "mechanism": "Organelas sob a película disparam filamentos quando a célula é estimulada.", "uerj": "Especializações celulares em seres unicelulares.", "commonMistake": "Tricocistos não capturam presas como os cnidócitos dos cnidários."},
+        {"id": "cytoproct", "label": "Citoprocto", "functions": ["excretion"], "function": "Eliminar resíduos não digeridos.", "mechanism": "O vacúolo digestivo esvaziado se funde à membrana nesse ponto fixo e libera o conteúdo.", "uerj": "Eliminação de resíduos por exocitose.", "commonMistake": "Não é um ânus com tubo digestório."}
+      ]}
+  ],
+  "sources": [
+    {"id": "phylogeny", "title": "OpenStax Biology 2e — Determinação das relações evolutivas", "url": "https://openstax.org/books/biology-2e/pages/20-2-determining-evolutionary-relationships"},
+    {"id": "tree-perspectives", "title": "OpenStax Biology 2e — Perspectivas sobre a árvore filogenética", "url": "https://openstax.org/books/biology-2e/pages/20-3-perspectives-on-the-phylogenetic-tree"},
+    {"id": "prokaryote-diversity", "title": "OpenStax Biology 2e — Diversidade dos procariontes", "url": "https://openstax.org/books/biology-2e/pages/22-1-prokaryotic-diversity"},
+    {"id": "prokaryote-structure", "title": "OpenStax Biology 2e — Estrutura de Bacteria e Archaea", "url": "https://openstax.org/books/biology-2e/pages/22-2-structure-of-prokaryotes-bacteria-and-archaea"},
+    {"id": "prokaryote-metabolism", "title": "OpenStax Biology 2e — Metabolismo procarionte", "url": "https://openstax.org/books/biology-2e/pages/22-3-prokaryotic-metabolism"},
+    {"id": "micro-prokaryote-cells", "title": "OpenStax Microbiology — Características das células procarióticas", "url": "https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells"},
+    {"id": "micro-archaea", "title": "OpenStax Microbiology — Archaea", "url": "https://openstax.org/books/microbiology/pages/4-6-archaea"},
+    {"id": "protist-characteristics", "title": "OpenStax Biology 2e — Características dos protistas", "url": "https://openstax.org/books/biology-2e/pages/23-2-characteristics-of-protists"},
+    {"id": "protist-groups", "title": "OpenStax Biology 2e — Grupos de protistas", "url": "https://openstax.org/books/biology-2e/pages/23-3-groups-of-protists"},
+    {"id": "micro-protist-parasites", "title": "OpenStax Microbiology — Eucariontes unicelulares parasitas", "url": "https://openstax.org/books/microbiology/pages/5-1-unicellular-eukaryotic-parasites"},
+    {"id": "micro-algae", "title": "OpenStax Microbiology — Algas", "url": "https://openstax.org/books/microbiology/pages/5-4-algae"},
+    {"id": "fungi-characteristics", "title": "OpenStax Biology 2e — Características dos fungos", "url": "https://openstax.org/books/biology-2e/pages/24-1-characteristics-of-fungi"},
+    {"id": "fungi-classification", "title": "OpenStax Biology 2e — Classificação dos fungos", "url": "https://openstax.org/books/biology-2e/pages/24-2-classifications-of-fungi"},
+    {"id": "micro-fungi", "title": "OpenStax Microbiology — Fungos", "url": "https://openstax.org/books/microbiology/pages/5-3-fungi"},
+    {"id": "early-plants", "title": "OpenStax Biology 2e — Início da vida vegetal", "url": "https://openstax.org/books/biology-2e/pages/25-1-early-plant-life"},
+    {"id": "green-algae", "title": "OpenStax Biology 2e — Algas verdes, precursoras das plantas", "url": "https://openstax.org/books/biology-2e/pages/25-2-green-algae-precursors-of-land-plants"},
+    {"id": "bryophytes", "title": "OpenStax Biology 2e — Briófitas", "url": "https://openstax.org/books/biology-2e/pages/25-3-bryophytes"},
+    {"id": "seedless-vascular", "title": "OpenStax Biology 2e — Plantas vasculares sem sementes", "url": "https://openstax.org/books/biology-2e/pages/25-4-seedless-vascular-plants"},
+    {"id": "seed-plants", "title": "OpenStax Biology 2e — Evolução das plantas com sementes", "url": "https://openstax.org/books/biology-2e/pages/26-1-evolution-of-seed-plants"},
+    {"id": "gymnosperms", "title": "OpenStax Biology 2e — Gimnospermas", "url": "https://openstax.org/books/biology-2e/pages/26-2-gymnosperms"},
+    {"id": "angiosperms", "title": "OpenStax Biology 2e — Angiospermas", "url": "https://openstax.org/books/biology-2e/pages/26-3-angiosperms"},
+    {"id": "animal-features", "title": "OpenStax Biology 2e — Características do reino animal", "url": "https://openstax.org/books/biology-2e/pages/27-1-features-of-the-animal-kingdom"},
+    {"id": "animal-classify", "title": "OpenStax Biology 2e — Critérios de classificação dos animais", "url": "https://openstax.org/books/biology-2e/pages/27-2-features-used-to-classify-animals"},
+    {"id": "animal-phylogeny", "title": "OpenStax Biology 2e — Filogenia animal", "url": "https://openstax.org/books/biology-2e/pages/27-3-animal-phylogeny"},
+    {"id": "porifera", "title": "OpenStax Biology 2e — Filo Porifera", "url": "https://openstax.org/books/biology-2e/pages/28-1-phylum-porifera"},
+    {"id": "cnidaria", "title": "OpenStax Biology 2e — Filo Cnidaria", "url": "https://openstax.org/books/biology-2e/pages/28-2-phylum-cnidaria"},
+    {"id": "lophotrochozoa-flatworms", "title": "OpenStax Biology 2e — Lofotrocozoários: platelmintos", "url": "https://openstax.org/books/biology-2e/pages/28-3-superphylum-lophotrochozoa-flatworms-rotifers-and-nemerteans"},
+    {"id": "lophotrochozoa-mollusks-annelids", "title": "OpenStax Biology 2e — Lofotrocozoários: moluscos e anelídeos", "url": "https://openstax.org/books/biology-2e/pages/28-4-superphylum-lophotrochozoa-mollusks-and-annelids"},
+    {"id": "ecdysozoa-nematodes", "title": "OpenStax Biology 2e — Ecdisozoários: nematódeos", "url": "https://openstax.org/books/biology-2e/pages/28-5-superphylum-ecdysozoa-nematodes-and-tardigrades"},
+    {"id": "ecdysozoa-arthropods", "title": "OpenStax Biology 2e — Ecdisozoários: artrópodes", "url": "https://openstax.org/books/biology-2e/pages/28-6-superphylum-ecdysozoa-arthropods"},
+    {"id": "deuterostomia", "title": "OpenStax Biology 2e — Deuterostômios", "url": "https://openstax.org/books/biology-2e/pages/28-7-superphylum-deuterostomia"},
+    {"id": "micro-helminths", "title": "OpenStax Microbiology — Helmintos parasitas", "url": "https://openstax.org/books/microbiology/pages/5-2-parasitic-helminths"},
+    {"id": "chordates", "title": "OpenStax Biology 2e — Cordados", "url": "https://openstax.org/books/biology-2e/pages/29-1-chordates"},
+    {"id": "fishes", "title": "OpenStax Biology 2e — Peixes", "url": "https://openstax.org/books/biology-2e/pages/29-2-fishes"},
+    {"id": "amphibians", "title": "OpenStax Biology 2e — Anfíbios", "url": "https://openstax.org/books/biology-2e/pages/29-3-amphibians"},
+    {"id": "reptiles", "title": "OpenStax Biology 2e — Répteis", "url": "https://openstax.org/books/biology-2e/pages/29-4-reptiles"},
+    {"id": "birds", "title": "OpenStax Biology 2e — Aves", "url": "https://openstax.org/books/biology-2e/pages/29-5-birds"},
+    {"id": "mammals", "title": "OpenStax Biology 2e — Mamíferos", "url": "https://openstax.org/books/biology-2e/pages/29-6-mammals"},
+    {"id": "gas-exchange", "title": "OpenStax Biology 2e — Sistemas de trocas gasosas", "url": "https://openstax.org/books/biology-2e/pages/39-1-systems-of-gas-exchange"},
+    {"id": "circulation", "title": "OpenStax Biology 2e — Visão geral do sistema circulatório", "url": "https://openstax.org/books/biology-2e/pages/40-1-overview-of-the-circulatory-system"},
+    {"id": "osmoregulation", "title": "OpenStax Biology 2e — Sistemas excretores", "url": "https://openstax.org/books/biology-2e/pages/41-3-excretion-systems"}
+  ]
+}

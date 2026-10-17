@@ -74,6 +74,18 @@ Há 65 registros explícitos entre fonte e entrada canônica, correspondentes a 
 | Vaso linfático | Esquema / sem referência anatômica integrada | 5 | 0 | 0 | Esquema educacional sem referência anatômica correspondente integrada. Substituir esquema por parede e valvas contínuas verificadas, diferenciando capilar inicial e coletor. |
 | Diafragma | Referência anatômica / Z-Anatomy | 5 | 0 | 0 | Extração macroscópica do acervo corporal; não comprova camadas histológicas ou todos os componentes internos. Individualizar porções musculares, centro tendíneo e hiatos, mantendo aberturas como espaços. |
 
+## Sistemática: organismos 3D
+
+Reconstruções autorais geradas no aparelho (sem arquivo de malha baixado), em `systematics-*.js`. Não são escaneamentos de espécimes; cores, espessuras de envoltórios, padrões moleculares e o número de estruturas repetidas são didáticos. Contagens medidas em 2026-10-17 (desktop / toque).
+
+| Grupo | Organismo | Partes | Triângulos | Limites declarados |
+|---|---|---|---|---|
+| Bacteria | Escherichia coli | 10 | 327.810 / 110.720 | Envoltório espessado, flagelos encurtados, amostra de ribossomos e fímbrias; célula real quase incolor. |
+| Archaea | Halobacterium salinarum | 9 | 334.880 / 113.398 | Rede da camada S e nervuras das vesículas de gás ampliadas; cor lembra carotenoides. |
+| Eukarya (protozoários) | Paramecium caudatum | 12 | 621.569 / 79.664 | Menos cílios que os reais, relevo da película ampliado, organelas em tamanhos aproximados. |
+
+Os outros 19 grupos da árvore têm classificação e fisiologia comparada em `data/systematics-content.json`, sem modelo 3D próprio por enquanto; mamíferos abrem o corpo humano do Atlas.
+
 ## Verificação técnica e limites
 
 Os 36 arquivos GLB foram inspecionados diretamente: cabeçalho, metadados de geometria, imagens incorporadas, tamanho e SHA-256. Seus hashes são comparados ao manifesto distribuído. As correspondências explicitadas em organ-detail.json foram aceitas apenas quando o nó com sourceName contém geometria no arquivo usado pela vista.
