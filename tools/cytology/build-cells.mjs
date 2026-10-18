@@ -287,8 +287,8 @@ RECIPES.cardiomyocyte={version:'r1',seed:17,mottleScale:900,occupancyCells:150,
     dots(sc,'calcium-channels',ltype,42,C.ltype);dots(sc,'calcium-channels',ryr,46,C.ryr);dots(sc,'calcium-pump',serca.filter((_,i)=>i%2===0),32,C.serca);
     // Intercalated disc junctions: gap junction plaques on the longitudinal steps, desmosomes and adherens plaques on the transverse faces.
     const gj=[],des=[],adh=[];for(let y=-9000;y<9000;y+=2600){const y1=y+2600,xa=stair(y+10),xb=stair(y1+10),zs=[-4600,-3000,-1400];
-      if(Math.abs(xa-xb)>100){for(const z of zs)gj.push(S.transform(S.superellipsoid([Math.abs(xa-xb)*.35,24,500],.4,sc.res(14,10),sc.res(6,4)),p=>add(p,[(xa+xb)/2,y1,z])))}
-      for(let yy=y+300;yy<y1-200;yy+=520)for(const z of[-4800,-3600,-2400,-1200,-200]){if(yy>0&&z>-1400)continue;const kind=rand()<.45;(kind?des:adh).push(S.transform(S.superellipsoid([45,kind?160:260,kind?160:300],.45,sc.res(10,8),sc.res(6,5)),p=>add(p,[xa,yy+(rand()-.5)*100,z])))}}
+      if(Math.abs(xa-xb)>100&&Math.abs(y1)<7400){for(const z of zs)if(Math.abs(y1/8000)**3+Math.abs(z/5500)**3<.8)gj.push(S.transform(S.superellipsoid([Math.abs(xa-xb)*.35,24,500],.4,sc.res(14,10),sc.res(6,4)),p=>add(p,[(xa+xb)/2,y1,z])))}
+      for(let yy=y+300;yy<y1-200;yy+=520)for(const z of[-4800,-3600,-2400,-1200,-200]){if(yy>0&&z>-1400)continue;if(Math.abs(yy/8000)**3+Math.abs(z/5500)**3>.82)continue;const kind=rand()<.45;(kind?des:adh).push(S.transform(S.superellipsoid([45,kind?160:260,kind?160:300],.45,sc.res(10,8),sc.res(6,5)),p=>add(p,[xa,yy+(rand()-.5)*100,z])))}}
     sc.add('gap-junctions',merge(gj),{color:C.gap,roughness:.45});sc.add('anchoring-junctions',merge(des),{color:C.desmo,roughness:.5});sc.add('anchoring-junctions',merge(adh),{color:C.adherens,roughness:.5});
     // Cut face of the cytoplasm (translucent) on both steps.
     const holes=p=>{for(const f of fib)if(f.cut&&p[0]>f.x0&&p[0]<f.x1&&Math.abs(p[1]-f.y)<f.r+40)return true;return false};

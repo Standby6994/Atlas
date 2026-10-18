@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-18-citologia-3d-v40';
+const APP_VERSION = '2026-10-18-citologia-3d-v41';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
@@ -394,8 +394,8 @@ const CONTENT_SHA256 = {
   "assets/cytology/real/calvin-cycle-touch-r1.bin": "b5c85ded31577bbe07d20ba3e073a0d22208f875fd202f37362de2ade1ddb210",
   "assets/cytology/real/carbohydrates-lipids-desktop-r1.bin": "a4c8c38010bf49c083e403a1ab4798c27ec8e06911158d29b802757a36823088",
   "assets/cytology/real/carbohydrates-lipids-touch-r1.bin": "55f2f405271a2414ccb668a382bfa6562c24b7abfec94556a4fde278b451ae14",
-  "assets/cytology/real/cardiomyocyte-desktop-r1.bin": "750642ab2254a0f3ad74d60c39f41bc54b9227cd94aef87d1608cb7bda32ed5b",
-  "assets/cytology/real/cardiomyocyte-touch-r1.bin": "e8b561a6e40ab74256ed0c6ff80788b20945e1068fc95121a1e5110e359d8756",
+  "assets/cytology/real/cardiomyocyte-desktop-r1.bin": "ca6db725848960798ca95550ba9c527ef01ed038cb559a81fd1496c99bbebba0",
+  "assets/cytology/real/cardiomyocyte-touch-r1.bin": "a7244dcedf50a793b38cb085b56996ebc624a3e03d9133f0d643b25e364cefd4",
   "assets/cytology/real/cell-cycle-desktop-r1.bin": "296d2d8849441854002bb7d96e84566b3e6b185a1abe1e8190a0f3decf9246d8",
   "assets/cytology/real/cell-cycle-touch-r1.bin": "ab859cfb3a9b8c3728ab2a336c4a584ce420a8c10584d4fb0aa7a792a403c102",
   "assets/cytology/real/cell-differentiation-desktop-r1.bin": "ac6f70b06ceefedb47942b6b7a2612e616885523e4e648b5191499fa6cf49039",
