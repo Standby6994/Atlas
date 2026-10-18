@@ -35,7 +35,7 @@ Os mapas de 4096 × 4096 da histologia são procedurais e pertencem às vistas h
 
 A coluna de correspondências informa quantas das entradas canônicas têm uma ligação explicitamente revisada com um nó geométrico da referência. Ela é conservadora: nomes regionais disponíveis na fonte podem ainda não ter ligação canônica revisada. Portanto, zero não significa necessariamente ausência de toda anatomia interna.
 
-As peças autorais são reconstruções educacionais, sem segmentação de espécime, escala clínica ou validação diagnóstica. Este inventário é estático: contagens de IDs e presença das fábricas não comprovam renderização. Os testes gráficos integrados de testículo/vagina na v14 e de rim/pulmões na v17 estão registrados separadamente em VALIDACAO.md e nos respectivos relatórios de navegador.
+As peças autorais são reconstruções educacionais, sem segmentação de espécime, escala clínica ou validação diagnóstica. Este inventário é estático: contagens de IDs e presença das fábricas não comprovam renderização. Os testes gráficos integrados de testículo/vagina (v14) e de rim/pulmões (v17) foram feitos em versões anteriores e seus relatórios não acompanham este repositório.
 
 Há 65 registros explícitos entre fonte e entrada canônica, correspondentes a 54 IDs canônicos distintos; várias superfícies podem ligar-se à mesma entrada. A contagem por órgão na tabela considera as entradas distintas.
 
@@ -134,4 +134,4 @@ Limites: os escaneamentos foram simplificados até o limite das costuras de text
 
 Os 36 arquivos GLB foram inspecionados diretamente: cabeçalho, metadados de geometria, imagens incorporadas, tamanho e SHA-256. Seus hashes são comparados ao manifesto distribuído. As correspondências explicitadas em organ-detail.json foram aceitas apenas quando o nó com sourceName contém geometria no arquivo usado pela vista.
 
-A auditoria é reproduzível por qa-organ-coverage-v19.py e seu relatório qa-organ-coverage-v19.json. O inventário legível pelo aplicativo está em data/organ-model-coverage.json. Testes de fluxo, seleção, exportação, aparelho físico e aparência biológica não são substituídos por este inventário.
+A auditoria foi feita com um script da revisão v19 (qa-organ-coverage-v19), que não acompanha este repositório. O inventário legível pelo aplicativo está em data/organ-model-coverage.json. Testes de fluxo, seleção, exportação, aparelho físico e aparência biológica não são substituídos por este inventário.

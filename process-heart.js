@@ -36,7 +36,7 @@ export async function createCardiacCycle({app,mode}){
     {curve:line([-.048,.30,.012],[-.048,.255,.012]),offset:30,reach:.1,accept:only(['pulmonary_valve'])},{curve:line([.095,.30,-.02],[.095,.255,-.02]),offset:31,reach:.1,accept:only(['aortic_valve'])}
   ];
   await new Promise(resolve=>setTimeout(resolve,30));
-  const field=createWaveField(model.group,routes,'heart-cycle');field.ensure();
+  const field=await createWaveField(model.group,routes,'heart-cycle');field.ensure();
   // Blood: one draw for the particles in front, one faint copy for those behind walls (shared instance matrices).
   const circuits=[{curves:[gated(RIGHT_FROM_SVC,VALVES.right),gated(RIGHT_FROM_IVC,VALVES.right)],color:0x5b7fd6,count:90},{curves:[gated(LEFT_ROUTE,VALVES.left)],color:0xd8434f,count:90}];
   const sphere=new THREE.SphereGeometry(1,10,8);

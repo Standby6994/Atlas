@@ -185,6 +185,8 @@ body{padding-bottom:env(safe-area-inset-bottom)}
 .tablet-ui #selected-label small{font-size:13px}
 .tablet-ui .atlas-layout[data-detail=open] #selected-label{opacity:0;pointer-events:none}
 .tablet-ui .toast{bottom:calc(90px + env(safe-area-inset-bottom));font-size:15px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.update-banner{position:fixed;top:calc(92px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;background:#1d3a33;border:1px solid #5c8d7a;border-radius:10px;box-shadow:0 6px 24px #0007;font-size:13px;max-width:calc(100vw - 32px)}.update-banner[hidden]{display:none}.update-banner button{font-size:12px;padding:7px 12px}.tablet-ui .update-banner{font-size:15px;top:calc(70px + env(safe-area-inset-top))}.tablet-ui .update-banner button{min-height:44px;min-width:44px;font-size:15px}
 
 /* Other views */
 .tablet-ui .content-view{padding:32px max(28px,env(safe-area-inset-right)) calc(60px + env(safe-area-inset-bottom)) max(28px,env(safe-area-inset-left))}
@@ -283,6 +285,7 @@ details>summary{transition:color .18s}
 .tablet-ui .atlas-layout[data-detail=open] .board-panel{left:calc((100% - var(--drawer-w) - 12px)/2);width:min(680px,calc(100% - var(--drawer-w) - 48px))}
 .tablet-portrait .atlas-layout[data-detail=open] .board-panel{left:50%;width:min(760px,calc(100% - 24px));max-height:calc(100% - var(--sheet-h) - 150px)}
 /* Board v2: compact side bar while drawing; the options panel sits beside it instead of over the model. */
+.board-return{position:absolute;z-index:5;left:50%;top:60px;transform:translateX(-50%);font-size:12px;padding:8px 14px;border-radius:18px;background:#1d3a33;border-color:#5c8d7a;color:var(--text);box-shadow:0 4px 16px #0006}.board-return[hidden]{display:none}.tablet-ui .board-return{min-height:44px;font-size:15px}
 .board-mini{position:absolute;z-index:5;left:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid #2c3d52;border-radius:16px;background:rgba(17,27,41,.95);box-shadow:0 10px 30px #0007;animation:rise-in .2s var(--ease-out,ease)}
 .board-mini[hidden]{display:none}
 .board-mini button{width:44px;height:44px;min-height:0;padding:0;font-size:19px;line-height:1;border-radius:12px;background:transparent;border-color:transparent}

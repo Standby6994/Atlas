@@ -96,18 +96,29 @@ let offlineWorker=null;
 function setupOffline(){
   if(touchDevice)$('install-hint').hidden=false;
   if(!('serviceWorker' in navigator)||!globalThis.isSecureContext){$('offline-status').textContent='Acesso off-line requer a versão HTTPS.';return}
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{offlineWorker=navigator.serviceWorker.controller;$('download-offline').disabled=!offlineWorker;offlineWorker?.postMessage({type:'CACHE_STATUS'})});
+  // The offline download keeps only this device's versions (light ones on touch screens).
+  const profile=touchDevice?'touch':'desktop',hadController=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{offlineWorker=navigator.serviceWorker.controller;$('download-offline').disabled=!offlineWorker;offlineWorker?.postMessage({type:'CACHE_STATUS',profile})});
   navigator.serviceWorker.addEventListener('message',event=>{
     const data=event.data;if(data?.type!=='ATLAS_CACHE_STATUS')return;
+    if(data.profile!==profile){if(!['start','progress'].includes(data.phase))offlineWorker?.postMessage({type:'CACHE_STATUS',profile});return}
     const active=['start','progress'].includes(data.phase);
     $('download-offline').disabled=active||!offlineWorker;
     $('download-offline').textContent=data.offlineReady?'Acervo salvo · verificar':'Baixar para usar off-line';
-    $('offline-status').textContent=active?`Salvando arquivos: ${data.cached} / ${data.total}`:data.errors?.length?'Alguns arquivos não foram salvos. Toque para tentar novamente.':data.offlineReady?'Acervo salvo neste navegador. Teste em modo avião antes de estudar sem internet.':`Modelos salvos: ${data.modelsCached||0} / ${data.modelsTotal||36}`;
+    $('offline-status').textContent=active?`Salvando arquivos: ${data.cached} / ${data.total}`:data.errors?.length?'Alguns arquivos não foram salvos. Toque para tentar novamente.':data.offlineReady?'Acervo salvo neste aparelho. Teste em modo avião antes de estudar sem internet.':`Modelos salvos: ${data.modelsCached||0} / ${data.modelsTotal}`;
   });
-  $('download-offline').addEventListener('click',()=>{if(offlineWorker){$('download-offline').disabled=true;offlineWorker.postMessage({type:'CACHE_ALL'});toast('Salvando o acervo no dispositivo. Você pode continuar explorando.')}});
-  navigator.serviceWorker.register('./service-worker.js',{scope:'./',updateViaCache:'none'}).then(async()=>{
-    const registration=await navigator.serviceWorker.ready;offlineWorker=navigator.serviceWorker.controller||registration.active;
-    $('download-offline').disabled=!offlineWorker;offlineWorker?.postMessage({type:'CACHE_STATUS'});
+  $('download-offline').addEventListener('click',()=>{if(offlineWorker){$('download-offline').disabled=true;offlineWorker.postMessage({type:'CACHE_ALL',profile});toast('Salvando o acervo no dispositivo. Você pode continuar explorando.')}});
+  // A new version takes over in the background; this page keeps the old code until it reloads, and a module loaded
+  // on demand afterwards could come from the new one. Offer the reload instead of mixing versions.
+  const offerUpdate=()=>{if(!hadController||!$('update-banner').hidden)return;$('update-banner').hidden=false};
+  $('update-reload').addEventListener('click',()=>location.reload());$('update-dismiss').addEventListener('click',()=>{$('update-banner').hidden=true});
+  navigator.serviceWorker.register('./service-worker.js',{scope:'./',updateViaCache:'none'}).then(async registration=>{
+    const watch=worker=>{if(!worker)return;const ready=()=>['installed','activated'].includes(worker.state);if(ready())offerUpdate();else worker.addEventListener('statechange',()=>{if(ready())offerUpdate()})};
+    registration.addEventListener('updatefound',()=>watch(registration.installing));watch(registration.waiting||registration.installing);
+    // The app installed on the Home Screen can stay suspended for days: look for a new version on each return.
+    let checked=Date.now();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-checked>10*60e3){checked=Date.now();registration.update().catch(()=>{})}});
+    await navigator.serviceWorker.ready;offlineWorker=navigator.serviceWorker.controller||registration.active;
+    $('download-offline').disabled=!offlineWorker;offlineWorker?.postMessage({type:'CACHE_STATUS',profile});
   }).catch(()=>{$('offline-status').textContent='Não foi possível preparar o acesso off-line neste navegador.'});
 }
 function registerMesh(mesh){if(!meshSet.has(mesh)){meshSet.add(mesh);allMeshObjects.push(mesh)}preparePickingMesh(mesh)}
@@ -182,6 +193,8 @@ function updateSurfaceQuality(){
   applyVisibility();
 }
 
+// Screen readers hear only the title of a new detail panel, not the whole panel each time it is rebuilt.
+function setupDetailAnnouncer(){let last='';new MutationObserver(()=>{const title=$('detail-panel').querySelector('h2')?.textContent.trim()||'';if(title&&title!==last){last=title;$('detail-announce').textContent=title}}).observe($('detail-panel'),{childList:true})}
 function toast(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4200)}
 function showError(text){$('notice').textContent=text;$('notice').hidden=false}
 async function getJSON(path,optional=false){try{const r=await fetch(path);if(!r.ok)throw new Error('Arquivo indisponível: '+path);return await r.json()}catch(error){if(optional){console.warn('Conteúdo temporariamente indisponível: '+path);return null}throw error}}
@@ -877,14 +890,18 @@ function setupDrawBoard(){
   const canvas=renderer.domElement;let panel=null;
   const sample3D=(x,y)=>{renderer.render(scene,camera);const gl=renderer.getContext(),r=canvas.getBoundingClientRect(),d=new Uint8Array(4);gl.readPixels(Math.round((x-r.left)/r.width*gl.drawingBufferWidth),Math.round((1-(y-r.top)/r.height)*gl.drawingBufferHeight),1,1,gl.RGBA,gl.UNSIGNED_BYTE,d);requestRender();return d[3]>20?[0,1,2].map(i=>Math.min(255,d[i]*255/d[3])):null};
   const snapshot3D=()=>{drawScene();const copy=document.createElement('canvas');copy.width=canvas.width;copy.height=canvas.height;copy.getContext('2d').drawImage(canvas,0,0);requestRender();return copy};
-  drawBoard=createDrawBoard({viewport:$('viewport'),panel:$('board-panel'),toggle:$('open-board'),sample3D,snapshot3D,onChange:kind=>{panel?.refresh();if(kind==='full')toast('A memória de anotações deste aparelho está cheia. Apague anotações de outros modelos.')}});
+  // Each stroke remembers the camera it was drawn from, so it can fade when the model turns and bring that view back.
+  const getView=()=>[...camera.position.toArray(),...controls.target.toArray()];
+  const setView=v=>moveCamera(new THREE.Vector3(v[3],v[4],v[5]),new THREE.Vector3(v[0],v[1],v[2]));
+  drawBoard=createDrawBoard({viewport:$('viewport'),panel:$('board-panel'),toggle:$('open-board'),sample3D,snapshot3D,getView,setView,onChange:kind=>{panel?.refresh();if(kind==='full')toast('A memória de anotações deste aparelho está cheia. Apague anotações de outros modelos.')}});
   panel=mountBoardPanel($('board-panel'),drawBoard,{surface:document.querySelector('.viewer-panel'),onClose:()=>drawBoard.setActive(false),onExport:async()=>{
     const blob=await drawBoard.exportImage();if(!blob){toast('Não foi possível gerar a imagem.');return}
     const name='atlas-humano-anotacoes-'+state.mode+'.png',file=touchDevice&&typeof File==='function'?new File([blob],name,{type:'image/png'}):null;
     if(file&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'Atlas Humano'});return}catch(error){if(error.name==='AbortError')return}}
     const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);toast('Imagem com anotações salva.')}});
   $('open-board').addEventListener('click',()=>drawBoard.toggle());
-  drawBoard.setContext(state.mode);
+  controls.addEventListener('change',()=>drawBoard.syncView(getView()));
+  drawBoard.setContext(state.mode);drawBoard.syncView(getView());
 }
 // Process animations (process-animations.js): the player asks the app to open the right model, then animates helper objects.
 let processPlayer=null;
@@ -979,9 +996,13 @@ function drawChart(lines,xLabel,yLabel,ratios,sim){
   for(const l of lines){svg+=`<line x1="${legendX}" y1="${H-34}" x2="${legendX+18}" y2="${H-34}" stroke="${l.color}" stroke-width="3"/><text x="${legendX+25}" y="${H-30}" fill="#c6dce5" font-size="11">${escapeHtml(l.name)}</text>`;legendX+=pw/Math.max(1,lines.length)}
   $('sim-chart').innerHTML=svg;
 }
+const IMPERATIVE={relacionar:'relacione',distinguir:'distinga',explicar:'explique',comparar:'compare',integrar:'integre',ordenar:'ordene',interpretar:'interprete',identificar:'identifique',prever:'preveja',usar:'use',justificar:'justifique',construir:'construa',ler:'leia',calcular:'calcule',indicar:'indique',descrever:'descreva',diferenciar:'diferencie',associar:'associe',reconhecer:'reconheça',analisar:'analise',citar:'cite',localizar:'localize',evitar:'evite',conectar:'conecte'};
+// Infinitive instructions at the start of the text or after ";" become requests: "Relacionar…; calcular…" → "Relacione…; calcule…".
+const imperative=text=>text.replace(/(^|;\s*)([A-Za-zÀ-ú]+)/g,(all,lead,word)=>{const verb=IMPERATIVE[word.toLowerCase()];if(!verb)return all;return lead+(word[0]===word[0].toUpperCase()?verb[0].toUpperCase()+verb.slice(1):verb)});
 function questionEntries(){
   const result=simulationEntries().filter(s=>s.uerj?.question||s.uerj?.prompt).map(s=>({source:'simulation',id:s.id,name:s.title,system:s.system,question:s.uerj.question||s.uerj.prompt,answer:s.uerj.answer||s.uerj.modelAnswer,rubric:s.uerj.rubric,points:s.uerj.points,acceptedEquivalents:s.uerj.acceptedEquivalents,commonErrors:s.uerj.commonErrors}));
-  for(const c of state.core){result.push({source:'core',id:c.id,name:c.name,system:c.system,question:`Identifique a função de ${c.name.toLowerCase()} e explique um mecanismo que permite seu desempenho.`,answer:[c.function||c.shortFunction,c.mechanism].join(' '),rubric:'Elementos de resposta: função correta; mecanismo causal; relação explícita entre ambos.'})}return result;
+  // Each structure asks what its UERJ focus asks ("Relacionar…" becomes "Relacione…") and warns about its common mistake.
+  for(const c of state.core){const focus=c.uerj?imperative(c.uerj):`Identifique a função de ${c.name.toLowerCase()} e explique um mecanismo que permite seu desempenho.`;result.push({source:'core',id:c.id,name:c.name,system:c.system,question:focus+' Responda com o termo técnico, o mecanismo e a consequência.',answer:[c.function||c.shortFunction,c.mechanism].join(' '),rubric:'Elementos de resposta: o que o enunciado pede, com o termo técnico; mecanismo causal; consequência para o organismo.',commonErrors:c.commonMistake?[c.commonMistake]:[]})}return result;
 }
 function renderQuestion(){
   const filter=$('practice-system').value,items=questionEntries().filter(q=>filter==='all'||systemLabel(q.system)===systemLabel(filter));if(!items.length){$('practice-panel').textContent='Nenhuma questão neste sistema.';return}
@@ -1079,7 +1100,7 @@ async function start(){
     setupSystematics(await getJSON('./data/systematics-content.json',true));
     $('cytology-category').innerHTML='<option value="all">Todos os temas</option>'+cytologyContent.categories.map(c=>`<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
     const options=[['Por dentro',studyContent.organs||[],'internal-'],['Histologia',studyContent.histology||[],'histo-'],['Citologia',cytologyContent.views||[],'cyto-']];for(const [label,entries,prefix] of options){const group=document.createElement('optgroup');group.label=label;for(const entry of entries){const option=document.createElement('option');option.value=prefix+entry.id;option.textContent=entry.label||entry.title;group.append(option)}$('model-mode').append(group)}
-    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupProcesses();setupEvents();setupOffline();
+    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupProcesses();setupEvents();setupOffline();setupDetailAnnouncer();
     $('load-progress').max=2;$('load-detail').textContent='Órgãos internos e esqueleto…';await Promise.all([loadSystem('visceral'),loadSystem('skeletal')]);$('viewer-loading').hidden=true;fitBody('front',true);fadeInCanvas();$('load-progress').max=7;
     const saved=studySessions.load(),view=location.hash.replace('#',''),restored=await restoreStudySession(saved);if(['atlas','physiology','practice','about'].includes(view))setView(view);else if(saved)setView(saved.view);sessionReady=true;if(restored)rememberStudy();
     window.atlas={state,scene,camera,renderer,controls,processPlayer,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};

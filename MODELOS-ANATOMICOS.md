@@ -62,7 +62,7 @@ Os arquivos nativos e as miniaturas oficiais têm resolução, autoria, licença
 
 ## Histologia digestiva reformulada
 
-Parede gástrica e mucosa colônica mantêm seus seis/quatro IDs, agora em malhas pré-calculadas de computador/toque. No gástrico, três unidades ilustrativas ligam fovéolas a túbulos cegos: células pertencem à parede, e a luz permanece vazia. Um túbulo por fosseta simplifica a ramificação real. Há três tecidos de contexto sem novo ID; isolar uma peça oculta esse contexto. No cólon, epitélio, criptas e caliciformes partilham um mosaico em contato com a lâmina própria. O campo não contém vilosidades nem redes vasculares/imunes individualizadas. O significado de cada superfície e os limites aparecem ao selecionar. Os23registros de microscopia e52marcações do acervo permanecem intactos, incluindo as duas fotografias digestivas usadas aqui; foto e modelo não são equivalentes medidos.
+Parede gástrica e mucosa colônica mantêm seus seis/quatro IDs, agora em malhas pré-calculadas de computador/toque. No gástrico, três unidades ilustrativas ligam fovéolas a túbulos cegos: células pertencem à parede, e a luz permanece vazia. Um túbulo por fosseta simplifica a ramificação real. Há três tecidos de contexto sem novo ID; isolar uma peça oculta esse contexto. No cólon, epitélio, criptas e caliciformes partilham um mosaico em contato com a lâmina própria. O campo não contém vilosidades nem redes vasculares/imunes individualizadas. O significado de cada superfície e os limites aparecem ao selecionar. Os 23 registros de microscopia e 52 marcações do acervo permanecem intactos, incluindo as duas fotografias digestivas usadas aqui; foto e modelo não são equivalentes medidos.
 
 ## O significado de 4K
 
@@ -75,4 +75,4 @@ Parede gástrica e mucosa colônica mantêm seus seis/quatro IDs, agora em malha
 | Referências HRA | Sem fotografias de textura incorporadas. |
 | Cortes de rim/pulmões/estômago/delgado/esôfago/grosso | Geometria autoral e acabamento ilustrativo; nenhuma textura fotográfica 4K própria confirmada. |
 
-Uma imagem exportada maior não produz anatomia ausente. A aparência ainda é educativa e varia entre referências. Não foi demonstrado fotorrealismo, reconstrução molecular medida, funcionamento animado ou desempenho em iPad 9 físico. Os ensaios locais e seus limites estão em [VALIDACAO.md](VALIDACAO.md).
+Uma imagem exportada maior não produz anatomia ausente. A aparência ainda é educativa e varia entre referências. Não foi demonstrado fotorrealismo nem reconstrução molecular medida. As animações de processos são esquemas ilustrativos, e o desempenho no iPad 9 depende de medição no próprio aparelho (Ajustes → "Mostrar FPS").

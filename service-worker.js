@@ -5,7 +5,7 @@
  * Increment APP_VERSION after changes to shell/data; increment MODEL_VERSION
  * when replacing GLBs. CACHE_ALL downloads sequentially, without decoding GLB.
  */
-const APP_VERSION = '2026-10-17-hidden-fix-v37';
+const APP_VERSION = '2026-10-17-revisao-v38';
 const MODEL_VERSION = 'models-v1';
 const scopeURL = new URL(self.registration.scope);
 const scopeKey = encodeURIComponent(scopeURL.pathname);
@@ -121,6 +121,7 @@ const APP_ASSETS = [
   "models/UPSTREAM_NOTICE.txt",
   "models/BRAIN_ATTRIBUTION.txt",
   "models/FEMALE_ATTRIBUTION.txt",
+  "models/FEMALE_BODY_ATTRIBUTION.txt",
   "models/draco/LICENSE.txt",
   "vendor/LICENSE",
   "heart-model.js",
@@ -285,45 +286,45 @@ const MODEL_ASSETS = [
 // Content identity is generated from the published source files. A stable path
 // alone never proves that a cached texture or model belongs to this release.
 const CONTENT_SHA256 = {
-  "assets/cytology/cytology-albedo-4096.jpg": "2316444ac14ce708f221b178966f43049fe5405188d6db90e9d1cbbc4f9d3a5c",
-  "assets/cytology/cytology-albedo-2048.jpg": "b9c77126dda2fddd352538e3ab3d98e78b864933c42ab0ff73ffc9230c567e9e",
-  "assets/cytology/cytology-normal-4096.png": "9bd6ec30748cf4405a14cea3baaff5b22bb32587e267150a92055ba0741c2f6d",
-  "assets/cytology/cytology-normal-2048.png": "fef4989e9305c49774d1f0a9d23545b10051ab5583152f26cdaa027c0fb20ad0",
-  "assets/cytology/cytology-roughness-4096.png": "f99fb10d0410de42c643f476b55d521e7337de4a1eec635eb3d9dc0009cc6351",
-  "assets/cytology/cytology-roughness-2048.png": "afed9b7ea6cbfaa8874f2fc3f75ae774e58f937d05c6ea69425a1e616a9c7bde",
-  "assets/histology/histology-albedo-4k.png": "fa56d28ab8851ba7b755e5ac1736e24ec14a4894431b5ef458fbef4180bc37d7",
-  "assets/histology/histology-normal-4k.png": "c4f61efd61a63bbd4cf409a2e0adb5f2f9f1d162650a37ef0846ad968e5d2e53",
+  "assets/cytology/cytology-albedo-4096.jpg": "32e99549fea4a1420ada2f979d41e03ebe1f342a59c24d33475412a0c5ebf2a5",
+  "assets/cytology/cytology-albedo-2048.jpg": "3a33900046cee5c4dcf61fed9b9a361fefa0d78c5eeee180633cb145308c3374",
+  "assets/cytology/cytology-normal-4096.png": "05c07fba5b79b198daa8a3c26b85dbc892e02020e7e4e753024f9cbc147024b9",
+  "assets/cytology/cytology-normal-2048.png": "f9158f0a26579e434f828ad352e8b20b4f0e8e9b801714237fd44e0d78290d90",
+  "assets/cytology/cytology-roughness-4096.png": "fdfef6445ae5884a7fb060493ad31b51ba930bd7dc7f30875fdbba4ccfbe4e47",
+  "assets/cytology/cytology-roughness-2048.png": "2534e685724954cd8befb6327b6c8d012a1c0270a9503edb742bf36a693d1532",
+  "assets/histology/histology-albedo-4k.png": "f42e81cfa2aed5a91ebe66267a40335d61fd554b1d770376ce139a32582a1b01",
+  "assets/histology/histology-normal-4k.png": "ee02dabbfde81a91e8b0c0fdc4339a2e35518b11b625ae8d277e8e06221ae85f",
   "assets/histology/histology-albedo-2k.png": "905affbfbbecc6cbec5927fdf0c505ccbd938888861c537f1b6cdba379ece570",
   "assets/histology/histology-normal-2k.png": "b2a85933f7d5f799a9dfd3b0cdc702adeeeaca8ad3e39aafc7d149baff1107a7",
-  "images/histology/cardiac-muscle.jpg": "4fbf98487adc57355ea00b98368ad034c3636989cff0be1c3c70a4b5848a4b41",
-  "images/histology/cardiac-muscle-preview.jpg": "49afa126f88c6630211f27b651407e8df7aad9900952269e945d9d869ecbe565",
-  "images/histology/renal-medulla.jpg": "b0ed41d5f80a9768bf59759539885f57b15d70e778bb50d1a07670c5b974f116",
-  "images/histology/renal-medulla-preview.jpg": "57a36724c49301b8180ae61bae33a980ef26ed616f1958ed66a458dca5dce974",
-  "images/histology/intestinal-mucosa.jpg": "4bb765688d17fba439c46c9f893006e89981b061a2b2ab8401ca1ed7c02c27ab",
-  "images/histology/intestinal-mucosa-preview.jpg": "ac3cc8cafe6b6d9fc1f9bf4eaad4502ef0b097eb84bd7f0ec67dfcbcc0af2b87",
-  "images/histology/thick-skin.jpg": "aecef01be18f78b14e7a7493576c143658874fa9fe19adc982cd3fbf65965f74",
-  "images/histology/thick-skin-preview.jpg": "ff6e8ae7704d824f5ce38edc0dea03fb65bff4e081f28ba416bf769f3968f977",
+  "images/histology/cardiac-muscle.jpg": "1c5c21889c20c23a6a15e40440830918b671e7ea7a177cac2b015340fb883a67",
+  "images/histology/cardiac-muscle-preview.jpg": "eee40221bb8ee3ebed87e6a50adf5312574f762b6330bc3e0676d8ce24e30d8c",
+  "images/histology/renal-medulla.jpg": "68a576df6708fb47a66e70286cc3b833e73082105a1621c4205b622f0fc02c31",
+  "images/histology/renal-medulla-preview.jpg": "504ee36cc6b544d2e5ecc7817bb288a8ca6fba11e5d00cd7094d063ba7bb9737",
+  "images/histology/intestinal-mucosa.jpg": "e41e246542a05a4f7397c9f2699638965fc096c7ff272c6b4e952995dfcdf8fc",
+  "images/histology/intestinal-mucosa-preview.jpg": "1fa12ef710a236a3b972fa41638b9cf76be3f1b3505b82ae3c016416b162e3c9",
+  "images/histology/thick-skin.jpg": "c96d7378357e1f98085334209ca981e21f0ada9276b88451e15f3bd30d74a43f",
+  "images/histology/thick-skin-preview.jpg": "102fb37ac5d886c95818a144d9c51e84b914f9c99668d7124ff4c7715d1ed3a8",
   "images/histology/ATTRIBUTION.md": "2aad399e283ce748adc099af08ea7f778c50424f7c4af63e288a02c41819a4bf",
-  "images/histology/renal-cortex.jpg": "9f4edc564d51b8d043d2270700d6340137e02cca30fe6e4d6395db42e149598d",
-  "images/histology/renal-cortex-preview.jpg": "9ba0d9246946307d917e273229071133435cd7023f295f6b090574e51aea164d",
-  "images/histology/liver-section.jpg": "35144ad3d7ab0c4dbe5a0278844cf6b31102c708a622880bc42babf377eebef2",
-  "images/histology/liver-section-preview.jpg": "1c895df61c6f889bb61e9bea1cf557d8d511b51f663a5c50f06b0c412e07f47b",
-  "images/histology/pancreas-islet-confocal.jpg": "527ba78ca5ac009e6aaac7289eb72df3689af4e93caff58b14e6375892308fe7",
-  "images/histology/pancreas-islet-confocal-preview.jpg": "527ba78ca5ac009e6aaac7289eb72df3689af4e93caff58b14e6375892308fe7",
-  "images/histology/ovarian-follicle-real.jpg": "52c72dc398b999f865dfb50346f11c9951434bf1088b97173ed4889790fe73a4",
-  "images/histology/ovarian-follicle-real-preview.jpg": "52c72dc398b999f865dfb50346f11c9951434bf1088b97173ed4889790fe73a4",
-  "images/histology/testis-boar.jpg": "e5d32d4661567f46f9b8d76e157c6ff00a0ad89d8e168766c7a70e6d8bd24b0b",
-  "images/histology/testis-boar-preview.jpg": "e5d32d4661567f46f9b8d76e157c6ff00a0ad89d8e168766c7a70e6d8bd24b0b",
-  "images/histology/hyaline-cartilage.jpg": "115768f99bdea50a8e2ada5b8935bf2d8111b47691902a4a0af7ed895d432be1",
-  "images/histology/hyaline-cartilage-preview.jpg": "c5bdc0647d4d9ec9ac9964acfffc5114fde76c4fbcf32d73aec31b086e6940a8",
-  "images/histology/thyroid-section.jpg": "2502c2561a024d3e57dbe1531ea4f101329a04b48185ce1db5ff707dd33c9b86",
-  "images/histology/thyroid-section-preview.jpg": "2502c2561a024d3e57dbe1531ea4f101329a04b48185ce1db5ff707dd33c9b86",
-  "images/histology/lung-section.jpg": "71731bd1aa89a5ff8f9a801acee8f897c65e5f8b26bc9d882bb8645d926edcf2",
-  "images/histology/lung-section-preview.jpg": "71731bd1aa89a5ff8f9a801acee8f897c65e5f8b26bc9d882bb8645d926edcf2",
-  "images/histology/dense-connective.jpg": "c7134b5b3b725247bee5333ea889add3e82278040d72fb4e789407badee6d7fc",
-  "images/histology/dense-connective-preview.jpg": "c7134b5b3b725247bee5333ea889add3e82278040d72fb4e789407badee6d7fc",
-  "images/histology/peripheral-nerve.jpg": "6fb71ab792abbbfd7452066946b5da84545d60bc99d01c22604a11802c1a81ec",
-  "images/histology/peripheral-nerve-preview.jpg": "6fb71ab792abbbfd7452066946b5da84545d60bc99d01c22604a11802c1a81ec",
+  "images/histology/renal-cortex.jpg": "1b75254a645d0e38bf9966449a41a6a19a786d348a0356662b40974480e557c3",
+  "images/histology/renal-cortex-preview.jpg": "9ef54acc248737ff40609d574f9adc0fff0078ae9ff7366a74d8b8a283176613",
+  "images/histology/liver-section.jpg": "9ce4a9d2cfc02cc6b8b38907b07a1bf8850beaacb2d1b6983640113ad6713f9b",
+  "images/histology/liver-section-preview.jpg": "cf38e1f8bc32ba98c4dac54f3a591f697507bf7ccaced136c0b8822ebb45381f",
+  "images/histology/pancreas-islet-confocal.jpg": "f870b049e8d265c8091e4ba683379b70708381dbbad79eb35b51d52c9e7229cd",
+  "images/histology/pancreas-islet-confocal-preview.jpg": "659591ddfc6f590aee7ff9b44c9546eab455ba46667e15157a657e5a36a57e9c",
+  "images/histology/ovarian-follicle-real.jpg": "42aaf0fdc106aea4b31f87ded61ebb75f1ecc40ea1776a829b4f54c7589dde38",
+  "images/histology/ovarian-follicle-real-preview.jpg": "5eb1079c75e6977cccf3657e561b3e063a4adb5e32b7aad9599ecfeff2848b5f",
+  "images/histology/testis-boar.jpg": "d7d9c35f8233579cbad9d30f12eeeec84f5d1b39fb04ccf1a222cf83a8572dda",
+  "images/histology/testis-boar-preview.jpg": "16d81cbb8c95b6ed338c10137c02223d6041d31dab7e0240d92ae39c4eefa372",
+  "images/histology/hyaline-cartilage.jpg": "8ec400a664557a9f233ce7b3f7a491c7d482b9bbd820086ffba82004a6cd05ef",
+  "images/histology/hyaline-cartilage-preview.jpg": "9cccbd3494ca7cfa15b9ff65c321030a4652afaf2bcbf2b4145d20b690599b02",
+  "images/histology/thyroid-section.jpg": "8aabf86d2a10fb5a1562c45cf8183ba804c52496c90b7ee6546be26199ab9d3f",
+  "images/histology/thyroid-section-preview.jpg": "6fd3d04fafff491243b6b5c02abbd66ae015f6bfb05b6e5c5cf5ef259fc5d101",
+  "images/histology/lung-section.jpg": "7c5d1a89457806948927950c9c9065067071d800685d8436f8e018b306e1545f",
+  "images/histology/lung-section-preview.jpg": "3588ee320dfba9ffa930e6bafb428030ab9781e6f97f2e716f63fbf114a60349",
+  "images/histology/dense-connective.jpg": "c99d93536616389c79998aca240b1e9f37d52ecbe487116efc613132103af487",
+  "images/histology/dense-connective-preview.jpg": "bf580980c793f9a5e0eba981bd235596ceef3050291140f3c781868baf4b96b3",
+  "images/histology/peripheral-nerve.jpg": "8802d6cf40cb4aa0b478dd8053e56489f4a2be75cf73d4d8947f62e09e3e556b",
+  "images/histology/peripheral-nerve-preview.jpg": "1da51d445253b28eec40bc0c9907ab0af986cacb0c50420e8935284efbfcbced",
   "models/skeletal.glb": "c2b70b31ddec4062cbc5ba969fc24ecfed61d00397a0bca795e2701d997200f8",
   "models/visceral.glb": "b21a0f34b3da1bb0b6a9a6ae71d16ffbc036beb504944af2422d4b91a9317fe5",
   "models/cardiovascular.glb": "bc94c7b8eb1712f18ee461e064140e54aa817f3614e0f56a45b00e2a829cfb59",
@@ -396,26 +397,26 @@ const CONTENT_SHA256 = {
   "models/systematics/sponge-touch.glb": "1643e2fbcf067c8c0da9843ab5ae8c63cbf366138d52c8cb7836fd71f831babc",
   "models/systematics/sponge.glb": "94a3b448d7c7063d595b2a2a94135006d5fed5973ff065765d92a02ecb007723",
   "images/microscopy/ATTRIBUTION.md": "562601564ac56176d4385d8e5b19c12be9e15fd7a503bb15941689c85a7f96af",
-  "images/microscopy/chloroplast-lettuce-stem-preview.jpg": "5ab99b10b9805531edd6df74ca183dea81f365ec89b85cdf556fe46f4cac7c90",
-  "images/microscopy/chloroplast-lettuce-stem.jpg": "f18b305f3d300bbefff7aa150317ef1fd9e35ecd521cdd730c236b0891cf97e3",
-  "images/microscopy/leaf-semithin-reischig-preview.jpg": "d24b95acd1824903a1c83f9ee0c0e28e9dab798551610f16fe683334b4723ae5",
-  "images/microscopy/leaf-semithin-reischig.jpg": "54ae4c47ae0d259560ac15112ca6ec07482fa011dd07bce9cab564625e3accaf",
-  "images/microscopy/mitochondria-lung-tem.jpg": "e8656f87df4075e7093b57afda0bad18fef1bc71c825de918345d6db6a01ced7",
-  "images/microscopy/mitosis-vicia-faba-preview.jpg": "18f1854b1e0678b09933933020091ae274433d56496355343dc1f3a11a1a8b7c",
-  "images/microscopy/mitosis-vicia-faba.jpg": "1ae8593fb2bda1806c16efc3852de6a5038cb5a05921fec9c2801e45832072d1",
-  "images/microscopy/root-ranunculus-houseman-preview.jpg": "5836b81bd0af310a84777fa664e1626f533e411c8a66bea266d3d7572aeb5286",
-  "images/microscopy/root-ranunculus-houseman.jpg": "dbdffca300e44a3cffc122ef323ce9e18d84b5791253c17830a1bcb95396f985",
-  "images/microscopy/stoma-aloe-vera-preview.jpg": "a9472af8523bdb10afa84fdbce6f930ff6b4f7a0bac346c98861f0950b0ef3ea",
-  "images/microscopy/stoma-aloe-vera.jpg": "72bcfb1b536fc0c5d41e00eaa359a44c8ac8ef3882742fc3956d25f8c636d666",
+  "images/microscopy/chloroplast-lettuce-stem-preview.jpg": "3002224b3a921a8b6fda97caa9650f3e9b08ea89c211ccd4b8ceaeb7879c6778",
+  "images/microscopy/chloroplast-lettuce-stem.jpg": "e481c7ba63da621c003831ee3c4bcabf320d641ec9f9ea58c8ec0ab2a91c7abf",
+  "images/microscopy/leaf-semithin-reischig-preview.jpg": "045a947460b12c751734ce37e54f98cdd333aea78b4f5fcbf14fcdc4949bd580",
+  "images/microscopy/leaf-semithin-reischig.jpg": "1c356722198f3a97660b3971702c275af07e0b1d2fcfcf498eba549069342a39",
+  "images/microscopy/mitochondria-lung-tem.jpg": "fe0c63d8fb2a2454ae894cafb93e393923d16554423035f59d32c71a52882d5e",
+  "images/microscopy/mitosis-vicia-faba-preview.jpg": "a98900143e6960b7558efc0608d95ce13a8ae2599e6dbfba31eb11a474e54ac6",
+  "images/microscopy/mitosis-vicia-faba.jpg": "d4f17c640322cacbf52102d523a17f7772190f14194e5ab5e1c3c06d157cac7a",
+  "images/microscopy/root-ranunculus-houseman-preview.jpg": "a1c4ccbb063d5fed06abb71ad36c589a58111f4d9c132a8dad14e93e3f9b5cd5",
+  "images/microscopy/root-ranunculus-houseman.jpg": "20406d4af114efb5be84d2a924d97c83bbc5d2823a7a2322fe7d22320808fe80",
+  "images/microscopy/stoma-aloe-vera-preview.jpg": "434e7500f6f85268c1881d73be157eaca66d194d5abd61748f4dd6e461e772e6",
+  "images/microscopy/stoma-aloe-vera.jpg": "c8549314674ad5bfdedffe9fc0950149240354b482a5266793a9d5974872b921",
   "assets/interiors/pulmonary-detailed-v17.bin": "dba48e0bc3a62fe342d3349486a183625cff1ab19a2c0f59d7af7b1e73dadcc6",
   "assets/interiors/pulmonary-touch-v17.bin": "7f255f24f080304cdb68e6b7ebcd2012653edbba611b9c9ad1cf2bd8ef5912e4",
   "assets/interiors/renal-desktop.bin": "6f88a8396cd3bbaa9810fd51553b1a3263999ee7e6e5ad5ffa4fce7e513e8995",
   "assets/interiors/renal-touch.bin": "4c0a93fe17c087c3f3c89a1facf89251ee9e35e5be6e1d41e78f6a0f69973e7d",
-  "images/microscopy/gastric-wall-human.jpg": "92e035e1d875899d374e5dadd8f6f5d8fcd62e1f09bb443d368c9b165c3f56d5",
-  "images/microscopy/gastric-wall-human-preview.jpg": "5e4e1a9da8c87572660844115eac38162da98b17347f1f8931eb23f01a08efe5",
-  "images/microscopy/esophageal-epithelium-human.jpg": "1fff314c80f74f8ba83b3fe2e5d34a2326248dfb38291be2861663e900a9860a",
-  "images/microscopy/colon-crypts-human.jpg": "2d7f66dc9317ce60f5f138f4af8f50d7ce331facf16f97a07e433b7779432c5a",
-  "images/microscopy/colon-crypts-human-preview.jpg": "38e796ebde331e02ce68c915b076e2bfa07c97f2c38d5176efe488538341cf09",
+  "images/microscopy/gastric-wall-human.jpg": "152fec95bd5a46f8fc75e70273fe24baccd5cc21da70c24b11aee7536f925014",
+  "images/microscopy/gastric-wall-human-preview.jpg": "3a6a921c9e8b4a64e6bbede59e848e5f4b01ad7545ec3ee66177fff7cfd67175",
+  "images/microscopy/esophageal-epithelium-human.jpg": "eeff44b0ef6c9a7776366bab9e81be32574ca066e1eecbbba29ca842fe1aa3ee",
+  "images/microscopy/colon-crypts-human.jpg": "96efa406ba0e1b3276c3c917c11ad4a726ea740cc8d9842a8327a5d7160f70c3",
+  "images/microscopy/colon-crypts-human-preview.jpg": "f4d01d691426e9530e1cbbcc854f3b08e9f8cb19272d69912a89d68821ecbcdc",
   "images/microscopy/ATTRIBUTION-DIGESTIVA-V18.md": "2500aff4aa9eb10765cbca72e9f0567cf59d6dd315f6fd92ada96aae42e3b490",
   "assets/interiors/stomach-desktop-v18.bin": "aad4eccbd042a878e272481d2076f67e992d7d80f46a7ec61b355f41fbdf0123",
   "assets/interiors/stomach-touch-v18.bin": "a020b25cd9e081b85afc764c24e7bdd9de23472cce260a94d2d976a670745a1e",
@@ -440,6 +441,19 @@ const CONTENT_SHA256 = {
 };
 const ALL_ASSETS = [...APP_ASSETS, ...MODEL_ASSETS];
 const BOOTSTRAP_ASSETS = APP_ASSETS.filter(asset => !CONTENT_SHA256[asset]);
+// Touch devices open the light versions (-touch, 2048/2k maps, *-touch.glb scans) and computers the full ones; the
+// offline download keeps only the device's own (~126 MB less on the iPad). Must match the `mobile` choices in the modules.
+function profileOf(asset) {
+  if (/-desktop|-detailed-|-4096\.|-4k\./.test(asset) || (/^models\/systematics\/[^/]+\.glb$/.test(asset) && !asset.endsWith('-touch.glb'))) return 'desktop';
+  if (/-touch|-2048\.|-2k\./.test(asset)) return 'touch';
+  return null;
+}
+const PROFILES = ['touch', 'desktop'];
+const profileName = value => PROFILES.includes(value) ? value : 'all';
+const profileAssets = profile => profile === 'all' ? ALL_ASSETS : ALL_ASSETS.filter(asset => { const own = profileOf(asset); return !own || own === profile; });
+// App files go to the network first, but a weak Wi-Fi must not hold the app: past this wait the saved copy is used
+// (the network answer still refreshes the cache for the next time).
+const NETWORK_TIMEOUT_MS = 4000;
 const allowedAssets = new Set(ALL_ASSETS);
 const modelAssets = new Set(MODEL_ASSETS);
 let cacheAllPromise = null;
@@ -520,7 +534,7 @@ async function cachedAsset(asset, { allowLegacy = true, promote = false, epoch =
 async function retireMigratedCaches() {
   // Never erase a complete previous version while the new shell or any heavy
   // content is missing. Count only primary caches here, not borrowed entries.
-  if (!(await snapshot(false)).offlineReady) return;
+  if (!(await snapshot(false)).readyProfiles.length) return;
   for (const name of await legacyCacheNames()) await caches.delete(name);
 }
 
@@ -573,7 +587,7 @@ async function download(asset, signal, epoch = generation) {
   if (!await store(asset, response, epoch)) throw new Error('Resposta estática inválida: ' + asset);
 }
 
-async function snapshot(allowLegacy = true) {
+async function snapshot(allowLegacy = true, profile = 'all') {
   // Progress emits once per asset. Enumerate cache keys instead of reopening
   // all static response streams on every progress tick; hash each heavy entry
   // only on its first use in this worker's lifetime.
@@ -600,17 +614,19 @@ async function snapshot(allowLegacy = true) {
     if (available) cachedAssets.push(asset);
   }
   const available = new Set(cachedAssets);
-  const shellReady = APP_ASSETS.every(asset => available.has(asset));
-  return { cached: cachedAssets.length, total: ALL_ASSETS.length,
-    modelsCached: MODEL_ASSETS.filter(asset => available.has(asset)).length,
-    modelsTotal: MODEL_ASSETS.length, shellReady,
-    offlineReady: shellReady && MODEL_ASSETS.every(asset => available.has(asset)),
+  const ready = name => profileAssets(name).every(asset => available.has(asset));
+  const wanted = profileAssets(profile), models = wanted.filter(asset => modelAssets.has(asset));
+  const shellReady = wanted.filter(asset => !modelAssets.has(asset)).every(asset => available.has(asset));
+  return { profile, cached: wanted.filter(asset => available.has(asset)).length, total: wanted.length,
+    modelsCached: models.filter(asset => available.has(asset)).length,
+    modelsTotal: models.length, shellReady,
+    offlineReady: ready(profile), readyProfiles: PROFILES.filter(ready),
     // A complete cache is observable; a working Safari install/auth gate needs
     // a real device offline check. Do not label this property "offlineTested".
     offlineTested: false };
 }
-async function status(phase, extras = {}, target = null) {
-  const message = { type: 'ATLAS_CACHE_STATUS', phase, ...await snapshot(), ...extras };
+async function status(phase, extras = {}, target = null, profile = 'all') {
+  const message = { type: 'ATLAS_CACHE_STATUS', phase, ...await snapshot(true, profile), ...extras };
   if (target?.postMessage) { target.postMessage(message); return; }
   const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
   for (const client of clients) if (isAppClient(client)) client.postMessage(message);
@@ -620,7 +636,13 @@ self.addEventListener('install', event => {
   event.waitUntil((async () => {
     // Start with the shell/data. Texture maps, microscopy and GLBs are cached
     // on use or by CACHE_ALL, without delaying initial activation.
-    for (const asset of BOOTSTRAP_ASSETS) await download(asset);
+    // Each file gets three tries, so one dropped request on a weak Wi-Fi does not cancel the whole update.
+    for (const asset of BOOTSTRAP_ASSETS) {
+      for (let attempt = 1; ; attempt++) {
+        try { await download(asset); break; }
+        catch (error) { if (attempt >= 3) throw error; await new Promise(resolve => setTimeout(resolve, 600 * attempt)); }
+      }
+    }
     // Reuse only byte-identical maps, microscopy and models. Heavy migration is
     // optional for installation: offline/invalid/missing assets keep the old
     // cache intact, and quota failures remain readable there.
@@ -645,55 +667,58 @@ self.addEventListener('fetch', event => {
   event.respondWith((async () => {
     const cached = await cachedAsset(asset);
     if (modelAssets.has(asset) && cached) return cached;
-    try {
-      const response = await fetch(event.request);
-      if (await validateResponse(asset, response)) {
-        event.waitUntil(store(asset, response, epoch).catch(() => false));
-      }
+    let storing = Promise.resolve();
+    const network = fetch(event.request).then(async response => {
+      if (await validateResponse(asset, response)) storing = store(asset, response, epoch).catch(() => false);
       // Preserve online auth decisions (401/403/redirect) rather than serving
       // a cached protected document after an explicit login/logout response.
       return response;
-    } catch (error) {
-      if (cached) return cached;
-      throw error;
-    }
+    });
+    event.waitUntil(network.then(() => storing, () => {}));
+    if (!cached) return network;
+    let timer;
+    const late = new Promise(resolve => { timer = setTimeout(resolve, NETWORK_TIMEOUT_MS, null); });
+    const answer = await Promise.race([network.catch(() => null), late]);
+    clearTimeout(timer);
+    return answer || cached;
   })());
 });
 
-async function cacheAll() {
+async function cacheAll(profile = 'all') {
   if (cacheAllPromise) return cacheAllPromise;
   const epoch = generation;
   cacheController = new AbortController();
   cacheAllPromise = (async () => {
     const errors = [];
-    await status('start', { errors });
-    for (const asset of ALL_ASSETS) {
+    await status('start', { errors }, null, profile);
+    for (const asset of profileAssets(profile)) {
       if (epoch !== generation) return;
       if (!await cachedAsset(asset, { promote: true, epoch })) {
         try { await download(asset, cacheController.signal, epoch); }
         catch (error) {
           if (epoch !== generation) return;
           errors.push(asset); // Fixed public path only; never serialize request/auth error text.
-          if (error.name === 'QuotaExceededError') { await status('error', { errors, reason: 'storage-full' }); return; }
+          if (error.name === 'QuotaExceededError') { await status('error', { errors, reason: 'storage-full' }, null, profile); return; }
         }
       }
-      await status('progress', { asset, errors: [...errors] });
+      await status('progress', { asset, errors: [...errors] }, null, profile);
     }
     if (!errors.length) await retireMigratedCaches();
-    await status(errors.length ? 'error' : 'complete', { errors });
+    await status(errors.length ? 'error' : 'complete', { errors }, null, profile);
   })().finally(() => { cacheController = null; cacheAllPromise = null; });
   return cacheAllPromise;
 }
 self.addEventListener('message', event => {
   if (!isAppClient(event.source) || !event.data || typeof event.data !== 'object') return;
-  if (event.data.type === 'CACHE_ALL') event.waitUntil(cacheAll());
-  if (event.data.type === 'CACHE_STATUS') event.waitUntil(status('status', {}, event.source));
+  const profile = profileName(event.data.profile);
+  if (event.data.type === 'CACHE_ALL') event.waitUntil(cacheAll(profile));
+  if (event.data.type === 'CACHE_STATUS') event.waitUntil(status('status', {}, event.source, profile));
   if (event.data.type === 'CLEAR_CACHE') event.waitUntil((async () => {
     generation++;
     verifiedCacheEntries.clear();
     cacheController?.abort();
     if (cacheAllPromise) await cacheAllPromise.catch(() => {});
     for (const name of await caches.keys()) if (name.startsWith(CACHE_PREFIX)) await caches.delete(name);
-    await status('cleared', { errors: [] }, event.source);
+    await status('cleared', { errors: [] }, event.source, profile);
   })());
 });

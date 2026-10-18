@@ -51,20 +51,28 @@ function wrapMaterial(material){
       if(atlasWave.x>500.0){float atlasS=atlasWave.x-1000.0,atlasK=0.0;for(int i=0;i<6;i++){vec4 w=atlasWaves[i];float d=(atlasS-w.x)/w.y;atlasK+=w.z*exp(-d*d);}transformed=atlasWave.yzw+(transformed-atlasWave.yzw)*(1.0+atlasK);}`)};
   material.customProgramCacheKey=()=>key+'|'+WAVE_KEY;material.needsUpdate=true;
 }
-/** routes: [{curve, offset, reach, accept?(mesh)}] in scene space; s = offset + arc-length position (0–1). */
-export function createWaveField(group,routes,key){
+const nextTask=()=>new Promise(resolve=>{const channel=new MessageChannel();channel.port1.onmessage=()=>resolve();channel.port2.postMessage(0)});
+// Grid cell → one number (no string per lookup); exact while |index| < 1024, i.e. within ±1024 cells of the origin.
+const cellId=(x,y,z)=>((x+1024)*2048+(y+1024))*2048+(z+1024);
+/** routes: [{curve, offset, reach, accept?(mesh)}] in scene space; s = offset + arc-length position (0–1).
+ * Built once per geometry in ~6 ms slices, so the page keeps responding (the heart took >4 s in one block). */
+export async function createWaveField(group,routes,key){
   const meshes=[];group.updateMatrixWorld(true);group.traverse(o=>{if(o.isMesh&&o.geometry?.attributes.position)meshes.push(o)});
-  const k=(x,y,z)=>x+','+y+','+z;
-  const sets=routes.map(r=>{const cell=r.reach,grid=new Map(),n=Math.max(64,Math.round(r.curve.getLength()/.006));for(let i=0;i<=n;i++){const u=i/n,p=r.curve.getPointAt(u),id=k(Math.floor(p.x/cell),Math.floor(p.y/cell),Math.floor(p.z/cell));(grid.get(id)||grid.set(id,[]).get(id)).push({s:r.offset+u,p})}return{r,cell,grid}});
-  const v=new THREE.Vector3(),a=new THREE.Vector3(),inverse=new THREE.Matrix4();
+  // Each cell holds its route points flattened as x, y, z, s (doubles: same distances and ties as Vector3 math).
+  const sets=routes.map(r=>{const cell=r.reach,lists=new Map(),n=Math.max(64,Math.round(r.curve.getLength()/.006));for(let i=0;i<=n;i++){const u=i/n,p=r.curve.getPointAt(u),id=cellId(Math.floor(p.x/cell),Math.floor(p.y/cell),Math.floor(p.z/cell));let list=lists.get(id);if(!list)lists.set(id,list=[]);list.push(p.x,p.y,p.z,r.offset+u)}
+    const grid=new Map();for(const[id,list]of lists)grid.set(id,Float64Array.from(list));return{r,cell,grid}});
+  const a=new THREE.Vector3(),inverse=new THREE.Matrix4();let slice=performance.now();
   for(const mesh of meshes){
     const g=mesh.geometry;if(g.userData.atlasWaveKey===key)continue;
-    const pos=g.attributes.position,data=new Float32Array(pos.count*4),allowed=sets.filter(x=>!x.r.accept||x.r.accept(mesh));inverse.copy(mesh.matrixWorld).invert();
+    const pos=g.attributes.position,data=new Float32Array(pos.count*4),allowed=sets.filter(x=>!x.r.accept||x.r.accept(mesh)),e=mesh.matrixWorld.elements;inverse.copy(mesh.matrixWorld).invert();
     for(let i=0;i<pos.count;i++){
-      v.fromBufferAttribute(pos,i).applyMatrix4(mesh.matrixWorld);let best=null,bd=Infinity;
-      for(const {r,cell,grid} of allowed){const gx=Math.floor(v.x/cell),gy=Math.floor(v.y/cell),gz=Math.floor(v.z/cell),limit=r.reach*r.reach;
-        for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(let dz=-1;dz<=1;dz++){const list=grid.get(k(gx+dx,gy+dy,gz+dz));if(list)for(const s of list){const d=s.p.distanceToSquared(v);if(d<bd&&d<limit){bd=d;best=s}}}}
-      if(best){a.copy(best.p).applyMatrix4(inverse);data.set([best.s+1000,a.x,a.y,a.z],i*4)}else data.set([-100,0,0,0],i*4);
+      if((i&1023)===0&&performance.now()-slice>6){await nextTask();slice=performance.now()}
+      const x0=pos.getX(i),y0=pos.getY(i),z0=pos.getZ(i),w=1/(e[3]*x0+e[7]*y0+e[11]*z0+e[15]);
+      const x=(e[0]*x0+e[4]*y0+e[8]*z0+e[12])*w,y=(e[1]*x0+e[5]*y0+e[9]*z0+e[13])*w,z=(e[2]*x0+e[6]*y0+e[10]*z0+e[14])*w;
+      let best=null,bi=0,bd=Infinity;
+      for(const {r,cell,grid} of allowed){const gx=Math.floor(x/cell),gy=Math.floor(y/cell),gz=Math.floor(z/cell),limit=r.reach*r.reach;
+        for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(let dz=-1;dz<=1;dz++){const list=grid.get(cellId(gx+dx,gy+dy,gz+dz));if(list)for(let j=0;j<list.length;j+=4){const px=list[j]-x,py=list[j+1]-y,pz=list[j+2]-z,d=px*px+py*py+pz*pz;if(d<bd&&d<limit){bd=d;best=list;bi=j}}}}
+      if(best){a.set(best[bi],best[bi+1],best[bi+2]).applyMatrix4(inverse);data[i*4]=best[bi+3]+1000;data[i*4+1]=a.x;data[i*4+2]=a.y;data[i*4+3]=a.z}else data[i*4]=-100;
     }
     g.setAttribute('atlasWave',new THREE.BufferAttribute(data,4));g.userData.atlasWaveKey=key;
   }

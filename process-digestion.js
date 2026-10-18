@@ -137,7 +137,7 @@ async function createCutProcess({app,mode,id,routes,bolusRadius,steps,update,set
   const curves=routes.map(r=>({...r,curve:curveOf(r.points)}));
   // Building the attributes takes a few tens of milliseconds; let the bar paint first.
   await new Promise(resolve=>setTimeout(resolve,30));
-  const field=createWaveField(model.group,curves,id);field.ensure();
+  const field=await createWaveField(model.group,curves,id);field.ensure();
   const bolus=createBolus(bolusRadius,.45,.28);root.add(bolus.group);
   let start=0;for(const s of steps){s.start=start;start+=s.duration}
   const extra=setup?.({root,curves,bolus})||{};helper(root);

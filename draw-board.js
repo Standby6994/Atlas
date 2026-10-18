@@ -1,5 +1,6 @@
 // Annotation board over the 3D viewer. Strokes live in viewport-relative coordinates, are saved per model
-// (localStorage) and redrawn on resize. An Apple Pencil always draws; fingers keep rotating the model unless
+// (localStorage) and redrawn on resize. Each stroke keeps the camera view it was drawn in (getView); after the model
+// turns, strokes from another view fade and a button returns the camera to them (setView). An Apple Pencil always draws; fingers keep rotating the model unless
 // board mode is on (then any pointer draws). Tools: pen (pressure), pencil, pigment brush, highlighter,
 // eraser, stroke eraser, line, arrow, rectangle, ellipse, text and an eyedropper that also reads the 3D scene.
 
@@ -20,7 +21,7 @@ const SHAPES=new Set(['line','arrow','rect','ellipse']);
 // Small deterministic generator so pencil grain replays identically after reload.
 const grain=seed=>()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);
 
-export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapshot3D=null,onChange=()=>{}}){
+export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapshot3D=null,getView=()=>null,setView=null,onChange=()=>{}}){
   const base=document.createElement('canvas'),live=document.createElement('canvas');
   base.className='draw-layer';live.className='draw-layer draw-live';
   viewport.append(base,live);
@@ -28,6 +29,14 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
   const settings={tool:'pen',color:'#d8343f',size:6,opacity:1,background:'default',visible:true};
   try{Object.assign(settings,JSON.parse(localStorage.getItem(STORAGE+'settings')||'{}'))}catch{}
   let strokes=[],undone=[],context='body',active=false,current=null,penSeen=false,ratio=1;
+  // ---- camera view of each stroke: [camera x,y,z, target x,y,z] ----
+  let view=null,alignedKey='';const fade=document.createElement('canvas');
+  const back=document.createElement('button');back.type='button';back.className='board-return';back.hidden=true;back.textContent='↺ Voltar à vista das anotações';viewport.append(back);
+  // Same view: camera and target within 1% of the viewing distance (older strokes without a view always match).
+  const sameView=(a,b)=>{const d=Math.hypot(b[0]-b[3],b[1]-b[4],b[2]-b[5])||1;return Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2])+Math.hypot(a[3]-b[3],a[4]-b[4],a[5]-b[5])<.01*d};
+  const aligned=s=>!s.view||!view||sameView(s.view,view);
+  const offView=()=>strokes.filter(s=>s.tool!=='eraser'&&!aligned(s));
+  back.addEventListener('click',()=>{const target=offView().at(-1);if(target&&setView)setView(target.view)});
 
   // ---- geometry helpers ----
   const box=()=>viewport.getBoundingClientRect();
@@ -73,17 +82,26 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
   }
   function drawText(c,s){strokeStyle(c,s);const k=scale(),size=Math.max(10,s.size*k*3.5);c.font=`600 ${size}px system-ui,-apple-system,"Segoe UI",sans-serif`;c.textBaseline='top';const [x,y]=px(s.points[0]);s.text.split('\n').forEach((line,i)=>c.fillText(line,x,y+i*size*1.2))}
   function drawStroke(c,s){c.save();if(s.tool==='text')drawText(c,s);else if(SHAPES.has(s.tool))drawShape(c,s);else drawFreehand(c,s);c.restore()}
-  function redraw(){ctx.clearRect(0,0,base.width,base.height);for(const s of strokes)drawStroke(ctx,s);base.hidden=live.hidden=!settings.visible}
+  function redraw(){
+    ctx.clearRect(0,0,base.width,base.height);const off=strokes.filter(s=>!aligned(s));
+    // Strokes drawn in another camera view no longer point at their structure: shown faint, behind the current ones.
+    if(off.length){fade.width=base.width;fade.height=base.height;const f=fade.getContext('2d');for(const s of off)drawStroke(f,s);ctx.save();ctx.globalAlpha=.18;ctx.drawImage(fade,0,0);ctx.restore();fade.width=fade.height=1}
+    for(const s of strokes)if(aligned(s))drawStroke(ctx,s);base.hidden=live.hidden=!settings.visible;
+    alignedKey=strokes.map(s=>aligned(s)?1:0).join('');back.hidden=!settings.visible||!setView||!offView().length;
+  }
+  // Called by the app whenever the camera changes; repaints only when some stroke enters or leaves its view.
+  function syncView(next){view=next?next.map(n=>Math.round(n*1e4)/1e4):null;if(strokes.map(s=>aligned(s)?1:0).join('')!==alignedKey)redraw()}
   function drawLive(){liveCtx.clearRect(0,0,live.width,live.height);if(current&&current.tool!=='eraser')drawStroke(liveCtx,current)}
 
   // ---- persistence ----
   const save=()=>{try{localStorage.setItem(STORAGE+context,JSON.stringify(strokes))}catch{onChange('full')}};
+  const currentView=()=>{const v=getView();return v?v.map(n=>Math.round(n*1e4)/1e4):null};
   const saveSettings=()=>{try{localStorage.setItem(STORAGE+'settings',JSON.stringify(settings))}catch{}};
   function setContext(name){
     if(name===context&&strokes.length)return;context=name;undone=[];
     try{strokes=JSON.parse(localStorage.getItem(STORAGE+name)||'[]')}catch{strokes=[]}redraw();onChange('context');
   }
-  function commit(stroke){strokes.push(stroke);undone=[];save();redraw();onChange('stroke')}
+  function commit(stroke){stroke.view||=currentView()||undefined;strokes.push(stroke);undone=[];save();redraw();onChange('stroke')}
 
   // ---- stroke eraser: removes every stroke passing near the pointer ----
   function eraseStrokesAt(pt){
@@ -177,7 +195,7 @@ export function createDrawBoard({viewport,panel,toggle,sample3D=()=>null,snapsho
     undo(){if(!strokes.length)return;undone.push(strokes.pop());save();redraw();onChange('stroke')},
     redo(){if(!undone.length)return;strokes.push(undone.pop());save();redraw();onChange('stroke')},
     clear(){if(!strokes.length)return;undone=[...strokes].reverse();strokes=[];save();redraw();onChange('stroke')},
-    setContext,resize,redraw,
+    setContext,resize,redraw,syncView,
     // Flattened image of the 3D view (supplied by the app) with the annotations on top.
     async exportImage(){
       resize();const out=document.createElement('canvas');out.width=base.width;out.height=base.height;const o=out.getContext('2d');
