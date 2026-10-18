@@ -66,6 +66,13 @@ async function readPack(url){
   return{buffer,meta,base:Math.ceil((12+length)/8)*8};
 }
 
+// Vertex colours are stored as sRGB bytes; three.js wants linear ones. They are converted once here, into 16-bit
+// linear values (8-bit linear would band in the shadows), because the app clones materials for selection and a
+// shader patch on the original would be lost; a slight saturation keeps them vivid under the app's bright lights.
+const SRGB_TO_LINEAR=Float32Array.from({length:256},(_,i)=>{const c=i/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4});
+function linearColors(bytes){const out=new Uint16Array(bytes.length);for(let i=0;i<bytes.length;i+=3){const r=SRGB_TO_LINEAR[bytes[i]],g=SRGB_TO_LINEAR[bytes[i+1]],b=SRGB_TO_LINEAR[bytes[i+2]],l=.2126*r+.7152*g+.0722*b,k=1.15;
+  out[i]=Math.min(65535,Math.max(0,(l+(r-l)*k)*65535));out[i+1]=Math.min(65535,Math.max(0,(l+(g-l)*k)*65535));out[i+2]=Math.min(65535,Math.max(0,(l+(b-l)*k)*65535))}return out}
+
 export async function createRealCytologyModel(id,def,{mobile=false,url=null}={}){
   const spec=REAL_PACKS[id];if(!spec&&!url)return null;
   const {buffer,meta,base}=await readPack(url||new URL('./'+realPackPath(id,mobile),import.meta.url));
@@ -82,12 +89,10 @@ export async function createRealCytologyModel(id,def,{mobile=false,url=null}={})
       const g=new THREE.BufferGeometry();
       g.setAttribute('position',new THREE.BufferAttribute(view(Uint16Array,m.position),3,true));
       g.setAttribute('normal',new THREE.BufferAttribute(view(Int8Array,m.normal),3,true));
-      if(m.colors)g.setAttribute('color',new THREE.BufferAttribute(view(Uint8Array,m.colors),3,true));
+      if(m.colors)g.setAttribute('color',new THREE.BufferAttribute(linearColors(view(Uint8Array,m.colors)),3,true));
       g.setIndex(new THREE.BufferAttribute(view(m.index[2]===4?Uint32Array:Uint16Array,m.index),1));
       g.computeBoundingSphere();geometries.add(g);
-      const material=new THREE.MeshStandardMaterial({color:m.color,roughness:m.roughness,metalness:0,side:THREE.DoubleSide,transparent:m.opacity<1,opacity:m.opacity,depthWrite:m.opacity>=.95,vertexColors:!!m.colors,forceSinglePass:true});
-      // Vertex colours are stored as sRGB bytes; three.js expects linear ones: convert per vertex.
-      if(m.colors){material.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <color_vertex>','#include <color_vertex>\n\tvColor.rgb=pow(vColor.rgb,vec3(2.2));')};material.customProgramCacheKey=()=>'atlas-srgb-vertex-colors'}
+      const material=new THREE.MeshStandardMaterial({color:m.color,roughness:m.roughness,metalness:0,side:THREE.DoubleSide,transparent:m.opacity<1,opacity:m.opacity,depthWrite:m.opacity>=.95,vertexColors:!!m.colors,forceSinglePass:true,envMapIntensity:.4});
       materials.add(material);
       const mesh=new THREE.Mesh(g,material);mesh.name=part.object.name+'_'+m.name;mesh.position.copy(min);mesh.scale.copy(size);
       mesh.userData=part.context?{contextOnly:true,cytology:true,realData:true}:{partId:part.id,atlasName:part.object.name,cytology:true,educational:true,realData:true};if(part.context)mesh.raycast=()=>{};
