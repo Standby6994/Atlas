@@ -22,6 +22,8 @@ import {createAmbientOcclusion} from './ambient-occlusion.js';
 import {createDrawBoard,mountBoardPanel} from './draw-board.js';
 import {createProcessPlayer} from './process-animations.js';
 import {createSystematicsView} from './systematics-view.js';
+import {studyBackupBlob,readStudyBackup,restoreStudyData} from './study-backup.js';
+import {createQuiz3D} from './quiz-3d.js';
 const {applyTissueFinish,copyTissueFinish,getTissueFinishStats}=tissueFinish;
 const releaseTissueFinish=root=>tissueFinish.releaseTissueFinish?.(root);
 
@@ -120,6 +122,24 @@ function setupOffline(){
     await navigator.serviceWorker.ready;offlineWorker=navigator.serviceWorker.controller||registration.active;
     $('download-offline').disabled=!offlineWorker;offlineWorker?.postMessage({type:'CACHE_STATUS',profile});
   }).catch(()=>{$('offline-status').textContent='Não foi possível preparar o acesso off-line neste navegador.'});
+}
+// Study backup (study-backup.js): a JSON file with annotations, drafts and progress, shared like the exported images.
+function setupBackup(){
+  $('backup-save').addEventListener('click',async()=>{
+    const {blob,count}=studyBackupBlob();if(!count){toast('Ainda não há anotações, rascunhos ou progresso para salvar.');return}
+    const name='atlas-humano-estudo-'+new Date().toISOString().slice(0,10)+'.json',file=typeof File==='function'?new File([blob],name,{type:'application/json'}):null;
+    if(touchDevice&&file&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'Backup do Atlas Humano'});return}catch(error){if(error.name==='AbortError')return}}
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);toast('Backup salvo: '+name);
+  });
+  $('backup-restore').addEventListener('click',()=>$('backup-file').click());
+  $('backup-file').addEventListener('change',async e=>{
+    const file=e.target.files?.[0];e.target.value='';if(!file)return;
+    try{const backup=await readStudyBackup(file);if(!backup.count){toast('O arquivo não tem anotações nem rascunhos.');return}
+      const when=backup.createdAt?' de '+new Date(backup.createdAt).toLocaleDateString('pt-BR'):'';
+      if(!confirm('Restaurar o backup'+when+'? Anotações e rascunhos dos mesmos modelos e questões serão substituídos pelos do arquivo.'))return;
+      restoreStudyData(backup.entries);toast('Backup restaurado. Recarregando…');setTimeout(()=>location.reload(),900);
+    }catch(error){toast(error.message)}
+  });
 }
 function registerMesh(mesh){if(!meshSet.has(mesh)){meshSet.add(mesh);allMeshObjects.push(mesh)}preparePickingMesh(mesh)}
 function freezeModel(root){root.updateMatrixWorld(true);root.traverse(object=>{object.matrixAutoUpdate=false;object.matrixWorldAutoUpdate=false})}
@@ -455,7 +475,8 @@ async function loadSystem(id){
   const promise=(async()=>{
     const meta=bodySystem(id),female=isFemaleSystem(id);$('asset-status').textContent='Carregando '+(female?'corpo feminino · ':'')+meta.name.toLowerCase()+'…';
     try{
-      const roots=(await Promise.all((meta.files||[meta.file]).map(file=>loader.loadAsync('./models/'+file)))).map(gltf=>gltf.scene);
+      const load=async file=>{const bytes=await prefetchedModels.get(file);prefetchedModels.delete(file);return bytes?loader.parseAsync(bytes,'./models/'):loader.loadAsync('./models/'+file)};
+      const roots=(await Promise.all((meta.files||[meta.file]).map(load))).map(gltf=>gltf.scene);
       // Pieces are attached while the container is still at the origin (source coordinates), then the container joins its body.
       const container=new THREE.Group();container.name=id;const named=[];
       for(const root of roots){root.updateMatrixWorld(true);root.traverse(o=>{if(o.userData.za_name&&state.registry.get(o.userData.za_name)?.system===id)named.push(o)})}
@@ -747,7 +768,7 @@ function initPicking(){
   renderer.domElement.atlasRenderStats=(frames=20)=>{if(tween){camera.position.copy(tween.toPosition);controls.target.copy(tween.toTarget);controls.update();tween=null}selectionFade.value=1;const t=performance.now();for(let i=0;i<frames;i++){if(controls.autoRotate)controls.update();drawScene()}renderer.getContext().finish();const systems={};for(const r of state.registry.values()){if(!r.object)continue;let visible=r.object.visible;for(let p=r.object.parent;p&&visible;p=p.parent)visible=p.visible;if(!visible)continue;const e=systems[r.system]||(systems[r.system]={meshes:0,triangles:0,transparent:0});r.object.traverse(m=>{if(!m.isMesh||!m.visible)return;e.meshes++;const g=m.geometry;e.triangles+=(g.index?g.index.count:g.attributes.position.count)/3;if([].concat(m.material).some(x=>x.transparent))e.transparent++})}return{msPerFrame:+((performance.now()-t)/frames).toFixed(2),ratio:renderer.getPixelRatio(),batches:renderBatches.stats(),...renderer.info.render,systems}};
   renderer.domElement.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){touchPointers.add(e.pointerId);if(touchPointers.size>1||e.isPrimary===false){down=null;$('hover-label').hidden=true;return}}down={id:e.pointerId,x:e.clientX,y:e.clientY,time:performance.now(),moved:false};$('hover-label').hidden=true});
   renderer.domElement.addEventListener('pointercancel',e=>{touchPointers.delete(e.pointerId);down=null});
-  renderer.domElement.addEventListener('pointerup',e=>{if(down&&!down.moved&&down.id===e.pointerId&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&performance.now()-down.time<800&&e.button===0){const hit=pick(e);if(hit)selectItem(hit.name,false,false)}touchPointers.delete(e.pointerId);down=null});
+  renderer.domElement.addEventListener('pointerup',e=>{if(down&&!down.moved&&down.id===e.pointerId&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&performance.now()-down.time<800&&e.button===0){const hit=pick(e);if(hit){selectItem(hit.name,false,false);quiz?.answer(hit)}}touchPointers.delete(e.pointerId);down=null});
   renderer.domElement.addEventListener('pointermove',e=>{if(down&&down.id===e.pointerId&&Math.hypot(e.clientX-down.x,e.clientY-down.y)>=5)down.moved=true;if(e.pointerType==='touch'||e.buttons||tween||performance.now()-lastHover<120)return;lastHover=performance.now();const hit=pick(e),label=$('hover-label');label.hidden=!hit;renderer.domElement.style.cursor=hit?'pointer':'grab';if(hit){label.textContent=hit.pt;const rect=$('viewport').getBoundingClientRect();label.style.left=Math.max(8,Math.min(e.clientX-rect.left+13,rect.width-Math.min(260,rect.width-16)-8))+'px';label.style.top=Math.max(8,e.clientY-rect.top-42)+'px'}});
   renderer.domElement.addEventListener('pointerleave',()=>$('hover-label').hidden=true);
 }
@@ -929,6 +950,19 @@ function setupProcesses(){
   // Verification: place the animation at a time (seconds) and draw that frame synchronously.
   renderer.domElement.atlasProcessFrame=t=>{const info=processPlayer.seekTo(t);drawScene();renderer.getContext().finish();return info};
 }
+// Identification quiz (quiz-3d.js): asks for structures that are visible in the open body and checks each tap.
+let quiz=null;
+function setupQuiz(){
+  const bodyMode=()=>state.mode==='body'||state.mode==='female';
+  quiz=createQuiz3D({bar:$('quiz-bar'),app:{toast,
+    candidates(){if(!bodyMode())return[];const female=state.mode==='female',ids=new Set();
+      for(const r of state.registry.values())if(r.coreId&&r.object&&state.layers[r.system]&&isFemaleSystem(r.system)===female&&!state.hidden.has(r.name))ids.add(r.coreId);
+      return[...ids].map(id=>state.coreMap.get(id)).filter(Boolean).map(c=>({id:c.id,name:c.name,systemLabel:systemLabel(c.system),shortFunction:c.shortFunction}))},
+    async open(){setView('atlas');if(!bodyMode()&&!await switchModel('body'))return false;tabletUI.closeAll?.();return true},
+    reveal:id=>selectItem(id,true),
+    clearSelection(){++selectionVersion;state.selected=null;state.selectedNames=new Set();state.isolated=null;$('selected-label').hidden=true;applyVisibility();resetDetail()}}});
+  $('start-quiz').addEventListener('click',()=>quiz.start());
+}
 function setupEvents(){
   new MutationObserver(organizeModelNotes).observe($('detail-panel'),{childList:true,subtree:true});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)requestRender()});
@@ -1077,17 +1111,23 @@ async function restoreStudySession(saved){
   if(state.selected)renderDetail();else resetDetail();updateStudyPath();fitBody('front',true);
   return true;
 }
+// The first two body layers download while the data files arrive; loadSystem parses these bytes instead of fetching again.
+const prefetchedModels=new Map();
+function prefetchModel(file){prefetchedModels.set(file,fetch('./models/'+file).then(r=>r.ok?r.arrayBuffer():null).catch(()=>null))}
 async function start(){
   try{
+    for(const id of ['visceral','skeletal'])prefetchModel(bodySystem(id).file);
+    // Every data file is requested at once (they used to wait for each other in a chain of round trips).
+    const later=Object.fromEntries(['supplementary-content','reference-organs','atlas-female-body','reference-part-functions','botany-content','organ-detail','histology-detail','microscopy-references','study-connections','organ-model-coverage','systematics-content'].map(name=>[name,getJSON('./data/'+name+'.json',true)]));
     [physiology,simulations,atlasSystems,lexicon,contentSources,simulationSources,femaleMeta,studyContent,cytologyContent]=await Promise.all([getJSON('./data/physiology.json'),getJSON('./data/simulations.json'),getJSON('./data/atlas-systems.json'),getJSON('./data/atlas-lexicon.json'),getJSON('./data/content-sources.json'),getJSON('./data/simulation-sources.json'),getJSON('./data/atlas-female.json',true),getJSON('./data/internal-content.json',true),getJSON('./data/cytology-content.json',true)]);
     cytologyContent||={views:[],categories:[],sources:[]};
     studyContent||={organs:[],histology:[],sources:[]};
-    const supplementary=await getJSON('./data/supplementary-content.json',true);if(supplementary)for(const key of ['organs','histology','sources'])studyContent[key]=[...(studyContent[key]||[]),...(supplementary[key]||[])];
-    referenceCatalog=await getJSON('./data/reference-organs.json',true);
-    femaleBody=await getJSON('./data/atlas-female-body.json',true);
-    referencePartFunctions=await getJSON('./data/reference-part-functions.json',true)||{parts:[]};
-    botanyContent=await getJSON('./data/botany-content.json',true)||{views:[],categories:[],sources:[]};
-    const [organDetails,histologyDetails,microscopyReferences,connectionData,coverageData]=await Promise.all([getJSON('./data/organ-detail.json',true),getJSON('./data/histology-detail.json',true),getJSON('./data/microscopy-references.json',true),getJSON('./data/study-connections.json',true),getJSON('./data/organ-model-coverage.json',true)]);
+    const supplementary=await later['supplementary-content'];if(supplementary)for(const key of ['organs','histology','sources'])studyContent[key]=[...(studyContent[key]||[]),...(supplementary[key]||[])];
+    referenceCatalog=await later['reference-organs'];
+    femaleBody=await later['atlas-female-body'];
+    referencePartFunctions=await later['reference-part-functions']||{parts:[]};
+    botanyContent=await later['botany-content']||{views:[],categories:[],sources:[]};
+    const [organDetails,histologyDetails,microscopyReferences,connectionData,coverageData]=await Promise.all(['organ-detail','histology-detail','microscopy-references','study-connections','organ-model-coverage'].map(name=>later[name]));
     currentConnectionData=connectionData;currentOrganDetails=organDetails;
     modelCoverage=coverageData;
     studyConnections=createStudyConnections(connectionData,studyContent,cytologyContent,organDetails,botanyContent);
@@ -1097,13 +1137,13 @@ async function start(){
     const ids=[...new Set(state.core.map(c=>c.system))];$('practice-system').innerHTML='<option value="all">Todos os sistemas</option>'+ids.map(id=>`<option value="${id}">${escapeHtml(systemLabel(id))}</option>`).join('');
     const studySystems=[...new Set([...(studyContent.organs||[]),...(studyContent.histology||[])].map(o=>o.system))];$('study-system').innerHTML='<option value="all">Todos os sistemas</option>'+studySystems.map(id=>`<option value="${escapeHtml(id)}">${escapeHtml(systemLabel(id))}</option>`).join('');
     syncBotanyOptions();
-    setupSystematics(await getJSON('./data/systematics-content.json',true));
+    setupSystematics(await later['systematics-content']);
     $('cytology-category').innerHTML='<option value="all">Todos os temas</option>'+cytologyContent.categories.map(c=>`<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
     const options=[['Por dentro',studyContent.organs||[],'internal-'],['Histologia',studyContent.histology||[],'histo-'],['Citologia',cytologyContent.views||[],'cyto-']];for(const [label,entries,prefix] of options){const group=document.createElement('optgroup');group.label=label;for(const entry of entries){const option=document.createElement('option');option.value=prefix+entry.id;option.textContent=entry.label||entry.title;group.append(option)}$('model-mode').append(group)}
-    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupProcesses();setupEvents();setupOffline();setupDetailAnnouncer();
+    tabletUI=setupTabletUI({touchDevice,onInsetChange:setViewInset});init3D();setupDrawBoard();setupProcesses();setupQuiz();setupEvents();setupOffline();setupDetailAnnouncer();setupBackup();
     $('load-progress').max=2;$('load-detail').textContent='Órgãos internos e esqueleto…';await Promise.all([loadSystem('visceral'),loadSystem('skeletal')]);$('viewer-loading').hidden=true;fitBody('front',true);fadeInCanvas();$('load-progress').max=7;
     const saved=studySessions.load(),view=location.hash.replace('#',''),restored=await restoreStudySession(saved);if(['atlas','physiology','practice','about'].includes(view))setView(view);else if(saved)setView(saved.view);sessionReady=true;if(restored)rememberStudy();
-    window.atlas={state,scene,camera,renderer,controls,processPlayer,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
+    window.atlas={state,scene,camera,renderer,controls,processPlayer,quiz:()=>quiz,botanyContent,systematicsContent:()=>systematicsContent,systematicsView:()=>systematicsView,focusSystematicsFunction,applyVisibility,requestRender,fitBody,selectItem,loadSystem,switchModel,openStudy,followStudyConnection,returnStudyConnection,studyConnections,studyContent,cytologyContent,studyModels,selectSimulation,setView,export4K,getStats:()=>({catalog:state.registry.size,core:state.core.length,loaded:[...state.loaded],objects:allMeshObjects.length,materialVariants:materialCache.size,tissues:getTissueFinishStats(),pickCandidates:pickCandidates.length,triangles:renderer.info.render.triangles,simulations:simulationEntries().length,internalOrgans:studyContent.organs.length,histologyUnits:studyContent.histology.length,botanyViews:botanyContent.views.length,botanyParts:botanyContent.views.reduce((n,v)=>n+v.parts.length,0),cytologyViews:cytologyContent.views.length,cytologyParts:cytologyContent.views.reduce((n,v)=>n+v.parts.length,0),studyModelsLoaded:studyModels.size})};
   }catch(error){console.error(error);$('viewer-loading').hidden=true;showError('O atlas não pôde iniciar: '+error.message+'. Recarregue a página. Se o acervo ainda não foi salvo para uso off-line, conecte-se à internet e tente novamente.');$('asset-status').textContent='Falha no carregamento'}
 }
 start();

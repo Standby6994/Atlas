@@ -45,12 +45,25 @@ async function loadScan(url,loader){
 const inRegion=(r,x,y,z)=>r.box?x>=r.box[0][0]&&x<=r.box[1][0]&&y>=r.box[0][1]&&y<=r.box[1][1]&&z>=r.box[0][2]&&z<=r.box[1][2]:r.sphere?(x-r.sphere[0])**2+(y-r.sphere[1])**2+(z-r.sphere[2])**2<=r.sphere[3]**2:r.capsule?nearSegment(r.capsule,x,y,z):false;
 // Capsule region [x1,y1,z1, x2,y2,z2, radius]: within radius of the segment.
 function nearSegment(c,x,y,z){const dx=c[3]-c[0],dy=c[4]-c[1],dz=c[5]-c[2],t=Math.max(0,Math.min(1,((x-c[0])*dx+(y-c[1])*dy+(z-c[2])*dz)/(dx*dx+dy*dy+dz*dz)));return(x-c[0]-dx*t)**2+(y-c[1]-dy*t)**2+(z-c[2]-dz*t)**2<=c[6]**2}
-function splitScan(scene,spec){
- const out=new Map(),meshes=[];scene.updateMatrixWorld(true);scene.traverse(o=>{if(o.isMesh)meshes.push(o)});
- for(const mesh of meshes){const g=mesh.geometry;g.applyMatrix4(mesh.matrixWorld);if(!g.index)g.setIndex([...Array(g.attributes.position.count).keys()]);const pos=g.attributes.position.array,idx=g.index.array,lists=new Map();
-  for(let t=0;t<idx.length;t+=3){const a=idx[t]*3,b=idx[t+1]*3,c=idx[t+2]*3,x=(pos[a]+pos[b]+pos[c])/3,y=(pos[a+1]+pos[b+1]+pos[c+1])/3,z=(pos[a+2]+pos[b+2]+pos[c+2])/3;let part=spec.part;
-   for(const r of spec.regions||[])if(inRegion(r,x,y,z)){part=r.part;break}let l=lists.get(part);if(!l)lists.set(part,l=[]);l.push(idx[t],idx[t+1],idx[t+2])}
-  for(const [part,list] of lists){const geo=new THREE.BufferGeometry();for(const [k,v] of Object.entries(g.attributes))geo.setAttribute(k,v);geo.setIndex(list);geo.computeBoundingSphere();if(!out.has(part))out.set(part,[]);out.get(part).push({geometry:geo,material:mesh.material})}}
+const nextTask=()=>new Promise(resolve=>{const channel=new MessageChannel();channel.port1.onmessage=()=>resolve();channel.port2.postMessage(0)});
+// Two passes over typed arrays (region of each triangle, then one index array per region), in ~6 ms slices:
+// the old version pushed into plain arrays and held the page ~250 ms for a 400k-triangle scan.
+async function splitScan(scene,spec){
+ const out=new Map(),meshes=[],regions=spec.regions||[],names=[spec.part,...regions.map(r=>r.part)];let slice=performance.now();
+ scene.updateMatrixWorld(true);scene.traverse(o=>{if(o.isMesh)meshes.push(o)});
+ for(const mesh of meshes){const g=mesh.geometry;g.applyMatrix4(mesh.matrixWorld);const count=g.attributes.position.count;if(!g.index){const fill=new (count>65535?Uint32Array:Uint16Array)(count);for(let i=0;i<count;i++)fill[i]=i;g.setIndex(new THREE.BufferAttribute(fill,1))}
+  const pos=g.attributes.position.array,idx=g.index.array,triangles=idx.length/3,owner=new Uint8Array(triangles),sizes=new Uint32Array(names.length);
+  for(let t=0;t<triangles;t++){
+   if((t&4095)===0&&performance.now()-slice>6){await nextTask();slice=performance.now()}
+   const a=idx[t*3]*3,b=idx[t*3+1]*3,c=idx[t*3+2]*3,x=(pos[a]+pos[b]+pos[c])/3,y=(pos[a+1]+pos[b+1]+pos[c+1])/3,z=(pos[a+2]+pos[b+2]+pos[c+2])/3;let k=0;
+   for(let r=0;r<regions.length;r++)if(inRegion(regions[r],x,y,z)){k=r+1;break}owner[t]=k;sizes[k]++}
+  // Several regions may name the same part: their triangles join one index array, in triangle order as before.
+  const byPart=new Map();names.forEach((part,k)=>{if(sizes[k])byPart.set(part,(byPart.get(part)||0)+sizes[k])});
+  const lists=new Map(),filled=new Map();for(const [part,n] of byPart){lists.set(part,new idx.constructor(n*3));filled.set(part,0)}
+  for(let t=0;t<triangles;t++){const part=names[owner[t]],list=lists.get(part);let at=filled.get(part);list[at]=idx[t*3];list[at+1]=idx[t*3+1];list[at+2]=idx[t*3+2];filled.set(part,at+3)}
+  // Bounds come from the whole shared position buffer (indices are not used), so one computation serves every part.
+  g.computeBoundingBox();g.computeBoundingSphere();
+  for(const [part,list] of lists){const geo=new THREE.BufferGeometry();for(const [k,v] of Object.entries(g.attributes))geo.setAttribute(k,v);geo.setIndex(new THREE.BufferAttribute(list,1));geo.boundingBox=g.boundingBox.clone();geo.boundingSphere=g.boundingSphere.clone();if(!out.has(part))out.set(part,[]);out.get(part).push({geometry:geo,material:mesh.material})}}
  return out;
 }
 
@@ -60,7 +73,7 @@ export async function createSystematicsModel(id,definition,{mobile=false,loader=
  const [data,gltf]=await Promise.all([definition.procedural===false?{parts:{},stats:{}}:generate(id,mobile),scanSpec?loadScan(mobile&&scanSpec.touch||scanSpec.file,loader):null]);
  const group=new THREE.Group(),geometries=new Set(),materials=new Map(),scanMaterials=new Set(),textures=new Set();let disposed=false;
  group.name='SYSTEMATICS_'+id;group.userData={systematics:true,educational:true,authoredReconstruction:!scanSpec,specimenScan:!!scanSpec,organismId:id};
- const scanParts=gltf?splitScan(gltf.scene,scanSpec):new Map(),scanMeshes=[];
+ const scanParts=gltf?await splitScan(gltf.scene,scanSpec):new Map(),scanMeshes=[];
  const parts=[];let triangles=0;
  for(const def of definition.parts){
   const object=new THREE.Group();object.name='SYST_'+id+'_'+def.id;object.userData={partId:def.id,systematics:true};group.add(object);
