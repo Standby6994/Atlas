@@ -1,5 +1,6 @@
 import {createDetailedOrganelleModel} from './cytology-organelles.js';
 import {createDetailedProcessModel} from './cytology-processes.js';
+import {hasRealCytology,createRealCytologyModel} from './cytology-real.js';
 import * as THREE from 'three';
 
 // Original static teaching geometry: exposed sections, stage panels and molecular
@@ -194,4 +195,4 @@ function cardiomyocyte(c){
 
 
 const BUILDERS={cardiomyocyte,sarcomere:sarcomereCell};
-export async function createCytologyModel(id,suppliedDefinition,{mobile=false}={}){if(!CYTOLOGY_IDS.includes(id))throw new RangeError('Vista de citologia inexistente: '+id);const def=await getDefinition(id,suppliedDefinition);if(!def)throw new RangeError('Definição de citologia inexistente: '+id);const rebuilt=createDetailedOrganelleModel(id,def,{mobile})||createDetailedProcessModel(id,def,{mobile});if(rebuilt)return rebuilt;const c=context(def),build=BUILDERS[id];if(!build)throw Error('Geometria em elaboração: '+id);build(c);return c.finish()}
+export async function createCytologyModel(id,suppliedDefinition,{mobile=false}={}){if(!CYTOLOGY_IDS.includes(id))throw new RangeError('Vista de citologia inexistente: '+id);const def=await getDefinition(id,suppliedDefinition);if(!def)throw new RangeError('Definição de citologia inexistente: '+id);if(hasRealCytology(id)){try{return await createRealCytologyModel(id,def,{mobile})}catch(error){console.warn('Modelo real indisponível; usando o modelo autoral.',error)}}const rebuilt=createDetailedOrganelleModel(id,def,{mobile})||createDetailedProcessModel(id,def,{mobile});if(rebuilt)return rebuilt;const c=context(def),build=BUILDERS[id];if(!build)throw Error('Geometria em elaboração: '+id);build(c);return c.finish()}

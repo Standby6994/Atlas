@@ -2,3 +2,6 @@
 .claude/
 __pycache__/
 *.pyc
+
+# Downloaded sources for tools/ (rebuildable)
+.cache/

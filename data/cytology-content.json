@@ -48,7 +48,7 @@
       "label": "Célula animal",
       "category": "diversidade",
       "description": "Célula eucariótica animal generalizada em corte: compartimentos integrados ao metabolismo, à síntese e ao tráfego.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Corte de célula animal generalizada; proporções e número de organelas não representam um tipo celular específico.",
+      "limits": "Célula HeLa real (linhagem humana de câncer de colo do útero, em cultura), imageada por microscopia eletrônica FIB-SEM com voxels de 4 nm e segmentada por aprendizado de máquina (OpenOrganelle, HHMI Janelia, CC BY 4.0). A membrana plasmática aparece translúcida para mostrar o interior; a célula, aderida a uma lâmina, é achatada (cerca de 48 × 33 µm de largura e 6 µm de altura); o envelope nuclear, que a fonte segmenta junto com o retículo, foi retirado do retículo; malhas reduzidas para o aparelho. Retículo rugoso e liso não vêm separados na fonte: aqui, o retículo junto ao núcleo aparece como rugoso e o periférico como liso, uma aproximação didática. Lisossomos e endossomos foram segmentados juntos; aparecem os ~900 maiores, e das ~40 mil vesículas, as 2 500 maiores. Ribossomos livres e citosol não têm malha própria nesta escala (ribossomos medem ~25 nm).",
       "recognition": "Membrana delimita o citoplasma; núcleo e organelas indicam organização eucariótica.",
       "contrast": "Não há parede celular nem cloroplastos; o esquema não representa todas as células animais diferenciadas.",
       "relatedViews": [
@@ -63,7 +63,8 @@
       ],
       "sourceIds": [
         "bio-eukaryotes",
-        "bio-endomembrane"
+        "bio-endomembrane",
+        "openorganelle-cosem"
       ],
       "parts": [
         {
@@ -198,7 +199,7 @@
       "label": "Cardiomiócito",
       "category": "integracao",
       "description": "Célula contrátil ventricular em corte, com redes responsáveis pela ativação, produção de força, energia e ligação às células vizinhas. A ramificação pertence a uma única célula.",
-      "limits": "Reconstrução didática autoral estática. A face aberta é um corte de visualização; cores, quantidades de organelas, espessuras, distâncias e símbolos de canais estão ampliados e não representam medidas. Exemplifica cardiomiócito ventricular contrátil adulto, não célula marca-passo, fibra de Purkinje ou toda a diversidade cardíaca. A superfície celular é contínua; os contatos assinalam interfaces com células vizinhas que não estão integralmente modeladas.",
+      "limits": "Modelo autoral em 3D de um trecho de cardiomiócito ventricular (cerca de 40 µm de comprimento e 16 × 11 µm de seção), com uma ramificação e o disco intercalar que o une à célula vizinha. Corte em degrau: na metade de baixo, o plano corta as miofibrilas, mostrando as faixas dos sarcômeros (linhas Z, bandas I e A, zona H e linha M, período de ~1,9 µm), e as mitocôndrias, com cristas densas; na metade de cima, o corte é mais fundo e mostra as superfícies: retículo sarcoplasmático em rede ao redor das miofibrilas, túbulos T entrando na altura das linhas Z e díades (cisterna do retículo junto ao túbulo T) com canais de Ca²⁺ do tipo L e RyR2. Bombas SERCA aparecem como pontos no retículo. No disco intercalar, as faces transversais concentram junções aderentes e desmossomos, e as longitudinais, junções comunicantes. Canais, bombas e junções estão muito ampliados (dezenas de vezes) para serem vistos; quantidades são ilustrativas.",
       "recognition": "Ramificação, núcleo central, miofibrilas estriadas e discos intercalares distinguem a célula muscular cardíaca. Túbulos T e retículo são componentes ultraestruturais e não faixas identificáveis em qualquer corte comum.",
       "contrast": "Cardiomiócitos permanecem células distintas: o sincício é funcional. O sistema especializado de condução inicia e distribui os sinais; esta vista explica a resposta de uma célula contrátil.",
       "relatedViews": [
@@ -358,7 +359,7 @@
       "label": "Sarcômero",
       "category": "integracao",
       "description": "Unidade contrátil dentro das miofibrilas de músculos estriados cardíaco e esquelético. Filamentos contínuos se sobrepõem entre dois discos Z; não representa um órgão ou uma célula inteira.",
-      "limits": "Esquema autoral estático. Filamentos, cabeças e proteínas reguladoras são representações ampliadas: cores, distâncias e quantidades não estão em escala molecular. O modelo é uma unidade com sobreposição ilustrativa e não mede tensão, velocidade, encurtamento ou força. Seu mecanismo contrátil básico pertence a ambos os músculos estriados; a ativação elétrica e a organização de túbulos T/retículo diferem entre eles.",
+      "limits": "Trecho de sarcômero montado com estruturas reais: filamento fino cardíaco humano com actina, tropomiosina e troponina (PDB 6KN7, crio-microscopia, estado sem cálcio), cabeças de miosina II ligadas à actina no complexo de rigor (PDB 5H53) formando o filamento espesso (a cauda em hélice dupla é ilustrativa), α-actinina (PDB 4D1E) no disco Z e íons Ca²⁺ e ATP do dicionário de componentes do PDB. A linha M aparece como pontes ilustrativas entre os filamentos espessos. Comprimento reduzido (um sarcômero real mede ~2,2 µm); espaçamentos aproximados.",
       "recognition": "Dois discos Z delimitam a unidade. Filamentos finos se ancoram nas extremidades; filamentos espessos ocupam a região central, organizados pela linha M.",
       "contrast": "Sarcômeros repetidos geram estriações dentro de uma célula. Discos intercalares unem cardiomiócitos diferentes; não são os limites desta unidade.",
       "relatedViews": [
@@ -375,7 +376,8 @@
         "ap-muscle-contraction-v14",
         "yale-muscle-junctions",
         "ap-cardiac-electrical",
-        "bio-cytoskeleton"
+        "bio-cytoskeleton",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -476,7 +478,7 @@
       "label": "Célula vegetal",
       "category": "diversidade",
       "description": "Célula vegetal fotossintética generalizada, com parede, vacúolo central e plastídios.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Exemplo de célula fotossintética; não representa todas as células vegetais nem todos os plastídios.",
+      "limits": "Modelo autoral em 3D de uma célula do mesofilo de folha (cerca de 42 × 28 × 26 µm), aberta ao meio. O vacúolo central ocupa a maior parte do volume, com o tonoplasto translúcido, e empurra o citoplasma contra a parede: os cloroplastos ficam enfileirados junto à membrana, e cordões de citoplasma atravessam o vacúolo. O núcleo fica numa bolsa de citoplasma, com envelope duplo, poros, nucléolo e cromatina; à volta dele, retículo rugoso com ribossomos e dictiossomos (complexo golgiense). Nos cloroplastos e mitocôndrias cortados aparecem grana e cristas. Escalas ampliadas para ficarem visíveis: espessura das membranas, plasmodesmos (cerca de 4×) e ribossomos (cerca de 2×). Número, tamanho e posição das organelas são ilustrativos e variam entre tipos de células vegetais.",
       "recognition": "Parede externa, grande vacúolo e cloroplastos sugerem uma célula de tecido fotossintético.",
       "contrast": "Nem toda célula vegetal tem cloroplastos; raízes e tecidos de reserva podem ter outros plastídios.",
       "relatedViews": [
@@ -614,7 +616,7 @@
       "label": "Célula bacteriana",
       "category": "diversidade",
       "description": "Bactéria generalizada com exemplos opcionais de parede, cápsula, plasmídio e flagelo.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Cápsula, flagelo e plasmídio são exemplos opcionais; o conjunto não identifica uma espécie bacteriana.",
+      "limits": "Bactéria em forma de bastonete (como Escherichia coli, ~1,6 × 0,6 µm aqui encurtada) aberta ao meio, montada em escala molecular reduzida: membranas externa e interna e o peptidoglicano entre elas desenhados com uma conta por lipídio ou unidade de parede; centenas de ribossomos com a forma real do ribossomo bacteriano (PDB 4V51, uma conta por resíduo); o nucleoide como fibra de DNA enovelada (ilustrativa) no centro; um plasmídeo em anel; e o flagelo com o motor e o gancho reais de Salmonella (PDB 7CGO) e o filamento de flagelina (PDB 1UCU) por simetria helicoidal. A cápsula aparece como uma camada externa difusa. Quantidades e densidades são ilustrativas; proteínas solúveis e outros componentes foram omitidos.",
       "recognition": "Nucleoide sem envelope e ausência de organelas eucarióticas membranosas são pistas de organização procariótica.",
       "contrast": "Estruturas opcionais não existem em todas as bactérias; arqueas também são procarióticas, mas pertencem a outro domínio.",
       "relatedViews": [
@@ -625,7 +627,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-prokaryotes"
+        "bio-prokaryotes",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -728,7 +731,7 @@
       "label": "Célula fúngica",
       "category": "diversidade",
       "description": "Exemplo didático de levedura em corte, com brotamento ilustrativo; fungos também apresentam formas filamentosas em hifas.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Exemplo de levedura com brotamento; não representa arquitetura de hifas ou a diversidade de fungos.",
+      "limits": "Modelo autoral em 3D de uma levedura em brotamento (semelhante a Saccharomyces cerevisiae; célula-mãe com cerca de 5 µm), aberta ao meio como um corte de microscopia eletrônica. A parede tem duas camadas (interna de glucanas e quitina, externa de manoproteínas, fibrilar) e cicatrizes de brotamentos anteriores. Dentro: núcleo com envelope duplo e poros, nucléolo em forma de crescente, vacúolo com grânulos de polifosfato, rede de mitocôndrias tubulares junto à superfície, retículo cortical sob a membrana, gotículas de lipídio e ribossomos (apenas uma amostra do total, que passa de 100 mil por célula). Espessuras de membranas levemente ampliadas; posição e número de organelas ilustrativos.",
       "recognition": "Núcleo com envelope e parede contendo quitina/glucanos distinguem a organização fúngica típica.",
       "contrast": "Fungo não é planta; sua nutrição é heterotrófica por absorção e não ocorre fotossíntese fúngica própria.",
       "relatedViews": [
@@ -790,6 +793,22 @@
           "mechanism": "Complexos de RNA e proteínas sintetizam polipeptídios.",
           "uerj": "Comparar parede, nutrição e compartimentalização de fungos, plantas e bactérias.",
           "commonMistake": "Parede não interfere com a classificação eucariótica do ribossomo citosólico."
+        },
+        {
+          "id": "endoplasmic-reticulum",
+          "label": "Retículo endoplasmático",
+          "function": "Sintetizar lipídios e proteínas de membrana e secreção.",
+          "mechanism": "Na levedura, parte do retículo forma uma rede logo abaixo da membrana plasmática (retículo cortical) e parte continua com o envelope nuclear.",
+          "uerj": "Comparar o sistema de endomembranas de fungos e animais.",
+          "commonMistake": "Fungos também têm retículo e complexo golgiense: são eucariontes."
+        },
+        {
+          "id": "lipid-droplets",
+          "label": "Gotículas de lipídio",
+          "function": "Armazenar lipídios neutros.",
+          "mechanism": "Triacilgliceróis e ésteres de esterol ficam envoltos por uma monocamada de fosfolipídios.",
+          "uerj": "Relacionar reservas energéticas aos diferentes grupos de seres vivos.",
+          "commonMistake": "A reserva de carboidrato dos fungos é o glicogênio, não o amido."
         }
       ],
       "steps": [
@@ -928,7 +947,7 @@
       "label": "Água e ambiente molecular",
       "category": "composicao",
       "description": "Propriedades da água e interações que sustentam o ambiente químico celular.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Átomos, cargas parciais e interações são símbolos; o arranjo não mede ângulos, comprimentos ou energia de ligações.",
+      "limits": "Moléculas de água com seus hidrogênios (dicionário de componentes do PDB; O vermelho, H branco), arranjadas como no líquido, com as ligações de hidrogênio entre moléculas vizinhas desenhadas como traços. Ao lado: íons Na⁺ e Cl⁻ cada um com sua camada de hidratação (a água vira o oxigênio para o cátion e os hidrogênios para o ânion) e um pedaço de gelo com a rede hexagonal regular, que explica a menor densidade do gelo. A molécula ampliada destaca a polaridade (δ− no oxigênio, δ+ nos hidrogênios). Posições ilustrativas, sem simulação molecular.",
       "recognition": "Esferas e linhas representam átomos/interações; não são micrografias ou cargas medidas.",
       "contrast": "Molécula polar pode ter carga total nula; interação de hidrogênio não é a ligação covalente O–H.",
       "relatedViews": [
@@ -938,7 +957,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-water"
+        "bio-water",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1025,7 +1045,7 @@
       "label": "Carboidratos e lipídios",
       "category": "composicao",
       "description": "Monômeros, polímeros e moléculas anfipáticas com funções energéticas e estruturais.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. São comparados representantes de classes; estruturas simplificadas não mostram todos os átomos, isômeros ou classes lipídicas.",
+      "limits": "Moléculas do dicionário de componentes do PDB em cores por elemento (C cinza, O vermelho, P laranja): glicose (monossacarídeo), uma cadeia de amilose montada com glicoses em hélice (polissacarídeo de reserva, ~6 resíduos por volta), triacilglicerol (triestearina), fosfatidilcolina (POPC), colesterol e os ácidos graxos palmítico (saturado, reto) e oleico (insaturado, com dobra). Geometria das moléculas isoladas, sem interação entre elas.",
       "recognition": "Observe grupos funcionais e organização molecular, sem tomar a cor como critério químico.",
       "contrast": "Lipídios são uma classe diversa; não são todos polímeros de monômeros repetidos como proteínas.",
       "relatedViews": [
@@ -1036,7 +1056,8 @@
       "histologyIds": [],
       "sourceIds": [
         "bio-carbohydrates",
-        "bio-lipids"
+        "bio-lipids",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1123,7 +1144,7 @@
       "label": "Proteínas e enzimas",
       "category": "composicao",
       "description": "Sequência, dobramento e catálise, incluindo efeito de pH, temperatura e cofatores.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Enzima e substrato são genéricos; o encaixe ilustrativo não substitui uma estrutura molecular determinada experimentalmente.",
+      "limits": "Hexoquinase I humana (PDB 1HKB) com glicose no sítio ativo, o exemplo clássico de encaixe induzido; os resíduos a até 6 Å da glicose formam o sítio ativo (dourado). ATP, ADP, glicose-6-fosfato, Mg²⁺ e aminoácidos livres vêm do dicionário de componentes do PDB; a minipproteína Trp-cage (PDB 1L2Y) mostra a cadeia polipeptídica e suas ligações peptídicas em cores por elemento. A proteína desnaturada ao lado é uma cadeia estendida ilustrativa, sem a dobra funcional.",
       "recognition": "O sítio ativo é uma região química tridimensional; o desenho não reproduz a estrutura de uma enzima específica.",
       "contrast": "Enzima reduz energia de ativação, sem alterar ΔG ou a posição do equilíbrio da reação.",
       "relatedViews": [
@@ -1135,7 +1156,8 @@
       "sourceIds": [
         "bio-proteins",
         "bio-enzymes",
-        "ncbi-rna"
+        "ncbi-rna",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1239,7 +1261,7 @@
       "label": "Ácidos nucleicos",
       "category": "composicao",
       "description": "Nucleotídeos, DNA e RNA: organização covalente, complementaridade e orientação.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Bases e cadeias são representações ampliadas; sequências ilustrativas não identificam um gene ou organismo.",
+      "limits": "DNA em dupla hélice B montado repetindo um passo real de par de bases da estrutura PDB 1BNA (dodecâmero de Dickerson, CC0), com 3,38 Å de subida e 36° de giro por par; a sequência alterna A·T e G·C para mostrar os dois pareamentos. O RNA é o RNA transportador de fenilalanina de levedura (PDB 1EHZ), uma cadeia única dobrada sobre si mesma. Cores das bases: A vermelho, T amarelo, G verde, C azul, U lilás. O nucleotídeo isolado vem do mesmo DNA, em cores por elemento (P laranja, O vermelho, N azul, C cinza).",
       "recognition": "Observe açúcar-fosfato, bases e sentidos 5′/3′; as moléculas são modelos ampliados.",
       "contrast": "DNA e RNA não se distinguem apenas pelo número de fitas: diferem também em açúcar e bases usuais.",
       "relatedViews": [
@@ -1250,7 +1272,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-nucleic"
+        "bio-nucleic",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1345,7 +1368,7 @@
       "label": "Membrana plasmática",
       "category": "membranas",
       "description": "Mosaico fluido com bicamada, proteínas, carboidratos e associação ao citoesqueleto.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Cores e quantidades de componentes são ilustrativas; a bicamada é mostrada em corte e não é uma superfície rígida.",
+      "limits": "Trecho de membrana plasmática de ~22 nm montado com moléculas reais: fosfatidilcolina POPC e colesterol do dicionário de componentes do PDB (coordenadas ideais), aquaporina-1 humana (PDB 1J4N, tetrâmero) e o transportador de glicose GLUT1 (PDB 4PYP), com cadeias de açúcar (N-acetilglicosamina, manose, galactose, ácido siálico) do lado de fora e um filamento de actina (PDB 6BNO) por dentro. A orientação das proteínas na bicamada foi calculada pela faixa mais hidrofóbica de cada uma. Membranas reais são mais fluidas e variadas; a proporção de colesterol (~30 %) e a densidade das proteínas são ilustrativas.",
       "recognition": "A bicamada tem cabeças voltadas ao meio aquoso e caudas no interior; proteínas ocupam posições diversas.",
       "contrast": "Membrana é dinâmica e assimétrica; o desenho não indica distribuição uniforme de cada componente.",
       "relatedViews": [
@@ -1359,7 +1382,8 @@
         "urothelium"
       ],
       "sourceIds": [
-        "bio-membrane"
+        "bio-membrane",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1446,7 +1470,7 @@
       "label": "Difusão simples e facilitada",
       "category": "membranas",
       "description": "Passagem espontânea de partículas pela bicamada ou por proteínas, conforme gradiente.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Estados e gradientes são comparados sem medir velocidade, concentração experimental ou cinética de um transportador específico.",
+      "limits": "Membrana montada com moléculas reais (POPC e colesterol do dicionário de componentes do PDB) com o canal de potássio KcsA (PDB 1BL8, tetrâmero, com íons K⁺ em fila no poro) e o transportador de glicose GLUT1 humano (PDB 4PYP). O₂, CO₂ e glicose vêm do dicionário do PDB; íons aparecem como esferas do tamanho do íon hidratado. Moléculas pequenas e apolares (O₂, CO₂) atravessam a bicamada por difusão simples; íons e glicose dependem de canal ou carreador. Quantidades ilustrativas.",
       "recognition": "Compare lados com concentrações diferentes e identifique um canal ou carreador.",
       "contrast": "Difusão facilitada usa proteína, mas não acoplamento direto a ATP para mover o soluto contra seu gradiente.",
       "relatedViews": [
@@ -1459,7 +1483,8 @@
         "intestinal-villus"
       ],
       "sourceIds": [
-        "bio-passive"
+        "bio-passive",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1546,7 +1571,7 @@
       "label": "Osmose e tonicidade",
       "category": "membranas",
       "description": "Fluxo líquido de água e efeito de solutos efetivamente não penetrantes sobre o volume celular.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Volumes são exemplos de estados, sem escala temporal. A previsão depende da permeabilidade e da presença ou ausência de parede.",
+      "limits": "À esquerda, na escala molecular: membrana com moléculas reais (POPC e colesterol do dicionário de componentes do PDB) e aquaporina-1 humana (PDB 1J4N, tetrâmero), o canal que deixa passar água; moléculas de água e solutos vêm do dicionário do PDB. À direita, em outra escala (cerca de 1:100 000 em relação às moléculas): hemácias com o contorno bicôncavo medido por Evans e Fung (1972) em meio isotônico, inchadas em meio hipotônico e crenadas em meio hipertônico. As formas das hemácias são modelos matemáticos, não micrografias.",
       "recognition": "Compare a célula com os meios externo e interno e considere quais solutos atravessam a membrana.",
       "contrast": "Osmolaridade total e tonicidade não são sempre iguais; tonicidade depende do efeito sustentado sobre volume.",
       "relatedViews": [
@@ -1559,7 +1584,8 @@
         "renal-tubules"
       ],
       "sourceIds": [
-        "bio-passive"
+        "bio-passive",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1646,7 +1672,7 @@
       "label": "Transporte ativo",
       "category": "membranas",
       "description": "Transporte primário e secundário, com acoplamento energético a gradientes de solutos.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Bomba Na⁺/K⁺ é um exemplo de transporte primário; a estequiometria 3:2 não se aplica a toda proteína de transporte.",
+      "limits": "Membrana montada com moléculas reais (POPC e colesterol do dicionário de componentes do PDB) contendo a bomba de sódio e potássio (Na⁺/K⁺-ATPase de rim de porco, PDB 3WGU: subunidades α, β e γ) e o cotransportador sódio–galactose de Vibrio parahaemolyticus (PDB 3DH4), parente bacteriano dos cotransportadores de glicose humanos. ATP e glicose vêm do dicionário do PDB. Íons aparecem como esferas do tamanho do íon hidratado: Na⁺ lilás (mais fora), K⁺ roxo (mais dentro), H₃O⁺ azul-claro no gradiente de prótons. Números de íons e moléculas são ilustrativos; concentrações reais diferem em ordens de grandeza.",
       "recognition": "Identifique a fonte de energia e o sentido relativo de cada espécie transportada.",
       "contrast": "Contra concentração não descreve sozinho transporte de íons: é preciso considerar o gradiente eletroquímico.",
       "relatedViews": [
@@ -1659,7 +1685,8 @@
         "intestinal-villus"
       ],
       "sourceIds": [
-        "bio-active"
+        "bio-active",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1754,7 +1781,7 @@
       "label": "Endocitose e exocitose",
       "category": "membranas",
       "description": "Tráfego de material por invaginação, vesículas e fusão de membranas.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Estados sucessivos são mostrados lado a lado; não são vesículas obrigatoriamente simultâneas nem uma sequência universal de revestimentos.",
+      "limits": "Modelo autoral em 3D de um trecho de membrana plasmática (cerca de 1,9 µm; meio externo acima, citosol abaixo) cortado ao meio, como num corte de microscopia eletrônica. Endocitose mediada por clatrina, da esquerda para o centro: placa revestida, fosseta rasa, fosseta profunda com a dinamina enrolada no pescoço, vesícula revestida livre e vesícula perdendo o revestimento; a carga (partículas presas a receptores) entra com elas. Em seguida, o endossomo inicial (com vesículas internas e túbulos) e o lisossomo, com membranas em degradação e enzimas. À direita, exocitose: vesículas secretoras com conteúdo denso, uma vesícula ancorada à membrana por complexos SNARE, um poro de fusão aberto liberando a carga e uma vesícula já incorporada à membrana. A gaiola de clatrina segue a geometria real (pentágonos e hexágonos); tamanhos de vesículas (60–200 nm) aproximados; membranas com espessura levemente ampliada; quantidades ilustrativas.",
       "recognition": "Observe continuidade da membrana e posições do conteúdo vesicular em cada etapa.",
       "contrast": "Material internalizado pode permanecer no lúmen vesicular, topologicamente separado do citosol.",
       "relatedViews": [
@@ -1856,7 +1883,7 @@
       "label": "Junções celulares",
       "category": "membranas",
       "description": "Conexões de barreira, adesão e comunicação em tecidos animais, com comparação vegetal.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Compara tipos de junção; não pressupõe que todos estejam presentes nas mesmas células ou na mesma posição.",
+      "limits": "Pares de membranas de células vizinhas (POPC e colesterol do dicionário de componentes do PDB) com a distância de cada junção e suas proteínas reais: claudina-15 (PDB 4P79) na junção oclusiva, onde as membranas quase se tocam; caderinas (ectodomínio da caderina C, PDB 1L3W) atravessando ~25 nm na junção aderente, ligadas por dentro a filamentos de actina (PDB 6BNO); caderinas e uma placa densa ligada a filamentos intermediários (vimentina, PDB 3UF1) no desmossomo; o canal de conexina-26 (PDB 2ZW3) unindo as duas membranas na junção comunicante; colágeno (PDB 1BKV) e fibronectina (PDB 1FNF) na matriz extracelular. O plasmodesmo vegetal é um canal revestido de membrana atravessando uma parede de fibras de celulose ilustrativas, com o desmotúbulo no centro. Distâncias reais aproximadas; quantidades ilustrativas.",
       "recognition": "Observe se a conexão sela espaço, prende fibras ou forma um canal de comunicação.",
       "contrast": "Junções diferentes podem coexistir; uma junção de adesão não equivale automaticamente a um canal.",
       "relatedViews": [
@@ -1871,7 +1898,8 @@
         "urothelium"
       ],
       "sourceIds": [
-        "bio-junctions"
+        "bio-junctions",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -1958,7 +1986,7 @@
       "label": "Citoesqueleto",
       "category": "organelas",
       "description": "Filamentos dinâmicos e sistemas motores que organizam forma, força e transporte.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Diâmetros e comprimentos são ampliados para comparação. As redes reais são dinâmicas e variam entre células.",
+      "limits": "Filamentos do citoesqueleto montados a partir de estruturas reais: filamento de actina por simetria helicoidal de uma subunidade da estrutura de crio-microscopia PDB 6BNO (27,6 Å e −166,6° por subunidade), microtúbulo de 13 protofilamentos com o dímero de tubulina α/β da PDB 6DPU (8 nm por dímero), filamentos intermediários com dímeros em hélice dupla de vimentina (fragmento PDB 3UF1) enrolados como corda, cinesina-1 dimérica (PDB 3KIN) caminhando sobre o microtúbulo e puxando uma vesícula, e, representando o centrossomo, o complexo em anel de γ-tubulina humano (PDB 6V6S), que nucleia o microtúbulo e fica na sua extremidade menos. A vesícula é desenhada com uma conta por lipídio, em escala reduzida de detalhe; comprimentos e quantidades são ilustrativos.",
       "recognition": "Compare diâmetro relativo, montagem e relação com carga; as dimensões no modelo são ilustrativas.",
       "contrast": "Citoesqueleto não é um conjunto de ossos celulares imóveis.",
       "relatedViews": [
@@ -1972,7 +2000,8 @@
         "nervous-tissue"
       ],
       "sourceIds": [
-        "bio-cytoskeleton"
+        "bio-cytoskeleton",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -2059,7 +2088,7 @@
       "label": "Cílios e flagelos",
       "category": "organelas",
       "description": "Comparação de projeções eucarióticas móveis/sensoriais e flagelo bacteriano rotatório.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Secções de axonema, corpo basal e flagelo bacteriano são comparações distintas. Padrões 9+2 e 9+0 têm exceções.",
+      "limits": "Cílio móvel em corte: o axonema 9+2 montado com contas por resíduo da tubulina real (PDB 6DPU) — nove duplas de microtúbulos e o par central —, braços de dineína do motor completo de dineína (PDB 3VKH) e a membrana desenhada com uma conta por lipídio, vistos em corte transversal (o padrão 9+2); abaixo, o corpúsculo basal com nove trios. O flagelo eucariótico, à direita, tem a mesma organização 9+2. O cílio primário, sensorial, tem arranjo 9+0, sem par central nem dineína. O flagelo bacteriano é outra máquina: motor e gancho de Salmonella (PDB 7CGO) e um trecho do filamento de flagelina (PDB 1UCU, por simetria helicoidal). Comprimentos reduzidos; detalhes em escala de contas.",
       "recognition": "Axonema e corpo basal diferem; flagelo bacteriano não contém a mesma arquitetura eucariótica.",
       "contrast": "O padrão móvel 9+2 e primário 9+0 é típico, com exceções; não é uma regra absoluta para toda projeção.",
       "relatedViews": [
@@ -2073,7 +2102,8 @@
       ],
       "sourceIds": [
         "bio-cytoskeleton",
-        "bio-prokaryotes"
+        "bio-prokaryotes",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -2168,7 +2198,7 @@
       "label": "Ribossomo",
       "category": "organelas",
       "description": "Complexo ribonucleoproteico de tradução, com duas subunidades e associação ao RNA.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Subunidades e RNAs estão ampliados e simplificados; a vista não corresponde a uma estrutura atômica de ribossomo de uma espécie.",
+      "limits": "Ribossomo bacteriano 70S de Thermus thermophilus com RNA mensageiro e três RNAs transportadores (sítios A, P e E), da estrutura cristalográfica PDB 4V51 (Selmer et al., Science 2006; CC0). Cada superfície envolve os átomos de uma parte. O RNA mensageiro foi prolongado de forma ilustrativa para ligar o ribossomo aos do polissomo, que são cópias reduzidas do mesmo modelo. O polipeptídio nascente não está resolvido nessa estrutura e aparece como um traço ilustrativo saindo da subunidade grande.",
       "recognition": "Duas subunidades se associam ao mensageiro e a RNAs transportadores; o modelo amplia componentes moleculares.",
       "contrast": "Ribossomo não é organela envolvida por membrana nem uma célula pequena.",
       "relatedViews": [
@@ -2181,7 +2211,8 @@
         "bio-eukaryotes",
         "bio-endomembrane",
         "bio-nucleic",
-        "ncbi-rna"
+        "ncbi-rna",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -2268,7 +2299,7 @@
       "label": "Retículo endoplasmático rugoso",
       "category": "organelas",
       "description": "Cisternas do retículo com ribossomos voltados ao citosol e produção de proteínas da via secretora.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Cisternas e ribossomos ilustram regiões selecionadas; o retículo forma uma rede contínua, variável entre células.",
+      "limits": "Retículo endoplasmático real de uma célula HeLa (cisternas achatadas e túbulos), contínuo com o envelope nuclear, imageado por microscopia eletrônica FIB-SEM (voxels de 4 nm) e traçado à mão (recorte anotado do OpenOrganelle, HHMI Janelia, CC BY 4.0). Os ribossomos não foram segmentados na fonte: aparecem como grânulos de 25 nm distribuídos sobre a face citosólica das cisternas, com densidade ilustrativa. O lúmen aparece translúcido por dentro da membrana. Aberto por um plano.",
       "recognition": "Ribossomos na face citosólica e cisternas ligadas ao sistema de membranas são as pistas principais.",
       "contrast": "Proteína secretora entra no retículo durante a síntese; outras proteínas podem ser traduzidas sem seguir essa via.",
       "relatedViews": [
@@ -2282,7 +2313,8 @@
         "gastric-wall"
       ],
       "sourceIds": [
-        "bio-endomembrane"
+        "bio-endomembrane",
+        "openorganelle-cosem"
       ],
       "parts": [
         {
@@ -2369,7 +2401,7 @@
       "label": "Retículo endoplasmático liso",
       "category": "organelas",
       "description": "Regiões tubulares do retículo sem cobertura ribossômica densa, com funções dependentes do tipo celular.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Funções representam especializações em tecidos distintos; nenhuma célula precisa executar todas com igual intensidade.",
+      "limits": "Modelo autoral em 3D de retículo endoplasmático liso de um hepatócito (região de cerca de 2,4 × 1,5 µm), aberto ao meio: uma rede de túbulos (50–70 nm de diâmetro) unidos em junções de três vias, contínua com uma cisterna de retículo rugoso à esquerda. Na superfície ficam enzimas de transformação de compostos (citocromos P450, pontos verdes) e de síntese de lipídios (laranja), com gotículas de lipídio brotando da membrana; dentro dos túbulos, íons Ca²⁺ armazenados (vermelho) bombeados pela SERCA (azul). Junto à rede, rosetas de glicogênio, cuja glicose-6-fosfato é convertida em glicose pela glicose-6-fosfatase do retículo (amarelo). Os fosfolipídios recém-produzidos aparecem como moléculas ampliadas (cerca de 4×) inseridas na membrana. Enzimas, íons e moléculas estão ampliados e em número ilustrativo.",
       "recognition": "Túbulos membranosos e ausência de ribossomos associados distinguem a região lisa no esquema.",
       "contrast": "Detoxificação, lipídios e armazenamento de Ca²⁺ variam conforme tecido; não são igualmente intensos em toda célula.",
       "relatedViews": [
@@ -2469,7 +2501,7 @@
       "label": "Complexo de Golgi",
       "category": "organelas",
       "description": "Pilha polarizada de cisternas e redes de entrada/saída para modificação e distribuição.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Faces e cisternas são organizadas para leitura; cis e trans não equivalem a direções fixas do corpo ou do desenho.",
+      "limits": "Complexo de Golgi real de uma célula HeLa, imageado por microscopia eletrônica FIB-SEM (voxels de 4 nm) e traçado à mão (recorte anotado do OpenOrganelle, HHMI Janelia, CC BY 4.0), com as vesículas e endossomos ao redor. A pilha foi dividida em quatro faixas ao longo da sua espessura — face cis (voltada para o núcleo e o retículo), cisternas, cisternas mediais e face trans —, uma divisão didática por posição, não por marcadores moleculares. Aberto por um plano para mostrar as cisternas.",
       "recognition": "Identifique face cis, compartimentos intermediários e face trans, com cargas vesiculares.",
       "contrast": "O tráfego é dinâmico; a pilha estática não implica uma esteira rígida única.",
       "relatedViews": [
@@ -2481,7 +2513,8 @@
         "pancreatic-tissue"
       ],
       "sourceIds": [
-        "bio-endomembrane"
+        "bio-endomembrane",
+        "openorganelle-cosem"
       ],
       "parts": [
         {
@@ -2568,7 +2601,7 @@
       "label": "Lisossomos e autofagia",
       "category": "organelas",
       "description": "Degradação em compartimento ácido e entrega de material celular pela autofagia.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. A vista destaca macroautofagia e estados selecionados; outras modalidades e rotas de entrega não são reconstruídas.",
+      "limits": "Modelo autoral em 3D da autofagia e da digestão lisossômica (região de cerca de 3 µm), aberto ao meio. Da esquerda para a direita: o fagóforo, membrana dupla em forma de taça envolvendo parte do citoplasma (um pedaço de mitocôndria e ribossomos); o autofagossomo já fechado, com membrana dupla; um lisossomo, com membrana simples, lúmen ácido (H⁺) e hidrolases, fundindo-se ao autofagossomo; e o autolisossomo, onde a carga é degradada e de onde moléculas pequenas (aminoácidos, açúcares, nucleotídeos) saem por transportadores da membrana para o citosol. Tamanhos de 0,5–1,5 µm aproximados; enzimas, íons e moléculas ampliados e em número ilustrativo.",
       "recognition": "Compare lisossomo com autofagossomo de dupla membrana e compartimento após fusão.",
       "contrast": "Autofagia é um processo regulado de manutenção e adaptação; não é sinônimo automático de morte celular.",
       "relatedViews": [
@@ -2666,7 +2699,7 @@
       "label": "Peroxissomo",
       "category": "organelas",
       "description": "Compartimento oxidativo com enzimas que geram e processam peróxido de hidrogênio.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Compartimento e substratos estão fora de escala relativa; não é representada uma cadeia respiratória produtora de ATP.",
+      "limits": "Peroxissomo em escala molecular: membrana desenhada com uma conta por lipídio (detalhe reduzido), cheia de catalase humana (PDB 1DGF, tetrâmero com heme), e acil-CoA oxidase representada pela catalase em outra cor como enzima oxidativa ilustrativa; água oxigenada, ácido palmítico e O₂ vêm do dicionário de componentes do PDB. Peroxissomos reais medem 0,1–1 µm e contêm muitas outras enzimas; este modelo tem ~60 nm e densidade de proteínas ilustrativa.",
       "recognition": "Membrana única e matriz enzimática representam uma organela diferente de mitocôndria e lisossomo.",
       "contrast": "O modelo não mostra uma cadeia respiratória que produz ATP por gradiente, como na mitocôndria.",
       "relatedViews": [
@@ -2676,7 +2709,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-eukaryotes"
+        "bio-eukaryotes",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -2763,7 +2797,7 @@
       "label": "Vacúolo vegetal",
       "category": "organelas",
       "description": "Vacúolo central vegetal: armazenamento, regulação do conteúdo e relação osmótica com a parede.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Exemplo de vacúolo central vegetal desenvolvido; outras células podem ter múltiplos vacúolos ou organização diferente.",
+      "limits": "Modelo autoral em 3D de uma célula vegetal (cerca de 30 × 20 × 18 µm) aberta ao meio, com o vacúolo central ocupando a maior parte do volume. O tonoplasto separa o lúmen (com solutos dissolvidos e cristais de oxalato de cálcio, uma drusa e um feixe de ráfides) do citoplasma periférico, apertado contra a parede, onde ficam núcleo, cloroplastos e mitocôndrias. As setas indicam a pressão de turgor do vacúolo cheio de água contra a parede. A janela ampliada cerca de 300 vezes mostra um trecho do tonoplasto com as bombas de prótons reais, em superfície molecular: a ATPase do tipo V (estrutura de levedura, PDB 3J9T) e a pirofosfatase de prótons vacuolar (feijão-mungo, PDB 4A01), que acumulam H⁺ no lúmen (pontos vermelhos). Na célula, espessuras de membranas ampliadas e quantidades ilustrativas.",
       "recognition": "Grande compartimento delimitado pelo tonoplasto desloca o citoplasma para a periferia no exemplo.",
       "contrast": "Vacúolos variam e podem ser líticos; não são apenas reservatórios de água.",
       "relatedViews": [
@@ -2775,7 +2809,8 @@
       "sourceIds": [
         "bio-eukaryotes",
         "bio-active",
-        "bio-passive"
+        "bio-passive",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -2862,7 +2897,7 @@
       "label": "Mitocôndria",
       "category": "organelas",
       "description": "Dupla membrana, cristas e matriz integram respiração, genoma próprio e metabolismo celular.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. O corte enfatiza membranas e compartimentos. Forma, cristas, genomas e ribossomos reais variam entre espécies e condições.",
+      "limits": "Uma mitocôndria inteira de uma célula HeLa real (2,7 µm de comprimento), recortada dos volumes de segmentação de microscopia eletrônica FIB-SEM do OpenOrganelle (HHMI Janelia, CC BY 4.0) em resolução de 4 nm: contorno da organela, membranas com as cristas e ribossomos mitocondriais segmentados por aprendizado de máquina. Aberta ao meio ao longo do comprimento para mostrar as cristas. A membrana interna e as cristas são a mesma membrana: a parte junto ao contorno aparece como membrana interna e as dobras que entram na matriz como cristas. A matriz aparece translúcida. O espaço intermembranas é a fresta de ~10 nm entre as membranas, estreita demais para ter peça própria nesta resolução. O DNA mitocondrial não foi segmentado e aparece como nucleoides ilustrativos.",
       "recognition": "Membrana interna dobrada e compartimentos distintos são pistas da estrutura mitocondrial.",
       "contrast": "Mitocôndrias são dinâmicas; o formato único e as cristas regulares são escolhas didáticas.",
       "relatedViews": [
@@ -2877,7 +2912,8 @@
       "sourceIds": [
         "bio-eukaryotes",
         "bio-krebs",
-        "bio-oxidative"
+        "bio-oxidative",
+        "openorganelle-cosem"
       ],
       "parts": [
         {
@@ -2972,7 +3008,7 @@
       "label": "Glicólise e fermentação",
       "category": "metabolismo",
       "description": "Oxidação parcial da glicose no citosol e rotas que regeneram NAD⁺ para manter o fluxo glicolítico.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Agrupa etapas e compara destinos; não desenha todas as enzimas. Balanços são por glicose na rota didática usual.",
+      "limits": "Enzimas reais da glicólise e das fermentações em sequência: hexoquinase (PDB 1HKB), fosfofrutoquinase (PDB 3PFK), gliceraldeído-3-fosfato desidrogenase (PDB 1GPD), piruvato quinase (PDB 1PKN), lactato desidrogenase humana com NADH (PDB 1I10), piruvato descarboxilase (PDB 1PVD) e álcool desidrogenase de levedura (PDB 4W6Z). Glicose, piruvato, ATP, NAD⁺/NADH, lactato, etanol e CO₂ vêm do dicionário de componentes do PDB, em cores por elemento. As etapas intermediárias e suas enzimas foram resumidas; distâncias ilustrativas.",
       "recognition": "As moléculas e setas representam reagentes, produtos e transformações, não posições fixas de organelas.",
       "contrast": "Fermentação não é sinônimo de toda respiração anaeróbia; esta pode usar cadeia e aceptores diferentes de O₂.",
       "relatedViews": [
@@ -2986,7 +3022,8 @@
       ],
       "sourceIds": [
         "bio-glycolysis",
-        "bio-fermentation"
+        "bio-fermentation",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3081,7 +3118,7 @@
       "label": "Ciclo de Krebs",
       "category": "metabolismo",
       "description": "Ciclo do ácido cítrico: oxidação de acetil-CoA, regeneração de oxaloacetato e formação de transportadores reduzidos.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. O formato circular é um diagrama de regeneração, não a forma física de uma organela. Balanços do ciclo excluem a oxidação prévia do piruvato.",
+      "limits": "Enzimas reais do ciclo de Krebs em anel: citrato sintase (PDB 1CTS), aconitase (PDB 7ACN), isocitrato desidrogenase (PDB 1AI2), succinato desidrogenase/complexo II (PDB 1NEK), fumarase (PDB 1FUO) e malato desidrogenase (PDB 4MDH); a α-cetoglutarato desidrogenase e a succinil-CoA sintetase, enormes, não foram incluídas. Acetil-CoA, oxaloacetato, citrato, isocitrato, α-cetoglutarato, succinil-CoA, succinato, fumarato, malato, CO₂, NADH, FADH₂ e GTP vêm do dicionário de componentes do PDB, em cores por elemento. A esfera translúcida representa a matriz mitocondrial; distâncias ilustrativas.",
       "recognition": "A sequência circular indica regeneração de um intermediário, não moléculas girando fisicamente em uma roda.",
       "contrast": "A oxidação de piruvato para acetil-CoA antecede o ciclo e não é a mesma etapa que cada volta do ciclo.",
       "relatedViews": [
@@ -3091,7 +3128,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-krebs"
+        "bio-krebs",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3194,7 +3232,7 @@
       "label": "Fosforilação oxidativa",
       "category": "metabolismo",
       "description": "Transferência de elétrons, construção de gradiente eletroquímico e síntese de ATP por quimiosmose.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Representa a via mitocondrial aeróbia típica. Rendimento de ATP varia; números ilustrativos não são uma medição de uma célula.",
+      "limits": "Membrana mitocondrial interna montada com moléculas reais: complexo I (PDB 5LDW, camundongo), complexo III dímero (PDB 1BGY, bovino), complexo IV (PDB 1OCC, bovino), citocromo c (PDB 1HRC) e ATP sintase (PDB 5ARA, bovina), em bicamada de POPC com cardiolipina representada pela própria POPC. NADH, FADH₂, ubiquinona, O₂, H₂O e ATP vêm do dicionário de componentes do PDB; prótons aparecem como íons hidrônio (azul-claro), concentrados no espaço intermembranas (em cima). A matriz fica embaixo. O complexo II e a curvatura das cristas não foram incluídos; distâncias entre complexos são ilustrativas.",
       "recognition": "Observe membrana interna, dois compartimentos e sentidos de bombeamento e retorno de H⁺.",
       "contrast": "A cadeia não produz a maior parte do ATP por transferir diretamente um fosfato à glicose; o acoplamento central usa gradiente.",
       "relatedViews": [
@@ -3207,7 +3245,8 @@
         "cardiac-muscle"
       ],
       "sourceIds": [
-        "bio-oxidative"
+        "bio-oxidative",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3310,7 +3349,7 @@
       "label": "Cloroplasto",
       "category": "organelas",
       "description": "Plastídio fotossintético com envelope, estroma e sistema de tilacoides.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Corte generalizado; distribuição de grana e formas de plastídios variam. Pilhas mostradas não representam um número universal de tilacoides.",
+      "limits": "Modelo autoral em 3D de um cloroplasto de folha (cerca de 5,4 × 3 × 2,2 µm), aberto ao longo do comprimento. As dimensões seguem medidas publicadas: grana com 450–600 nm de diâmetro e tilacoides empilhados a cada ~21 nm, espaçamento medido nos tomogramas crioeletrônicos de cloroplastos intactos de espinafre do EMPIAR-12612 (Wietrzynski et al., CC0). Cada granum é uma pilha de tilacoides em forma de disco ligados por lamelas do estroma inclinadas, que contornam as pilhas. Nos grana cortados aparecem as duas membranas de cada tilacoide e o lúmen entre elas. A distância entre as membranas externa e interna do envelope foi ampliada para ficar visível. Número e posição de grana, grãos de amido, plastoglóbulos, nucleoides e ribossomos são ilustrativos.",
       "recognition": "Diferencie dupla membrana do envelope de membrana e lúmen dos tilacoides.",
       "contrast": "O cloroplasto não é presente em toda célula vegetal; outros plastídios têm funções distintas.",
       "relatedViews": [
@@ -3381,6 +3420,22 @@
           "mechanism": "Genoma geralmente circular funciona em integração com genes nucleares.",
           "uerj": "Relacionar compartimentos às etapas fotossintéticas e comparar evidências endossimbióticas.",
           "commonMistake": "Cloroplasto não codifica todas as proteínas necessárias ao seu funcionamento."
+        },
+        {
+          "id": "stroma-lamellae",
+          "label": "Lamelas do estroma",
+          "function": "Ligar os grana entre si.",
+          "mechanism": "Tilacoides não empilhados contornam as pilhas e mantêm o lúmen contínuo; concentram o fotossistema I e a ATP sintase.",
+          "uerj": "Relacionar a organização dos tilacoides às etapas da fase clara.",
+          "commonMistake": "Lamelas do estroma não ficam soltas no estroma: são continuação dos tilacoides dos grana."
+        },
+        {
+          "id": "plastoglobuli",
+          "label": "Plastoglóbulos",
+          "function": "Armazenar lipídios ligados aos tilacoides.",
+          "mechanism": "Gotículas de lipídios presas às membranas guardam carotenoides, plastoquinona e outros compostos.",
+          "uerj": "Diferenciar reservas do plastídio: amido no estroma e lipídios nos plastoglóbulos.",
+          "commonMistake": "Plastoglóbulo não é grão de amido."
         }
       ],
       "steps": [
@@ -3418,7 +3473,7 @@
       "label": "Reações luminosas",
       "category": "metabolismo",
       "description": "Conversão de energia luminosa em ATP e NADPH, com oxidação de água na fotossíntese oxigênica.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Mostra componentes funcionais selecionados em tilacoides; não representa absorção espectral ou estrutura atômica dos fotossistemas.",
+      "limits": "Membrana do tilacoide montada com moléculas reais: fotossistema II dímero de cianobactéria (PDB 3WU2), complexo citocromo b6f dímero (PDB 1VF5), fotossistema I de planta com antenas LHCI (PDB 5L8R, ervilha), ferredoxina–NADP⁺ redutase de espinafre (PDB 1FNB), ATP sintase de cloroplasto (PDB 6FKF, espinafre) e plastocianina (PDB 1PLC), em bicamada de galactolipídios (MGDG e DGDG do dicionário de componentes do PDB). Água, O₂, NADP⁺/NADPH e ATP também vêm desse dicionário; prótons aparecem como íons hidrônio, concentrados no lúmen do tilacoide (em cima). O estroma fica embaixo. As antenas LHCII e o empilhamento dos grana não foram incluídos.",
       "recognition": "Reconheça dois fotossistemas e os lados estroma/lúmen da membrana tilacoidal.",
       "contrast": "A vista representa fluxo não cíclico oxigênico; há também fluxo cíclico e outros tipos de fotossíntese.",
       "relatedViews": [
@@ -3428,7 +3483,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-light"
+        "bio-light",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3523,7 +3579,7 @@
       "label": "Ciclo de Calvin",
       "category": "metabolismo",
       "description": "Fixação, redução e regeneração de aceptores no metabolismo fotossintético do estroma.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. A roda representa conexões metabólicas; não existe uma organela em forma de ciclo. Valores são balanços líquidos de carbono e cofatores.",
+      "limits": "Rubisco de espinafre completa (oito subunidades grandes e oito pequenas, montagem biológica da estrutura PDB 8RUC, com o análogo de intermediário 2-carboxiarabinitol-bisfosfato no sítio ativo) cercada pelos metabólitos do ciclo de Calvin do dicionário de componentes do PDB: CO₂, ribulose-1,5-bisfosfato (RuBP), 3-fosfoglicerato, gliceraldeído-3-fosfato, ATP e NADPH. Os metabólitos estão em anéis que lembram a ordem do ciclo; quantidades e distâncias são ilustrativas. As demais enzimas do ciclo não foram incluídas; a regeneração da RuBP aparece como uma fila de moléculas de RuBP saindo do anel.",
       "recognition": "As setas indicam regeneração de RuBP e saída parcial de produtos; não uma organela em forma de roda.",
       "contrast": "Não depender diretamente de um fóton em cada reação não significa ocorrer apenas à noite ou dispensar os produtos luminosos.",
       "relatedViews": [
@@ -3533,7 +3589,8 @@
       ],
       "histologyIds": [],
       "sourceIds": [
-        "bio-calvin"
+        "bio-calvin",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3636,7 +3693,7 @@
       "label": "Núcleo e cromatina",
       "category": "informacao",
       "description": "Envelope, poros, nucléolo e estados de organização do DNA nuclear de uma célula eucariótica.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Compactação e laços são escolhas ilustrativas; não impõem uma sequência rígida universal de fibras de cromatina.",
+      "limits": "O núcleo inteiro de uma célula HeLa real (cerca de 22 × 14 µm, achatado), recortado dos volumes de segmentação de microscopia eletrônica FIB-SEM do OpenOrganelle (HHMI Janelia, CC BY 4.0) em resolução de 32 nm: envelope nuclear, poros nucleares, nucléolo e cromatina densa (heterocromatina), que se concentra junto ao envelope e ao redor do nucléolo. A heterocromatina aqui é a cromatina densa a até ~250 nm do envelope e do nucléolo, onde ela se concentra; o restante da cromatina aparece como eucromatina, translúcida (a fonte não separa os dois tipos). A metade de cima foi retirada para mostrar o interior. A alça de cromatina é ilustrativa (contas de 11 nm, um nucleossomo cada, em escala ampliada).",
       "recognition": "Diferencie o limite membranoso, as regiões de cromatina e o nucléolo sem membrana própria.",
       "contrast": "Cromatina é DNA associado a proteínas; cromossomos continuam existindo na intérfase, embora não tenham sempre aspecto de X.",
       "relatedViews": [
@@ -3651,7 +3708,8 @@
       "sourceIds": [
         "bio-eukaryotes",
         "bio-division",
-        "bio-epigenetic"
+        "bio-epigenetic",
+        "openorganelle-cosem"
       ],
       "parts": [
         {
@@ -3738,7 +3796,7 @@
       "label": "Replicação do DNA",
       "category": "informacao",
       "description": "Duplicação semiconservativa com abertura, iniciadores e síntese orientada de novas cadeias.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Forquilha e enzimas são ampliadas; a vista omite muitos componentes de controle e não representa a velocidade de síntese.",
+      "limits": "Forquilha de replicação montada com moléculas reais do bacteriófago T7 e de humanos: o anel helicase–primase e as DNA polimerases (com tiorredoxina) do replissomo de T7 (PDB 5IKN) e a DNA ligase I humana (PDB 1X9N). O DNA é dupla hélice B construída de um passo real (PDB 1BNA): fita-molde cinza, fita contínua azul, fragmentos de Okazaki verdes com iniciadores de RNA lilás no começo de cada um. A geometria da forquilha (ângulos, alça da fita descontínua) é ilustrativa.",
       "recognition": "Identifique fitas-molde antiparalelas e novas cadeias sintetizadas 5′ → 3′.",
       "contrast": "Fitas contínua e descontínua diferem em relação à progressão da forquilha, não na direção química de síntese.",
       "relatedViews": [
@@ -3750,7 +3808,8 @@
       "histologyIds": [],
       "sourceIds": [
         "bio-replication",
-        "bio-replication-euk"
+        "bio-replication-euk",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3845,7 +3904,7 @@
       "label": "Transcrição e processamento de RNA",
       "category": "informacao",
       "description": "Síntese de RNA e exemplo de processamento de um pré-mRNA eucariótico.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. O processamento é um exemplo eucariótico de pré-mRNA; não se aplica integralmente a todo RNA ou a todas as células.",
+      "limits": "RNA polimerase II de levedura em elongação (PDB 1I6H, Gnatt et al., Science 2001), com a fita-molde de DNA e o RNA nascente resolvidos na estrutura. O DNA foi prolongado dos dois lados com dupla hélice B construída de um passo real de DNA (PDB 1BNA); a região promotora (laranja) fica antes do ponto de início. O RNA que sai da enzima foi prolongado de forma ilustrativa, com éxons (verde) e íntrons (lilás); ao lado, o mRNA processado, com cap 5′ (um nucleotídeo de guanina do dicionário de componentes do PDB) e cauda poli(A).",
       "recognition": "Compare DNA-molde, RNA nascente e produto processado; não interprete o DNA como convertido em RNA.",
       "contrast": "Nem todo RNA codifica proteína e nem todo transcrito sofre exatamente o mesmo processamento.",
       "relatedViews": [
@@ -3857,7 +3916,8 @@
       "histologyIds": [],
       "sourceIds": [
         "bio-transcription",
-        "bio-rna-processing"
+        "bio-rna-processing",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -3944,7 +4004,7 @@
       "label": "Tradução proteica",
       "category": "informacao",
       "description": "Leitura de códons e síntese de polipeptídio por ribossomos e RNAs transportadores.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Componentes estão fora de escala e o mensageiro é ilustrativo. Código padrão é referência didática, com exceções biológicas.",
+      "limits": "Ribossomo bacteriano 70S (PDB 4V51, Thermus thermophilus) com RNA mensageiro e RNAs transportadores nos sítios A, P e E; subunidade menor em bege e maior em azul. Aminoácidos livres vêm do dicionário de componentes do PDB. O mensageiro foi prolongado de forma ilustrativa: o códon de parada (UAA) aparece em vermelho mais adiante, e o polipeptídio nascente, que não está resolvido nessa estrutura, aparece como um traço ilustrativo saindo da subunidade maior.",
       "recognition": "Códon pertence ao mensageiro; anticódon pertence ao tRNA; a cadeia resultante tem aminoácidos.",
       "contrast": "Código genético relaciona trincas a aminoácidos ou parada; não traduz diretamente cada base em um aminoácido.",
       "relatedViews": [
@@ -3956,7 +4016,8 @@
       "histologyIds": [],
       "sourceIds": [
         "bio-translation",
-        "ncbi-rna"
+        "ncbi-rna",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -4043,7 +4104,7 @@
       "label": "Regulação gênica",
       "category": "informacao",
       "description": "Controle da expressão em vários níveis: cromatina, transcrição, processamento e estabilidade de RNA.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Elementos e setas são relações funcionais; não são organelas físicas separadas nem uma rede completa de um gene específico.",
+      "limits": "Montagem com moléculas reais: nucleossomos (PDB 1KX5) na cromatina compacta, fator de transcrição CREB ligado ao DNA (PDB 1DH3) num elemento intensificador, proteína de ligação ao TATA (TBP de levedura, PDB 1YTB) no promotor e Argonauta 2 humana com um microRNA (PDB 4W5N) ligado a um mRNA. O DNA livre é dupla hélice B construída de um passo real (PDB 1BNA). O processamento do RNA aparece como um transcrito com íntron em laço, e a estabilidade do mRNA como a cauda poli(A). Distâncias e a dobra do DNA são ilustrativas.",
       "recognition": "Identifique quais etapas alteram acesso, quantidade ou uso de um transcrito.",
       "contrast": "Regulação não exige mudar a sequência do DNA em toda resposta celular.",
       "relatedViews": [
@@ -4056,7 +4117,8 @@
       "sourceIds": [
         "bio-epigenetic",
         "bio-posttranscription",
-        "bio-transcription"
+        "bio-transcription",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -4151,7 +4213,7 @@
       "label": "Ciclo celular",
       "category": "divisao",
       "description": "Crescimento, duplicação do DNA, preparação e divisão, com pontos de controle de um ciclo eucariótico típico.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Fases e controles são estados funcionais, não compartimentos físicos. O exemplo de contagem é diploide e a duração não é medida.",
+      "limits": "Modelo autoral em 3D do ciclo celular de uma célula animal típica, com as fases dispostas num anel: G1 (célula menor, um centrossomo, cromatina descondensada), S (DNA sendo duplicado: focos de replicação em verde no núcleo; o centrossomo também se duplica), G2 (célula maior, dois centrossomos) e M (mitose, aqui na metáfase). Os pontos de controle aparecem como portões no caminho: em G1 (antes da replicação), em G2 (antes da divisão) e o de ligação ao fuso, dentro da mitose, antes da anáfase. Tamanhos de células e núcleos são aproximados; microtúbulos e centríolos ampliados; durações das fases não estão representadas.",
       "recognition": "As regiões do diagrama representam fases e avaliações; não são partes físicas separadas da célula.",
       "contrast": "Intérfase é metabolicamente ativa; duplicar DNA na fase S não duplica automaticamente a ploidia.",
       "relatedViews": [
@@ -4265,7 +4327,7 @@
       "label": "Mitose",
       "category": "divisao",
       "description": "Segregação de cromátides-irmãs em uma divisão nuclear típica, seguida ou acompanhada por citocinese.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Exemplo de mitose aberta com poucos cromossomos para leitura, podendo usar 2n = 4; quantidades ilustradas não representam a espécie humana.",
+      "limits": "Modelo autoral em 3D das etapas da mitose numa célula animal (cerca de 20 µm), lado a lado ao longo do eixo do fuso: prófase (cromossomos condensando dentro do núcleo, centrossomos se afastando), prometáfase (envelope nuclear fragmentado, microtúbulos capturando cinetócoros), metáfase (cromossomos alinhados na placa equatorial, cada cinetócoro ligado a um polo), anáfase (cromátides-irmãs separadas indo aos polos), telófase (núcleos se reorganizando, sulco de clivagem) e citocinese (anel contrátil, ponte com corpo intermediário). Para ficar legível, aparecem 8 pares de cromossomos (a célula humana tem 23 pares); o diâmetro dos microtúbulos e o tamanho dos centríolos foram ampliados (cerca de 2–3×). A membrana aparece translúcida para mostrar o interior. Tempos, formas e posições são ilustrativos.",
       "recognition": "Procure organização do fuso, alinhamento e separação; X representa cromossomo duplicado condensado.",
       "contrast": "Mitose conserva normalmente a ploidia de entrada e pode ocorrer em células haploides, não somente diploides.",
       "relatedViews": [
@@ -4378,7 +4440,7 @@
       "label": "Meiose",
       "category": "divisao",
       "description": "Uma replicação e duas divisões: separação de homólogos e depois de cromátides, com recombinação e distribuição.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. São usados poucos cromossomos para comparar segregação. Produtos simétricos são um exemplo; não tornam toda meiose uma produção de quatro gametas equivalentes.",
+      "limits": "Modelo autoral em 3D da meiose numa célula com 2n = 6 (três pares de homólogos; cromossomos de origem materna em vermelho e paterna em azul): prófase I com homólogos pareados (bivalentes) e quiasmas, onde cromátides não irmãs trocaram segmentos; metáfase I com os bivalentes na placa e cada homólogo ligado a um polo; anáfase I separando homólogos (as cromátides-irmãs continuam unidas); meiose II em duas células, separando cromátides-irmãs; e as quatro células haploides resultantes, com combinações diferentes de segmentos. A recombinação aparece como troca de cor no quiasma (anel amarelo). Número de cromossomos reduzido para clareza (a célula humana tem 23 pares); microtúbulos e centríolos ampliados; formas e tempos ilustrativos.",
       "recognition": "Bivalentes e troca entre cromátides não irmãs caracterizam a primeira divisão típica.",
       "contrast": "Meiose pode gerar gametas em animais e esporos em plantas; o produto não é universalmente um gameta.",
       "relatedViews": [
@@ -4482,7 +4544,7 @@
       "label": "Gametogênese humana",
       "category": "divisao",
       "description": "Exemplos humanos de espermatogênese e ovogênese, com etapas meióticas e diferenciação.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Seleciona etapas humanas, sem mostrar todos os estágios intermediários. O esquema não é um retrato de um testículo ou ovário real.",
+      "limits": "Modelo autoral em 3D das células da gametogênese humana em tamanhos relativos reais. Linha masculina (acima): espermatogônia (~12 µm), espermatócito primário em prófase I (~18 µm, o maior da linhagem, com homólogos pareados), espermatócitos secundários, espermátides (redonda, com a vesícula acrossômica, e em alongamento) e o espermatozoide (~55 µm: cabeça com acrossomo e núcleo condensado, peça intermediária com a hélice de mitocôndrias, cauda). Linha feminina (abaixo): ovócito primário (~90 µm) parado na prófase I, com o núcleo grande (vesícula germinativa), zona pelúcida em formação e células foliculares; ovócito secundário ovulado (~120 µm) parado na metáfase II, com o fuso junto à superfície, zona pelúcida, coroa radiada (aberta pela metade) e o primeiro corpúsculo polar no espaço perivitelino. Membranas translúcidas para mostrar o interior; número de cromossomos reduzido; formas ilustrativas.",
       "recognition": "Separe a identidade da célula, seu estágio meiótico e a distribuição de citoplasma.",
       "contrast": "A vista trata de humanos; ciclos de outros organismos podem formar gametas por outra organização.",
       "relatedViews": [
@@ -4598,7 +4660,7 @@
       "label": "Sinalização celular",
       "category": "integracao",
       "description": "Comunicação celular representada como uma sequência estática de recepção, transdução, resposta e encerramento. O ligante pode agir sobre receptores de superfície ou intracelulares; a resposta depende dos receptores e das proteínas disponíveis na célula-alvo, e pode alterar metabolismo, expressão gênica, movimento ou divisão.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Combina classes de componentes; nenhuma via precisa usar todos. Ligações e distâncias não representam concentrações ou velocidades medidas.",
+      "limits": "Via do AMP cíclico montada com moléculas reais: receptor β2-adrenérgico acoplado à proteína Gs (PDB 3SN6; a lisozima de fusão e o nanocorpo da cristalização foram retirados), adrenalina (epinefrina), cAMP e ATP do dicionário de componentes do PDB, adenilato ciclase com Gαs (PDB 1AZS), proteína quinase A (subunidade catalítica com ATP, PDB 1ATP), fosfodiesterase 4D com cAMP (PDB 2PW3), que encerra o sinal, e o fator de transcrição CREB ligado ao DNA (PDB 1DH3), mais abaixo, representando a resposta no núcleo. Membrana de POPC e colesterol. Distâncias e quantidades são ilustrativas.",
       "recognition": "Reconheça o ligante no lado de recepção, o receptor, os mediadores intracelulares e a resposta. Em uma via real, ramificações e interações substituem frequentemente a sequência linear simplificada.",
       "contrast": "Hormônio é um sinal entre células; segundo mensageiro transmite informação dentro da célula. Receptor de membrana não exige que o ligante entre no citoplasma.",
       "relatedViews": [
@@ -4616,7 +4678,8 @@
         "bio-signal-receptors",
         "bio-signal-propagation",
         "bio-signal-response",
-        "ncbi-signaling"
+        "ncbi-signaling",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -4709,7 +4772,7 @@
       "label": "Apoptose e controle da proliferação",
       "category": "integracao",
       "description": "A sobrevivência e a proliferação resultam de controles integrados. A apoptose remove células por um programa regulado de desmontagem; falhas em reparo, controle do ciclo e eliminação podem favorecer o acúmulo de alterações relacionadas ao câncer. O esquema compara processos celulares, sem permitir diagnóstico.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Compara mecanismos de morte e controle celular; formas ilustradas não identificam tumor, malignidade ou lesão clínica.",
+      "limits": "Montagem com estruturas reais: apoptossomo humano (PDB 5JUY) — a roda de Apaf-1 com o citocromo c liberado da mitocôndria (o sinal) e a caspase-9 ativada —, caspase-3 executora com um inibidor peptídico (PDB 1PAU) e p53 ligada ao DNA (PDB 1TSR), o guardião dos pontos de controle. O DNA danificado é dupla hélice B construída de um passo real (PDB 1BNA) com uma quebra. Corpos apoptóticos, a membrana do fagócito e a célula em divisão são desenhados com uma conta por lipídio, em escala reduzida de detalhe. Escalas e distâncias ilustrativas.",
       "recognition": "Na representação da apoptose, observe encolhimento e fragmentação em corpos delimitados por membrana. Na proliferação, acompanhe a geração de células; formas esquemáticas não identificam um tumor ou uma doença.",
       "contrast": "Apoptose é morte celular regulada; mitose gera novas células. Necrose e apoptose têm mecanismos e efeitos diferentes, e nem toda proliferação intensa é cancerosa.",
       "relatedViews": [
@@ -4727,7 +4790,8 @@
         "ncbi-apoptosis",
         "bio-signal-response",
         "bio-checkpoints",
-        "bio-cancer"
+        "bio-cancer",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -4829,7 +4893,7 @@
       "label": "Diferenciação celular",
       "category": "integracao",
       "description": "Diferenciação é a aquisição de características funcionais e estruturais especializadas. Em geral, células somáticas nucleadas de um mesmo organismo compartilham o genoma, mas utilizam conjuntos e níveis diferentes de genes. Sinais do desenvolvimento e do microambiente ajudam a estabelecer e manter esses programas.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Trajetórias ilustram destinos possíveis; a forma desenhada não comprova potência, autorrenovação ou identidade molecular experimental.",
+      "limits": "Modelo autoral em 3D sobre diferenciação celular: uma célula-tronco no seu nicho (células de apoio, fibras da matriz extracelular e moléculas sinalizadoras) dá origem, por etapas, a células especializadas — neurônio, fibra muscular esquelética (multinucleada, estriada), célula epitelial absortiva (com microvilosidades) e adipócito (com uma grande gota de gordura). Todos os núcleos guardam o mesmo genoma: os territórios cromossômicos têm as mesmas cores e posições; o que muda é o estado da cromatina (territórios compactados, em roxo escuro, diferentes em cada tipo celular). A rede de regulação gênica aparece como um esquema de nós (fatores de transcrição) e ligações sobre a célula-tronco. Territórios, rede e quantidades são representações didáticas, não medidas.",
       "recognition": "Reconheça trajetórias de especialização, com mudanças em forma, proteínas e função. A aparência de uma célula isolada não demonstra sua potência ou seu estado epigenético; estes exigem evidências experimentais.",
       "contrast": "Diferenciação modifica o programa de expressão e o funcionamento; divisão modifica o número de células. Uma célula especializada não precisa ter eliminado os genes que utiliza pouco.",
       "relatedViews": [
@@ -4944,7 +5008,7 @@
       "label": "Vírus: organização acelular",
       "category": "diversidade",
       "description": "Vírus são entidades acelulares cujo genoma depende de células hospedeiras para a produção de novos vírus. A vista compara um vírion, composto por genoma e capsídeo e, em alguns grupos, envelope, com etapas gerais de infecção. Vírus não são bactérias, não possuem ribossomos próprios e não se dividem por mitose.",
-      "limits": "Modelo didático autoral em 3D, sem escala molecular ou celular medida; não é micrografia nem reconstrução experimental. Etapas são estáticas. Envelope é opcional e a célula hospedeira está fora de escala. O esquema não identifica espécie viral e não representa uma infecção real.",
+      "limits": "À esquerda, um vírus sem envelope: o capsídeo icosaédrico de 60 subunidades do vírus-satélite do mosaico do Panicum (montagem biológica da estrutura PDB 1STM), com o RNA desenhado de forma ilustrativa por dentro. Ao centro, um vírus envelopado como o SARS-CoV-2 (~100 nm): envelope lipídico desenhado com uma conta por lipídio e espículas reais (glicoproteína S, PDB 6VXX), com o genoma de RNA ilustrativo dentro. À direita, a membrana da célula hospedeira (POPC e colesterol do dicionário de componentes do PDB) com o receptor ACE2 humano ligado ao domínio de ligação da espícula (PDB 6M17); abaixo dela, novas fitas de RNA viral e ribossomos (PDB 4V51, em contas) representam a replicação. Escalas relativas aproximadas.",
       "recognition": "Reconheça capsídeo, genoma e envelope opcional; geometrias podem ser helicoidais, aproximadamente icosaédricas ou complexas. O esquema reúne componentes para comparação e não representa uma espécie viral identificada.",
       "contrast": "Vírus têm organização acelular e dependem da maquinaria de uma célula; bactérias e arqueas são procariontes celulares. Envelope viral não é sinônimo de membrana plasmática com metabolismo autônomo.",
       "relatedViews": [
@@ -4959,7 +5023,8 @@
       "sourceIds": [
         "bio-viruses",
         "bio-viral-infection",
-        "ncbi-viral-structure"
+        "ncbi-viral-structure",
+        "wwpdb-structures"
       ],
       "parts": [
         {
@@ -5493,6 +5558,22 @@
       "kind": "livro universitário aberto",
       "publisher": "OpenStax / Rice University",
       "accessedOn": "2026-10-14"
+    },
+    {
+      "id": "openorganelle-cosem",
+      "title": "OpenOrganelle — células imageadas por FIB-SEM e segmentadas por organela (HHMI Janelia, CC BY 4.0)",
+      "url": "https://openorganelle.janelia.org/",
+      "kind": "banco de dados científico aberto",
+      "publisher": "HHMI Janelia Research Campus",
+      "accessedOn": "2026-10-18"
+    },
+    {
+      "id": "wwpdb-structures",
+      "title": "Protein Data Bank — estruturas moleculares determinadas experimentalmente (wwPDB, CC0)",
+      "url": "https://www.rcsb.org/",
+      "kind": "banco de dados científico aberto",
+      "publisher": "wwPDB / RCSB PDB",
+      "accessedOn": "2026-10-18"
     }
   ]
 }

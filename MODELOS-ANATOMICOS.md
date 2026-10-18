@@ -54,7 +54,9 @@ Limites: o esqueleto tem coluna (C1–L6; a doadora tem seis vértebras lombares
 
 ## Tecido, célula e fotografia
 
-A histologia humana reúne 48 vistas/237 componentes; a citologia, 46/316; a botânica, 13/84. Os 821 atalhos humanos/vegetais declaram se a relação é de componente, composição, mecanismo ou contexto. Uma comparação funcional não é uma equivalência anatômica automática.
+A histologia humana reúne 48 vistas/237 componentes; a citologia, 46/320; a botânica, 13/84. Os 821 atalhos humanos/vegetais declaram se a relação é de componente, composição, mecanismo ou contexto. Uma comparação funcional não é uma equivalência anatômica automática.
+
+Na citologia, 45 das 46 vistas abrem um modelo 3D pré-calculado (`assets/cytology/real/`, créditos em `ATTRIBUTION.md` ao lado): células e organelas segmentadas de microscopia eletrônica FIB-SEM do OpenOrganelle (célula HeLa, mitocôndria e núcleo inteiros, Golgi e retículo rugoso; CC BY 4.0), cenas moleculares montadas com estruturas do PDB (CC0) e modelos autorais em escala celular feitos a partir de dimensões publicadas (célula vegetal, levedura, cloroplasto, vacúolo, cardiomiócito, divisão celular, gametogênese, diferenciação, endo/exocitose, retículo liso e autofagia). Cada vista diz nas limitações o que é dado medido e o que foi ampliado ou ilustrado. A vista de teoria celular e microscopia mantém o modelo procedural.
 
 A microscopia reúne 23 registros/52 marcações, vinculados a 26 vistas (23 delas com destinos de marcações). São 22 microfotografias e um composto com imagem real e segmentação científica. Espécies, estágios e diferenças em relação aos modelos são explicitados. Um folículo primário sem antro não equivale à fase antral; uma ilhota de rato não determina a organização humana; mitose vegetal não contém os centrossomos do exemplo animal 3D.
 
